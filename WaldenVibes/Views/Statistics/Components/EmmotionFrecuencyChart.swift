@@ -1,0 +1,43 @@
+//  EmmotionFrecuencyChart.swift
+import SwiftUI
+import Charts
+
+struct EmotionFrequencyChart: View {
+    @EnvironmentObject var dataManager: DataManager
+    let period: TimePeriod
+    
+    var chartData: [(type: EmotionType, count: Int)] {
+        let frequencies = dataManager.emotionFrequency(for: period)
+        return frequencies.map { ($0.key, $0.value) }.sorted { $0.count > $1.count }
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("stats.emotion.frequency")
+                .font(.headline)
+                .padding(.horizontal)
+            
+            if chartData.isEmpty {
+                EmptyChartView(message: "stats.nodata")
+            } else {
+                Chart(chartData, id: \.type) { item in
+                    BarMark(
+                        x: .value("Emotion", item.type.emoji),
+                        y: .value("Count", item.count)
+                    )
+                    .foregroundStyle(item.type.color)
+                    .cornerRadius(8)
+                }
+                .frame(height: 200)
+                .padding(.horizontal)
+                .chartYAxis {
+                    AxisMarks(position: .leading)
+                }
+            }
+        }
+        .padding(.vertical)
+        .background(Color(UIColor.secondarySystemBackground))
+        .cornerRadius(16)
+        .padding(.horizontal)
+    }
+}

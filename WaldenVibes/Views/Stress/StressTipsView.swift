@@ -1,0 +1,40 @@
+//  StressTipsView.swift
+import SwiftUI
+
+struct StressTipsView: View {
+    @Environment(\.dismiss) var dismiss
+    
+    var body: some View {
+        NavigationView {
+            List(StressTip.tips) { tip in
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        Image(systemName: tip.icon)
+                            .font(.title2)
+                            .foregroundColor(Color("AccentColor"))
+                            .frame(width: 40)
+                        
+                        Text(tip.title)
+                            .font(.headline)
+                    }
+                    
+                    Text(tip.description)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(.vertical, 8)
+            }
+            .listStyle(InsetGroupedListStyle())
+            .navigationTitle("stress.tips.title")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("done") {
+                        dismiss()
+                    }
+                }
+            }
+        }
+    }
+}
