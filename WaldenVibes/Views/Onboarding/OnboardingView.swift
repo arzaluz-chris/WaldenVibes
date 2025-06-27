@@ -1,4 +1,4 @@
-//  OnboardingView.swift
+// OnboardingView.swift
 import SwiftUI
 
 struct OnboardingView: View {
@@ -56,14 +56,14 @@ struct OnboardingView: View {
                     .padding()
                 }
                 
-                // Page content
+                // Page content - removed page indicators from TabView
                 TabView(selection: $currentPage) {
                     ForEach(0..<pages.count, id: \.self) { index in
                         OnboardingPageView(page: pages[index])
                             .tag(index)
                     }
                 }
-                .tabViewStyle(PageTabViewStyle())
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) // Hide default indicators
                 
                 // Page indicator and continue button
                 VStack(spacing: 30) {
@@ -169,3 +169,4 @@ struct OnboardingPageView: View {
         }
     }
 }
+

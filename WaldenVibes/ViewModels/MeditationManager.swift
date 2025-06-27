@@ -1,10 +1,9 @@
-//  MeditationManager.swift
+// MeditationManager.swift - Updated with completion sound
 import Foundation
 import SwiftUI
 import Combine
 import AVFoundation
 
-// MARK: - MeditationManager
 class MeditationManager: ObservableObject {
     // Published properties
     @Published var timeRemaining: TimeInterval = 0
@@ -117,8 +116,8 @@ class MeditationManager: ObservableObject {
     }
     
     private func playCompletionSound() {
-        // Try to play custom sound first
-        if let soundURL = Bundle.main.url(forResource: "MeditationComplete", withExtension: "m4a") {
+        // Play custom completion sound
+        if let soundURL = Bundle.main.url(forResource: "MeditationComplete", withExtension: "mp3") {
             do {
                 audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
                 audioPlayer?.play()
@@ -137,7 +136,13 @@ class MeditationManager: ObservableObject {
         let content = UNMutableNotificationContent()
         content.title = NSLocalizedString("meditation.complete.title", comment: "")
         content.body = NSLocalizedString("meditation.complete.body", comment: "")
-        content.sound = .default
+        
+        // Use custom notification sound
+        if Bundle.main.url(forResource: "Notification", withExtension: "mp3") != nil {
+            content.sound = UNNotificationSound(named: UNNotificationSoundName("Notification.mp3"))
+        } else {
+            content.sound = .default
+        }
         
         let request = UNNotificationRequest(
             identifier: "meditation-complete",
@@ -164,3 +169,4 @@ class MeditationManager: ObservableObject {
         }
     }
 }
+

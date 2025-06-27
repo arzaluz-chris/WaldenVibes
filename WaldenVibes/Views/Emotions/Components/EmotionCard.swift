@@ -1,4 +1,4 @@
-//  EmotionCard.swift
+// EmotionCard.swift - Fixed
 import SwiftUI
 
 struct EmotionCard: View {
@@ -6,33 +6,39 @@ struct EmotionCard: View {
     
     var body: some View {
         HStack(spacing: 16) {
-            // Emoji and Type
-            VStack(spacing: 4) {
-                Text(emotion.type.emoji)
-                    .font(.system(size: 40))
+            // Emoji with background
+            ZStack {
+                Circle()
+                    .fill(emotion.type.color.opacity(0.2))
+                    .frame(width: 60, height: 60)
                 
-                Text(emotion.type.localizedName)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                Text(emotion.type.emoji)
+                    .font(.system(size: 30))
             }
-            .frame(width: 70)
             
             // Details
             VStack(alignment: .leading, spacing: 6) {
-                // Intensity
+                // Type and intensity
                 HStack {
-                    Text("intensity.label")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                    Text(emotion.type.localizedName)
+                        .font(.headline)
                     
-                    IntensityView(intensity: emotion.intensity, color: emotion.type.color)
+                    Spacer()
+                    
+                    HStack(spacing: 2) {
+                        ForEach(1...10, id: \.self) { level in
+                            Rectangle()
+                                .fill(level <= Int(emotion.intensity) ? emotion.type.color : Color.gray.opacity(0.3))
+                                .frame(width: 3, height: 12)
+                        }
+                    }
                 }
                 
                 // Note preview
                 if !emotion.note.isEmpty {
                     Text(emotion.note)
                         .font(.subheadline)
-                        .foregroundColor(.primary)
+                        .foregroundColor(.secondary)
                         .lineLimit(2)
                 }
                 
@@ -52,22 +58,13 @@ struct EmotionCard: View {
             }
             
             Spacer()
-            
-            // Chevron
-            Image(systemName: "chevron.right")
-                .font(.caption)
-                .foregroundStyle(.tertiary)
         }
         .padding()
         .background(
-            ZStack {
-                Color(UIColor.secondarySystemBackground)
-                Image("CardTexture")
-                    .resizable()
-                    .opacity(0.03)
-            }
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(UIColor.secondarySystemBackground))
+                .shadow(color: emotion.type.color.opacity(0.1), radius: 5, x: 0, y: 2)
         )
-        .cornerRadius(12)
         .padding(.horizontal)
     }
 }

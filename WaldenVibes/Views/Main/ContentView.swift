@@ -1,4 +1,4 @@
-//  ContentView.swift
+// ContentView.swift - Updated with redesigned More tab
 import SwiftUI
 
 struct ContentView: View {
@@ -45,23 +45,14 @@ struct ContentView: View {
             }
             .tag(3)
             
-            // Statistics Tab
+            // More Tab - Updated
             NavigationView {
-                StatisticsView()
+                MoreView()
             }
             .tabItem {
-                Label("tab.statistics", systemImage: "chart.line.uptrend.xyaxis")
+                Label("More", systemImage: "ellipsis.circle.fill")
             }
             .tag(4)
-            
-            // Settings Tab
-            NavigationView {
-                SettingsView()
-            }
-            .tabItem {
-                Label("tab.settings", systemImage: "gearshape.fill")
-            }
-            .tag(5)
         }
         .accentColor(Color("AccentColor"))
     }

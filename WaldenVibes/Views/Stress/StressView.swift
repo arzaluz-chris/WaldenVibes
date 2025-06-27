@@ -1,4 +1,4 @@
-//  StressView.swift
+// StressView.swift - Fixed
 import SwiftUI
 
 struct StressView: View {
@@ -9,10 +9,22 @@ struct StressView: View {
     
     var body: some View {
         ZStack {
+            // Gradient background
+            LinearGradient(
+                colors: [
+                    Color("StressLow").opacity(0.1),
+                    Color("StressModerate").opacity(0.05),
+                    Color.clear
+                ],
+                startPoint: .top,
+                endPoint: .center
+            )
+            .ignoresSafeArea()
+            
             if dataManager.stressRecords.isEmpty {
                 EmptyStressView(showingAddStress: $showingAddStress)
             } else {
-                StressList(selectedStress: $selectedStress)
+                StressList(selectedStress: $selectedStress, showingTips: $showingTips)
             }
         }
         .navigationTitle("nav.stress")
@@ -76,40 +88,6 @@ struct EmptyStressView: View {
                     .cornerRadius(25)
             }
             .padding(.top, 10)
-        }
-    }
-}
-
-// MARK: - Stress List
-struct StressList: View {
-    @EnvironmentObject var dataManager: DataManager
-    @Binding var selectedStress: Stress?
-    
-    var body: some View {
-        ScrollView {
-            // Current Stress Summary
-            if let latestStress = dataManager.stressRecords.first {
-                CurrentStressCard(stress: latestStress)
-                    .padding(.horizontal)
-                    .padding(.top)
-            }
-            
-            // History
-            LazyVStack(spacing: 12) {
-                Text("stress.history")
-                    .font(.headline)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal)
-                    .padding(.top, 20)
-                
-                ForEach(dataManager.stressRecords) { stress in
-                    StressCard(stress: stress)
-                        .onTapGesture {
-                            selectedStress = stress
-                        }
-                }
-            }
-            .padding(.bottom)
         }
     }
 }

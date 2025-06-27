@@ -1,4 +1,4 @@
-//  AddEmotionView.swift
+// AddEmotionView.swift - Updated with sound
 import SwiftUI
 import AVFoundation
 
@@ -23,7 +23,11 @@ struct AddEmotionView: View {
                                 EmotionButton(
                                     type: type,
                                     isSelected: selectedType == type,
-                                    action: { selectedType = type }
+                                    action: {
+                                        withAnimation(.spring()) {
+                                            selectedType = type
+                                        }
+                                    }
                                 )
                             }
                         }
@@ -108,9 +112,8 @@ struct AddEmotionView: View {
         let impactFeedback = UIImpactFeedbackGenerator(style: .light)
         impactFeedback.impactOccurred()
         
-        // Play custom sound if available
-        if let soundURL = Bundle.main.url(forResource: "EmotionRecorded", withExtension: "m4a") {
-            AudioServicesPlaySystemSound(1519) // Light impact
+        // Play custom sound
+        if let soundURL = Bundle.main.url(forResource: "EmotionRecorded", withExtension: "mp3") {
             var soundID: SystemSoundID = 0
             AudioServicesCreateSystemSoundID(soundURL as CFURL, &soundID)
             AudioServicesPlaySystemSound(soundID)

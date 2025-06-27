@@ -1,4 +1,4 @@
-//  MomentsView.swift
+// MomentsView.swift
 import SwiftUI
 
 struct MomentsView: View {
@@ -8,6 +8,20 @@ struct MomentsView: View {
     
     var body: some View {
         ZStack {
+            // Background pattern
+            GeometryReader { geometry in
+                ForEach(0..<20, id: \.self) { index in
+                    Image(systemName: "star.fill")
+                        .font(.caption)
+                        .foregroundColor(Color("AccentColor").opacity(0.03))
+                        .position(
+                            x: CGFloat.random(in: 0...geometry.size.width),
+                            y: CGFloat.random(in: 0...geometry.size.height)
+                        )
+                }
+            }
+            .ignoresSafeArea()
+            
             if dataManager.moments.isEmpty {
                 EmptyMomentsView(showingAddMoment: $showingAddMoment)
             } else {

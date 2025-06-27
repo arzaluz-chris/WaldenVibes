@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "- Virgil" : {
+
+    },
+    "“The greatest wealth is health.”" : {
+
+    },
     "%lld" : {
       "localizations" : {
         "en" : {
@@ -221,6 +227,9 @@
         }
       }
     },
+    "Daily Inspiration" : {
+
+    },
     "Date" : {
       "localizations" : {
         "en" : {
@@ -240,6 +249,9 @@
           }
         }
       }
+    },
+    "Delete" : {
+
     },
     "delete.confirm.message" : {
       "localizations" : {
@@ -490,6 +502,9 @@
           }
         }
       }
+    },
+    "Feeling stressed?" : {
+
     },
     "insight.emotion.dominant" : {
       "localizations" : {
@@ -800,6 +815,9 @@
           }
         }
       }
+    },
+    "More" : {
+
     },
     "nav.emotions" : {
       "localizations" : {
@@ -1171,6 +1189,9 @@
         }
       }
     },
+    "Quick Overview" : {
+
+    },
     "save" : {
       "localizations" : {
         "en" : {
@@ -1180,6 +1201,9 @@
           }
         }
       }
+    },
+    "Select Sound" : {
+
     },
     "settings.about" : {
       "localizations" : {
@@ -1340,6 +1364,12 @@
           }
         }
       }
+    },
+    "Show less" : {
+
+    },
+    "Show more" : {
+
     },
     "stats.emotion.frequency" : {
       "localizations" : {
@@ -1642,6 +1672,7 @@
       }
     },
     "tab.settings" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1652,6 +1683,7 @@
       }
     },
     "tab.statistics" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1670,6 +1702,9 @@
           }
         }
       }
+    },
+    "Tap for quick tips" : {
+
     },
     "theme.dark" : {
       "localizations" : {
@@ -1821,6 +1856,9 @@
         }
       }
     },
+    "Tools & Features" : {
+
+    },
     "trigger.environment" : {
       "localizations" : {
         "en" : {
@@ -1910,6 +1948,9 @@
           }
         }
       }
+    },
+    "Your emotional well-being companion" : {
+
     }
   },
   "version" : "1.0"
