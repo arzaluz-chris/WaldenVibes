@@ -1,12 +1,14 @@
-// SoundPickerView.swift
+// WaldenVibes/Views/Meditation/SoundPickerView.swift
 import SwiftUI
 import AVFoundation
 
 struct SoundPickerView: View {
-    @Binding var selectedSound: MeditationView.MeditationSound?
+    @Binding var selectedSound: MeditationView.MeditationSound
     @Environment(\.dismiss) var dismiss
     @State private var previewPlayer: AVAudioPlayer?
     @State private var currentlyPreviewing: MeditationView.MeditationSound?
+    @State private var previewTimer: Timer?
+    @State private var isAnimating = false
     
     var body: some View {
         NavigationView {
@@ -25,7 +27,7 @@ struct SoundPickerView: View {
                         
                         Spacer()
                         
-                        // Preview button
+                        // Preview button with animation
                         if sound != .none {
                             Button(action: {
                                 if currentlyPreviewing == sound {
@@ -34,9 +36,25 @@ struct SoundPickerView: View {
                                     previewSound(sound)
                                 }
                             }) {
-                                Image(systemName: currentlyPreviewing == sound ? "stop.circle.fill" : "play.circle.fill")
-                                    .font(.title2)
-                                    .foregroundColor(.blue)
+                                ZStack {
+                                    // Background circle for animation
+                                    if currentlyPreviewing == sound {
+                                        Circle()
+                                            .stroke(Color.blue.opacity(0.3), lineWidth: 2)
+                                            .frame(width: 35, height: 35)
+                                            .scaleEffect(isAnimating ? 1.2 : 1.0)
+                                            .opacity(isAnimating ? 0 : 1)
+                                            .animation(
+                                                Animation.easeInOut(duration: 1.5)
+                                                    .repeatForever(autoreverses: false),
+                                                value: isAnimating
+                                            )
+                                    }
+                                    
+                                    Image(systemName: currentlyPreviewing == sound ? "stop.circle.fill" : "play.circle.fill")
+                                        .font(.title2)
+                                        .foregroundColor(.blue)
+                                }
                             }
                             .buttonStyle(BorderlessButtonStyle())
                         }
@@ -80,12 +98,11 @@ struct SoundPickerView: View {
                 previewPlayer = try AVAudioPlayer(contentsOf: soundURL)
                 previewPlayer?.play()
                 currentlyPreviewing = sound
+                isAnimating = true
                 
-                // Stop after 5 seconds
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    if currentlyPreviewing == sound {
-                        stopPreview()
-                    }
+                // Stop after 30 seconds
+                previewTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: false) { _ in
+                    stopPreview()
                 }
             } catch {
                 print("Failed to preview sound: \(error)")
@@ -97,5 +114,8 @@ struct SoundPickerView: View {
         previewPlayer?.stop()
         previewPlayer = nil
         currentlyPreviewing = nil
+        isAnimating = false
+        previewTimer?.invalidate()
+        previewTimer = nil
     }
 }

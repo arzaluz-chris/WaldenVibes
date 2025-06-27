@@ -1,4 +1,4 @@
-// MoreView.swift - Fixed
+// WaldenVibes/Views/Main/MoreView.swift
 import SwiftUI
 
 struct MoreView: View {
@@ -131,7 +131,7 @@ struct MoreView: View {
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Text("“The greatest wealth is health.”")
+                    Text("\"The greatest wealth is health.\"")
                         .font(.title3)
                         .italic()
                         .multilineTextAlignment(.center)
@@ -167,4 +167,3 @@ struct MoreView: View {
         return dates.count
     }
 }
-

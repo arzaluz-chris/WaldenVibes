@@ -1,4 +1,4 @@
-// AddEmotionView.swift - Updated with sound
+// WaldenVibes/Views/Emotions/AddEmotionView.swift
 import SwiftUI
 import AVFoundation
 
@@ -11,6 +11,7 @@ struct AddEmotionView: View {
     @State private var note = ""
     @State private var includeLocation = false
     @State private var location = ""
+    @State private var previousIntensity: Double = 5
     
     var body: some View {
         NavigationView {
@@ -50,6 +51,11 @@ struct AddEmotionView: View {
                         
                         Slider(value: $intensity, in: 1...10, step: 1)
                             .accentColor(selectedType.color)
+                            .onChange(of: intensity) { _, newValue in
+                                // Progressive haptic feedback based on intensity
+                                triggerProgressiveHaptic(for: newValue, previous: previousIntensity)
+                                previousIntensity = newValue
+                            }
                         
                         IntensityView(intensity: intensity, color: selectedType.color)
                             .frame(maxWidth: .infinity)
@@ -96,6 +102,33 @@ struct AddEmotionView: View {
                 }
             }
         }
+        .onAppear {
+            previousIntensity = intensity
+        }
+    }
+    
+    // MARK: - Haptic Feedback
+    private func triggerProgressiveHaptic(for newValue: Double, previous: Double) {
+        let difference = abs(newValue - previous)
+        
+        if difference >= 1 {
+            // Determine intensity based on emotion intensity level
+            let hapticStyle: UIImpactFeedbackGenerator.FeedbackStyle
+            
+            switch newValue {
+            case 1...3:
+                hapticStyle = .light
+            case 4...6:
+                hapticStyle = .medium
+            case 7...10:
+                hapticStyle = .heavy
+            default:
+                hapticStyle = .medium
+            }
+            
+            let impactFeedback = UIImpactFeedbackGenerator(style: hapticStyle)
+            impactFeedback.impactOccurred()
+        }
     }
     
     private func saveEmotion() {
@@ -108,8 +141,8 @@ struct AddEmotionView: View {
         
         dataManager.addEmotion(emotion)
         
-        // Haptic feedback
-        let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+        // Strong haptic feedback for successful save
+        let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
         impactFeedback.impactOccurred()
         
         // Play custom sound

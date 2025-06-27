@@ -1,4 +1,4 @@
-//  AddStressView.swift
+// WaldenVibes/Views/Stress/AddStressView.swift
 import SwiftUI
 
 struct AddStressView: View {
@@ -8,6 +8,7 @@ struct AddStressView: View {
     @State private var stressLevel: Double = 5
     @State private var selectedTriggers: Set<StressTrigger> = []
     @State private var note = ""
+    @State private var previousStressLevel: Double = 5
     
     var body: some View {
         NavigationView {
@@ -28,6 +29,11 @@ struct AddStressView: View {
                         // Slider
                         Slider(value: $stressLevel, in: 0...10, step: 1)
                             .accentColor(colorForLevel(stressLevel))
+                            .onChange(of: stressLevel) { _, newValue in
+                                // Progressive haptic feedback based on stress level
+                                triggerProgressiveStressHaptic(for: newValue, previous: previousStressLevel)
+                                previousStressLevel = newValue
+                            }
                         
                         // Visual indicator
                         HStack {
@@ -104,6 +110,41 @@ struct AddStressView: View {
                 }
             }
         }
+        .onAppear {
+            previousStressLevel = stressLevel
+        }
+    }
+    
+    // MARK: - Haptic Feedback
+    private func triggerProgressiveStressHaptic(for newValue: Double, previous: Double) {
+        let difference = abs(newValue - previous)
+        
+        if difference >= 1 {
+            // More intense haptic feedback for higher stress levels
+            let hapticStyle: UIImpactFeedbackGenerator.FeedbackStyle
+            
+            switch newValue {
+            case 0...2:
+                hapticStyle = .light
+            case 3...5:
+                hapticStyle = .medium
+            case 6...7:
+                hapticStyle = .heavy
+            case 8...10:
+                // For very high stress, use heavy with multiple impacts
+                let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
+                impactFeedback.impactOccurred()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    impactFeedback.impactOccurred()
+                }
+                return
+            default:
+                hapticStyle = .medium
+            }
+            
+            let impactFeedback = UIImpactFeedbackGenerator(style: hapticStyle)
+            impactFeedback.impactOccurred()
+        }
     }
     
     private func colorForLevel(_ level: Double) -> Color {
@@ -145,8 +186,8 @@ struct AddStressView: View {
         
         dataManager.addStressRecord(stress)
         
-        // Haptic feedback
-        let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+        // Strong haptic feedback for successful save
+        let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
         impactFeedback.impactOccurred()
         
         dismiss()

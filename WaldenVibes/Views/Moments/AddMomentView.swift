@@ -1,4 +1,4 @@
-//  AddMomentView.swift
+// WaldenVibes/Views/Moments/AddMomentView.swift
 import SwiftUI
 
 struct AddMomentView: View {
@@ -111,8 +111,8 @@ struct AddMomentView: View {
         
         dataManager.addMoment(moment)
         
-        // Haptic feedback
-        let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+        // Strong haptic feedback for successful save
+        let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
         impactFeedback.impactOccurred()
         
         dismiss()

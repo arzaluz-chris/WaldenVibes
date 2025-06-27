@@ -1,4 +1,4 @@
-// ContentView.swift - Updated with redesigned More tab
+// WaldenVibes/Views/Main/ContentView.swift
 import SwiftUI
 
 struct ContentView: View {
@@ -45,15 +45,20 @@ struct ContentView: View {
             }
             .tag(3)
             
-            // More Tab - Updated
+            // Tools Tab (renamed from More)
             NavigationView {
                 MoreView()
             }
             .tabItem {
-                Label("More", systemImage: "ellipsis.circle.fill")
+                Label("Tools", systemImage: "wrench.and.screwdriver.fill")
             }
             .tag(4)
         }
         .accentColor(Color("AccentColor"))
+        .onChange(of: selectedTab) { _, _ in
+            // Light haptic feedback when switching tabs
+            let selectionFeedback = UISelectionFeedbackGenerator()
+            selectionFeedback.selectionChanged()
+        }
     }
 }

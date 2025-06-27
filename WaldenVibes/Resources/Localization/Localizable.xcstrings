@@ -1,11 +1,28 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "- Virgil" : {
+    "" : {
 
     },
-    "“The greatest wealth is health.”" : {
-
+    "- Virgil" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- Virgil"
+          }
+        }
+      }
+    },
+    "\"The greatest wealth is health.\"" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\"The greatest wealth is health.\""
+          }
+        }
+      }
     },
     "%lld" : {
       "localizations" : {
@@ -228,7 +245,14 @@
       }
     },
     "Daily Inspiration" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily Inspiration"
+          }
+        }
+      }
     },
     "Date" : {
       "localizations" : {
@@ -251,7 +275,14 @@
       }
     },
     "Delete" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        }
+      }
     },
     "delete.confirm.message" : {
       "localizations" : {
@@ -504,7 +535,14 @@
       }
     },
     "Feeling stressed?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        }
+      }
     },
     "insight.emotion.dominant" : {
       "localizations" : {
@@ -622,26 +660,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Location"
-          }
-        }
-      }
-    },
-    "meditation.complete.body" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You've finished your meditation session. How do you feel?"
-          }
-        }
-      }
-    },
-    "meditation.complete.title" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Meditation completed!"
           }
         }
       }
@@ -817,7 +835,14 @@
       }
     },
     "More" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        }
+      }
     },
     "nav.emotions" : {
       "localizations" : {
@@ -825,16 +850,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Emotions"
-          }
-        }
-      }
-    },
-    "nav.meditation" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Meditation"
           }
         }
       }
@@ -1190,7 +1205,14 @@
       }
     },
     "Quick Overview" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quick Overview"
+          }
+        }
+      }
     },
     "save" : {
       "localizations" : {
@@ -1203,7 +1225,14 @@
       }
     },
     "Select Sound" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select Sound"
+          }
+        }
+      }
     },
     "settings.about" : {
       "localizations" : {
@@ -1366,10 +1395,24 @@
       }
     },
     "Show less" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show less"
+          }
+        }
+      }
     },
     "Show more" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show more"
+          }
+        }
+      }
     },
     "stats.emotion.frequency" : {
       "localizations" : {
@@ -1671,28 +1714,6 @@
         }
       }
     },
-    "tab.settings" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings"
-          }
-        }
-      }
-    },
-    "tab.statistics" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Statistics"
-          }
-        }
-      }
-    },
     "tab.stress" : {
       "localizations" : {
         "en" : {
@@ -1704,7 +1725,14 @@
       }
     },
     "Tap for quick tips" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap for quick tips"
+          }
+        }
+      }
     },
     "theme.dark" : {
       "localizations" : {
@@ -1856,8 +1884,25 @@
         }
       }
     },
+    "Tools" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tools"
+          }
+        }
+      }
+    },
     "Tools & Features" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tools & Features"
+          }
+        }
+      }
     },
     "trigger.environment" : {
       "localizations" : {
@@ -1950,7 +1995,14 @@
       }
     },
     "Your emotional well-being companion" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your emotional well-being companion"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

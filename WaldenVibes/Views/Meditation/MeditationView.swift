@@ -1,4 +1,4 @@
-// MeditationView.swift - Fixed the complex expression
+// WaldenVibes/Views/Meditation/MeditationView.swift
 import SwiftUI
 import AVFoundation
 
@@ -7,13 +7,17 @@ struct MeditationView: View {
     @State private var showingDurationPicker = false
     @State private var showingSoundPicker = false
     @State private var animateCircle = false
-    @State private var selectedSound: MeditationSound? = nil
+    @AppStorage("selectedMeditationSound") private var selectedSoundRawValue = "none"
     @State private var audioPlayer: AVAudioPlayer?
     
     private let circleSize: CGFloat = 280
     
+    private var selectedSound: MeditationSound {
+        MeditationSound(rawValue: selectedSoundRawValue) ?? .none
+    }
+    
     enum MeditationSound: String, CaseIterable {
-        case none = "None"
+        case none = "none"
         case beach = "Beach"
         case calm = "Calm"
         case jazz = "Jazz"
@@ -48,48 +52,91 @@ struct MeditationView: View {
             // Background
             backgroundView
             
-            ScrollView {
-                VStack(spacing: 40) {
-                    // Title with more spacing
+            GeometryReader { geometry in
+                VStack(spacing: 30) {
+                    // Add spacer to push content down
+                    Spacer()
+                        .frame(height: geometry.size.height * 0.1) // 10% of screen height
+                    
+                    // Title centered in available space
                     Text("meditation.title")
                         .font(.largeTitle)
                         .fontWeight(.light)
-                        .padding(.top, 20)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
                     
-                    // Timer Circle
+                    Spacer()
+                        .frame(height: 20)
+                    
+                    // Timer Circle - centered vertically
                     timerCircleView
+                    
+                    Spacer()
+                        .frame(height: 30)
                     
                     // Control buttons
                     controlButtonsView
-                        .padding(.top, 20)
                     
-                    // Tips
+                    // Tips (only when not active)
                     if !meditationManager.isActive {
                         MeditationTipsView()
-                            .padding(.top)
+                            .padding(.top, 20)
                     }
                     
-                    Spacer(minLength: 50)
+                    // Bottom spacer
+                    Spacer()
+                        .frame(height: geometry.size.height * 0.1) // 10% of screen height
                 }
-                .padding()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .navigationTitle("nav.meditation")
+        .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackgroundHidden()
         .sheet(isPresented: $showingDurationPicker) {
             DurationPickerView(selectedDuration: $meditationManager.selectedDuration)
         }
         .sheet(isPresented: $showingSoundPicker) {
-            SoundPickerView(selectedSound: $selectedSound)
+            SoundPickerView(selectedSound: Binding(
+                get: { selectedSound },
+                set: { newValue in selectedSoundRawValue = newValue.rawValue }
+            ))
         }
-        .onDisappear {
-            animateCircle = false
-            stopMeditationSound()
+        .onAppear {
+            setupBackgroundAudio()
         }
-        .onChange(of: meditationManager.isActive) { isActive in
-            if !isActive {
+        .onChange(of: meditationManager.isActive) { _, isActive in
+            if isActive {
+                withAnimation(.easeInOut(duration: 1)) {
+                    animateCircle = true
+                }
+                playMeditationSound()
+            } else {
+                animateCircle = false
                 stopMeditationSound()
             }
+        }
+        .onChange(of: meditationManager.isPaused) { _, isPaused in
+            if isPaused {
+                pauseMeditationSound()
+            } else if meditationManager.isActive {
+                resumeMeditationSound()
+            }
+        }
+    }
+    
+    // MARK: - Audio Setup
+    private func setupBackgroundAudio() {
+        do {
+            // Configure audio session for background playback and to override silent mode
+            try AVAudioSession.sharedInstance().setCategory(
+                .playback,
+                mode: .default,
+                options: [.allowBluetooth, .allowBluetoothA2DP, .allowAirPlay, .mixWithOthers]
+            )
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Failed to configure audio session: \(error)")
         }
     }
     
@@ -146,7 +193,7 @@ struct MeditationView: View {
                 .animation(.linear(duration: 0.1), value: meditationManager.progress)
             
             // Animated circles
-            if meditationManager.isActive && !meditationManager.isPaused {
+            if meditationManager.isActive && !meditationManager.isPaused && animateCircle {
                 animatedCircles
             }
             
@@ -197,9 +244,9 @@ struct MeditationView: View {
                     
                     Button(action: { showingSoundPicker = true }) {
                         HStack(spacing: 6) {
-                            Image(systemName: selectedSound?.icon ?? "speaker.slash.fill")
+                            Image(systemName: selectedSound.icon)
                                 .font(.caption)
-                            Text(selectedSound?.displayName ?? "No Sound")
+                            Text(selectedSound.displayName)
                                 .font(.subheadline)
                             Image(systemName: "chevron.down")
                                 .font(.caption)
@@ -216,13 +263,17 @@ struct MeditationView: View {
             if meditationManager.isActive {
                 // Stop button
                 Button(action: {
+                    // Haptic feedback for stopping meditation
+                    let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
+                    impactFeedback.impactOccurred()
+                    
                     meditationManager.stop()
                     stopMeditationSound()
                 }) {
                     Image(systemName: "stop.fill")
                         .font(.title)
                         .foregroundColor(.white)
-                        .frame(width: 60, height: 60)
+                        .frame(width: 80, height: 80)
                         .background(Color.red.opacity(0.8))
                         .clipShape(Circle())
                 }
@@ -230,11 +281,17 @@ struct MeditationView: View {
                 // Play/Pause button
                 Button(action: {
                     if meditationManager.isPaused {
+                        // Haptic feedback for resuming meditation
+                        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                        impactFeedback.impactOccurred()
+                        
                         meditationManager.resume()
-                        resumeMeditationSound()
                     } else {
+                        // Haptic feedback for pausing meditation
+                        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                        impactFeedback.impactOccurred()
+                        
                         meditationManager.pause()
-                        pauseMeditationSound()
                     }
                 }) {
                     Image(systemName: meditationManager.isPaused ? "play.fill" : "pause.fill")
@@ -247,9 +304,11 @@ struct MeditationView: View {
             } else {
                 // Start button
                 Button(action: {
+                    // Haptic feedback for starting meditation
+                    let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
+                    impactFeedback.impactOccurred()
+                    
                     meditationManager.start()
-                    animateCircle = true
-                    playMeditationSound()
                 }) {
                     Image(systemName: "play.fill")
                         .font(.title)
@@ -265,13 +324,22 @@ struct MeditationView: View {
     
     // MARK: - Sound Management
     private func playMeditationSound() {
-        guard let sound = selectedSound, sound != .none else { return }
+        guard selectedSound != .none else { return }
         
-        if let soundURL = Bundle.main.url(forResource: sound.rawValue, withExtension: "m4a") {
+        if let soundURL = Bundle.main.url(forResource: selectedSound.rawValue, withExtension: "m4a") {
             do {
+                // Stop any existing player
+                audioPlayer?.stop()
+                
+                // Create new audio player
                 audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
                 audioPlayer?.numberOfLoops = -1 // Loop indefinitely
+                audioPlayer?.prepareToPlay()
                 audioPlayer?.play()
+                
+                // Configure to play even when app is in background
+                try AVAudioSession.sharedInstance().setActive(true)
+                
             } catch {
                 print("Failed to play meditation sound: \(error)")
             }
@@ -292,3 +360,21 @@ struct MeditationView: View {
     }
 }
 
+// Navigation bar background hidden extension
+extension View {
+    func navigationBarBackgroundHidden() -> some View {
+        self.modifier(NavigationBarBackgroundHiddenModifier())
+    }
+}
+
+struct NavigationBarBackgroundHiddenModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .onAppear {
+                let appearance = UINavigationBarAppearance()
+                appearance.configureWithTransparentBackground()
+                UINavigationBar.appearance().standardAppearance = appearance
+                UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            }
+    }
+}

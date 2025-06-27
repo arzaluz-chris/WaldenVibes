@@ -1,8 +1,9 @@
-// MeditationManager.swift - Updated with completion sound
+// WaldenVibes/ViewModels/MeditationManager.swift
 import Foundation
 import SwiftUI
 import Combine
 import AVFoundation
+import UserNotifications
 
 class MeditationManager: ObservableObject {
     // Published properties
@@ -26,6 +27,7 @@ class MeditationManager: ObservableObject {
     
     init() {
         setupAudio()
+        setupBackgroundAudio()
     }
     
     // MARK: - Timer Controls
@@ -98,20 +100,85 @@ class MeditationManager: ObservableObject {
         let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
         impactFeedback.impactOccurred()
         
-        // Show notification if app is in background
-        if UIApplication.shared.applicationState != .active {
-            sendCompletionNotification()
-        }
+        // Send completion notification
+        sendCompletionNotification()
     }
     
-    // MARK: - Audio
+    // MARK: - Audio Setup
     private func setupAudio() {
-        // Configure audio session
+        // Configure audio session for background playback and override silent mode
         do {
-            try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
+            try AVAudioSession.sharedInstance().setCategory(
+                .playback,
+                mode: .default,
+                options: [.allowBluetooth, .allowBluetoothA2DP, .allowAirPlay]
+            )
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
             print("Failed to set up audio session: \(error)")
+        }
+    }
+    
+    private func setupBackgroundAudio() {
+        // This will be handled in the app delegate or scene delegate
+        // for now we ensure the audio session is properly configured
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleInterruption),
+            name: AVAudioSession.interruptionNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleRouteChange),
+            name: AVAudioSession.routeChangeNotification,
+            object: nil
+        )
+    }
+    
+    @objc private func handleInterruption(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
+            return
+        }
+        
+        switch type {
+        case .began:
+            // Interruption began - pause if needed
+            if isActive && !isPaused {
+                pause()
+            }
+        case .ended:
+            // Interruption ended - resume if we were active
+            if let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt {
+                let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
+                if options.contains(.shouldResume) && isActive && isPaused {
+                    resume()
+                }
+            }
+        @unknown default:
+            break
+        }
+    }
+    
+    @objc private func handleRouteChange(notification: Notification) {
+        // Handle route changes (headphones plugged/unplugged, etc.)
+        guard let userInfo = notification.userInfo,
+              let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
+              let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else {
+            return
+        }
+        
+        switch reason {
+        case .oldDeviceUnavailable:
+            // Headphones were unplugged - pause meditation
+            if isActive && !isPaused {
+                pause()
+            }
+        default:
+            break
         }
     }
     
@@ -134,10 +201,18 @@ class MeditationManager: ObservableObject {
     // MARK: - Notifications
     private func sendCompletionNotification() {
         let content = UNMutableNotificationContent()
-        content.title = NSLocalizedString("meditation.complete.title", comment: "")
-        content.body = NSLocalizedString("meditation.complete.body", comment: "")
+        content.title = "🧘‍♀️ ¡Sesión completada!"
+        content.body = "Has concluido una sesión de meditación. ¡Bien hecho! 🌟"
+        content.sound = .default
         
-        // Use custom notification sound
+        // Add some zen emojis for a relaxing feel
+        let relaxingEmojis = ["🧘‍♀️", "🌸", "🌿", "✨", "🌙", "🕯️", "🦋", "🌺"]
+        let randomEmoji = relaxingEmojis.randomElement() ?? "🧘‍♀️"
+        
+        content.title = "\(randomEmoji) ¡Sesión completada!"
+        content.body = "Has concluido una sesión de meditación. ¡Bien hecho! \(randomEmoji)"
+        
+        // Use custom notification sound if available
         if Bundle.main.url(forResource: "Notification", withExtension: "mp3") != nil {
             content.sound = UNNotificationSound(named: UNNotificationSoundName("Notification.mp3"))
         } else {
@@ -145,12 +220,16 @@ class MeditationManager: ObservableObject {
         }
         
         let request = UNNotificationRequest(
-            identifier: "meditation-complete",
+            identifier: "meditation-complete-\(UUID().uuidString)",
             content: content,
             trigger: nil
         )
         
-        UNUserNotificationCenter.current().add(request)
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error sending meditation completion notification: \(error)")
+            }
+        }
     }
     
     // MARK: - Helper Methods
@@ -168,5 +247,8 @@ class MeditationManager: ObservableObject {
             return "\(minutes) \(NSLocalizedString("minutes", comment: ""))"
         }
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
-

@@ -1,4 +1,4 @@
-//  SettingsView.swift
+// WaldenVibes/Views/Settings/SettingsView.swift
 import SwiftUI
 import UserNotifications
 
@@ -39,7 +39,7 @@ struct SettingsView: View {
             // Notifications Section
             Section {
                 Toggle("settings.notifications.enable", isOn: $notificationsEnabled)
-                    .onChange(of: notificationsEnabled) { newValue in
+                    .onChange(of: notificationsEnabled) { _, newValue in
                         if newValue {
                             requestNotificationPermission()
                         } else {
@@ -53,7 +53,7 @@ struct SettingsView: View {
                         selection: $notificationTime,
                         displayedComponents: .hourAndMinute
                     )
-                    .onChange(of: notificationTime) { _ in
+                    .onChange(of: notificationTime) { _, _ in
                         scheduleNotification()
                     }
                 }
@@ -183,4 +183,3 @@ struct SettingsView: View {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
 }
-
