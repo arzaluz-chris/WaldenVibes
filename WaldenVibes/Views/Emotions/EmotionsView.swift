@@ -6,6 +6,8 @@ struct EmotionsView: View {
     @State private var showingAddEmotion = false
     @State private var selectedEmotion: Emotion?
     @State private var selectedFilter: EmotionType? = nil
+    @State private var emotionToDelete: Emotion?
+    @State private var showingDeleteAlert = false
     
     var filteredEmotions: [Emotion] {
         if let filter = selectedFilter {
@@ -96,6 +98,14 @@ struct EmotionsView: View {
                                             .onTapGesture {
                                                 selectedEmotion = emotion
                                             }
+                                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                                Button(role: .destructive) {
+                                                    emotionToDelete = emotion
+                                                    showingDeleteAlert = true
+                                                } label: {
+                                                    Label("Delete", systemImage: "trash")
+                                                }
+                                            }
                                     }
                                 } header: {
                                     HStack {
@@ -130,6 +140,18 @@ struct EmotionsView: View {
         }
         .sheet(item: $selectedEmotion) { emotion in
             EmotionDetailView(emotion: emotion)
+        }
+        .alert("delete.confirm.title", isPresented: $showingDeleteAlert) {
+            Button("delete", role: .destructive) {
+                if let emotion = emotionToDelete {
+                    withAnimation {
+                        dataManager.deleteEmotion(emotion)
+                    }
+                }
+            }
+            Button("cancel", role: .cancel) {}
+        } message: {
+            Text("delete.confirm.message")
         }
     }
     

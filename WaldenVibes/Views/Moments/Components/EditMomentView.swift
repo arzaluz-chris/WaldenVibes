@@ -1,16 +1,25 @@
-//  AddMomentView.swift
+//  EditMomentView.swift
 import SwiftUI
 
-struct AddMomentView: View {
+struct EditMomentView: View {
+    let moment: Moment
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var dataManager: DataManager
     
-    @State private var description = ""
-    @State private var selectedCategory: MomentCategory = .general
-    @State private var duration = 30
-    @State private var date = Date()
+    @State private var description: String
+    @State private var selectedCategory: MomentCategory
+    @State private var duration: Int
+    @State private var date: Date
     
     let durationOptions = [15, 30, 45, 60, 90, 120, 180, 240, 300]
+    
+    init(moment: Moment) {
+        self.moment = moment
+        _description = State(initialValue: moment.description)
+        _selectedCategory = State(initialValue: moment.category)
+        _duration = State(initialValue: moment.duration)
+        _date = State(initialValue: moment.date)
+    }
     
     var body: some View {
         NavigationView {
@@ -84,7 +93,7 @@ struct AddMomentView: View {
                     }
                 }
             }
-            .navigationTitle("moment.new")
+            .navigationTitle("Edit Moment")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackground()
             .toolbar {
@@ -96,7 +105,7 @@ struct AddMomentView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("save") {
-                        saveMoment()
+                        updateMoment()
                     }
                     .fontWeight(.semibold)
                     .disabled(description.isEmpty)
@@ -119,15 +128,21 @@ struct AddMomentView: View {
         }
     }
     
-    private func saveMoment() {
-        let moment = Moment(
+    private func updateMoment() {
+        // Create updated moment
+        let updatedMoment = Moment(
+            id: moment.id,
             description: description,
             category: selectedCategory,
             duration: duration,
             date: date
         )
         
-        dataManager.addMoment(moment)
+        // Update in data manager
+        if let index = dataManager.moments.firstIndex(where: { $0.id == moment.id }) {
+            dataManager.moments[index] = updatedMoment
+            dataManager.saveMoments()
+        }
         
         // Strong haptic feedback for successful save
         let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)

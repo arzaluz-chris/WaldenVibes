@@ -6,6 +6,7 @@ struct EmotionDetailView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var dataManager: DataManager
     @State private var showingDeleteAlert = false
+    @State private var showingEditView = false
     
     var body: some View {
         NavigationView {
@@ -83,9 +84,16 @@ struct EmotionDetailView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { showingDeleteAlert = true }) {
-                        Image(systemName: "trash")
-                            .foregroundColor(.red)
+                    HStack(spacing: 16) {
+                        Button(action: { showingEditView = true }) {
+                            Image(systemName: "pencil")
+                                .foregroundColor(Color("AccentColor"))
+                        }
+                        
+                        Button(action: { showingDeleteAlert = true }) {
+                            Image(systemName: "trash")
+                                .foregroundColor(.red)
+                        }
                     }
                 }
             }
@@ -98,6 +106,9 @@ struct EmotionDetailView: View {
             } message: {
                 Text("delete.confirm.message")
             }
+        }
+        .sheet(isPresented: $showingEditView) {
+            EditEmotionView(emotion: emotion)
         }
     }
 }

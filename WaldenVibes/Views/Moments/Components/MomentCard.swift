@@ -3,8 +3,6 @@ import SwiftUI
 
 struct MomentCard: View {
     let moment: Moment
-    @EnvironmentObject var dataManager: DataManager
-    @State private var showingDeleteAlert = false
     @State private var isExpanded = false
     
     var body: some View {
@@ -50,18 +48,6 @@ struct MomentCard: View {
                 }
                 
                 Spacer()
-                
-                // More menu
-                Menu {
-                    Button(role: .destructive, action: { showingDeleteAlert = true }) {
-                        Label("Delete", systemImage: "trash")
-                    }
-                } label: {
-                    Image(systemName: "ellipsis")
-                        .font(.body)
-                        .foregroundColor(.secondary)
-                        .frame(width: 30, height: 30)
-                }
             }
             
             // Description
@@ -86,15 +72,5 @@ struct MomentCard: View {
                 .shadow(color: moment.category.color.opacity(0.1), radius: 5, x: 0, y: 2)
         )
         .padding(.horizontal)
-        .alert("delete.confirm.title", isPresented: $showingDeleteAlert) {
-            Button("delete", role: .destructive) {
-                withAnimation {
-                    dataManager.deleteMoment(moment)
-                }
-            }
-            Button("cancel", role: .cancel) {}
-        } message: {
-            Text("delete.moment.message")
-        }
     }
 }

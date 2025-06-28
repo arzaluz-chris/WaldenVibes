@@ -1,4 +1,4 @@
-// WaldenVibes/Views/Stress/AddStressView.swift
+// AddStressView.swift
 import SwiftUI
 
 struct AddStressView: View {
@@ -87,6 +87,14 @@ struct AddStressView: View {
                 Section {
                     TextEditor(text: $note)
                         .frame(minHeight: 100)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                Spacer()
+                                Button("Done") {
+                                    hideKeyboard()
+                                }
+                            }
+                        }
                 } header: {
                     Text("notes.section")
                 } footer: {
@@ -95,6 +103,7 @@ struct AddStressView: View {
             }
             .navigationTitle("stress.new")
             .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackground()
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("cancel") {

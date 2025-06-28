@@ -3,10 +3,10 @@ import SwiftUI
 
 struct MeditationTipsView: View {
     private let tips = [
-        "meditation.tip.breathing",
-        "meditation.tip.posture",
-        "meditation.tip.focus",
-        "meditation.tip.patience"
+        "Take a deep breath in for 4 seconds, hold for 4, then exhale for 6",
+        "Sit comfortably with your back straight and shoulders relaxed",
+        "Focus on your breath - when your mind wanders, gently bring it back",
+        "Be patient with yourself - meditation is a practice that improves over time"
     ]
     
     @State private var currentTipIndex = 0
@@ -17,7 +17,7 @@ struct MeditationTipsView: View {
                 .font(.headline)
                 .foregroundColor(.secondary)
             
-            Text(LocalizedStringKey(tips[currentTipIndex]))
+            Text(tips[currentTipIndex])
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.secondary)

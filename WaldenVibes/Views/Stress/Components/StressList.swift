@@ -23,7 +23,7 @@ struct StressList: View {
                             .font(.title3)
                         
                         VStack(alignment: .leading) {
-                            Text("Feeling stressed?")
+                            Text("Stress Relief Tips")
                                 .font(.headline)
                             Text("Tap for quick tips")
                                 .font(.caption)

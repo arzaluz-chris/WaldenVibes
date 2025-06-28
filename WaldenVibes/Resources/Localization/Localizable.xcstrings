@@ -324,6 +324,16 @@
         }
       }
     },
+    "Description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        }
+      }
+    },
     "done" : {
       "localizations" : {
         "en" : {
@@ -334,12 +344,52 @@
         }
       }
     },
+    "Done" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
+    "Duration" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duration"
+          }
+        }
+      }
+    },
     "duration.select" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Select duration"
+          }
+        }
+      }
+    },
+    "Edit Emotion" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Emotion"
+          }
+        }
+      }
+    },
+    "Edit Moment" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Moment"
           }
         }
       }
@@ -530,16 +580,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Export Data"
-          }
-        }
-      }
-    },
-    "Feeling stressed?" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete"
           }
         }
       }
@@ -1414,6 +1454,16 @@
         }
       }
     },
+    "Specify location" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Specify location"
+          }
+        }
+      }
+    },
     "stats.emotion.frequency" : {
       "localizations" : {
         "en" : {
@@ -1500,6 +1550,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stress trend"
+          }
+        }
+      }
+    },
+    "Stress Relief Tips" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stress Relief Tips"
           }
         }
       }
@@ -1760,6 +1820,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "System"
+          }
+        }
+      }
+    },
+    "Time" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time"
           }
         }
       }

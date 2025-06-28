@@ -5,6 +5,7 @@ struct MomentsView: View {
     @EnvironmentObject var dataManager: DataManager
     @State private var showingAddMoment = false
     @State private var selectedCategory: MomentCategory? = nil
+    @State private var selectedMoment: Moment?
     
     var body: some View {
         ZStack {
@@ -25,7 +26,7 @@ struct MomentsView: View {
             if dataManager.moments.isEmpty {
                 EmptyMomentsView(showingAddMoment: $showingAddMoment)
             } else {
-                MomentsList(selectedCategory: $selectedCategory)
+                MomentsList(selectedCategory: $selectedCategory, selectedMoment: $selectedMoment)
             }
         }
         .navigationTitle("nav.moments")
@@ -40,6 +41,9 @@ struct MomentsView: View {
         }
         .sheet(isPresented: $showingAddMoment) {
             AddMomentView()
+        }
+        .sheet(item: $selectedMoment) { moment in
+            MomentDetailView(moment: moment)
         }
     }
 }
@@ -84,6 +88,9 @@ struct EmptyMomentsView: View {
 struct MomentsList: View {
     @EnvironmentObject var dataManager: DataManager
     @Binding var selectedCategory: MomentCategory?
+    @Binding var selectedMoment: Moment?
+    @State private var momentToDelete: Moment?
+    @State private var showingDeleteAlert = false
     
     var filteredMoments: [Moment] {
         if let category = selectedCategory {
@@ -141,6 +148,17 @@ struct MomentsList: View {
                             Section {
                                 ForEach(moments) { moment in
                                     MomentCard(moment: moment)
+                                        .onTapGesture {
+                                            selectedMoment = moment
+                                        }
+                                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                            Button(role: .destructive) {
+                                                momentToDelete = moment
+                                                showingDeleteAlert = true
+                                            } label: {
+                                                Label("Delete", systemImage: "trash")
+                                            }
+                                        }
                                 }
                             } header: {
                                 HStack {
@@ -158,6 +176,18 @@ struct MomentsList: View {
                     .padding(.vertical)
                 }
             }
+        }
+        .alert("delete.confirm.title", isPresented: $showingDeleteAlert) {
+            Button("delete", role: .destructive) {
+                if let moment = momentToDelete {
+                    withAnimation {
+                        dataManager.deleteMoment(moment)
+                    }
+                }
+            }
+            Button("cancel", role: .cancel) {}
+        } message: {
+            Text("delete.moment.message")
         }
     }
     
