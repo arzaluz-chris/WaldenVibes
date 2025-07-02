@@ -1,4 +1,4 @@
-//  StatCard.swift
+// WaldenVibes/Views/Statistics/Components/StatCard.swift
 import SwiftUI
 
 struct StatCard: View {

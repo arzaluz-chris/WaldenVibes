@@ -1,4 +1,4 @@
-// StressList.swift
+// WaldenVibes/Views/Stress/Components/StressList.swift
 import SwiftUI
 
 struct StressList: View {
@@ -23,9 +23,9 @@ struct StressList: View {
                             .font(.title3)
                         
                         VStack(alignment: .leading) {
-                            Text("Stress Relief Tips")
+                            Text("Stress Relief Tips", comment: "Title for stress relief tips button")
                                 .font(.headline)
-                            Text("Tap for quick tips")
+                            Text("Tap for quick tips", comment: "Subtitle for stress relief tips button")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -47,7 +47,7 @@ struct StressList: View {
                 
                 // History
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("stress.history")
+                    Text("Stress History", comment: "Section header for stress history")
                         .font(.headline)
                         .padding(.horizontal)
                     

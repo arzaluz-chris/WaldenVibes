@@ -1,4 +1,4 @@
-// EmotionsView.swift - Fixed
+// WaldenVibes/Views/Emotions/EmotionsView.swift
 import SwiftUI
 
 struct EmotionsView: View {
@@ -38,18 +38,18 @@ struct EmotionsView: View {
                         .frame(width: 150, height: 150)
                         .opacity(0.5)
                     
-                    Text("emotions.empty.title")
+                    Text("No emotions recorded", comment: "Empty state title when no emotions have been tracked")
                         .font(.title2)
                         .fontWeight(.semibold)
                     
-                    Text("emotions.empty.subtitle")
+                    Text("Start tracking how you feel to monitor your emotional well-being", comment: "Empty state subtitle encouraging user to start tracking emotions")
                         .font(.body)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 40)
                     
                     Button(action: { showingAddEmotion = true }) {
-                        Label("emotions.add", systemImage: "plus.circle.fill")
+                        Label("Add Emotion", systemImage: "plus.circle.fill")
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding(.horizontal, 20)
@@ -65,7 +65,7 @@ struct EmotionsView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
                             FilterChip(
-                                title: "All",
+                                title: String(localized: "All", comment: "Filter option to show all emotions"),
                                 isSelected: selectedFilter == nil,
                                 color: Color("AccentColor")
                             ) {
@@ -125,7 +125,7 @@ struct EmotionsView: View {
                 }
             }
         }
-        .navigationTitle("nav.emotions")
+        .navigationTitle("Emotions")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { showingAddEmotion = true }) {
@@ -141,17 +141,17 @@ struct EmotionsView: View {
         .sheet(item: $selectedEmotion) { emotion in
             EmotionDetailView(emotion: emotion)
         }
-        .alert("delete.confirm.title", isPresented: $showingDeleteAlert) {
-            Button("delete", role: .destructive) {
+        .alert("Delete Emotion?", isPresented: $showingDeleteAlert) {
+            Button("Delete", role: .destructive) {
                 if let emotion = emotionToDelete {
                     withAnimation {
                         dataManager.deleteEmotion(emotion)
                     }
                 }
             }
-            Button("cancel", role: .cancel) {}
+            Button("Cancel", role: .cancel) {}
         } message: {
-            Text("delete.confirm.message")
+            Text("Are you sure you want to delete this emotion record?")
         }
     }
     

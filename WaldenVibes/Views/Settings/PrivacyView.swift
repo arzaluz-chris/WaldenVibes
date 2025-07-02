@@ -1,4 +1,4 @@
-//  PrivacyView.swift
+// WaldenVibes/Views/Settings/PrivacyView.swift
 import SwiftUI
 
 struct PrivacyView: View {
@@ -8,39 +8,39 @@ struct PrivacyView: View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
-                    Text("privacy.title")
+                    Text("Privacy Policy", comment: "Privacy policy title")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .padding(.top)
                     
                     Group {
                         PrivacySection(
-                            title: "privacy.section.data",
-                            content: "privacy.section.data.content"
+                            title: LocalizedStringKey("Your Data"),
+                            content: LocalizedStringKey("All your emotional data, moments, and stress records are stored locally on your device. We do not collect or have access to any of your personal information.")
                         )
                         
                         PrivacySection(
-                            title: "privacy.section.storage",
-                            content: "privacy.section.storage.content"
+                            title: LocalizedStringKey("Data Storage"),
+                            content: LocalizedStringKey("Your data is stored securely on your device using iOS's built-in security features. No data is transmitted to external servers.")
                         )
                         
                         PrivacySection(
-                            title: "privacy.section.sharing",
-                            content: "privacy.section.sharing.content"
+                            title: LocalizedStringKey("Data Sharing"),
+                            content: LocalizedStringKey("We never share, sell, or transmit your personal data to third parties. Your information remains completely private.")
                         )
                         
                         PrivacySection(
-                            title: "privacy.section.analytics",
-                            content: "privacy.section.analytics.content"
+                            title: LocalizedStringKey("Analytics"),
+                            content: LocalizedStringKey("We do not collect any analytics or usage data. Your app usage patterns remain private.")
                         )
                         
                         PrivacySection(
-                            title: "privacy.section.rights",
-                            content: "privacy.section.rights.content"
+                            title: LocalizedStringKey("Your Rights"),
+                            content: LocalizedStringKey("You have complete control over your data. You can export or delete all your data at any time from the settings menu.")
                         )
                     }
                     
-                    Text("privacy.update.date")
+                    Text("Last updated: June 2025", comment: "Privacy policy last update date")
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .padding(.top)
@@ -51,7 +51,7 @@ struct PrivacyView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("done") {
+                    Button("Done") {
                         dismiss()
                     }
                 }

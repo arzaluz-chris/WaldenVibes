@@ -1,4 +1,4 @@
-//  FlowLayout.swift
+// WaldenVibes/Components/FlowLayout.swift
 import SwiftUI
 
 struct FlowLayout: Layout {

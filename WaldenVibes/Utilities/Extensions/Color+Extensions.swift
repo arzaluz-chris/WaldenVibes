@@ -1,4 +1,4 @@
-//  Color+Extensions.swift
+// WaldenVibes/Utilities/Extensions/Color+Extensions.swift
 import SwiftUI
 
 extension Color {

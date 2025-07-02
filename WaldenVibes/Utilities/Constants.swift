@@ -1,4 +1,4 @@
-//  Constants.swift
+// WaldenVibes/Utilities/Constants.swift
 import SwiftUI
 
 struct Constants {

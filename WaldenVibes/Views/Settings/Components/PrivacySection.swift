@@ -1,4 +1,4 @@
-//  PrivacySection.swift
+// WaldenVibes/Views/Settings/Components/PrivacySection.swift
 import SwiftUI
 
 struct PrivacySection: View {

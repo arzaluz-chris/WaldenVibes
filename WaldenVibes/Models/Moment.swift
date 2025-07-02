@@ -1,4 +1,4 @@
-// Moment.swift
+// WaldenVibes/Models/Moment.swift
 import Foundation
 import SwiftUI
 
@@ -35,11 +35,11 @@ enum MomentCategory: String, CaseIterable, Codable {
     
     var localizedName: LocalizedStringKey {
         switch self {
-        case .work: return "category.work"
-        case .family: return "category.family"
-        case .friends: return "category.friends"
-        case .personal: return "category.personal"
-        case .general: return "category.general"
+        case .work: return LocalizedStringKey("Work")
+        case .family: return LocalizedStringKey("Family")
+        case .friends: return LocalizedStringKey("Friends")
+        case .personal: return LocalizedStringKey("Personal")
+        case .general: return LocalizedStringKey("General")
         }
     }
     
@@ -97,14 +97,14 @@ extension Moment {
     
     var formattedDuration: String {
         if duration < 60 {
-            return "\(duration) min"
+            return String(localized: "\(duration) min", comment: "Duration in minutes")
         } else {
             let hours = duration / 60
             let minutes = duration % 60
             if minutes == 0 {
-                return "\(hours)h"
+                return String(localized: "\(hours)h", comment: "Duration in hours")
             } else {
-                return "\(hours)h \(minutes)min"
+                return String(localized: "\(hours)h \(minutes)min", comment: "Duration in hours and minutes")
             }
         }
     }

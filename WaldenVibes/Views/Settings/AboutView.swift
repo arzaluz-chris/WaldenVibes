@@ -1,4 +1,4 @@
-//  AboutView.swift
+// WaldenVibes/Views/Settings/AboutView.swift
 import SwiftUI
 
 struct AboutView: View {
@@ -18,14 +18,14 @@ struct AboutView: View {
                             .font(.largeTitle)
                             .fontWeight(.bold)
                         
-                        Text("about.tagline")
+                        Text("Your emotional well-being matters", comment: "App tagline in about view")
                             .font(.headline)
                             .foregroundColor(.secondary)
                     }
                     .padding(.top, 40)
                     
                     // Description
-                    Text("about.description")
+                    Text("Walden Vibes is designed to help you track your emotional well-being, practice mindfulness, and manage stress effectively.", comment: "App description in about view")
                         .font(.body)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 40)
@@ -34,31 +34,31 @@ struct AboutView: View {
                     VStack(alignment: .leading, spacing: 20) {
                         FeatureRow(
                             icon: "heart.fill",
-                            title: "about.feature.emotions",
+                            title: String(localized: "Detailed emotion tracking", comment: "Feature description"),
                             color: Color("AccentColor")
                         )
                         
                         FeatureRow(
                             icon: "sparkles",
-                            title: "about.feature.meditation",
+                            title: String(localized: "Customizable meditation timer", comment: "Feature description"),
                             color: .blue
                         )
                         
                         FeatureRow(
                             icon: "star.fill",
-                            title: "about.feature.moments",
+                            title: String(localized: "Capture special moments", comment: "Feature description"),
                             color: .orange
                         )
                         
                         FeatureRow(
                             icon: "waveform.path.ecg",
-                            title: "about.feature.stress",
+                            title: String(localized: "Stress monitoring and management", comment: "Feature description"),
                             color: .green
                         )
                         
                         FeatureRow(
                             icon: "chart.line.uptrend.xyaxis",
-                            title: "about.feature.statistics",
+                            title: String(localized: "Detailed analysis and insights", comment: "Feature description"),
                             color: .red
                         )
                     }
@@ -66,11 +66,11 @@ struct AboutView: View {
                     
                     // Credits
                     VStack(spacing: 8) {
-                        Text("about.credits")
+                        Text("Made with ❤️ for your well-being", comment: "App credits message")
                             .font(.caption)
                             .foregroundColor(.secondary)
                         
-                        Text("about.credits.team")
+                        Text("© 2025 Walden Vibes Team", comment: "Copyright notice")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -82,7 +82,7 @@ struct AboutView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("done") {
+                    Button("Done") {
                         dismiss()
                     }
                 }

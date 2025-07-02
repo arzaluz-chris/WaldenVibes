@@ -201,16 +201,16 @@ class MeditationManager: ObservableObject {
     // MARK: - Notifications
     private func sendCompletionNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "🧘‍♀️ ¡Sesión completada!"
-        content.body = "Has concluido una sesión de meditación. ¡Bien hecho! 🌟"
+        content.title = String(localized: "Meditation Complete! 🧘‍♀️", comment: "Meditation completion notification title")
+        content.body = String(localized: "Great job! You've completed your meditation session. 🌟", comment: "Meditation completion notification body")
         content.sound = .default
         
         // Add some zen emojis for a relaxing feel
         let relaxingEmojis = ["🧘‍♀️", "🌸", "🌿", "✨", "🌙", "🕯️", "🦋", "🌺"]
         let randomEmoji = relaxingEmojis.randomElement() ?? "🧘‍♀️"
         
-        content.title = "\(randomEmoji) ¡Sesión completada!"
-        content.body = "Has concluido una sesión de meditación. ¡Bien hecho! \(randomEmoji)"
+        content.title = String(localized: "\(randomEmoji) Meditation Complete!", comment: "Meditation completion notification title with emoji")
+        content.body = String(localized: "Well done! You've completed your meditation session. \(randomEmoji)", comment: "Meditation completion notification body with emoji")
         
         // Use custom notification sound if available
         if Bundle.main.url(forResource: "Notification", withExtension: "mp3") != nil {
@@ -242,9 +242,9 @@ class MeditationManager: ObservableObject {
     func durationString(for seconds: TimeInterval) -> String {
         let minutes = Int(seconds) / 60
         if minutes == 1 {
-            return "1 \(NSLocalizedString("minute", comment: ""))"
+            return String(localized: "1 minute", comment: "Duration in singular minute")
         } else {
-            return "\(minutes) \(NSLocalizedString("minutes", comment: ""))"
+            return String(localized: "\(minutes) minutes", comment: "Duration in plural minutes")
         }
     }
     

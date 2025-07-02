@@ -1,4 +1,4 @@
-//  StressTipsView.swift
+// WaldenVibes/Views/Stress/StressTipsView.swift
 import SwiftUI
 
 struct StressTipsView: View {
@@ -26,11 +26,11 @@ struct StressTipsView: View {
                 .padding(.vertical, 8)
             }
             .listStyle(InsetGroupedListStyle())
-            .navigationTitle("stress.tips.title")
+            .navigationTitle("Stress Relief Tips")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("done") {
+                    Button("Done") {
                         dismiss()
                     }
                 }

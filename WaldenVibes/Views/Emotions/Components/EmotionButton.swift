@@ -1,4 +1,4 @@
-//  EmotionButton.swift
+// WaldenVibes/Views/Emotions/Components/EmotionButton.swift
 import SwiftUI
 
 struct EmotionButton: View {

@@ -1,4 +1,4 @@
-// AddStressView.swift
+// WaldenVibes/Views/Stress/AddStressView.swift
 import SwiftUI
 
 struct AddStressView: View {
@@ -18,7 +18,7 @@ struct AddStressView: View {
                     VStack(spacing: 20) {
                         // Level indicator
                         HStack {
-                            Text("stress.level")
+                            Text("Stress Level", comment: "Label for stress level slider")
                             Spacer()
                             Text("\(Int(stressLevel))/10")
                                 .font(.title2)
@@ -47,7 +47,7 @@ struct AddStressView: View {
                         .frame(maxWidth: .infinity)
                     }
                 } header: {
-                    Text("stress.level.section")
+                    Text("How stressed are you feeling?", comment: "Section header for stress level")
                 }
                 
                 // Triggers
@@ -78,9 +78,9 @@ struct AddStressView: View {
                         }
                     }
                 } header: {
-                    Text("stress.triggers.section")
+                    Text("Stress Triggers", comment: "Section header for stress triggers")
                 } footer: {
-                    Text("stress.triggers.footer")
+                    Text("Select factors contributing to your stress", comment: "Helper text for stress triggers")
                 }
                 
                 // Notes
@@ -96,23 +96,23 @@ struct AddStressView: View {
                             }
                         }
                 } header: {
-                    Text("notes.section")
+                    Text("Notes", comment: "Section header for notes field")
                 } footer: {
-                    Text("stress.notes.footer")
+                    Text("Add details about what's causing your stress", comment: "Helper text for stress notes")
                 }
             }
-            .navigationTitle("stress.new")
+            .navigationTitle("New Stress Record")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackground()
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("cancel") {
+                    Button("Cancel") {
                         dismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("save") {
+                    Button("Save") {
                         saveStress()
                     }
                     .fontWeight(.semibold)
@@ -178,11 +178,11 @@ struct AddStressView: View {
     
     private func descriptionForLevel(_ level: Double) -> LocalizedStringKey {
         switch level {
-        case 0..<3: return "stress.level.low"
-        case 3..<5: return "stress.level.moderate"
-        case 5..<7: return "stress.level.high"
-        case 7...10: return "stress.level.veryhigh"
-        default: return "stress.level.unknown"
+        case 0..<3: return LocalizedStringKey("Low")
+        case 3..<5: return LocalizedStringKey("Moderate")
+        case 5..<7: return LocalizedStringKey("High")
+        case 7...10: return LocalizedStringKey("Very High")
+        default: return LocalizedStringKey("Unknown")
         }
     }
     

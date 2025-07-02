@@ -1,4 +1,4 @@
-//  SummaryCards.swift
+// WaldenVibes/Views/Statistics/Components/SummaryCards.swift
 import SwiftUI
 
 struct SummaryCards: View {
@@ -26,7 +26,7 @@ struct SummaryCards: View {
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
             // Total Emotions
             StatCard(
-                title: "stats.emotions.total",
+                title: LocalizedStringKey("Total Emotions"),
                 value: "\(totalEmotions)",
                 icon: "heart.fill",
                 color: Color("AccentColor")
@@ -34,7 +34,7 @@ struct SummaryCards: View {
             
             // Total Moments
             StatCard(
-                title: "stats.moments.total",
+                title: LocalizedStringKey("Total Moments"),
                 value: "\(totalMoments)",
                 icon: "star.fill",
                 color: .orange
@@ -42,7 +42,7 @@ struct SummaryCards: View {
             
             // Average Stress
             StatCard(
-                title: "stats.stress.average",
+                title: LocalizedStringKey("Average Stress"),
                 value: String(format: "%.1f", averageStress),
                 icon: "waveform.path.ecg",
                 color: colorForStressLevel(averageStress)
@@ -51,9 +51,9 @@ struct SummaryCards: View {
             // Most Frequent Emotion
             if let frequent = mostFrequentEmotion {
                 StatCard(
-                    title: "stats.emotion.frequent",
+                    title: LocalizedStringKey("Most Frequent"),
                     value: frequent.type.emoji,
-                    subtitle: "\(frequent.count) times",
+                    subtitle: String(localized: "\(frequent.count) times", comment: "Frequency count"),
                     icon: "crown.fill",
                     color: frequent.type.color
                 )

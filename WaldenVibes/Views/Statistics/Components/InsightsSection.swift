@@ -1,4 +1,4 @@
-//  InsightsSection.swift
+// WaldenVibes/Views/Statistics/Components/InsightsSection.swift
 import SwiftUI
 
 struct InsightsSection: View {
@@ -10,7 +10,7 @@ struct InsightsSection: View {
         
         // Most productive time
         if let mostProductiveTime = getMostProductiveTime() {
-            insights.append(String(format: NSLocalizedString("insight.productive.time", comment: ""), mostProductiveTime))
+            insights.append(String(localized: "Your most active time for recording emotions is \(mostProductiveTime)", comment: "Insight about most active time"))
         }
         
         // Stress pattern
@@ -29,7 +29,7 @@ struct InsightsSection: View {
     var body: some View {
         if !insights.isEmpty {
             VStack(alignment: .leading, spacing: 16) {
-                Text("stats.insights")
+                Text("Insights", comment: "Section header for insights")
                     .font(.headline)
                     .padding(.horizontal)
                 
@@ -80,9 +80,9 @@ struct InsightsSection: View {
         let avgStress = dataManager.averageStressLevel(for: period)
         
         if avgStress > 7 {
-            return NSLocalizedString("insight.stress.high", comment: "")
+            return String(localized: "Your stress levels have been high. Consider taking breaks and practicing relaxation techniques.", comment: "High stress insight")
         } else if avgStress < 3 {
-            return NSLocalizedString("insight.stress.low", comment: "")
+            return String(localized: "Great job! Your stress levels remain low. Keep up the good practices.", comment: "Low stress insight")
         }
         
         return nil
@@ -94,9 +94,7 @@ struct InsightsSection: View {
         if let mostFrequent = frequencies.max(by: { $0.value < $1.value }) {
             let percentage = Double(mostFrequent.value) / Double(frequencies.values.reduce(0, +)) * 100
             if percentage > 50 {
-                return String(format: NSLocalizedString("insight.emotion.dominant", comment: ""),
-                            mostFrequent.key.emoji,
-                            Int(percentage))
+                return String(localized: "\(mostFrequent.key.emoji) represents \(Int(percentage))% of your recorded emotions", comment: "Dominant emotion insight")
             }
         }
         

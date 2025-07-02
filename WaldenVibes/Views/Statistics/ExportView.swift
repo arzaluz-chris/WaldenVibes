@@ -1,4 +1,4 @@
-//  ExportView.swift
+// WaldenVibes/Views/Statistics/ExportView.swift
 import SwiftUI
 
 struct ExportView: View {
@@ -14,11 +14,11 @@ struct ExportView: View {
                     .font(.system(size: 60))
                     .foregroundColor(Color("AccentColor"))
                 
-                Text("export.title")
+                Text("Export Your Data", comment: "Export view title")
                     .font(.title2)
                     .fontWeight(.semibold)
                 
-                Text("export.description")
+                Text("Export all your emotions, moments, and stress records to a text file that you can save or share.", comment: "Export view description")
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -28,7 +28,7 @@ struct ExportView: View {
                     exportText = dataManager.exportAllData()
                     showingShareSheet = true
                 }) {
-                    Label("export.button", systemImage: "doc.text")
+                    Label("Export as Text", systemImage: "doc.text")
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
@@ -44,7 +44,7 @@ struct ExportView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("done") {
+                    Button("Done") {
                         dismiss()
                     }
                 }

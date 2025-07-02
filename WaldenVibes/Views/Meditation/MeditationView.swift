@@ -26,12 +26,12 @@ struct MeditationView: View {
         
         var displayName: String {
             switch self {
-            case .none: return "No Sound"
-            case .beach: return "Beach Waves"
-            case .calm: return "Calm Ambience"
-            case .jazz: return "Smooth Jazz"
-            case .piano: return "Piano Melody"
-            case .tranquility: return "Tranquility"
+            case .none: return String(localized: "No Sound", comment: "Option for no meditation sound")
+            case .beach: return String(localized: "Beach Waves", comment: "Beach waves meditation sound")
+            case .calm: return String(localized: "Calm Ambience", comment: "Calm ambience meditation sound")
+            case .jazz: return String(localized: "Smooth Jazz", comment: "Jazz meditation sound")
+            case .piano: return String(localized: "Piano Melody", comment: "Piano meditation sound")
+            case .tranquility: return String(localized: "Tranquility", comment: "Tranquility meditation sound")
             }
         }
         
@@ -59,7 +59,7 @@ struct MeditationView: View {
                         .frame(height: geometry.size.height * 0.1) // 10% of screen height
                     
                     // Title centered in available space
-                    Text("meditation.title")
+                    Text("Time to Meditate", comment: "Meditation screen title")
                         .font(.largeTitle)
                         .fontWeight(.light)
                         .multilineTextAlignment(.center)

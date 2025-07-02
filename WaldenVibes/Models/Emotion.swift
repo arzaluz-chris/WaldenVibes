@@ -1,4 +1,4 @@
-//  Emotion.swift
+// WaldenVibes/Models/Emotion.swift
 import Foundation
 import SwiftUI
 
@@ -54,14 +54,14 @@ enum EmotionType: String, CaseIterable, Codable {
     
     var localizedName: LocalizedStringKey {
         switch self {
-        case .happy: return "emotion.happy"
-        case .sad: return "emotion.sad"
-        case .anxious: return "emotion.anxious"
-        case .calm: return "emotion.calm"
-        case .angry: return "emotion.angry"
-        case .excited: return "emotion.excited"
-        case .tired: return "emotion.tired"
-        case .grateful: return "emotion.grateful"
+        case .happy: return LocalizedStringKey("Happy")
+        case .sad: return LocalizedStringKey("Sad")
+        case .anxious: return LocalizedStringKey("Anxious")
+        case .calm: return LocalizedStringKey("Calm")
+        case .angry: return LocalizedStringKey("Angry")
+        case .excited: return LocalizedStringKey("Excited")
+        case .tired: return LocalizedStringKey("Tired")
+        case .grateful: return LocalizedStringKey("Grateful")
         }
     }
     

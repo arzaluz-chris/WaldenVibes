@@ -1,4 +1,4 @@
-// QuickStatCard.swift
+// WaldenVibes/Components/QuickStatCard.swift
 import SwiftUI
 
 struct QuickStatCard: View {

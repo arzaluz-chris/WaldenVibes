@@ -17,28 +17,28 @@ struct SettingsView: View {
         Form {
             // Appearance Section
             Section {
-                Picker("settings.theme", selection: $selectedTheme) {
-                    Label("theme.system", systemImage: "circle.lefthalf.filled")
+                Picker("Theme", selection: $selectedTheme) {
+                    Label("System", systemImage: "circle.lefthalf.filled")
                         .tag("system")
-                    Label("theme.light", systemImage: "sun.max.fill")
+                    Label("Light", systemImage: "sun.max.fill")
                         .tag("light")
-                    Label("theme.dark", systemImage: "moon.fill")
+                    Label("Dark", systemImage: "moon.fill")
                         .tag("dark")
                 }
                 
-                Picker("settings.language", selection: $appLanguage) {
+                Picker("Language", selection: $appLanguage) {
                     Text("Español")
                         .tag("es")
                     Text("English")
                         .tag("en")
                 }
             } header: {
-                Text("settings.appearance")
+                Text("Appearance", comment: "Settings section header")
             }
             
             // Notifications Section
             Section {
-                Toggle("settings.notifications.enable", isOn: $notificationsEnabled)
+                Toggle("Enable reminders", isOn: $notificationsEnabled)
                     .onChange(of: notificationsEnabled) { _, newValue in
                         if newValue {
                             requestNotificationPermission()
@@ -49,7 +49,7 @@ struct SettingsView: View {
                 
                 if notificationsEnabled {
                     DatePicker(
-                        "settings.notifications.time",
+                        "Reminder time",
                         selection: $notificationTime,
                         displayedComponents: .hourAndMinute
                     )
@@ -58,10 +58,10 @@ struct SettingsView: View {
                     }
                 }
             } header: {
-                Text("settings.notifications")
+                Text("Notifications", comment: "Settings section header")
             } footer: {
                 if notificationsEnabled {
-                    Text("settings.notifications.footer")
+                    Text("Receive a daily reminder to record your emotions", comment: "Settings footer text")
                 }
             }
             
@@ -71,7 +71,7 @@ struct SettingsView: View {
                     HStack {
                         Image(systemName: "trash")
                             .foregroundColor(.red)
-                        Text("settings.data.clear")
+                        Text("Clear All Data", comment: "Settings option to delete all data")
                             .foregroundColor(.red)
                     }
                 }
@@ -80,11 +80,11 @@ struct SettingsView: View {
                     HStack {
                         Image(systemName: "square.and.arrow.up")
                             .foregroundColor(Color("AccentColor"))
-                        Text("settings.data.export")
+                        Text("Export Data", comment: "Settings option to export data")
                     }
                 }
             } header: {
-                Text("settings.data")
+                Text("Data Management", comment: "Settings section header")
             }
             
             // About Section
@@ -93,7 +93,7 @@ struct SettingsView: View {
                     HStack {
                         Image(systemName: "info.circle")
                             .foregroundColor(Color("AccentColor"))
-                        Text("settings.about")
+                        Text("About", comment: "Settings option")
                         Spacer()
                         Image(systemName: "chevron.right")
                             .font(.caption)
@@ -105,7 +105,7 @@ struct SettingsView: View {
                     HStack {
                         Image(systemName: "lock.shield")
                             .foregroundColor(Color("AccentColor"))
-                        Text("settings.privacy")
+                        Text("Privacy Policy", comment: "Settings option")
                         Spacer()
                         Image(systemName: "chevron.right")
                             .font(.caption)
@@ -113,13 +113,13 @@ struct SettingsView: View {
                     }
                 }
             } header: {
-                Text("settings.info")
+                Text("Information", comment: "Settings section header")
             }
             
             // App Version
             Section {
                 HStack {
-                    Text("settings.version")
+                    Text("Version", comment: "App version label")
                         .foregroundColor(.secondary)
                     Spacer()
                     Text("1.0.0")
@@ -127,14 +127,14 @@ struct SettingsView: View {
                 }
             }
         }
-        .navigationTitle("nav.settings")
-        .alert("settings.data.clear.confirm.title", isPresented: $showingDeleteAlert) {
-            Button("cancel", role: .cancel) {}
-            Button("delete", role: .destructive) {
+        .navigationTitle("Settings")
+        .alert("Delete All Data?", isPresented: $showingDeleteAlert) {
+            Button("Cancel", role: .cancel) {}
+            Button("Delete", role: .destructive) {
                 dataManager.clearAllData()
             }
         } message: {
-            Text("settings.data.clear.confirm.message")
+            Text("This will permanently delete all your emotions, moments, and stress records. This action cannot be undone.")
         }
         .sheet(isPresented: $showingAbout) {
             AboutView()
@@ -161,8 +161,8 @@ struct SettingsView: View {
         cancelAllNotifications()
         
         let content = UNMutableNotificationContent()
-        content.title = NSLocalizedString("notification.title", comment: "")
-        content.body = NSLocalizedString("notification.body", comment: "")
+        content.title = String(localized: "Daily Reminder", comment: "Notification title")
+        content.body = String(localized: "How are you feeling today? Take a moment to track your emotions.", comment: "Notification body")
         content.sound = .default
         
         let calendar = Calendar.current

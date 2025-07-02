@@ -1,4 +1,4 @@
-// EmotionCard.swift - Fixed
+// WaldenVibes/Views/Emotions/Components/EmotionCard.swift
 import SwiftUI
 
 struct EmotionCard: View {
@@ -49,7 +49,10 @@ struct EmotionCard: View {
                         .foregroundColor(.secondary)
                     
                     if let location = emotion.location {
-                        Text("• \(location)")
+                        Text("•")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        Text(location)
                             .font(.caption)
                             .foregroundColor(.secondary)
                             .lineLimit(1)

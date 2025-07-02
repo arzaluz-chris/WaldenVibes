@@ -1,4 +1,4 @@
-//  EmotionDetailView.swift
+// WaldenVibes/Views/Emotions/EmotionDetailView.swift
 import SwiftUI
 
 struct EmotionDetailView: View {
@@ -33,7 +33,7 @@ struct EmotionDetailView: View {
                     VStack(alignment: .leading, spacing: 20) {
                         // Intensity
                         VStack(alignment: .leading, spacing: 8) {
-                            Label("intensity.label", systemImage: "dial.high")
+                            Label("Intensity", systemImage: "dial.high")
                                 .font(.headline)
                             
                             HStack {
@@ -51,7 +51,7 @@ struct EmotionDetailView: View {
                         // Note
                         if !emotion.note.isEmpty {
                             VStack(alignment: .leading, spacing: 8) {
-                                Label("notes.label", systemImage: "note.text")
+                                Label("Notes", systemImage: "note.text")
                                     .font(.headline)
                                 
                                 Text(emotion.note)
@@ -64,7 +64,7 @@ struct EmotionDetailView: View {
                         // Location
                         if let location = emotion.location {
                             VStack(alignment: .leading, spacing: 8) {
-                                Label("location.label", systemImage: "location.fill")
+                                Label("Location", systemImage: "location.fill")
                                     .font(.headline)
                                 
                                 Text(location)
@@ -78,7 +78,7 @@ struct EmotionDetailView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("done") {
+                    Button("Done") {
                         dismiss()
                     }
                 }
@@ -97,14 +97,14 @@ struct EmotionDetailView: View {
                     }
                 }
             }
-            .alert("delete.confirm.title", isPresented: $showingDeleteAlert) {
-                Button("delete", role: .destructive) {
+            .alert("Delete Emotion?", isPresented: $showingDeleteAlert) {
+                Button("Delete", role: .destructive) {
                     dataManager.deleteEmotion(emotion)
                     dismiss()
                 }
-                Button("cancel", role: .cancel) {}
+                Button("Cancel", role: .cancel) {}
             } message: {
-                Text("delete.confirm.message")
+                Text("Are you sure you want to delete this emotion record?")
             }
         }
         .sheet(isPresented: $showingEditView) {

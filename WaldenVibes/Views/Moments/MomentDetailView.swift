@@ -1,4 +1,4 @@
-//  MomentDetailView.swift
+// WaldenVibes/Views/Moments/MomentDetailView.swift
 import SwiftUI
 
 struct MomentDetailView: View {
@@ -90,7 +90,7 @@ struct MomentDetailView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("done") {
+                    Button("Done") {
                         dismiss()
                     }
                 }
@@ -109,14 +109,14 @@ struct MomentDetailView: View {
                     }
                 }
             }
-            .alert("delete.confirm.title", isPresented: $showingDeleteAlert) {
-                Button("delete", role: .destructive) {
+            .alert("Delete Moment?", isPresented: $showingDeleteAlert) {
+                Button("Delete", role: .destructive) {
                     dataManager.deleteMoment(moment)
                     dismiss()
                 }
-                Button("cancel", role: .cancel) {}
+                Button("Cancel", role: .cancel) {}
             } message: {
-                Text("delete.moment.message")
+                Text("Are you sure you want to delete this special moment?")
             }
         }
         .sheet(isPresented: $showingEditView) {
@@ -128,15 +128,15 @@ struct MomentDetailView: View {
         let hour = Calendar.current.component(.hour, from: date)
         switch hour {
         case 0..<6:
-            return "Early Morning"
+            return String(localized: "Early Morning", comment: "Time of day description")
         case 6..<12:
-            return "Morning"
+            return String(localized: "Morning", comment: "Time of day description")
         case 12..<17:
-            return "Afternoon"
+            return String(localized: "Afternoon", comment: "Time of day description")
         case 17..<21:
-            return "Evening"
+            return String(localized: "Evening", comment: "Time of day description")
         default:
-            return "Night"
+            return String(localized: "Night", comment: "Time of day description")
         }
     }
 }

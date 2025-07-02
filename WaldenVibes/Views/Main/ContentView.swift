@@ -13,7 +13,7 @@ struct ContentView: View {
                 EmotionsView()
             }
             .tabItem {
-                Label("tab.emotions", systemImage: "heart.fill")
+                Label("Emotions", systemImage: "heart.fill")
             }
             .tag(0)
             
@@ -23,7 +23,7 @@ struct ContentView: View {
                     .environmentObject(meditationManager)
             }
             .tabItem {
-                Label("tab.meditation", systemImage: "sparkles")
+                Label("Meditation", systemImage: "sparkles")
             }
             .tag(1)
             
@@ -32,7 +32,7 @@ struct ContentView: View {
                 MomentsView()
             }
             .tabItem {
-                Label("tab.moments", systemImage: "star.fill")
+                Label("Moments", systemImage: "star.fill")
             }
             .tag(2)
             
@@ -41,7 +41,7 @@ struct ContentView: View {
                 StressView()
             }
             .tabItem {
-                Label("tab.stress", systemImage: "waveform.path.ecg")
+                Label("Stress", systemImage: "waveform.path.ecg")
             }
             .tag(3)
             

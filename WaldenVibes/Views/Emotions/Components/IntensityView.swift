@@ -1,4 +1,4 @@
-//  IntensityView.swift
+// WaldenVibes/Views/Emotions/Components/IntensityView.swift
 import SwiftUI
 
 struct IntensityView: View {

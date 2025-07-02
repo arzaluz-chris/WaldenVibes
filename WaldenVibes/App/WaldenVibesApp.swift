@@ -9,6 +9,7 @@ struct WaldenVibesApp: App {
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @AppStorage("selectedTheme") private var selectedTheme = "system"
     @AppStorage("appLanguage") private var appLanguage = "es"
+    @State private var isShowingSplash = true
     
     init() {
         // Configure app appearance
@@ -23,7 +24,9 @@ struct WaldenVibesApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if hasSeenOnboarding {
+            if isShowingSplash {
+                SplashView(isShowingSplash: $isShowingSplash)
+            } else if hasSeenOnboarding {
                 ContentView()
                     .environmentObject(dataManager)
                     .environment(\.locale, Locale(identifier: appLanguage))

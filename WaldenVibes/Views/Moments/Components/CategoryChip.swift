@@ -1,8 +1,8 @@
-//  CategoryChip.swift
+// WaldenVibes/Views/Moments/Components/CategoryChip.swift
 import SwiftUI
 
 struct CategoryChip: View {
-    let title: LocalizedStringKey
+    let title: String
     let icon: String
     let color: Color
     let isSelected: Bool

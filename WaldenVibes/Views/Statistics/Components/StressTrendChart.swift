@@ -1,4 +1,4 @@
-//  StressTrendChart.swift
+// WaldenVibes/Views/Statistics/Components/StressTrendChart.swift
 import SwiftUI
 import Charts
 
@@ -13,12 +13,12 @@ struct StressTrendChart: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("stats.stress.trend")
+            Text("Stress Trend", comment: "Chart title")
                 .font(.headline)
                 .padding(.horizontal)
             
             if chartData.isEmpty {
-                EmptyChartView(message: "stats.nodata")
+                EmptyChartView(message: LocalizedStringKey("Not enough data yet"))
             } else {
                 Chart(chartData, id: \.date) { item in
                     LineMark(

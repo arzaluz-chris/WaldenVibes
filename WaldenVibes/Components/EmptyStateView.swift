@@ -1,4 +1,4 @@
-//  EmptyStateView.swift
+// WaldenVibes/Components/EmptyStateView.swift
 import SwiftUI
 
 struct EmptyStateView: View {

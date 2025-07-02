@@ -1,4 +1,4 @@
-//  StatisticsView.swift
+// WaldenVibes/Views/Statistics/StatisticsView.swift
 import SwiftUI
 import Charts
 
@@ -11,7 +11,7 @@ struct StatisticsView: View {
         ScrollView {
             VStack(spacing: 24) {
                 // Period Selector
-                Picker("period", selection: $selectedPeriod) {
+                Picker("Period", selection: $selectedPeriod) {
                     ForEach(TimePeriod.allCases, id: \.self) { period in
                         Text(period.localizedName)
                             .tag(period)
@@ -37,7 +37,7 @@ struct StatisticsView: View {
             }
             .padding(.vertical)
         }
-        .navigationTitle("nav.statistics")
+        .navigationTitle("Statistics")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { showingExport = true }) {

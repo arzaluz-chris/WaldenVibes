@@ -1,4 +1,4 @@
-//  AddMomentView.swift
+// WaldenVibes/Views/Moments/AddMomentView.swift
 import SwiftUI
 
 struct AddMomentView: View {
@@ -36,14 +36,14 @@ struct AddMomentView: View {
                                 }
                             }
                     } header: {
-                        Text("moment.description")
+                        Text("Description", comment: "Section header for moment description")
                     } footer: {
-                        Text("moment.description.footer")
+                        Text("Describe what made this moment special", comment: "Helper text for moment description field")
                     }
                     
                     // Category
                     Section {
-                        Picker("moment.category", selection: $selectedCategory) {
+                        Picker("Category", selection: $selectedCategory) {
                             ForEach(MomentCategory.allCases, id: \.self) { category in
                                 Label {
                                     Text(category.localizedName)
@@ -55,12 +55,12 @@ struct AddMomentView: View {
                             }
                         }
                     } header: {
-                        Text("moment.category.section")
+                        Text("Category", comment: "Section header for moment category")
                     }
                     
                     // Duration
                     Section {
-                        Picker("moment.duration", selection: $duration) {
+                        Picker("Duration", selection: $duration) {
                             ForEach(durationOptions, id: \.self) { minutes in
                                 Text(formatDuration(minutes))
                                     .tag(minutes)
@@ -69,33 +69,33 @@ struct AddMomentView: View {
                         .pickerStyle(WheelPickerStyle())
                         .frame(height: 120)
                     } header: {
-                        Text("moment.duration.section")
+                        Text("Duration", comment: "Section header for moment duration")
                     }
                     
                     // Date & Time
                     Section {
                         DatePicker(
-                            "moment.date",
+                            "Date & Time",
                             selection: $date,
                             displayedComponents: [.date, .hourAndMinute]
                         )
                     } header: {
-                        Text("moment.date.section")
+                        Text("When", comment: "Section header for moment date and time")
                     }
                 }
             }
-            .navigationTitle("moment.new")
+            .navigationTitle("New Moment")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackground()
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("cancel") {
+                    Button("Cancel") {
                         dismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("save") {
+                    Button("Save") {
                         saveMoment()
                     }
                     .fontWeight(.semibold)
@@ -107,14 +107,14 @@ struct AddMomentView: View {
     
     private func formatDuration(_ minutes: Int) -> String {
         if minutes < 60 {
-            return "\(minutes) min"
+            return String(localized: "\(minutes) min", comment: "Duration in minutes")
         } else {
             let hours = minutes / 60
             let mins = minutes % 60
             if mins == 0 {
-                return "\(hours)h"
+                return String(localized: "\(hours)h", comment: "Duration in hours")
             } else {
-                return "\(hours)h \(mins)min"
+                return String(localized: "\(hours)h \(mins)min", comment: "Duration in hours and minutes")
             }
         }
     }

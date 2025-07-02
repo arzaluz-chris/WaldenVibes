@@ -1,4 +1,4 @@
-// FilterChip.swift
+// WaldenVibes/Components/FilterChip.swift
 import SwiftUI
 
 struct FilterChip: View {

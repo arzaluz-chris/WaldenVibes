@@ -1,4 +1,4 @@
-// MomentCard.swift - Redesigned
+// WaldenVibes/Views/Moments/Components/MomentCard.swift
 import SwiftUI
 
 struct MomentCard: View {

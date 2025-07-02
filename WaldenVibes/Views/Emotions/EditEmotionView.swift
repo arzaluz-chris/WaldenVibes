@@ -1,4 +1,4 @@
-//  EditEmotionView.swift
+// WaldenVibes/Views/Emotions/EditEmotionView.swift
 import SwiftUI
 import AVFoundation
 
@@ -46,14 +46,14 @@ struct EditEmotionView: View {
                         .padding(.vertical, 10)
                     }
                 } header: {
-                    Text("emotion.select")
+                    Text("Select emotion", comment: "Section header for emotion selection")
                 }
                 
                 // Intensity Slider
                 Section {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
-                            Text("intensity.label")
+                            Text("Intensity", comment: "Label for emotion intensity")
                             Spacer()
                             Text("\(Int(intensity))")
                                 .fontWeight(.semibold)
@@ -72,7 +72,7 @@ struct EditEmotionView: View {
                             .frame(maxWidth: .infinity)
                     }
                 } header: {
-                    Text("intensity.section")
+                    Text("Emotion intensity", comment: "Section header for intensity slider")
                 }
                 
                 // Notes
@@ -80,33 +80,33 @@ struct EditEmotionView: View {
                     TextEditor(text: $note)
                         .frame(minHeight: 100)
                 } header: {
-                    Text("notes.section")
+                    Text("Notes", comment: "Section header for notes field")
                 } footer: {
-                    Text("notes.footer")
+                    Text("Optional notes about how you're feeling", comment: "Footer text explaining the notes field")
                 }
                 
                 // Location
                 Section {
-                    Toggle("location.include", isOn: $includeLocation)
+                    Toggle("Include location", isOn: $includeLocation)
                     
                     if includeLocation {
-                        TextField("location.placeholder", text: $location)
+                        TextField("Location", text: $location, prompt: Text("Where are you?"))
                     }
                 } header: {
-                    Text("location.section")
+                    Text("Location", comment: "Section header for location field")
                 }
             }
             .navigationTitle("Edit Emotion")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("cancel") {
+                    Button("Cancel") {
                         dismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("save") {
+                    Button("Save") {
                         updateEmotion()
                     }
                     .fontWeight(.semibold)

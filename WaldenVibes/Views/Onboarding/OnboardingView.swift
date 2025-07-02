@@ -1,4 +1,4 @@
-// OnboardingView.swift
+// WaldenVibes/Views/Onboarding/OnboardingView.swift
 import SwiftUI
 
 struct OnboardingView: View {
@@ -7,22 +7,22 @@ struct OnboardingView: View {
     
     let pages: [OnboardingPage] = [
         OnboardingPage(
-            title: "onboarding.welcome.title",
-            description: "onboarding.welcome.description",
+            title: LocalizedStringKey("Welcome to Walden Vibes"),
+            description: LocalizedStringKey("Your personal companion for emotional well-being and mindfulness"),
             imageName: "heart.circle.fill",
             backgroundImage: "OnboardingWelcome",
             color: Color("AccentColor")
         ),
         OnboardingPage(
-            title: "onboarding.emotions.title",
-            description: "onboarding.emotions.description",
+            title: LocalizedStringKey("Track Your Emotions"),
+            description: LocalizedStringKey("Record how you feel and discover patterns in your emotional journey"),
             imageName: "face.smiling.fill",
             backgroundImage: "OnboardingEmotions",
             color: Color("EmotionHappy")
         ),
         OnboardingPage(
-            title: "onboarding.wellness.title",
-            description: "onboarding.wellness.description",
+            title: LocalizedStringKey("Improve Your Well-being"),
+            description: LocalizedStringKey("Practice meditation, manage stress, and capture special moments"),
             imageName: "sparkles",
             backgroundImage: "OnboardingWellness",
             color: Color("EmotionCalm")
@@ -47,7 +47,7 @@ struct OnboardingView: View {
                 // Skip button
                 HStack {
                     Spacer()
-                    Button("onboarding.skip") {
+                    Button("Skip") {
                         withAnimation {
                             hasSeenOnboarding = true
                         }
@@ -90,7 +90,7 @@ struct OnboardingView: View {
                             }
                         }
                     }) {
-                        Text(currentPage == pages.count - 1 ? "onboarding.start" : "onboarding.continue")
+                        Text(currentPage == pages.count - 1 ? "Get Started" : "Continue")
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
@@ -169,4 +169,3 @@ struct OnboardingPageView: View {
         }
     }
 }
-

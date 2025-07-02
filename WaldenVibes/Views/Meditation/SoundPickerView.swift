@@ -78,7 +78,7 @@ struct SoundPickerView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("done") {
+                    Button("Done") {
                         stopPreview()
                         dismiss()
                     }

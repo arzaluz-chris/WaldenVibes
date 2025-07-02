@@ -1,4 +1,4 @@
-//  View+Extensions.swift
+// WaldenVibes/Utilities/Extensions/View+Extensions.swift
 import SwiftUI
 
 extension View {

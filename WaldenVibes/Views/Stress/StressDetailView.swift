@@ -1,4 +1,4 @@
-//  StressDetailView.swift
+// WaldenVibes/Views/Stress/StressDetailView.swift
 import SwiftUI
 
 struct StressDetailView: View {
@@ -21,7 +21,7 @@ struct StressDetailView: View {
                             .fontWeight(.semibold)
                         
                         HStack {
-                            Text("Level:")
+                            Text("Level:", comment: "Stress level label")
                                 .foregroundColor(.secondary)
                             Text("\(Int(stress.level))/10")
                                 .font(.title3)
@@ -38,7 +38,7 @@ struct StressDetailView: View {
                     
                     // Visual stress meter
                     VStack(alignment: .leading, spacing: 8) {
-                        Label("stress.level", systemImage: "waveform.path.ecg")
+                        Label("Stress Level", systemImage: "waveform.path.ecg")
                             .font(.headline)
                         
                         GeometryReader { geometry in
@@ -61,7 +61,7 @@ struct StressDetailView: View {
                     // Triggers
                     if !stress.triggers.isEmpty {
                         VStack(alignment: .leading, spacing: 12) {
-                            Label("stress.triggers", systemImage: "exclamationmark.triangle.fill")
+                            Label("Stress Triggers", systemImage: "exclamationmark.triangle.fill")
                                 .font(.headline)
                             
                             FlowLayout(spacing: 8) {
@@ -73,6 +73,7 @@ struct StressDetailView: View {
                                     .font(.subheadline)
                                     .foregroundColor(.primary)
                                     .padding(.horizontal, 16)
+                                    .padding(.vertical, 8)
                                     .background(Color("AccentColor").opacity(0.1))
                                     .cornerRadius(20)
                                 }
@@ -86,7 +87,7 @@ struct StressDetailView: View {
                     // Note
                     if !stress.note.isEmpty {
                         VStack(alignment: .leading, spacing: 8) {
-                            Label("notes.label", systemImage: "note.text")
+                            Label("Notes", systemImage: "note.text")
                                 .font(.headline)
                             
                             Text(stress.note)
@@ -100,7 +101,7 @@ struct StressDetailView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("done") {
+                    Button("Done") {
                         dismiss()
                     }
                 }
@@ -112,14 +113,14 @@ struct StressDetailView: View {
                     }
                 }
             }
-            .alert("delete.confirm.title", isPresented: $showingDeleteAlert) {
-                Button("delete", role: .destructive) {
+            .alert("Delete Stress Record?", isPresented: $showingDeleteAlert) {
+                Button("Delete", role: .destructive) {
                     dataManager.deleteStressRecord(stress)
                     dismiss()
                 }
-                Button("cancel", role: .cancel) {}
+                Button("Cancel", role: .cancel) {}
             } message: {
-                Text("delete.stress.message")
+                Text("Are you sure you want to delete this stress record?")
             }
         }
     }

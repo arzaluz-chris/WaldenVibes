@@ -1,4 +1,4 @@
-// MomentsView.swift
+// WaldenVibes/Views/Moments/MomentsView.swift
 import SwiftUI
 
 struct MomentsView: View {
@@ -29,7 +29,7 @@ struct MomentsView: View {
                 MomentsList(selectedCategory: $selectedCategory, selectedMoment: $selectedMoment)
             }
         }
-        .navigationTitle("nav.moments")
+        .navigationTitle("Moments")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { showingAddMoment = true }) {
@@ -60,18 +60,18 @@ struct EmptyMomentsView: View {
                 .frame(width: 150, height: 150)
                 .opacity(0.5)
             
-            Text("moments.empty.title")
+            Text("No moments yet", comment: "Empty state title when no moments have been recorded")
                 .font(.title2)
                 .fontWeight(.semibold)
             
-            Text("moments.empty.subtitle")
+            Text("Start capturing your special moments to preserve your memories", comment: "Empty state subtitle encouraging user to start recording moments")
                 .font(.body)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
             
             Button(action: { showingAddMoment = true }) {
-                Label("moments.add", systemImage: "plus.circle.fill")
+                Label("Add Moment", systemImage: "plus.circle.fill")
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding(.horizontal, 20)
@@ -101,41 +101,61 @@ struct MomentsList: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Category Filter
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
-                    CategoryChip(
-                        title: "category.all",
-                        icon: "square.grid.2x2",
-                        color: Color("AccentColor"),
-                        isSelected: selectedCategory == nil,
-                        action: { selectedCategory = nil }
-                    )
-                    
-                    ForEach(MomentCategory.allCases, id: \.self) { category in
-                        CategoryChip(
-                            title: category.localizedName,
-                            icon: category.icon,
-                            color: category.color,
-                            isSelected: selectedCategory == category,
-                            action: { selectedCategory = category }
-                        )
+            categoryFilter
+            Divider()
+            listContent
+        }
+        .alert("Delete Moment?", isPresented: $showingDeleteAlert) {
+            Button("Cancel", role: .cancel) {}
+            Button("Delete", role: .destructive) {
+                if let moment = momentToDelete {
+                    withAnimation {
+                        dataManager.deleteMoment(moment)
                     }
                 }
-                .padding(.horizontal)
-                .padding(.vertical, 12)
             }
-            .background(Color(UIColor.systemBackground))
-            
-            Divider()
-            
-            // Moments List
+        } message: {
+            Text("Are you sure you want to delete this special moment?")
+        }
+    }
+    
+    /// Horizontal chip selector
+    private var categoryFilter: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 12) {
+                CategoryChip(
+                    title: String(localized: "All", comment: "Filter option to show all categories"),
+                    icon: "square.grid.2x2",
+                    color: Color("AccentColor"),
+                    isSelected: selectedCategory == nil,
+                    action: { selectedCategory = nil }
+                )
+
+                ForEach(MomentCategory.allCases, id: \.self) { category in
+                    CategoryChip(
+                        title: "\(category.localizedName)",
+                        icon: category.icon,
+                        color: category.color,
+                        isSelected: selectedCategory == category,
+                        action: { selectedCategory = category }
+                    )
+                }
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 12)
+        }
+        .background(Color(UIColor.systemBackground))
+    }
+
+    /// Main list or empty state
+    private var listContent: some View {
+        Group {
             if filteredMoments.isEmpty {
                 VStack(spacing: 16) {
                     Image(systemName: "tray")
                         .font(.system(size: 50))
                         .foregroundColor(.secondary)
-                    Text("moments.filter.empty")
+                    Text("No moments in this category", comment: "Message shown when no moments match the selected filter")
                         .font(.headline)
                         .foregroundColor(.secondary)
                 }
@@ -144,50 +164,20 @@ struct MomentsList: View {
             } else {
                 ScrollView {
                     LazyVStack(spacing: 16) {
-                        ForEach(groupedMoments, id: \.key) { date, moments in
-                            Section {
-                                ForEach(moments) { moment in
-                                    MomentCard(moment: moment)
-                                        .onTapGesture {
-                                            selectedMoment = moment
-                                        }
-                                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                            Button(role: .destructive) {
-                                                momentToDelete = moment
-                                                showingDeleteAlert = true
-                                            } label: {
-                                                Label("Delete", systemImage: "trash")
-                                            }
-                                        }
-                                }
-                            } header: {
-                                HStack {
-                                    Text(date, style: .date)
-                                        .font(.subheadline)
-                                        .fontWeight(.medium)
-                                        .foregroundColor(.secondary)
-                                    Spacer()
-                                }
-                                .padding(.horizontal)
-                                .padding(.top, date == groupedMoments.first?.key ? 0 : 10)
-                            }
+                        ForEach(groupedMoments, id: \.key) { group in
+                            MomentSectionView(
+                                date: group.key,
+                                moments: group.value,
+                                isFirst: group.key == firstGroupDate,
+                                selectedMoment: $selectedMoment,
+                                momentToDelete: $momentToDelete,
+                                showingDeleteAlert: $showingDeleteAlert
+                            )
                         }
                     }
                     .padding(.vertical)
                 }
             }
-        }
-        .alert("delete.confirm.title", isPresented: $showingDeleteAlert) {
-            Button("delete", role: .destructive) {
-                if let moment = momentToDelete {
-                    withAnimation {
-                        dataManager.deleteMoment(moment)
-                    }
-                }
-            }
-            Button("cancel", role: .cancel) {}
-        } message: {
-            Text("delete.moment.message")
         }
     }
     
@@ -196,5 +186,49 @@ struct MomentsList: View {
             Calendar.current.startOfDay(for: moment.date)
         }
         return grouped.sorted { $0.key > $1.key }
+    }
+    
+    /// First date in the grouped array – used for header padding
+    private var firstGroupDate: Date? {
+        groupedMoments.first?.key
+    }
+}
+
+// MARK: - Helper Section View (extracts heavy body for better compile time)
+private struct MomentSectionView: View {
+    let date: Date
+    let moments: [Moment]
+    let isFirst: Bool
+    
+    // bindings forwarded from parent
+    @Binding var selectedMoment: Moment?
+    @Binding var momentToDelete: Moment?
+    @Binding var showingDeleteAlert: Bool
+    
+    var body: some View {
+        Section {
+            ForEach(moments) { moment in
+                MomentCard(moment: moment)
+                    .onTapGesture { selectedMoment = moment }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        Button(role: .destructive) {
+                            momentToDelete = moment
+                            showingDeleteAlert = true
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
+            }
+        } header: {
+            HStack {
+                Text(date, style: .date)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+                    .foregroundColor(.secondary)
+                Spacer()
+            }
+            .padding(.horizontal)
+            .padding(.top, isFirst ? 0 : 10)
+        }
     }
 }

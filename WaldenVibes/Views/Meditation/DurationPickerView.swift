@@ -1,4 +1,4 @@
-//  DurationPickerView.swift
+// WaldenVibes/Views/Meditation/DurationPickerView.swift
 import SwiftUI
 
 struct DurationPickerView: View {
@@ -29,11 +29,11 @@ struct DurationPickerView: View {
                 }
             }
             .listStyle(InsetGroupedListStyle())
-            .navigationTitle("duration.select")
+            .navigationTitle("Select Duration")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("done") {
+                    Button("Done") {
                         dismiss()
                     }
                 }
@@ -44,9 +44,9 @@ struct DurationPickerView: View {
     private func durationString(for seconds: TimeInterval) -> String {
         let minutes = Int(seconds) / 60
         if minutes == 1 {
-            return "1 \(NSLocalizedString("minute", comment: ""))"
+            return String(localized: "\(minutes) minute", comment: "Duration in singular minute")
         } else {
-            return "\(minutes) \(NSLocalizedString("minutes", comment: ""))"
+            return String(localized: "\(minutes) minutes", comment: "Duration in plural minutes")
         }
     }
 }

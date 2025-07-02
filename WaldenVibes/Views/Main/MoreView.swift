@@ -20,7 +20,7 @@ struct MoreView: View {
                         .font(.title)
                         .fontWeight(.bold)
                     
-                    Text("Your emotional well-being companion")
+                    Text("Your emotional well-being companion", comment: "App tagline in More view")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -34,7 +34,7 @@ struct MoreView: View {
                 
                 // Quick Stats
                 VStack(spacing: 16) {
-                    Text("Quick Overview")
+                    Text("Quick Overview", comment: "Section header for statistics overview")
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
@@ -43,28 +43,28 @@ struct MoreView: View {
                         QuickStatCard(
                             icon: "heart.fill",
                             value: "\(dataManager.emotions.count)",
-                            label: "Total Emotions",
+                            label: String(localized: "Total Emotions", comment: "Quick stat label"),
                             color: Color("EmotionHappy")
                         )
                         
                         QuickStatCard(
                             icon: "star.fill",
                             value: "\(dataManager.moments.count)",
-                            label: "Special Moments",
+                            label: String(localized: "Special Moments", comment: "Quick stat label"),
                             color: Color("EmotionExcited")
                         )
                         
                         QuickStatCard(
                             icon: "waveform.path.ecg",
                             value: String(format: "%.1f", dataManager.averageStressLevel(for: .month)),
-                            label: "Avg Stress",
+                            label: String(localized: "Avg Stress", comment: "Quick stat label"),
                             color: Color("StressModerate")
                         )
                         
                         QuickStatCard(
                             icon: "calendar",
                             value: "\(daysTracked)",
-                            label: "Days Tracked",
+                            label: String(localized: "Days Tracked", comment: "Quick stat label"),
                             color: Color("AccentColor")
                         )
                     }
@@ -73,7 +73,7 @@ struct MoreView: View {
                 
                 // Menu Items
                 VStack(spacing: 12) {
-                    Text("Tools & Features")
+                    Text("Tools & Features", comment: "Section header for tools menu")
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
@@ -82,8 +82,8 @@ struct MoreView: View {
                     NavigationLink(destination: StatisticsView()) {
                         MenuRow(
                             icon: "chart.line.uptrend.xyaxis",
-                            title: "Detailed Statistics",
-                            subtitle: "View trends and insights",
+                            title: String(localized: "Detailed Statistics", comment: "Menu item"),
+                            subtitle: String(localized: "View trends and insights", comment: "Menu item subtitle"),
                             color: .blue
                         )
                     }
@@ -91,8 +91,8 @@ struct MoreView: View {
                     NavigationLink(destination: ExportView()) {
                         MenuRow(
                             icon: "square.and.arrow.up",
-                            title: "Export Data",
-                            subtitle: "Save your data externally",
+                            title: String(localized: "Export Data", comment: "Menu item"),
+                            subtitle: String(localized: "Save your data externally", comment: "Menu item subtitle"),
                             color: .green
                         )
                     }
@@ -100,8 +100,8 @@ struct MoreView: View {
                     NavigationLink(destination: SettingsView()) {
                         MenuRow(
                             icon: "gearshape.fill",
-                            title: "Settings",
-                            subtitle: "Customize your experience",
+                            title: String(localized: "Settings", comment: "Menu item"),
+                            subtitle: String(localized: "Customize your experience", comment: "Menu item subtitle"),
                             color: .gray
                         )
                     }
@@ -109,8 +109,8 @@ struct MoreView: View {
                     Button(action: { showingAbout = true }) {
                         MenuRow(
                             icon: "info.circle.fill",
-                            title: "About",
-                            subtitle: "Learn more about the app",
+                            title: String(localized: "About", comment: "Menu item"),
+                            subtitle: String(localized: "Learn more about the app", comment: "Menu item subtitle"),
                             color: .orange
                         )
                     }
@@ -118,8 +118,8 @@ struct MoreView: View {
                     Button(action: { showingPrivacy = true }) {
                         MenuRow(
                             icon: "lock.shield.fill",
-                            title: "Privacy",
-                            subtitle: "Your data is safe",
+                            title: String(localized: "Privacy", comment: "Menu item"),
+                            subtitle: String(localized: "Your data is safe", comment: "Menu item subtitle"),
                             color: .purple
                         )
                     }
@@ -127,16 +127,16 @@ struct MoreView: View {
                 
                 // Motivational Quote
                 VStack(spacing: 12) {
-                    Text("Daily Inspiration")
+                    Text("Daily Inspiration", comment: "Section header for inspirational quote")
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Text("\"The greatest wealth is health.\"")
+                    Text("\"The greatest wealth is health.\"", comment: "Inspirational quote")
                         .font(.title3)
                         .italic()
                         .multilineTextAlignment(.center)
                     
-                    Text("- Virgil")
+                    Text("- Virgil", comment: "Quote author")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }

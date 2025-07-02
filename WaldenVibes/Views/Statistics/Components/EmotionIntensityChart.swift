@@ -1,4 +1,4 @@
-//  EmotionIntensityChart.swift
+// WaldenVibes/Views/Statistics/Components/EmotionIntensityChart.swift
 import SwiftUI
 
 struct EmotionIntensityChart: View {
@@ -14,12 +14,12 @@ struct EmotionIntensityChart: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("stats.emotion.intensity")
+            Text("Average Intensity", comment: "Chart title")
                 .font(.headline)
                 .padding(.horizontal)
             
             if chartData.isEmpty {
-                EmptyChartView(message: "stats.nodata")
+                EmptyChartView(message: LocalizedStringKey("Not enough data yet"))
             } else {
                 VStack(spacing: 12) {
                     ForEach(chartData, id: \.type) { item in
@@ -61,23 +61,5 @@ struct EmotionIntensityChart: View {
         .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(16)
         .padding(.horizontal)
-    }
-}
-
-// MARK: - Empty Chart View
-struct EmptyChartView: View {
-    let message: LocalizedStringKey
-    
-    var body: some View {
-        VStack {
-            Image(systemName: "chart.bar")
-                .font(.largeTitle)
-                .foregroundColor(.secondary)
-            Text(message)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-        }
-        .frame(height: 200)
-        .frame(maxWidth: .infinity)
     }
 }

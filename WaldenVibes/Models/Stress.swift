@@ -1,4 +1,4 @@
-//  Stress.swift
+// WaldenVibes/Models/Stress.swift
 import Foundation
 import SwiftUI
 
@@ -38,14 +38,14 @@ enum StressTrigger: String, CaseIterable, Codable {
     
     var localizedName: LocalizedStringKey {
         switch self {
-        case .work: return "trigger.work"
-        case .relationships: return "trigger.relationships"
-        case .health: return "trigger.health"
-        case .finances: return "trigger.finances"
-        case .time: return "trigger.time"
-        case .environment: return "trigger.environment"
-        case .technology: return "trigger.technology"
-        case .other: return "trigger.other"
+        case .work: return LocalizedStringKey("Work")
+        case .relationships: return LocalizedStringKey("Relationships")
+        case .health: return LocalizedStringKey("Health")
+        case .finances: return LocalizedStringKey("Finances")
+        case .time: return LocalizedStringKey("Time Pressure")
+        case .environment: return LocalizedStringKey("Environment")
+        case .technology: return LocalizedStringKey("Technology")
+        case .other: return LocalizedStringKey("Other")
         }
     }
     
@@ -127,15 +127,15 @@ extension Stress {
     var stressDescription: LocalizedStringKey {
         switch level {
         case 0..<3:
-            return "stress.level.low"
+            return LocalizedStringKey("Low stress")
         case 3..<5:
-            return "stress.level.moderate"
+            return LocalizedStringKey("Moderate stress")
         case 5..<7:
-            return "stress.level.high"
+            return LocalizedStringKey("High stress")
         case 7...10:
-            return "stress.level.veryhigh"
+            return LocalizedStringKey("Very high stress")
         default:
-            return "stress.level.unknown"
+            return LocalizedStringKey("Unknown")
         }
     }
 }
@@ -149,33 +149,33 @@ struct StressTip: Identifiable {
     
     static let tips: [StressTip] = [
         StressTip(
-            title: "tip.breathing.title",
-            description: "tip.breathing.description",
+            title: LocalizedStringKey("Deep Breathing"),
+            description: LocalizedStringKey("Take slow, deep breaths to calm your nervous system"),
             icon: "wind"
         ),
         StressTip(
-            title: "tip.exercise.title",
-            description: "tip.exercise.description",
+            title: LocalizedStringKey("Physical Activity"),
+            description: LocalizedStringKey("Regular exercise releases endorphins that reduce stress"),
             icon: "figure.walk"
         ),
         StressTip(
-            title: "tip.nature.title",
-            description: "tip.nature.description",
+            title: LocalizedStringKey("Nature Time"),
+            description: LocalizedStringKey("Spending time outdoors can lower stress levels"),
             icon: "leaf.fill"
         ),
         StressTip(
-            title: "tip.sleep.title",
-            description: "tip.sleep.description",
+            title: LocalizedStringKey("Quality Sleep"),
+            description: LocalizedStringKey("Good sleep is essential for managing stress"),
             icon: "moon.fill"
         ),
         StressTip(
-            title: "tip.social.title",
-            description: "tip.social.description",
+            title: LocalizedStringKey("Social Connection"),
+            description: LocalizedStringKey("Talking with friends and family can help reduce stress"),
             icon: "person.2.fill"
         ),
         StressTip(
-            title: "tip.mindfulness.title",
-            description: "tip.mindfulness.description",
+            title: LocalizedStringKey("Mindfulness"),
+            description: LocalizedStringKey("Practice being present to reduce anxiety about the future"),
             icon: "brain"
         )
     ]

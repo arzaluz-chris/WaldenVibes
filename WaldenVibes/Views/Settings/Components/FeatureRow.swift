@@ -1,9 +1,9 @@
-//  FeatureRow.swift
+// WaldenVibes/Views/Settings/Components/FeatureRow.swift
 import SwiftUI
 
 struct FeatureRow: View {
     let icon: String
-    let title: LocalizedStringKey
+    let title: String
     let color: Color
     
     var body: some View {

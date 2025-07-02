@@ -1,4 +1,4 @@
-//  TriggerChip.swift
+// WaldenVibes/Views/Stress/Components/TriggerChip.swift
 import SwiftUI
 
 struct TriggerChip: View {

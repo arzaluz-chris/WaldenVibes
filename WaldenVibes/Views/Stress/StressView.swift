@@ -1,4 +1,4 @@
-// StressView.swift - Fixed
+// WaldenVibes/Views/Stress/StressView.swift
 import SwiftUI
 
 struct StressView: View {
@@ -27,7 +27,7 @@ struct StressView: View {
                 StressList(selectedStress: $selectedStress, showingTips: $showingTips)
             }
         }
-        .navigationTitle("nav.stress")
+        .navigationTitle("Stress")
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { showingTips = true }) {
@@ -68,18 +68,18 @@ struct EmptyStressView: View {
                 .frame(width: 150, height: 150)
                 .opacity(0.5)
             
-            Text("stress.empty.title")
+            Text("No stress records", comment: "Empty state title when no stress has been tracked")
                 .font(.title2)
                 .fontWeight(.semibold)
             
-            Text("stress.empty.subtitle")
+            Text("Start tracking your stress levels to identify patterns", comment: "Empty state subtitle encouraging user to track stress")
                 .font(.body)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
             
             Button(action: { showingAddStress = true }) {
-                Label("stress.add", systemImage: "plus.circle.fill")
+                Label("Record Stress", systemImage: "plus.circle.fill")
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding(.horizontal, 20)

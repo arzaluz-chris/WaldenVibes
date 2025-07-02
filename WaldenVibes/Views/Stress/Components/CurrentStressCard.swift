@@ -1,4 +1,4 @@
-//  CurrentStressCard.swift
+// WaldenVibes/Views/Stress/Components/CurrentStressCard.swift
 import SwiftUI
 
 struct CurrentStressCard: View {
@@ -6,7 +6,7 @@ struct CurrentStressCard: View {
     
     var body: some View {
         VStack(spacing: 16) {
-            Text("stress.current")
+            Text("Current Stress Level", comment: "Current stress card title")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
             

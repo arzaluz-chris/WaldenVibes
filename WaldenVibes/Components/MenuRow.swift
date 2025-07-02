@@ -1,4 +1,4 @@
-// MenuRow.swift - Fixed
+// WaldenVibes/Components/MenuRow.swift
 import SwiftUI
 
 struct MenuRow: View {

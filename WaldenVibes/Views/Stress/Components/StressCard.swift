@@ -1,4 +1,4 @@
-//  StressCard.swift
+// WaldenVibes/Views/Stress/Components/StressCard.swift
 import SwiftUI
 
 struct StressCard: View {

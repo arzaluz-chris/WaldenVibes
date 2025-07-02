@@ -1,4 +1,4 @@
-//  AddEmotionView.swift
+// WaldenVibes/Views/Emotions/AddEmotionView.swift
 import SwiftUI
 import AVFoundation
 
@@ -21,6 +21,17 @@ struct AddEmotionView: View {
         case outdoors = "Outdoors"
         case transit = "Transit"
         case other = "Other"
+        
+        var localizedName: String {
+            switch self {
+            case .home: return String(localized: "Home", comment: "Location option for home")
+            case .work: return String(localized: "Work", comment: "Location option for work")
+            case .school: return String(localized: "School", comment: "Location option for school")
+            case .outdoors: return String(localized: "Outdoors", comment: "Location option for outdoor activities")
+            case .transit: return String(localized: "Transit", comment: "Location option for commuting/transit")
+            case .other: return String(localized: "Other", comment: "Location option for other places")
+            }
+        }
         
         var icon: String {
             switch self {
@@ -64,14 +75,14 @@ struct AddEmotionView: View {
                             .padding(.vertical, 10)
                         }
                     } header: {
-                        Text("emotion.select")
+                        Text("Select emotion", comment: "Section header for emotion selection")
                     }
                     
                     // Intensity Slider
                     Section {
                         VStack(alignment: .leading, spacing: 12) {
                             HStack {
-                                Text("intensity.label")
+                                Text("Intensity", comment: "Label for emotion intensity")
                                 Spacer()
                                 Text("\(Int(intensity))")
                                     .fontWeight(.semibold)
@@ -90,7 +101,7 @@ struct AddEmotionView: View {
                                 .frame(maxWidth: .infinity)
                         }
                     } header: {
-                        Text("intensity.section")
+                        Text("Emotion intensity", comment: "Section header for intensity slider")
                     }
                     
                     // Notes
@@ -106,9 +117,9 @@ struct AddEmotionView: View {
                                 }
                             }
                     } header: {
-                        Text("notes.section")
+                        Text("Notes", comment: "Section header for notes field")
                     } footer: {
-                        Text("notes.footer")
+                        Text("Optional notes about how you're feeling", comment: "Footer text explaining the notes field")
                     }
                     
                     // Location
@@ -119,7 +130,7 @@ struct AddEmotionView: View {
                                     .foregroundColor(selectedLocation == location ? Color("AccentColor") : .secondary)
                                     .frame(width: 30)
                                 
-                                Text(location.rawValue)
+                                Text(location.localizedName)
                                 
                                 Spacer()
                                 
@@ -136,26 +147,26 @@ struct AddEmotionView: View {
                         }
                         
                         if selectedLocation == .other {
-                            TextField("Specify location", text: $customLocation)
+                            TextField("Specify location", text: $customLocation, prompt: Text("Where are you?"))
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                         }
                     } header: {
-                        Text("location.section")
+                        Text("Location", comment: "Section header for location selection")
                     }
                 }
             }
-            .navigationTitle("emotion.new")
+            .navigationTitle("New Emotion")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackground()
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("cancel") {
+                    Button("Cancel") {
                         dismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("save") {
+                    Button("Save") {
                         saveEmotion()
                     }
                     .fontWeight(.semibold)
@@ -196,7 +207,7 @@ struct AddEmotionView: View {
             if selectedLocation == .other && !customLocation.isEmpty {
                 return customLocation
             } else if selectedLocation != .other {
-                return selectedLocation.rawValue
+                return selectedLocation.localizedName
             }
             return nil
         }()

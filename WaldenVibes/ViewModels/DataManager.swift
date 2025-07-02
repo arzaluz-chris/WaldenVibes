@@ -1,4 +1,4 @@
-//  DataManager.swift
+// WaldenVibes/ViewModels/DataManager.swift
 import Foundation
 import SwiftUI
 
@@ -11,10 +11,10 @@ enum TimePeriod: String, CaseIterable {
     
     var localizedName: LocalizedStringKey {
         switch self {
-        case .today: return "period.today"
-        case .week: return "period.week"
-        case .month: return "period.month"
-        case .year: return "period.year"
+        case .today: return LocalizedStringKey("Today")
+        case .week: return LocalizedStringKey("Week")
+        case .month: return LocalizedStringKey("Month")
+        case .year: return LocalizedStringKey("Year")
         }
     }
 }
@@ -129,44 +129,68 @@ class DataManager: ObservableObject {
     
     // MARK: - Export Data
     func exportAllData() -> String {
-        var exportText = "Walden Vibes - Data Export\n"
-        exportText += "Generated: \(Date().formatted())\n\n"
+        var exportText = String(localized: "Walden Vibes - Data Export", comment: "Export file header")
+        exportText += "\n"
+        exportText += String(localized: "Generated: \(Date().formatted())", comment: "Export generation date")
+        exportText += "\n\n"
         
         // Export Emotions
-        exportText += "=== EMOTIONS ===\n"
+        exportText += String(localized: "=== EMOTIONS ===", comment: "Emotions section header in export")
+        exportText += "\n"
         for emotion in emotions {
-            exportText += "\nDate: \(emotion.date.formatted())\n"
-            exportText += "Emotion: \(emotion.type.rawValue) \(emotion.type.emoji)\n"
-            exportText += "Intensity: \(Int(emotion.intensity))/10\n"
+            exportText += "\n"
+            exportText += String(localized: "Date: \(emotion.date.formatted())", comment: "Date label in export")
+            exportText += "\n"
+            exportText += String(localized: "Emotion: \(emotion.type.rawValue) \(emotion.type.emoji)", comment: "Emotion type in export")
+            exportText += "\n"
+            exportText += String(localized: "Intensity: \(Int(emotion.intensity))/10", comment: "Intensity in export")
+            exportText += "\n"
             if !emotion.note.isEmpty {
-                exportText += "Note: \(emotion.note)\n"
+                exportText += String(localized: "Note: \(emotion.note)", comment: "Note in export")
+                exportText += "\n"
             }
             if let location = emotion.location {
-                exportText += "Location: \(location)\n"
+                exportText += String(localized: "Location: \(location)", comment: "Location in export")
+                exportText += "\n"
             }
             exportText += "---\n"
         }
         
         // Export Moments
-        exportText += "\n=== SPECIAL MOMENTS ===\n"
+        exportText += "\n"
+        exportText += String(localized: "=== SPECIAL MOMENTS ===", comment: "Moments section header in export")
+        exportText += "\n"
         for moment in moments {
-            exportText += "\nDate: \(moment.date.formatted())\n"
-            exportText += "Category: \(moment.category.rawValue)\n"
-            exportText += "Duration: \(moment.formattedDuration)\n"
-            exportText += "Description: \(moment.description)\n"
+            exportText += "\n"
+            exportText += String(localized: "Date: \(moment.date.formatted())", comment: "Date label in export")
+            exportText += "\n"
+            exportText += String(localized: "Category: \(moment.category.rawValue)", comment: "Category in export")
+            exportText += "\n"
+            exportText += String(localized: "Duration: \(moment.formattedDuration)", comment: "Duration in export")
+            exportText += "\n"
+            exportText += String(localized: "Description: \(moment.description)", comment: "Description in export")
+            exportText += "\n"
             exportText += "---\n"
         }
         
         // Export Stress Records
-        exportText += "\n=== STRESS RECORDS ===\n"
+        exportText += "\n"
+        exportText += String(localized: "=== STRESS RECORDS ===", comment: "Stress section header in export")
+        exportText += "\n"
         for stress in stressRecords {
-            exportText += "\nDate: \(stress.date.formatted())\n"
-            exportText += "Level: \(Int(stress.level))/10\n"
+            exportText += "\n"
+            exportText += String(localized: "Date: \(stress.date.formatted())", comment: "Date label in export")
+            exportText += "\n"
+            exportText += String(localized: "Level: \(Int(stress.level))/10", comment: "Stress level in export")
+            exportText += "\n"
             if !stress.triggers.isEmpty {
-                exportText += "Triggers: \(stress.triggers.map { $0.rawValue }.joined(separator: ", "))\n"
+                let triggersList = stress.triggers.map { $0.rawValue }.joined(separator: ", ")
+                exportText += String(localized: "Triggers: \(triggersList)", comment: "Triggers in export")
+                exportText += "\n"
             }
             if !stress.note.isEmpty {
-                exportText += "Note: \(stress.note)\n"
+                exportText += String(localized: "Note: \(stress.note)", comment: "Note in export")
+                exportText += "\n"
             }
             exportText += "---\n"
         }
