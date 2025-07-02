@@ -20,10 +20,11 @@ struct SplashView: View {
             .ignoresSafeArea()
             
             VStack(spacing: 20) {
-                // App Icon
-                Image(systemName: "leaf.fill")
-                    .font(.system(size: 100))
-                    .foregroundColor(.white)
+                // App Icon from Assets
+                Image("LaunchLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 120)
                     .scaleEffect(isAnimating ? 1.1 : 1.0)
                     .animation(
                         Animation.easeInOut(duration: 1.5)

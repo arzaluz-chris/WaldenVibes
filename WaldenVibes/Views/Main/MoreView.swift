@@ -12,9 +12,10 @@ struct MoreView: View {
             VStack(spacing: 24) {
                 // Header Card
                 VStack(spacing: 16) {
-                    Image(systemName: "leaf.fill")
-                        .font(.system(size: 60))
-                        .foregroundColor(Color("AccentColor"))
+                    Image("LaunchLogo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 80, height: 80)
                     
                     Text("Walden Vibes")
                         .font(.title)
@@ -152,7 +153,7 @@ struct MoreView: View {
             }
             .padding(.vertical)
         }
-        .navigationTitle("More")
+        .navigationTitle("Tools")
         .sheet(isPresented: $showingAbout) {
             AboutView()
         }

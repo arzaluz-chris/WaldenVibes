@@ -77,15 +77,9 @@ struct MeditationView: View {
                     // Control buttons
                     controlButtonsView
                     
-                    // Tips (only when not active)
-                    if !meditationManager.isActive {
-                        MeditationTipsView()
-                            .padding(.top, 20)
-                    }
-                    
                     // Bottom spacer
                     Spacer()
-                        .frame(height: geometry.size.height * 0.1) // 10% of screen height
+                        .frame(height: geometry.size.height * 0.15) // 15% of screen height
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }

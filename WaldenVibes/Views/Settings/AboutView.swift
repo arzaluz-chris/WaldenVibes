@@ -10,9 +10,10 @@ struct AboutView: View {
                 VStack(spacing: 30) {
                     // App Icon and Name
                     VStack(spacing: 16) {
-                        Image(systemName: "leaf.fill")
-                            .font(.system(size: 80))
-                            .foregroundColor(Color("AccentColor"))
+                        Image("LaunchLogo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100, height: 100)
                         
                         Text("Walden Vibes")
                             .font(.largeTitle)
@@ -64,17 +65,39 @@ struct AboutView: View {
                     }
                     .padding(.horizontal, 40)
                     
-                    // Credits
+                    // Team Credits
+                    VStack(spacing: 16) {
+                        Text("Created by", comment: "Credits header")
+                            .font(.headline)
+                            .foregroundColor(.secondary)
+                        
+                        VStack(spacing: 8) {
+                            Text("Ubaldo Orozco Camargo")
+                                .font(.subheadline)
+                            Text("Patricio Aguilar Pacheco")
+                                .font(.subheadline)
+                            Text("Eduardo García Parra")
+                                .font(.subheadline)
+                            Text("Hansel Eduardo Ortega Borges")
+                                .font(.subheadline)
+                            Text("Santiago Aragoneses Arizmendi")
+                                .font(.subheadline)
+                        }
+                        .multilineTextAlignment(.center)
+                    }
+                    .padding(.top, 20)
+                    
+                    // Footer
                     VStack(spacing: 8) {
                         Text("Made with ❤️ for your well-being", comment: "App credits message")
                             .font(.caption)
                             .foregroundColor(.secondary)
                         
-                        Text("© 2025 Walden Vibes Team", comment: "Copyright notice")
+                        Text("© 2025 Walden Dos", comment: "Copyright notice")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
-                    .padding(.top, 20)
+                    .padding(.top, 10)
                     
                     Spacer(minLength: 40)
                 }

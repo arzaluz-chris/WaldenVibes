@@ -10,6 +10,7 @@ struct MeditationTipsView: View {
     ]
     
     @State private var currentTipIndex = 0
+    @State private var timer: Timer?
     
     var body: some View {
         VStack(spacing: 12) {
@@ -21,14 +22,24 @@ struct MeditationTipsView: View {
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.secondary)
-                .padding(.horizontal)
+                .padding(.horizontal, 30)
+                .fixedSize(horizontal: false, vertical: true) // Allow text to expand vertically
+                .frame(minHeight: 50) // Ensure minimum height for longer tips
                 .animation(.easeInOut, value: currentTipIndex)
         }
+        .frame(maxWidth: .infinity)
         .onAppear {
-            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
-                withAnimation {
-                    currentTipIndex = (currentTipIndex + 1) % tips.count
-                }
+            startTimer()
+        }
+        .onDisappear {
+            timer?.invalidate()
+        }
+    }
+    
+    private func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 7, repeats: true) { _ in
+            withAnimation {
+                currentTipIndex = (currentTipIndex + 1) % tips.count
             }
         }
     }

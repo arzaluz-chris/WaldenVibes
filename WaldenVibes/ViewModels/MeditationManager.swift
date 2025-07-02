@@ -201,9 +201,6 @@ class MeditationManager: ObservableObject {
     // MARK: - Notifications
     private func sendCompletionNotification() {
         let content = UNMutableNotificationContent()
-        content.title = String(localized: "Meditation Complete! 🧘‍♀️", comment: "Meditation completion notification title")
-        content.body = String(localized: "Great job! You've completed your meditation session. 🌟", comment: "Meditation completion notification body")
-        content.sound = .default
         
         // Add some zen emojis for a relaxing feel
         let relaxingEmojis = ["🧘‍♀️", "🌸", "🌿", "✨", "🌙", "🕯️", "🦋", "🌺"]

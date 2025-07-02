@@ -1,4144 +1,4191 @@
 {
-  "sourceLanguage": "en",
-  "strings": {
-    "": {
-      "localizations": {
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": ""
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+      "localizations" : {
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
           }
         }
       }
     },
-    "- Virgil": {
-      "comment": "Quote author",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "- Virgil"
+    "- Virgil" : {
+      "comment" : "Quote author",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- Virgil"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "- Virgilio"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- Virgilio"
           }
         }
       }
     },
-    "\"The greatest wealth is health.\"": {
-      "comment": "Inspirational quote",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "\"The greatest wealth is health.\""
+    "\"The greatest wealth is health.\"" : {
+      "comment" : "Inspirational quote",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\"The greatest wealth is health.\""
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«La mayor riqueza es la salud.»"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "«La mayor riqueza es la salud.»"
           }
         }
       }
     },
-    "%@ Meditation Complete!": {
-      "comment": "Meditation completion notification title with emoji",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ Meditation Complete!"
+    "%@ Meditation Complete!" : {
+      "comment" : "Meditation completion notification title with emoji",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Meditation Complete!"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ Meditación completada!"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Meditación completada!"
           }
         }
       }
     },
-    "%@ represents %lld%% of your recorded emotions": {
-      "comment": "Dominant emotion insight",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$@ represents %2$lld%% of your recorded emotions"
+    "%@ represents %lld%% of your recorded emotions" : {
+      "comment" : "Dominant emotion insight",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ represents %2$lld%% of your recorded emotions"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ represents %2$lld%% of your recorded emotions"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ representa el %2$lld%% de tus emociones registradas"
           }
         }
       }
     },
-    "%lld": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
+    "%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
           }
         }
       }
     },
-    "%lld min": {
-      "comment": "Duration in minutes",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld min"
+    "%lld min" : {
+      "comment" : "Duration in minutes",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld min"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
           }
         }
       }
     },
-    "%lld minute": {
-      "comment": "Duration in singular minute",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld minute"
+    "%lld minute" : {
+      "comment" : "Duration in singular minute",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld minute"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld minute"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld minuto"
           }
         }
       }
     },
-    "%lld minutes": {
-      "comment": "Duration in plural minutes",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld minutes"
+    "%lld minutes" : {
+      "comment" : "Duration in plural minutes",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld minutes"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld minutes"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld minutos"
           }
         }
       }
     },
-    "%lld times": {
-      "comment": "Frequency count",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld times"
+    "%lld times" : {
+      "comment" : "Frequency count",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld times"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld times"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld veces"
           }
         }
       }
     },
-    "%lld/10": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld/10"
+    "%lld/10" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld/10"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld/10"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld/10"
           }
         }
       }
     },
-    "%lldh": {
-      "comment": "Duration in hours",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld/10"
+    "%lldh" : {
+      "comment" : "Duration in hours",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld/10"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld/10"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld/10"
           }
         }
       }
     },
-    "%lldh %lldmin": {
-      "comment": "Duration in hours and minutes",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$lldh %2$lldmin"
+    "%lldh %lldmin" : {
+      "comment" : "Duration in hours and minutes",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lldh %2$lldmin"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$lldh %2$lldmin"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lldh %2$lldmin"
           }
         }
       }
     },
-    "•": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "•"
+    "•" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "•"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "•"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "•"
           }
         }
       }
     },
-    "© 2025 Walden Vibes Team": {
-      "comment": "Copyright notice",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "© 2025 Walden Vibes Team"
+    "© 2025 Walden Dos" : {
+      "comment" : "Copyright notice",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2025 Walden Dos"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "© 2025 Walden Vibes Team"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2025 Walden Dos"
           }
         }
       }
     },
-    "=== EMOTIONS ===": {
-      "comment": "Emotions section header in export",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "=== EMOTIONS ==="
+    "=== EMOTIONS ===" : {
+      "comment" : "Emotions section header in export",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "=== EMOTIONS ==="
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "=== EMOTIONS ==="
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "=== EMOCIONES ==="
           }
         }
       }
     },
-    "=== SPECIAL MOMENTS ===": {
-      "comment": "Moments section header in export",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "=== SPECIAL MOMENTS ==="
+    "=== SPECIAL MOMENTS ===" : {
+      "comment" : "Moments section header in export",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "=== SPECIAL MOMENTS ==="
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "=== SPECIAL MOMENTS ==="
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "=== MOMENTOS ESPECIALES ==="
           }
         }
       }
     },
-    "=== STRESS RECORDS ===": {
-      "comment": "Stress section header in export",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "=== STRESS RECORDS ==="
+    "=== STRESS RECORDS ===" : {
+      "comment" : "Stress section header in export",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "=== STRESS RECORDS ==="
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "=== STRESS RECORDS ==="
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "=== REGISTROS DE ESTRÉS ==="
           }
         }
       }
     },
-    "1 minute": {
-      "comment": "Duration in singular minute",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 minute"
+    "1 minute" : {
+      "comment" : "Duration in singular minute",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 minute"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 minute"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 minuto"
           }
         }
       }
     },
-    "1.0.0": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1.0.0"
+    "1.0.0" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1.0.0"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1.0.0"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1.0.0"
           }
         }
       }
     },
-    "About": {
-      "comment": "Menu item\nSettings option",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "About"
+    "About" : {
+      "comment" : "Menu item\nSettings option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "About"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acerca de"
           }
         }
       }
     },
-    "Add details about what's causing your stress": {
-      "comment": "Helper text for stress notes",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add details about what's causing your stress"
+    "Add details about what's causing your stress" : {
+      "comment" : "Helper text for stress notes",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add details about what's causing your stress"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add details about what's causing your stress"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agrega detalles sobre lo que está causando tu estrés"
           }
         }
       }
     },
-    "Add Emotion": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add Emotion"
+    "Add Emotion" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Emotion"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add Emotion"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir Emoción"
           }
         }
       }
     },
-    "Add Moment": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add Moment"
+    "Add Moment" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Moment"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add Moment"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir Momento"
           }
         }
       }
     },
-    "Afternoon": {
-      "comment": "Time of day description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Afternoon"
+    "Afternoon" : {
+      "comment" : "Time of day description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afternoon"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Afternoon"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarde"
           }
         }
       }
     },
-    "All": {
-      "comment": "Filter option to show all categories\nFilter option to show all emotions",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "All"
+    "All" : {
+      "comment" : "Filter option to show all categories\nFilter option to show all emotions",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "All"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todas"
           }
         }
       }
     },
-    "All your emotional data, moments, and stress records are stored locally on your device. We do not collect or have access to any of your personal information.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "All your emotional data, moments, and stress records are stored locally on your device. We do not collect or have access to any of your personal information."
+    "All your emotional data, moments, and stress records are stored locally on your device. We do not collect or have access to any of your personal information." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All your emotional data, moments, and stress records are stored locally on your device. We do not collect or have access to any of your personal information."
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "All your emotional data, moments, and stress records are stored locally on your device. We do not collect or have access to any of your personal information."
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos tus datos emocionales, momentos y registros de estrés se almacenan localmente en tu dispositivo. No recopilamos ni tenemos acceso a ninguna de tu información personal."
           }
         }
       }
     },
-    "Analytics": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Analytics"
+    "Analytics" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Analytics"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Analytics"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Analíticas"
           }
         }
       }
     },
-    "Angry": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Angry"
+    "Angry" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Angry"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Angry"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enojado"
           }
         }
       }
     },
-    "Anxious": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Anxious"
+    "Anxious" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anxious"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Anxious"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ansioso"
           }
         }
       }
     },
-    "Appearance": {
-      "comment": "Settings section header",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Appearance"
+    "Appearance" : {
+      "comment" : "Settings section header",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appearance"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Appearance"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apariencia"
           }
         }
       }
     },
-    "Are you sure you want to delete this emotion record?": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Are you sure you want to delete this emotion record?"
+    "Are you sure you want to delete this emotion record?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to delete this emotion record?"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Are you sure you want to delete this emotion record?"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Estás seguro de que quieres eliminar este registro de emoción?"
           }
         }
       }
     },
-    "Are you sure you want to delete this special moment?": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Are you sure you want to delete this special moment?"
+    "Are you sure you want to delete this special moment?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to delete this special moment?"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Are you sure you want to delete this special moment?"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Estás seguro de que quieres eliminar este momento especial?"
           }
         }
       }
     },
-    "Are you sure you want to delete this stress record?": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Are you sure you want to delete this stress record?"
+    "Are you sure you want to delete this stress record?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to delete this stress record?"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Are you sure you want to delete this stress record?"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Estás seguro de que quieres eliminar este registro de estrés?"
           }
         }
       }
     },
-    "Average Intensity": {
-      "comment": "Chart title",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Average Intensity"
+    "Average Intensity" : {
+      "comment" : "Chart title",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Average Intensity"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Average Intensity"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intensidad promedio"
           }
         }
       }
     },
-    "Average Stress": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Average Stress"
+    "Average Stress" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Average Stress"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Average Stress"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estrés promedio"
           }
         }
       }
     },
-    "Avg Stress": {
-      "comment": "Quick stat label",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avg Stress"
+    "Avg Stress" : {
+      "comment" : "Quick stat label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avg Stress"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avg Stress"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estrés promedio"
           }
         }
       }
     },
-    "Be patient with yourself - meditation is a practice that improves over time": {
-      "comment": "Meditation patience tip",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Be patient with yourself - meditation is a practice that improves over time"
+    "Be patient with yourself - meditation is a practice that improves over time" : {
+      "comment" : "Meditation patience tip",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Be patient with yourself - meditation is a practice that improves over time"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Be patient with yourself - meditation is a practice that improves over time"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sé paciente contigo mismo: la meditación es una práctica que mejora con el tiempo"
           }
         }
       }
     },
-    "Beach Waves": {
-      "comment": "Beach waves meditation sound",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Beach Waves"
+    "Beach Waves" : {
+      "comment" : "Beach waves meditation sound",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beach Waves"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Beach Waves"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Olas de la playa"
           }
         }
       }
     },
-    "Calm": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Calm"
+    "Calm" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calm"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Calm"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calma"
           }
         }
       }
     },
-    "Calm Ambience": {
-      "comment": "Calm ambience meditation sound",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Calm Ambience"
+    "Calm Ambience" : {
+      "comment" : "Calm ambience meditation sound",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calm Ambience"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Calm Ambience"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ambiente de calma"
           }
         }
       }
     },
-    "Cancel": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cancel"
+    "Cancel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cancel"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
           }
         }
       }
     },
-    "Capture special moments": {
-      "comment": "Feature description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Capture special moments"
+    "Capture special moments" : {
+      "comment" : "Feature description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capture special moments"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Capture special moments"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Captura momentos especiales"
           }
         }
       }
     },
-    "Category": {
-      "comment": "Section header for moment category",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Category"
+    "Category" : {
+      "comment" : "Section header for moment category",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Category"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Category"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Categoría"
           }
         }
       }
     },
-    "Category: %@": {
-      "comment": "Category in export",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Category: %@"
+    "Category: %@" : {
+      "comment" : "Category in export",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Category: %@"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Category: %@"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Categoría: %@"
           }
         }
       }
     },
-    "Clear All Data": {
-      "comment": "Settings option to delete all data",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clear All Data"
+    "Clear All Data" : {
+      "comment" : "Settings option to delete all data",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear All Data"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clear All Data"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borrar todos los datos"
           }
         }
       }
     },
-    "Continue": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Continue"
+    "Continue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Continue"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar"
           }
         }
       }
     },
-    "Count": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Count"
+    "Count" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Count"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Conteo"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conteo"
           }
         }
       }
     },
-    "Current Stress Level": {
-      "comment": "Current stress card title",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Current Stress Level"
+    "Created by" : {
+      "comment" : "Credits header",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Created by"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Current Stress Level"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creado por"
           }
         }
       }
     },
-    "Customizable meditation timer": {
-      "comment": "Feature description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Customizable meditation timer"
+    "Current Stress Level" : {
+      "comment" : "Current stress card title",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current Stress Level"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Customizable meditation timer"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nivel de Estrés Actual"
           }
         }
       }
     },
-    "Customize your experience": {
-      "comment": "Menu item subtitle",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Customize your experience"
+    "Customizable meditation timer" : {
+      "comment" : "Feature description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Customizable meditation timer"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Customize your experience"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temporizador de meditación personalizable"
           }
         }
       }
     },
-    "Daily Inspiration": {
-      "comment": "Section header for inspirational quote",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Daily Inspiration"
+    "Customize your experience" : {
+      "comment" : "Menu item subtitle",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Customize your experience"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Daily Inspiration"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personaliza tu experiencia"
           }
         }
       }
     },
-    "Daily Reminder": {
-      "comment": "Notification title",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Daily Reminder"
+    "Daily Inspiration" : {
+      "comment" : "Section header for inspirational quote",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily Inspiration"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Daily Reminder"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inspiración Diaria"
           }
         }
       }
     },
-    "Dark": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dark"
+    "Daily Reminder" : {
+      "comment" : "Notification title",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily Reminder"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dark"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recordatorio Diario"
           }
         }
       }
     },
-    "Data Management": {
-      "comment": "Settings section header",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Data Management"
+    "Dark" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dark"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Data Management"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oscuro"
           }
         }
       }
     },
-    "Data Sharing": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Data Sharing"
+    "Data Management" : {
+      "comment" : "Settings section header",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data Management"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Data Sharing"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gestión de datos"
           }
         }
       }
     },
-    "Data Storage": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Data Storage"
+    "Data Sharing" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data Sharing"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Data Storage"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir datos"
           }
         }
       }
     },
-    "Date": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Date"
+    "Data Storage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data Storage"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fecha"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Almacenamiento de datos"
           }
         }
       }
     },
-    "Date & Time": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Date & Time"
+    "Date" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Date & Time"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha"
           }
         }
       }
     },
-    "Date: %@": {
-      "comment": "Date label in export",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Date: %@"
+    "Date & Time" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date & Time"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Date: %@"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha y hora"
           }
         }
       }
     },
-    "Days Tracked": {
-      "comment": "Quick stat label",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Days Tracked"
+    "Date: %@" : {
+      "comment" : "Date label in export",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date: %@"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Days Tracked"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha: %@"
           }
         }
       }
     },
-    "Deep Breathing": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deep Breathing"
+    "Days Tracked" : {
+      "comment" : "Quick stat label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Days Tracked"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deep Breathing"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Días registrados"
           }
         }
       }
     },
-    "Delete": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Delete"
+    "Deep Breathing" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deep Breathing"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Delete"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Respiración Profunda"
           }
         }
       }
     },
-    "Delete All Data?": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Delete All Data?"
+    "Delete" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Delete All Data?"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borrar"
           }
         }
       }
     },
-    "Delete Emotion?": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Delete Emotion?"
+    "Delete All Data?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete All Data?"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Delete Emotion?"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Borrar toda la información?"
           }
         }
       }
     },
-    "Delete Moment?": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Delete Moment?"
+    "Delete Emotion?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Emotion?"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Delete Moment?"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Borrar Emoción?"
           }
         }
       }
     },
-    "Delete Stress Record?": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Delete Stress Record?"
+    "Delete Moment?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Moment?"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Delete Stress Record?"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Borrar Momento?"
           }
         }
       }
     },
-    "Describe what made this moment special": {
-      "comment": "Helper text for moment description field",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Describe what made this moment special"
+    "Delete Stress Record?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Stress Record?"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Describe what made this moment special"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Borrar Registro de Estrés?"
           }
         }
       }
     },
-    "Description": {
-      "comment": "Section header for moment description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Description"
+    "Describe what made this moment special" : {
+      "comment" : "Helper text for moment description field",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Describe what made this moment special"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Description"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Describe lo que hizo especial este momento"
           }
         }
       }
     },
-    "Description: %@": {
-      "comment": "Description in export",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Description: %@"
+    "Description" : {
+      "comment" : "Section header for moment description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Description: %@"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripción"
           }
         }
       }
     },
-    "Detailed analysis and insights": {
-      "comment": "Feature description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Detailed analysis and insights"
+    "Description: %@" : {
+      "comment" : "Description in export",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description: %@"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Detailed analysis and insights"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripción: %@"
           }
         }
       }
     },
-    "Detailed emotion tracking": {
-      "comment": "Feature description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Detailed emotion tracking"
+    "Detailed analysis and insights" : {
+      "comment" : "Feature description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detailed analysis and insights"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Detailed emotion tracking"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Análisis e información detallados"
           }
         }
       }
     },
-    "Detailed Statistics": {
-      "comment": "Menu item",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Detailed Statistics"
+    "Detailed emotion tracking" : {
+      "comment" : "Feature description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detailed emotion tracking"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Detailed Statistics"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registro detallado de emociones"
           }
         }
       }
     },
-    "Done": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Done"
+    "Detailed Statistics" : {
+      "comment" : "Menu item",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detailed Statistics"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Done"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estadísticas Detalladas"
           }
         }
       }
     },
-    "Duration": {
-      "comment": "Section header for moment duration",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Duration"
+    "Done" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Duration"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hecho"
           }
         }
       }
     },
-    "Duration: %@": {
-      "comment": "Duration in export",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Duration: %@"
+    "Duration" : {
+      "comment" : "Section header for moment duration",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duration"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Duration: %@"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duración"
           }
         }
       }
     },
-    "Early Morning": {
-      "comment": "Time of day description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Early Morning"
+    "Duration: %@" : {
+      "comment" : "Duration in export",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duration: %@"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Early Morning"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duración: %@"
           }
         }
       }
     },
-    "Edit Emotion": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Edit Emotion"
+    "Early Morning" : {
+      "comment" : "Time of day description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Early Morning"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Edit Emotion"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Madrugada"
           }
         }
       }
     },
-    "Edit Moment": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Edit Moment"
+    "Edit Emotion" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Emotion"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Edit Moment"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar Emoción"
           }
         }
       }
     },
-    "Emotion": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Emotion"
+    "Edit Moment" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Moment"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Emotion"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar Momento"
           }
         }
       }
     },
-    "Emotion Frequency": {
-      "comment": "Chart title",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Emotion Frequency"
+    "Eduardo García Parra" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eduardo García Parra"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Emotion Frequency"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eduardo García Parra"
           }
         }
       }
     },
-    "Emotion intensity": {
-      "comment": "Section header for intensity slider",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Emotion intensity"
+    "Emotion" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emotion"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Emotion intensity"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emoción"
           }
         }
       }
     },
-    "Emotion: %@ %@": {
-      "comment": "Emotion type in export",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "new",
-            "value": "Emotion: %1$@ %2$@"
+    "Emotion Frequency" : {
+      "comment" : "Chart title",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emotion Frequency"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Emotion: %1$@ %2$@"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frecuencia de Emoción"
           }
         }
       }
     },
-    "Emotions": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Emotions"
+    "Emotion intensity" : {
+      "comment" : "Section header for intensity slider",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emotion intensity"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Emotions"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intensidad de emoción"
           }
         }
       }
     },
-    "Enable reminders": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Enable reminders"
+    "Emotion: %@ %@" : {
+      "comment" : "Emotion type in export",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Emotion: %1$@ %2$@"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Enable reminders"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emoción: %1$@ %2$@"
           }
         }
       }
     },
-    "English": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "English"
+    "Emotions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emotions"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "English"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emociones"
           }
         }
       }
     },
-    "Environment": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Environment"
+    "Enable reminders" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable reminders"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Environment"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar recordatorios"
           }
         }
       }
     },
-    "Español": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Español"
+    "English" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "English"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Español"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inglés"
           }
         }
       }
     },
-    "Evening": {
-      "comment": "Time of day description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Evening"
+    "Environment" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Environment"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Evening"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medio ambiente"
           }
         }
       }
     },
-    "Excited": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Excited"
+    "Español" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Español"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Excited"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Español"
           }
         }
       }
     },
-    "Export all your emotions, moments, and stress records to a text file that you can save or share.": {
-      "comment": "Export view description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Export all your emotions, moments, and stress records to a text file that you can save or share."
+    "Evening" : {
+      "comment" : "Time of day description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Evening"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Export all your emotions, moments, and stress records to a text file that you can save or share."
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atardecer"
           }
         }
       }
     },
-    "Export as Text": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Export as Text"
+    "Excited" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excited"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Export as Text"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emocionado"
           }
         }
       }
     },
-    "Export Data": {
-      "comment": "Menu item\nSettings option to export data",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Export Data"
+    "Export all your emotions, moments, and stress records to a text file that you can save or share." : {
+      "comment" : "Export view description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export all your emotions, moments, and stress records to a text file that you can save or share."
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Export Data"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exporta todas tus emociones, momentos y registros de estrés a un archivo de texto que puedes guardar o compartir."
           }
         }
       }
     },
-    "Export Your Data": {
-      "comment": "Export view title",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Export Your Data"
+    "Export as Text" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export as Text"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Export Your Data"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar como Texto"
           }
         }
       }
     },
-    "Family": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Family"
+    "Export Data" : {
+      "comment" : "Menu item\nSettings option to export data",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export Data"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Family"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar Datos"
           }
         }
       }
     },
-    "Finances": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Finances"
+    "Export Your Data" : {
+      "comment" : "Export view title",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export Your Data"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Finances"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar Tus Datos"
           }
         }
       }
     },
-    "Focus on your breath - when your mind wanders, gently bring it back": {
-      "comment": "Meditation focus tip",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Focus on your breath - when your mind wanders, gently bring it back"
+    "Family" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Family"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Focus on your breath - when your mind wanders, gently bring it back"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Familia"
           }
         }
       }
     },
-    "Friends": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Friends"
+    "Finances" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finances"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Friends"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finanzas"
           }
         }
       }
     },
-    "General": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "General"
+    "Focus on your breath - when your mind wanders, gently bring it back" : {
+      "comment" : "Meditation focus tip",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Focus on your breath - when your mind wanders, gently bring it back"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "General"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Concéntrate en tu respiración; cuando tu mente divague, tráela de vuelta con suavidad"
           }
         }
       }
     },
-    "Generated: %@": {
-      "comment": "Export generation date",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Generated: %@"
+    "Friends" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Friends"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Generated: %@"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amigos"
           }
         }
       }
     },
-    "Get Started": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Get Started"
+    "General" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Get Started"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General"
           }
         }
       }
     },
-    "Good sleep is essential for managing stress": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Good sleep is essential for managing stress"
+    "Generated: %@" : {
+      "comment" : "Export generation date",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generated: %@"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Good sleep is essential for managing stress"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generado: %@"
           }
         }
       }
     },
-    "Grateful": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Grateful"
+    "Get Started" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get Started"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Grateful"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comenzar"
           }
         }
       }
     },
-    "Great job! You've completed your meditation session. 🌟": {
-      "comment": "Meditation completion notification body",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Great job! You've completed your meditation session. 🌟"
+    "Good sleep is essential for managing stress" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Good sleep is essential for managing stress"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Great job! You've completed your meditation session. 🌟"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dormir bien es esencial para manejar el estrés"
           }
         }
       }
     },
-    "Great job! Your stress levels remain low. Keep up the good practices.": {
-      "comment": "Low stress insight",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Great job! Your stress levels remain low. Keep up the good practices."
+    "Grateful" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grateful"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Great job! Your stress levels remain low. Keep up the good practices."
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agradecido"
           }
         }
       }
     },
-    "Happy": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Happy"
+    "Great job! Your stress levels remain low. Keep up the good practices." : {
+      "comment" : "Low stress insight",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Great job! Your stress levels remain low. Keep up the good practices."
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Happy"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Buen trabajo! Tus niveles de estrés se mantienen bajos. Sigue con las buenas prácticas."
           }
         }
       }
     },
-    "Health": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Health"
+    "Hansel Eduardo Ortega Borges" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hansel Eduardo Ortega Borges"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Health"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hansel Eduardo Ortega Borges"
           }
         }
       }
     },
-    "High": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "High"
+    "Happy" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Happy"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "High"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feliz"
           }
         }
       }
     },
-    "High stress": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "High stress"
+    "Health" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Health"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "High stress"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salud"
           }
         }
       }
     },
-    "Home": {
-      "comment": "Location option for home",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Home"
+    "High" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Home"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elevado"
           }
         }
       }
     },
-    "How are you feeling today? Take a moment to track your emotions.": {
-      "comment": "Notification body",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "How are you feeling today? Take a moment to track your emotions."
+    "High stress" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High stress"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "How are you feeling today? Take a moment to track your emotions."
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estrés elevado"
           }
         }
       }
     },
-    "How stressed are you feeling?": {
-      "comment": "Section header for stress level",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "How stressed are you feeling?"
+    "Home" : {
+      "comment" : "Location option for home",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "How stressed are you feeling?"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Casa"
           }
         }
       }
     },
-    "Improve Your Well-being": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Improve Your Well-being"
+    "How are you feeling today? Take a moment to track your emotions." : {
+      "comment" : "Notification body",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How are you feeling today? Take a moment to track your emotions."
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Improve Your Well-being"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Cómo te sientes hoy? Tómate un momento para registrar tus emociones."
           }
         }
       }
     },
-    "Include location": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Include location"
+    "How stressed are you feeling?" : {
+      "comment" : "Section header for stress level",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How stressed are you feeling?"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Include location"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Qué tan estresado te estás sintiendo?"
           }
         }
       }
     },
-    "Information": {
-      "comment": "Settings section header",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Information"
+    "Improve Your Well-being" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Improve Your Well-being"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Information"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mejora Tu Bienestar"
           }
         }
       }
     },
-    "Insights": {
-      "comment": "Section header for insights",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Insights"
+    "Include location" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Include location"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Insights"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incluir ubicación"
           }
         }
       }
     },
-    "Intensity": {
-      "comment": "Label for emotion intensity",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Intensity"
+    "Information" : {
+      "comment" : "Settings section header",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Information"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Intensity"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Información"
           }
         }
       }
     },
-    "Intensity: %lld/10": {
-      "comment": "Intensity in export",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Intensity: %lld/10"
+    "Insights" : {
+      "comment" : "Section header for insights",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insights"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Intensity: %lld/10"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Análisis"
           }
         }
       }
     },
-    "Language": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Language"
+    "Intensity" : {
+      "comment" : "Label for emotion intensity",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intensity"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Language"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intensidad"
           }
         }
       }
     },
-    "Last updated: June 2025": {
-      "comment": "Privacy policy last update date",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Last updated: June 2025"
+    "Intensity: %lld/10" : {
+      "comment" : "Intensity in export",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intensity: %lld/10"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Last updated: June 2025"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intensidad: %lld/10"
           }
         }
       }
     },
-    "Learn more about the app": {
-      "comment": "Menu item subtitle",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Learn more about the app"
+    "Language" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Learn more about the app"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma"
           }
         }
       }
     },
-    "Level": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Level"
+    "Last updated: June 2025" : {
+      "comment" : "Privacy policy last update date",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last updated: June 2025"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Level"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Última actualización: Junio 2025"
           }
         }
       }
     },
-    "Level:": {
-      "comment": "Stress level label",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Level:"
+    "Learn more about the app" : {
+      "comment" : "Menu item subtitle",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Learn more about the app"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Level:"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aprende más sobre la aplicación"
           }
         }
       }
     },
-    "Level: %lld/10": {
-      "comment": "Stress level in export",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Level: %lld/10"
+    "Level" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Level"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Level: %lld/10"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nivel"
           }
         }
       }
     },
-    "Light": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Light"
+    "Level:" : {
+      "comment" : "Stress level label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Level:"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Light"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nivel:"
           }
         }
       }
     },
-    "Location": {
-      "comment": "Section header for location field\nSection header for location selection",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Location"
+    "Level: %lld/10" : {
+      "comment" : "Stress level in export",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Level: %lld/10"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Location"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nivel: %lld/10"
           }
         }
       }
     },
-    "Location: %@": {
-      "comment": "Location in export",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Location: %@"
+    "Light" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Location: %@"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leve"
           }
         }
       }
     },
-    "Low": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Low"
+    "Location" : {
+      "comment" : "Section header for location field\nSection header for location selection",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Low"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ubicación"
           }
         }
       }
     },
-    "Low stress": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Low stress"
+    "Location: %@" : {
+      "comment" : "Location in export",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location: %@"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Low stress"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ubicación: %@"
           }
         }
       }
     },
-    "Made with ❤️ for your well-being": {
-      "comment": "App credits message",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Made with ❤️ for your well-being"
+    "Low" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Low"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Made with ❤️ for your well-being"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bajo"
           }
         }
       }
     },
-    "Meditation": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Meditation"
+    "Low stress" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Low stress"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Meditation"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estrés bajo"
           }
         }
       }
     },
-    "Meditation Complete! 🧘‍♀️": {
-      "comment": "Meditation completion notification title",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Meditation Complete! 🧘‍♀️"
+    "Made with ❤️ for your well-being" : {
+      "comment" : "App credits message",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Made with ❤️ for your well-being"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Meditation Complete! 🧘‍♀️"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hecho con ❤️ para tu bienestar"
           }
         }
       }
     },
-    "Mindfulness": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mindfulness"
+    "Meditation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meditation"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mindfulness"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meditación"
           }
         }
       }
     },
-    "Moderate": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Moderate"
+    "Mindfulness" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mindfulness"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Moderate"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mindfulness"
           }
         }
       }
     },
-    "Moderate stress": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Moderate stress"
+    "Moderate" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moderate"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Moderate stress"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moderado"
           }
         }
       }
     },
-    "Moments": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Moments"
+    "Moderate stress" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moderate stress"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Moments"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estrés moderado"
           }
         }
       }
     },
-    "Month": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Month"
+    "Moments" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moments"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Month"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Momentos"
           }
         }
       }
     },
-    "More": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "More"
+    "Month" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Month"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "More"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mes"
           }
         }
       }
     },
-    "Morning": {
-      "comment": "Time of day description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Morning"
+    "Morning" : {
+      "comment" : "Time of day description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Morning"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Morning"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mañana"
           }
         }
       }
     },
-    "Most Frequent": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Most Frequent"
+    "Most Frequent" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Most Frequent"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Most Frequent"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Más Frecuente"
           }
         }
       }
     },
-    "Nature Time": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nature Time"
+    "Nature Time" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nature Time"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nature Time"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiempo en la Naturaleza"
           }
         }
       }
     },
-    "New Emotion": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "New Emotion"
+    "New Emotion" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Emotion"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "New Emotion"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nueva Emoción"
           }
         }
       }
     },
-    "New Moment": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "New Moment"
+    "New Moment" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Moment"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "New Moment"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuevo Momento"
           }
         }
       }
     },
-    "New Stress Record": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "New Stress Record"
+    "New Stress Record" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Stress Record"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "New Stress Record"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuevo Registro de Estrés"
           }
         }
       }
     },
-    "Night": {
-      "comment": "Time of day description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Night"
+    "Night" : {
+      "comment" : "Time of day description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Night"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Night"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noche"
           }
         }
       }
     },
-    "No emotions recorded": {
-      "comment": "Empty state title when no emotions have been tracked",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No emotions recorded"
+    "No emotions recorded" : {
+      "comment" : "Empty state title when no emotions have been tracked",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No emotions recorded"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No emotions recorded"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay emociones registradas"
           }
         }
       }
     },
-    "No moments in this category": {
-      "comment": "Message shown when no moments match the selected filter",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No moments in this category"
+    "No moments in this category" : {
+      "comment" : "Message shown when no moments match the selected filter",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No moments in this category"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No moments in this category"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay momentos en esta categoría"
           }
         }
       }
     },
-    "No moments yet": {
-      "comment": "Empty state title when no moments have been recorded",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No moments yet"
+    "No moments yet" : {
+      "comment" : "Empty state title when no moments have been recorded",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No moments yet"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No moments yet"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no hay momentos"
           }
         }
       }
     },
-    "No Sound": {
-      "comment": "Option for no meditation sound",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No Sound"
+    "No Sound" : {
+      "comment" : "Option for no meditation sound",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Sound"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No Sound"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin Sonido"
           }
         }
       }
     },
-    "No stress records": {
-      "comment": "Empty state title when no stress has been tracked",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No stress records"
+    "No stress records" : {
+      "comment" : "Empty state title when no stress has been tracked",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No stress records"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No stress records"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay registros de estrés"
           }
         }
       }
     },
-    "Not enough data yet": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Not enough data yet"
+    "Not enough data yet" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not enough data yet"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Not enough data yet"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay datos suficientes"
           }
         }
       }
     },
-    "Note: %@": {
-      "comment": "Note in export",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Note: %@"
+    "Note: %@" : {
+      "comment" : "Note in export",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Note: %@"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Note: %@"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nota: %@"
           }
         }
       }
     },
-    "Notes": {
-      "comment": "Section header for notes field",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notes"
+    "Notes" : {
+      "comment" : "Section header for notes field",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notes"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notes"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notas"
           }
         }
       }
     },
-    "Notifications": {
-      "comment": "Settings section header",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notifications"
+    "Notifications" : {
+      "comment" : "Settings section header",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notifications"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notificaciones"
           }
         }
       }
     },
-    "Optional notes about how you're feeling": {
-      "comment": "Footer text explaining the notes field",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Optional notes about how you're feeling"
+    "Optional notes about how you're feeling" : {
+      "comment" : "Footer text explaining the notes field",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optional notes about how you're feeling"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Optional notes about how you're feeling"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notas opcionales sobre cómo te sientes"
           }
         }
       }
     },
-    "Other": {
-      "comment": "Location option for other places",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Other"
+    "Other" : {
+      "comment" : "Location option for other places",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Other"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Otro"
           }
         }
       }
     },
-    "Outdoors": {
-      "comment": "Location option for outdoor activities",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Outdoors"
+    "Outdoors" : {
+      "comment" : "Location option for outdoor activities",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outdoors"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Outdoors"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Al aire libre"
           }
         }
       }
     },
-    "Period": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Period"
+    "Patricio Aguilar Pacheco" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Patricio Aguilar Pacheco"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Period"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Patricio Aguilar Pacheco"
           }
         }
       }
     },
-    "Personal": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Personal"
+    "Period" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Period"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Personal"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Periodo"
           }
         }
       }
     },
-    "Physical Activity": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Physical Activity"
+    "Personal" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personal"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Physical Activity"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personal"
           }
         }
       }
     },
-    "Piano Melody": {
-      "comment": "Piano meditation sound",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Piano Melody"
+    "Physical Activity" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Physical Activity"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Piano Melody"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actividad Física"
           }
         }
       }
     },
-    "Practice being present to reduce anxiety about the future": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Practice being present to reduce anxiety about the future"
+    "Piano Melody" : {
+      "comment" : "Piano meditation sound",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piano Melody"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Practice being present to reduce anxiety about the future"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Melodía de Piano"
           }
         }
       }
     },
-    "Practice meditation, manage stress, and capture special moments": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Practice meditation, manage stress, and capture special moments"
+    "Practice being present to reduce anxiety about the future" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Practice being present to reduce anxiety about the future"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Practice meditation, manage stress, and capture special moments"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Practica estar presente para reducir la ansiedad sobre el futuro"
           }
         }
       }
     },
-    "Privacy": {
-      "comment": "Menu item",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Privacy"
+    "Practice meditation, manage stress, and capture special moments" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Practice meditation, manage stress, and capture special moments"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Privacy"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Practica la meditación, maneja el estrés y captura momentos especiales"
           }
         }
       }
     },
-    "Privacy Policy": {
-      "comment": "Privacy policy title\nSettings option",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Privacy Policy"
+    "Privacy" : {
+      "comment" : "Menu item",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Privacy Policy"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacidad"
           }
         }
       }
     },
-    "Quality Sleep": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quality Sleep"
+    "Privacy Policy" : {
+      "comment" : "Privacy policy title\nSettings option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Policy"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quality Sleep"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de Privacidad"
           }
         }
       }
     },
-    "Quick Overview": {
-      "comment": "Section header for statistics overview",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quick Overview"
+    "Quality Sleep" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quality Sleep"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quick Overview"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calidad del Sueño"
           }
         }
       }
     },
-    "Receive a daily reminder to record your emotions": {
-      "comment": "Settings footer text",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Receive a daily reminder to record your emotions"
+    "Quick Overview" : {
+      "comment" : "Section header for statistics overview",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quick Overview"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Receive a daily reminder to record your emotions"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resumen Rápido"
           }
         }
       }
     },
-    "Record how you feel and discover patterns in your emotional journey": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Record how you feel and discover patterns in your emotional journey"
+    "Receive a daily reminder to record your emotions" : {
+      "comment" : "Settings footer text",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receive a daily reminder to record your emotions"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Record how you feel and discover patterns in your emotional journey"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recibe un recordatorio diario para registrar tus emociones"
           }
         }
       }
     },
-    "Record Stress": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Record Stress"
+    "Record how you feel and discover patterns in your emotional journey" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Record how you feel and discover patterns in your emotional journey"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Record Stress"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registra cómo te sientes y descubre patrones en tu recorrido emocional"
           }
         }
       }
     },
-    "Regular exercise releases endorphins that reduce stress": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Regular exercise releases endorphins that reduce stress"
+    "Record Stress" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Record Stress"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Regular exercise releases endorphins that reduce stress"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registrar Estrés"
           }
         }
       }
     },
-    "Relationships": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Relationships"
+    "Regular exercise releases endorphins that reduce stress" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regular exercise releases endorphins that reduce stress"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Relationships"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El ejercicio regular libera endorfinas que disminuyen el estrés"
           }
         }
       }
     },
-    "Reminder time": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reminder time"
+    "Relationships" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relationships"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reminder time"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relaciones"
           }
         }
       }
     },
-    "Sad": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sad"
+    "Reminder time" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminder time"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sad"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hora del recordatorio"
           }
         }
       }
     },
-    "Save": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Save"
+    "Sad" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sad"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Save"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Triste"
           }
         }
       }
     },
-    "Save your data externally": {
-      "comment": "Menu item subtitle",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Save your data externally"
+    "Santiago Aragoneses Arizmendi" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Santiago Aragoneses Arizmendi"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Save your data externally"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Santiago Aragoneses Arizmendi"
           }
         }
       }
     },
-    "School": {
-      "comment": "Location option for school",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "School"
+    "Save" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "School"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
           }
         }
       }
     },
-    "Select Duration": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Select Duration"
+    "Save your data externally" : {
+      "comment" : "Menu item subtitle",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save your data externally"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Select Duration"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guarda tus datos externamente"
           }
         }
       }
     },
-    "Select emotion": {
-      "comment": "Section header for emotion selection",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Select emotion"
+    "School" : {
+      "comment" : "Location option for school",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "School"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Select emotion"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escuela"
           }
         }
       }
     },
-    "Select factors contributing to your stress": {
-      "comment": "Helper text for stress triggers",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Select factors contributing to your stress"
+    "Select Duration" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select Duration"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Select factors contributing to your stress"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleccionar Duración"
           }
         }
       }
     },
-    "Select Sound": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Select Sound"
+    "Select emotion" : {
+      "comment" : "Section header for emotion selection",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select emotion"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Select Sound"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleccionar Emoción"
           }
         }
       }
     },
-    "Settings": {
-      "comment": "Menu item",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settings"
+    "Select factors contributing to your stress" : {
+      "comment" : "Helper text for stress triggers",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select factors contributing to your stress"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settings"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecciona factores que estén contribuyendo a tu estrés"
           }
         }
       }
     },
-    "Show less": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Show less"
+    "Select Sound" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select Sound"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Show less"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escoger Sonido"
           }
         }
       }
     },
-    "Show more": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Show more"
+    "Settings" : {
+      "comment" : "Menu item",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Show more"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
           }
         }
       }
     },
-    "Sit comfortably with your back straight and shoulders relaxed": {
-      "comment": "Meditation posture tip",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sit comfortably with your back straight and shoulders relaxed"
+    "Show less" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show less"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sit comfortably with your back straight and shoulders relaxed"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar menos"
           }
         }
       }
     },
-    "Skip": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skip"
+    "Show more" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show more"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skip"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar más"
           }
         }
       }
     },
-    "Smooth Jazz": {
-      "comment": "Jazz meditation sound",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Smooth Jazz"
+    "Sit comfortably with your back straight and shoulders relaxed" : {
+      "comment" : "Meditation posture tip",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sit comfortably with your back straight and shoulders relaxed"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Smooth Jazz"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siéntate de manera cómoda con tu espalda recta y tus hombros relajados"
           }
         }
       }
     },
-    "Social Connection": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Social Connection"
+    "Skip" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Social Connection"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saltar"
           }
         }
       }
     },
-    "Special Moments": {
-      "comment": "Quick stat label",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Special Moments"
+    "Smooth Jazz" : {
+      "comment" : "Jazz meditation sound",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Smooth Jazz"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Special Moments"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jazz Suave"
           }
         }
       }
     },
-    "Specify location": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Specify location"
+    "Social Connection" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Social Connection"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Specify location"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conexión Social"
           }
         }
       }
     },
-    "Spending time outdoors can lower stress levels": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Spending time outdoors can lower stress levels"
+    "Special Moments" : {
+      "comment" : "Quick stat label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Special Moments"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Spending time outdoors can lower stress levels"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Momentos Especiales"
           }
         }
       }
     },
-    "Start capturing your special moments to preserve your memories": {
-      "comment": "Empty state subtitle encouraging user to start recording moments",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start capturing your special moments to preserve your memories"
+    "Specify location" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Specify location"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start capturing your special moments to preserve your memories"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Especificar ubicación"
           }
         }
       }
     },
-    "Start tracking how you feel to monitor your emotional well-being": {
-      "comment": "Empty state subtitle encouraging user to start tracking emotions",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start tracking how you feel to monitor your emotional well-being"
+    "Spending time outdoors can lower stress levels" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spending time outdoors can lower stress levels"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start tracking how you feel to monitor your emotional well-being"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pasar tiempo al aire libre puede disminuir los niveles de estrés"
           }
         }
       }
     },
-    "Start tracking your stress levels to identify patterns": {
-      "comment": "Empty state subtitle encouraging user to track stress",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start tracking your stress levels to identify patterns"
+    "Start capturing your special moments to preserve your memories" : {
+      "comment" : "Empty state subtitle encouraging user to start recording moments",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start capturing your special moments to preserve your memories"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start tracking your stress levels to identify patterns"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empieza a capturar tus momentos especiales para conservar tus recuerdos"
           }
         }
       }
     },
-    "Statistics": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Statistics"
+    "Start tracking how you feel to monitor your emotional well-being" : {
+      "comment" : "Empty state subtitle encouraging user to start tracking emotions",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start tracking how you feel to monitor your emotional well-being"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Statistics"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empieza a registrar cómo te sientes para monitorear tu bienestar emocional"
           }
         }
       }
     },
-    "Stress": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stress"
+    "Start tracking your stress levels to identify patterns" : {
+      "comment" : "Empty state subtitle encouraging user to track stress",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start tracking your stress levels to identify patterns"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stress"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empieza a registrar tus niveles de estrés para identificar patrones"
           }
         }
       }
     },
-    "Stress History": {
-      "comment": "Section header for stress history",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stress History"
+    "Statistics" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statistics"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stress History"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estadísticas"
           }
         }
       }
     },
-    "Stress Level": {
-      "comment": "Label for stress level slider",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stress Level"
+    "Stress" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stress"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stress Level"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estrés"
           }
         }
       }
     },
-    "Stress monitoring and management": {
-      "comment": "Feature description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stress monitoring and management"
+    "Stress History" : {
+      "comment" : "Section header for stress history",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stress History"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stress monitoring and management"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Historial de Estrés"
           }
         }
       }
     },
-    "Stress Relief Tips": {
-      "comment": "Title for stress relief tips button",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stress Relief Tips"
+    "Stress Level" : {
+      "comment" : "Label for stress level slider",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stress Level"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stress Relief Tips"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nivel de estrés"
           }
         }
       }
     },
-    "Stress Trend": {
-      "comment": "Chart title",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stress Trend"
+    "Stress monitoring and management" : {
+      "comment" : "Feature description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stress monitoring and management"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stress Trend"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monitoreo y administración del estrés"
           }
         }
       }
     },
-    "Stress Triggers": {
-      "comment": "Section header for stress triggers",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stress Triggers"
+    "Stress Relief Tips" : {
+      "comment" : "Title for stress relief tips button",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stress Relief Tips"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stress Triggers"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consejos para aliviar el estrés"
           }
         }
       }
     },
-    "System": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "System"
+    "Stress Trend" : {
+      "comment" : "Chart title",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stress Trend"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "System"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tendencias de Estrés"
           }
         }
       }
     },
-    "Take a deep breath in for 4 seconds, hold for 4, then exhale for 6": {
-      "comment": "Meditation breathing tip",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Take a deep breath in for 4 seconds, hold for 4, then exhale for 6"
+    "Stress Triggers" : {
+      "comment" : "Section header for stress triggers",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stress Triggers"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Take a deep breath in for 4 seconds, hold for 4, then exhale for 6"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detonantes de Estrés"
           }
         }
       }
     },
-    "Take slow, deep breaths to calm your nervous system": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Take slow, deep breaths to calm your nervous system"
+    "System" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Take slow, deep breaths to calm your nervous system"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sistema"
           }
         }
       }
     },
-    "Talking with friends and family can help reduce stress": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Talking with friends and family can help reduce stress"
+    "Take a deep breath in for 4 seconds, hold for 4, then exhale for 6" : {
+      "comment" : "Meditation breathing tip",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take a deep breath in for 4 seconds, hold for 4, then exhale for 6"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Talking with friends and family can help reduce stress"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toma una respiración profunda por 4 segundos, manténla por 4 y después exhala por 6"
           }
         }
       }
     },
-    "Tap for quick tips": {
-      "comment": "Subtitle for stress relief tips button",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tap for quick tips"
+    "Take slow, deep breaths to calm your nervous system" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take slow, deep breaths to calm your nervous system"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tap for quick tips"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toma lentas, respiraciones profundas para calmar tu sistema nervioso"
           }
         }
       }
     },
-    "Technology": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Technology"
+    "Talking with friends and family can help reduce stress" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Talking with friends and family can help reduce stress"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Technology"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hablar con amigos y familia puede ayudar a disminuir los niveles de estrés"
           }
         }
       }
     },
-    "Theme": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Theme"
+    "Tap for quick tips" : {
+      "comment" : "Subtitle for stress relief tips button",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap for quick tips"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Theme"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Presiona para consejos rápidos"
           }
         }
       }
     },
-    "This will permanently delete all your emotions, moments, and stress records. This action cannot be undone.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This will permanently delete all your emotions, moments, and stress records. This action cannot be undone."
+    "Technology" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Technology"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This will permanently delete all your emotions, moments, and stress records. This action cannot be undone."
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tecnología"
           }
         }
       }
     },
-    "Time": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time"
+    "Theme" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Theme"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tema"
           }
         }
       }
     },
-    "Time Pressure": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time Pressure"
+    "This will permanently delete all your emotions, moments, and stress records. This action cannot be undone." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This will permanently delete all your emotions, moments, and stress records. This action cannot be undone."
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time Pressure"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esto eliminará de forma permanente todas tus emociones, momentos y registros de estrés. Esta acción no se puede deshacer."
           }
         }
       }
     },
-    "Time to Meditate": {
-      "comment": "Meditation screen title",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time to Meditate"
+    "Time" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time to Meditate"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiempo"
           }
         }
       }
     },
-    "Tips": {
-      "comment": "Header for meditation tips section",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tips"
+    "Time Pressure" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time Pressure"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tips"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Presión de Tiempo"
           }
         }
       }
     },
-    "Tired": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tired"
+    "Time to Meditate" : {
+      "comment" : "Meditation screen title",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time to Meditate"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tired"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiempo para Meditar"
           }
         }
       }
     },
-    "Today": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Today"
+    "Tips" : {
+      "comment" : "Header for meditation tips section",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tips"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Today"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consejos"
           }
         }
       }
     },
-    "Tools": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tools"
+    "Tired" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tired"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tools"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cansado"
           }
         }
       }
     },
-    "Tools & Features": {
-      "comment": "Section header for tools menu",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tools & Features"
+    "Today" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tools & Features"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoy"
           }
         }
       }
     },
-    "Total Emotions": {
-      "comment": "Quick stat label",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total Emotions"
+    "Tools" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tools"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total Emotions"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herramientas"
           }
         }
       }
     },
-    "Total Moments": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total Moments"
+    "Tools & Features" : {
+      "comment" : "Section header for tools menu",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tools & Features"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total Moments"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herramientas y Funciones"
           }
         }
       }
     },
-    "Track Your Emotions": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Track Your Emotions"
+    "Total Emotions" : {
+      "comment" : "Quick stat label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total Emotions"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Track Your Emotions"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emociones Totales"
           }
         }
       }
     },
-    "Tranquility": {
-      "comment": "Tranquility meditation sound",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tranquility"
+    "Total Moments" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total Moments"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tranquility"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Momentos Totales"
           }
         }
       }
     },
-    "Transit": {
-      "comment": "Location option for commuting/transit",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Transit"
+    "Track Your Emotions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track Your Emotions"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Transit"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registra tus emociones"
           }
         }
       }
     },
-    "Triggers: %@": {
-      "comment": "Triggers in export",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Triggers: %@"
+    "Tranquility" : {
+      "comment" : "Tranquility meditation sound",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tranquility"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Triggers: %@"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tranquilidad"
           }
         }
       }
     },
-    "Unknown": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unknown"
+    "Transit" : {
+      "comment" : "Location option for commuting/transit",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transit"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unknown"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transporte"
           }
         }
       }
     },
-    "Version": {
-      "comment": "App version label",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Version"
+    "Triggers: %@" : {
+      "comment" : "Triggers in export",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Triggers: %@"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Version"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detonantes: %@"
           }
         }
       }
     },
-    "Very High": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Very High"
+    "Ubaldo Orozco Camargo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ubaldo Orozco Camargo"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Very High"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ubaldo Orozco Camargo"
           }
         }
       }
     },
-    "Very high stress": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Very high stress"
+    "Unknown" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Very high stress"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desconocido"
           }
         }
       }
     },
-    "View trends and insights": {
-      "comment": "Menu item subtitle",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "View trends and insights"
+    "Version" : {
+      "comment" : "App version label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "View trends and insights"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versión"
           }
         }
       }
     },
-    "Walden Vibes": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Walden Vibes"
+    "Very High" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Very High"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Walden Vibes"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muy alto"
           }
         }
       }
     },
-    "Walden Vibes - Data Export": {
-      "comment": "Export file header",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Walden Vibes - Data Export"
+    "Very high stress" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Very high stress"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Walden Vibes - Data Export"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estrés muy alto"
           }
         }
       }
     },
-    "Walden Vibes is designed to help you track your emotional well-being, practice mindfulness, and manage stress effectively.": {
-      "comment": "App description in about view",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Walden Vibes is designed to help you track your emotional well-being, practice mindfulness, and manage stress effectively."
+    "View trends and insights" : {
+      "comment" : "Menu item subtitle",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View trends and insights"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Walden Vibes is designed to help you track your emotional well-being, practice mindfulness, and manage stress effectively."
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver tendencias e información"
           }
         }
       }
     },
-    "We do not collect any analytics or usage data. Your app usage patterns remain private.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "We do not collect any analytics or usage data. Your app usage patterns remain private."
+    "Walden Vibes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walden Vibes"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "We do not collect any analytics or usage data. Your app usage patterns remain private."
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walden Vibes"
           }
         }
       }
     },
-    "We never share, sell, or transmit your personal data to third parties. Your information remains completely private.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "We never share, sell, or transmit your personal data to third parties. Your information remains completely private."
+    "Walden Vibes - Data Export" : {
+      "comment" : "Export file header",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walden Vibes - Data Export"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "We never share, sell, or transmit your personal data to third parties. Your information remains completely private."
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walden Vibes - Exportar Datos"
           }
         }
       }
     },
-    "Week": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Week"
+    "Walden Vibes is designed to help you track your emotional well-being, practice mindfulness, and manage stress effectively." : {
+      "comment" : "App description in about view",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walden Vibes is designed to help you track your emotional well-being, practice mindfulness, and manage stress effectively."
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Week"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walden Vibes está diseñada para ayudarte a registrar tu bienestar emocional, practicar atención plena y manejar el estrés de forma efectiva."
           }
         }
       }
     },
-    "Welcome to Walden Vibes": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Welcome to Walden Vibes"
+    "We do not collect any analytics or usage data. Your app usage patterns remain private." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We do not collect any analytics or usage data. Your app usage patterns remain private."
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Welcome to Walden Vibes"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No recopilamos ningún dato de análisis ni de uso. Tus patrones de uso de la app permanecen privados."
           }
         }
       }
     },
-    "Well done! You've completed your meditation session. %@": {
-      "comment": "Meditation completion notification body with emoji",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Well done! You've completed your meditation session. %@"
+    "We never share, sell, or transmit your personal data to third parties. Your information remains completely private." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We never share, sell, or transmit your personal data to third parties. Your information remains completely private."
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Well done! You've completed your meditation session. %@"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nunca compartimos, vendemos ni transmitimos tus datos personales a terceros. Tu información permanece completamente privada."
           }
         }
       }
     },
-    "When": {
-      "comment": "Section header for moment date and time",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "When"
+    "Week" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Week"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "When"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Semana"
           }
         }
       }
     },
-    "Where are you?": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Where are you?"
+    "Welcome to Walden Vibes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to Walden Vibes"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Where are you?"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenido a Walden Vibes"
           }
         }
       }
     },
-    "Work": {
-      "comment": "Location option for work",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Work"
+    "Well done! You've completed your meditation session. %@" : {
+      "comment" : "Meditation completion notification body with emoji",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Well done! You've completed your meditation session. %@"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Work"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Bien hecho! Has completado tu sesión de meditación. %@"
           }
         }
       }
     },
-    "Year": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Year"
+    "When" : {
+      "comment" : "Section header for moment date and time",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Year"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuando"
           }
         }
       }
     },
-    "You have complete control over your data. You can export or delete all your data at any time from the settings menu.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You have complete control over your data. You can export or delete all your data at any time from the settings menu."
+    "Where are you?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Where are you?"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You have complete control over your data. You can export or delete all your data at any time from the settings menu."
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿En dónde te encuentras?"
           }
         }
       }
     },
-    "Your Data": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your Data"
+    "Work" : {
+      "comment" : "Location option for work",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Work"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your Data"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trabajo"
           }
         }
       }
     },
-    "Your data is safe": {
-      "comment": "Menu item subtitle",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your data is safe"
+    "Year" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Year"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your data is safe"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Año"
           }
         }
       }
     },
-    "Your data is stored securely on your device using iOS's built-in security features. No data is transmitted to external servers.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your data is stored securely on your device using iOS's built-in security features. No data is transmitted to external servers."
+    "You have complete control over your data. You can export or delete all your data at any time from the settings menu." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have complete control over your data. You can export or delete all your data at any time from the settings menu."
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your data is stored securely on your device using iOS's built-in security features. No data is transmitted to external servers."
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tienes control total sobre tus datos. Puedes exportar o borrar todos tus datos en cualquier momento desde el menú de configuración."
           }
         }
       }
     },
-    "Your emotional well-being companion": {
-      "comment": "App tagline in More view",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your emotional well-being companion"
+    "Your Data" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your Data"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your emotional well-being companion"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus Datos"
           }
         }
       }
     },
-    "Your emotional well-being matters": {
-      "comment": "App tagline in about view\nApp tagline in splash screen",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your emotional well-being matters"
+    "Your data is safe" : {
+      "comment" : "Menu item subtitle",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your data is safe"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your emotional well-being matters"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus datos están seguros"
           }
         }
       }
     },
-    "Your most active time for recording emotions is %@": {
-      "comment": "Insight about most active time",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your most active time for recording emotions is %@"
+    "Your data is stored securely on your device using iOS's built-in security features. No data is transmitted to external servers." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your data is stored securely on your device using iOS's built-in security features. No data is transmitted to external servers."
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your most active time for recording emotions is %@"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus datos se almacenan de forma segura en tu dispositivo utilizando las funciones de seguridad integradas de iOS. No se transmite ningún dato a servidores externos."
           }
         }
       }
     },
-    "Your personal companion for emotional well-being and mindfulness": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your personal companion for emotional well-being and mindfulness"
+    "Your emotional well-being companion" : {
+      "comment" : "App tagline in More view",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your emotional well-being companion"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your personal companion for emotional well-being and mindfulness"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu compañero para el bienestar emocional"
           }
         }
       }
     },
-    "Your Rights": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your Rights"
+    "Your emotional well-being matters" : {
+      "comment" : "App tagline in about view\nApp tagline in splash screen",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your emotional well-being matters"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your Rights"
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu bienestar emocional importa"
           }
         }
       }
     },
-    "Your stress levels have been high. Consider taking breaks and practicing relaxation techniques.": {
-      "comment": "High stress insight",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your stress levels have been high. Consider taking breaks and practicing relaxation techniques."
+    "Your most active time for recording emotions is %@" : {
+      "comment" : "Insight about most active time",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your most active time for recording emotions is %@"
           }
         },
-        "es-419": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your stress levels have been high. Consider taking breaks and practicing relaxation techniques."
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu momento más activo para registrar emociones es %@"
+          }
+        }
+      }
+    },
+    "Your personal companion for emotional well-being and mindfulness" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your personal companion for emotional well-being and mindfulness"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu compañero personal para el bienestar emocional y la atención plena"
+          }
+        }
+      }
+    },
+    "Your Rights" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your Rights"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus Derechos"
+          }
+        }
+      }
+    },
+    "Your stress levels have been high. Consider taking breaks and practicing relaxation techniques." : {
+      "comment" : "High stress insight",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your stress levels have been high. Consider taking breaks and practicing relaxation techniques."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus niveles de estrés han sido altos. Considera tomar descansos y practicar técnicas de relajación."
           }
         }
       }
     }
   },
-  "version": "1.0"
+  "version" : "1.0"
 }

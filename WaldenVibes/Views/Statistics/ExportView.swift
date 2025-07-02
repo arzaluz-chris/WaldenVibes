@@ -4,7 +4,6 @@ import SwiftUI
 struct ExportView: View {
     @EnvironmentObject var dataManager: DataManager
     @Environment(\.dismiss) var dismiss
-    @State private var exportText = ""
     @State private var showingShareSheet = false
     
     var body: some View {
@@ -25,7 +24,6 @@ struct ExportView: View {
                     .padding(.horizontal, 40)
                 
                 Button(action: {
-                    exportText = dataManager.exportAllData()
                     showingShareSheet = true
                 }) {
                     Label("Export as Text", systemImage: "doc.text")
@@ -51,7 +49,7 @@ struct ExportView: View {
             }
         }
         .sheet(isPresented: $showingShareSheet) {
-            ShareSheet(items: [exportText])
+            ShareSheet(items: [dataManager.exportAllData()])
         }
     }
 }
