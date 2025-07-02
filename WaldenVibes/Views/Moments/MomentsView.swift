@@ -133,7 +133,7 @@ struct MomentsList: View {
 
                 ForEach(MomentCategory.allCases, id: \.self) { category in
                     CategoryChip(
-                        title: "\(category.localizedName)",
+                        title: categoryTitle(for: category),
                         icon: category.icon,
                         color: category.color,
                         isSelected: selectedCategory == category,
@@ -145,6 +145,22 @@ struct MomentsList: View {
             .padding(.vertical, 12)
         }
         .background(Color(UIColor.systemBackground))
+    }
+    
+    // Helper function to get proper localized string
+    private func categoryTitle(for category: MomentCategory) -> String {
+        switch category {
+        case .work:
+            return String(localized: "Work")
+        case .family:
+            return String(localized: "Family")
+        case .friends:
+            return String(localized: "Friends")
+        case .personal:
+            return String(localized: "Personal")
+        case .general:
+            return String(localized: "General")
+        }
     }
 
     /// Main list or empty state
