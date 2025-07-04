@@ -10,6 +10,7 @@ struct WaldenVibesApp: App {
     @AppStorage("selectedTheme") private var selectedTheme = "system"
     @AppStorage("appLanguage") private var appLanguage = "es"
     @State private var isShowingSplash = true
+    @State private var refreshID = UUID() // Add this to force UI refresh
     
     init() {
         // Configure app appearance
@@ -24,17 +25,25 @@ struct WaldenVibesApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if isShowingSplash {
-                SplashView(isShowingSplash: $isShowingSplash)
-            } else if hasSeenOnboarding {
-                ContentView()
-                    .environmentObject(dataManager)
-                    .environment(\.locale, Locale(identifier: appLanguage))
-                    .preferredColorScheme(colorScheme)
-            } else {
-                OnboardingView(hasSeenOnboarding: $hasSeenOnboarding)
-                    .environment(\.locale, Locale(identifier: appLanguage))
-                    .preferredColorScheme(colorScheme)
+            Group {
+                if isShowingSplash {
+                    SplashView(isShowingSplash: $isShowingSplash)
+                } else if hasSeenOnboarding {
+                    ContentView()
+                        .environmentObject(dataManager)
+                        .environment(\.locale, Locale(identifier: appLanguage))
+                        .preferredColorScheme(colorScheme)
+                        .id(refreshID) // Force refresh when language changes
+                } else {
+                    OnboardingView(hasSeenOnboarding: $hasSeenOnboarding)
+                        .environment(\.locale, Locale(identifier: appLanguage))
+                        .preferredColorScheme(colorScheme)
+                        .id(refreshID) // Force refresh when language changes
+                }
+            }
+            .onChange(of: appLanguage) { _, _ in
+                // Force UI refresh when language changes
+                refreshID = UUID()
             }
         }
     }

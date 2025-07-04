@@ -6,6 +6,7 @@ struct StressView: View {
     @State private var showingAddStress = false
     @State private var selectedStress: Stress?
     @State private var showingTips = false
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var body: some View {
         ZStack {
@@ -23,11 +24,13 @@ struct StressView: View {
             
             if dataManager.stressRecords.isEmpty {
                 EmptyStressView(showingAddStress: $showingAddStress)
+                    .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
             } else {
                 StressList(selectedStress: $selectedStress, showingTips: $showingTips)
             }
         }
         .navigationTitle("Stress")
+        .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { showingTips = true }) {
@@ -37,7 +40,12 @@ struct StressView: View {
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { showingAddStress = true }) {
+                Button(action: {
+                    // Add haptic feedback
+                    let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                    impactFeedback.impactOccurred()
+                    showingAddStress = true
+                }) {
                     Image(systemName: "plus.circle.fill")
                         .font(.title2)
                         .foregroundColor(Color("AccentColor"))
@@ -78,7 +86,12 @@ struct EmptyStressView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
             
-            Button(action: { showingAddStress = true }) {
+            Button(action: {
+                // Add haptic feedback
+                let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                impactFeedback.impactOccurred()
+                showingAddStress = true
+            }) {
                 Label("Record Stress", systemImage: "plus.circle.fill")
                     .font(.headline)
                     .foregroundColor(.white)

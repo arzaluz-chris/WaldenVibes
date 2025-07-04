@@ -6,6 +6,7 @@ struct MoreView: View {
     @State private var showingExport = false
     @State private var showingAbout = false
     @State private var showingPrivacy = false
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var body: some View {
         ScrollView {
@@ -32,6 +33,7 @@ struct MoreView: View {
                         .fill(Color("AccentColor").opacity(0.1))
                 )
                 .padding(.horizontal)
+                .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
                 
                 // Quick Stats
                 VStack(spacing: 16) {
@@ -40,36 +42,20 @@ struct MoreView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
                     
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                        QuickStatCard(
-                            icon: "heart.fill",
-                            value: "\(dataManager.emotions.count)",
-                            label: String(localized: "Total Emotions", comment: "Quick stat label"),
-                            color: Color("EmotionHappy")
-                        )
-                        
-                        QuickStatCard(
-                            icon: "star.fill",
-                            value: "\(dataManager.moments.count)",
-                            label: String(localized: "Special Moments", comment: "Quick stat label"),
-                            color: Color("EmotionExcited")
-                        )
-                        
-                        QuickStatCard(
-                            icon: "waveform.path.ecg",
-                            value: String(format: "%.1f", dataManager.averageStressLevel(for: .month)),
-                            label: String(localized: "Avg Stress", comment: "Quick stat label"),
-                            color: Color("StressModerate")
-                        )
-                        
-                        QuickStatCard(
-                            icon: "calendar",
-                            value: "\(daysTracked)",
-                            label: String(localized: "Days Tracked", comment: "Quick stat label"),
-                            color: Color("AccentColor")
-                        )
+                    if horizontalSizeClass == .regular {
+                        // iPad: 4 columns
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 16) {
+                            quickStatCards
+                        }
+                        .padding(.horizontal)
+                        .frame(maxWidth: 800)
+                    } else {
+                        // iPhone: 2 columns
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                            quickStatCards
+                        }
+                        .padding(.horizontal)
                     }
-                    .padding(.horizontal)
                 }
                 
                 // Menu Items
@@ -80,50 +66,53 @@ struct MoreView: View {
                         .padding(.horizontal)
                         .padding(.top, 8)
                     
-                    NavigationLink(destination: StatisticsView()) {
-                        MenuRow(
-                            icon: "chart.line.uptrend.xyaxis",
-                            title: String(localized: "Detailed Statistics", comment: "Menu item"),
-                            subtitle: String(localized: "View trends and insights", comment: "Menu item subtitle"),
-                            color: .blue
-                        )
+                    VStack(spacing: 12) {
+                        NavigationLink(destination: StatisticsView()) {
+                            MenuRow(
+                                icon: "chart.line.uptrend.xyaxis",
+                                title: String(localized: "Detailed Statistics", comment: "Menu item"),
+                                subtitle: String(localized: "View trends and insights", comment: "Menu item subtitle"),
+                                color: .blue
+                            )
+                        }
+                        
+                        NavigationLink(destination: ExportView()) {
+                            MenuRow(
+                                icon: "square.and.arrow.up",
+                                title: String(localized: "Export Data", comment: "Menu item"),
+                                subtitle: String(localized: "Save your data externally", comment: "Menu item subtitle"),
+                                color: .green
+                            )
+                        }
+                        
+                        NavigationLink(destination: SettingsView()) {
+                            MenuRow(
+                                icon: "gearshape.fill",
+                                title: String(localized: "Settings", comment: "Menu item"),
+                                subtitle: String(localized: "Customize your experience", comment: "Menu item subtitle"),
+                                color: .gray
+                            )
+                        }
+                        
+                        Button(action: { showingAbout = true }) {
+                            MenuRow(
+                                icon: "info.circle.fill",
+                                title: String(localized: "About", comment: "Menu item"),
+                                subtitle: String(localized: "Learn more about the app", comment: "Menu item subtitle"),
+                                color: .orange
+                            )
+                        }
+                        
+                        Button(action: { showingPrivacy = true }) {
+                            MenuRow(
+                                icon: "lock.shield.fill",
+                                title: String(localized: "Privacy", comment: "Menu item"),
+                                subtitle: String(localized: "Your data is safe", comment: "Menu item subtitle"),
+                                color: .purple
+                            )
+                        }
                     }
-                    
-                    NavigationLink(destination: ExportView()) {
-                        MenuRow(
-                            icon: "square.and.arrow.up",
-                            title: String(localized: "Export Data", comment: "Menu item"),
-                            subtitle: String(localized: "Save your data externally", comment: "Menu item subtitle"),
-                            color: .green
-                        )
-                    }
-                    
-                    NavigationLink(destination: SettingsView()) {
-                        MenuRow(
-                            icon: "gearshape.fill",
-                            title: String(localized: "Settings", comment: "Menu item"),
-                            subtitle: String(localized: "Customize your experience", comment: "Menu item subtitle"),
-                            color: .gray
-                        )
-                    }
-                    
-                    Button(action: { showingAbout = true }) {
-                        MenuRow(
-                            icon: "info.circle.fill",
-                            title: String(localized: "About", comment: "Menu item"),
-                            subtitle: String(localized: "Learn more about the app", comment: "Menu item subtitle"),
-                            color: .orange
-                        )
-                    }
-                    
-                    Button(action: { showingPrivacy = true }) {
-                        MenuRow(
-                            icon: "lock.shield.fill",
-                            title: String(localized: "Privacy", comment: "Menu item"),
-                            subtitle: String(localized: "Your data is safe", comment: "Menu item subtitle"),
-                            color: .purple
-                        )
-                    }
+                    .frame(maxWidth: horizontalSizeClass == .regular ? 800 : .infinity)
                 }
                 
                 // Motivational Quote
@@ -148,12 +137,17 @@ struct MoreView: View {
                         .fill(Color(UIColor.secondarySystemBackground))
                 )
                 .padding(.horizontal)
+                .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
                 
                 Spacer(minLength: 30)
             }
             .padding(.vertical)
+            .frame(maxWidth: .infinity)
         }
         .navigationTitle("Tools")
+        .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbarBackground(Color(UIColor.systemBackground), for: .navigationBar)
         .sheet(isPresented: $showingAbout) {
             AboutView()
         }
@@ -162,9 +156,40 @@ struct MoreView: View {
         }
     }
     
-    private var daysTracked: Int {
-        let calendar = Calendar.current
-        let dates = Set(dataManager.emotions.map { calendar.startOfDay(for: $0.date) })
-        return dates.count
-    }
-}
+    @ViewBuilder
+    private var quickStatCards: some View {
+        QuickStatCard(
+            icon: "heart.fill",
+            value: "\(dataManager.emotions.count)",
+            label: String(localized: "Total Emotions", comment: "Quick stat label"),
+            color: Color("EmotionHappy")
+        )
+        
+        QuickStatCard(
+            icon: "star.fill",
+            value: "\(dataManager.moments.count)",
+            label: String(localized: "Special Moments", comment: "Quick stat label"),
+            color: Color("EmotionExcited")
+        )
+               
+               QuickStatCard(
+                   icon: "waveform.path.ecg",
+                   value: String(format: "%.1f", dataManager.averageStressLevel(for: .month)),
+                   label: String(localized: "Avg Stress", comment: "Quick stat label"),
+                   color: Color("StressModerate")
+               )
+               
+               QuickStatCard(
+                   icon: "calendar",
+                   value: "\(daysTracked)",
+                   label: String(localized: "Days Tracked", comment: "Quick stat label"),
+                   color: Color("AccentColor")
+               )
+           }
+           
+           private var daysTracked: Int {
+               let calendar = Calendar.current
+               let dates = Set(dataManager.emotions.map { calendar.startOfDay(for: $0.date) })
+               return dates.count
+           }
+        }

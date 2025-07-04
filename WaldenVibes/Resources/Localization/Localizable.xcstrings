@@ -2,14 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "" : {
-      "localizations" : {
-        "es-419" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "- Virgil" : {
       "comment" : "Quote author",
@@ -3012,6 +3005,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Escoger Sonido"
+          }
+        }
+      }
+    },
+    "Select where you want to go" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select where you want to go"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecciona a dónde quieres ir"
           }
         }
       }

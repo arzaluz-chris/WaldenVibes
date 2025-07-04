@@ -8,6 +8,7 @@ struct EmotionsView: View {
     @State private var selectedFilter: EmotionType? = nil
     @State private var emotionToDelete: Emotion?
     @State private var showingDeleteAlert = false
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var filteredEmotions: [Emotion] {
         if let filter = selectedFilter {
@@ -48,7 +49,12 @@ struct EmotionsView: View {
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 40)
                     
-                    Button(action: { showingAddEmotion = true }) {
+                    Button(action: {
+                        // Add haptic feedback
+                        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                        impactFeedback.impactOccurred()
+                        showingAddEmotion = true
+                    }) {
                         Label("Add Emotion", systemImage: "plus.circle.fill")
                             .font(.headline)
                             .foregroundColor(.white)
@@ -59,6 +65,7 @@ struct EmotionsView: View {
                     }
                     .padding(.top, 10)
                 }
+                .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
             } else {
                 VStack(spacing: 0) {
                     // Filter chips
@@ -95,6 +102,7 @@ struct EmotionsView: View {
                                 Section {
                                     ForEach(emotions) { emotion in
                                         EmotionCard(emotion: emotion)
+                                            .frame(maxWidth: horizontalSizeClass == .regular ? 800 : .infinity)
                                             .onTapGesture {
                                                 selectedEmotion = emotion
                                             }
@@ -116,6 +124,7 @@ struct EmotionsView: View {
                                         Spacer()
                                     }
                                     .padding(.horizontal)
+                                    .frame(maxWidth: horizontalSizeClass == .regular ? 800 : .infinity)
                                     .padding(.top, date == groupedEmotions.first?.key ? 0 : 10)
                                 }
                             }
@@ -126,9 +135,15 @@ struct EmotionsView: View {
             }
         }
         .navigationTitle("Emotions")
+        .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { showingAddEmotion = true }) {
+                Button(action: {
+                    // Add haptic feedback
+                    let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                    impactFeedback.impactOccurred()
+                    showingAddEmotion = true
+                }) {
                     Image(systemName: "plus.circle.fill")
                         .font(.title2)
                         .foregroundColor(Color("AccentColor"))

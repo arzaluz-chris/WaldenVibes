@@ -9,8 +9,11 @@ struct MeditationView: View {
     @State private var animateCircle = false
     @AppStorage("selectedMeditationSound") private var selectedSoundRawValue = "none"
     @State private var audioPlayer: AVAudioPlayer?
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
-    private let circleSize: CGFloat = 280
+    private var circleSize: CGFloat {
+        horizontalSizeClass == .regular ? 400 : 280
+    }
     
     private var selectedSound: MeditationSound {
         MeditationSound(rawValue: selectedSoundRawValue) ?? .none
@@ -60,7 +63,7 @@ struct MeditationView: View {
                     
                     // Title centered in available space
                     Text("Time to Meditate", comment: "Meditation screen title")
-                        .font(.largeTitle)
+                        .font(horizontalSizeClass == .regular ? .system(size: 48, weight: .light) : .largeTitle)
                         .fontWeight(.light)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
@@ -221,7 +224,7 @@ struct MeditationView: View {
     private var timeDisplayView: some View {
         VStack(spacing: 8) {
             Text(meditationManager.formattedTime(from: meditationManager.timeRemaining))
-                .font(.system(size: 48, weight: .light, design: .rounded))
+                .font(.system(size: horizontalSizeClass == .regular ? 64 : 48, weight: .light, design: .rounded))
                 .foregroundColor(.primary)
             
             if !meditationManager.isActive {

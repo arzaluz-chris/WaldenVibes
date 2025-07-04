@@ -5,6 +5,7 @@ struct StressList: View {
     @EnvironmentObject var dataManager: DataManager
     @Binding var selectedStress: Stress?
     @Binding var showingTips: Bool
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var body: some View {
         ScrollView {
@@ -13,6 +14,7 @@ struct StressList: View {
                 if let latestStress = dataManager.stressRecords.first {
                     CurrentStressCard(stress: latestStress)
                         .padding(.horizontal)
+                        .frame(maxWidth: horizontalSizeClass == .regular ? 800 : .infinity)
                         .padding(.top)
                 }
                 
@@ -44,18 +46,35 @@ struct StressList: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 .padding(.horizontal)
+                .frame(maxWidth: horizontalSizeClass == .regular ? 800 : .infinity)
                 
                 // History
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Stress History", comment: "Section header for stress history")
                         .font(.headline)
                         .padding(.horizontal)
+                        .frame(maxWidth: horizontalSizeClass == .regular ? 800 : .infinity, alignment: .leading)
                     
-                    ForEach(dataManager.stressRecords) { stress in
-                        StressCard(stress: stress)
-                            .onTapGesture {
-                                selectedStress = stress
+                    if horizontalSizeClass == .regular {
+                        // iPad: Grid layout
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                            ForEach(dataManager.stressRecords) { stress in
+                                StressCard(stress: stress)
+                                    .onTapGesture {
+                                        selectedStress = stress
+                                    }
                             }
+                        }
+                        .padding(.horizontal)
+                        .frame(maxWidth: 1000)
+                    } else {
+                        // iPhone: List layout
+                        ForEach(dataManager.stressRecords) { stress in
+                            StressCard(stress: stress)
+                                .onTapGesture {
+                                    selectedStress = stress
+                                }
+                        }
                     }
                 }
             }
