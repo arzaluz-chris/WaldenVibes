@@ -523,22 +523,6 @@
         }
       }
     },
-    "All recorded emotions with intensities and notes" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "All recorded emotions with intensities and notes"
-          }
-        },
-        "es-419" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Todas las emociones registradas con intensidades y notas"
-          }
-        }
-      }
-    },
     "All your emotional data, moments, and stress records are stored locally on your device. We do not collect or have access to any of your personal information." : {
       "localizations" : {
         "en" : {
@@ -1000,6 +984,23 @@
         }
       }
     },
+    "Choose Export Format" : {
+      "comment" : "Format selection title",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose Export Format"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige el formato de exportación"
+          }
+        }
+      }
+    },
     "Choose how you want to export your wellness data" : {
       "comment" : "Export view description",
       "localizations" : {
@@ -1046,6 +1047,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Colores, emojis y formato atractivo"
+          }
+        }
+      }
+    },
+    "Compatible with all apps" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compatible with all apps"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compatible con todas las aplicaciones"
           }
         }
       }
@@ -1874,6 +1891,22 @@
         }
       }
     },
+    "Emotions with charts" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emotions with charts"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emociones con gráficas"
+          }
+        }
+      }
+    },
     "Enable reminders" : {
       "localizations" : {
         "en" : {
@@ -2018,23 +2051,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Exportar Datos"
-          }
-        }
-      }
-    },
-    "Export Format" : {
-      "comment" : "Section header for export format selection",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Export Format"
-          }
-        },
-        "es-419" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Formato de Exportación"
           }
         }
       }
@@ -4001,6 +4017,22 @@
         }
       }
     },
+    "Plain text format" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plain text format"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Formato de texto plano"
+          }
+        }
+      }
+    },
     "Practice being present to reduce anxiety about the future" : {
       "localizations" : {
         "en" : {
@@ -4277,6 +4309,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rara vez, pienso de forma positiva"
+          }
+        }
+      }
+    },
+    "Raw data export" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raw data export"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportación de datos sin formato"
           }
         }
       }
@@ -4934,6 +4982,22 @@
         }
       }
     },
+    "Special moments" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Special moments"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Momentos especiales"
+          }
+        }
+      }
+    },
     "Special Moments" : {
       "comment" : "Quick stat label",
       "localizations" : {
@@ -4947,22 +5011,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Momentos Especiales"
-          }
-        }
-      }
-    },
-    "Special moments with categories and durations" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Special moments with categories and durations"
-          }
-        },
-        "es-419" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Momentos especiales con categorías y duraciones"
           }
         }
       }
@@ -5099,6 +5147,22 @@
         }
       }
     },
+    "Stress analysis" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stress analysis"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Análisis de estrés"
+          }
+        }
+      }
+    },
     "Stress Assessment" : {
       "localizations" : {
         "en" : {
@@ -5195,22 +5259,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Registros de estrés"
-          }
-        }
-      }
-    },
-    "Stress records with triggers and levels" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stress records with triggers and levels"
-          }
-        },
-        "es-419" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Registros de estrés con desencadenantes y niveles"
           }
         }
       }
@@ -5987,22 +6035,6 @@
         }
       }
     },
-    "Visual charts and statistics" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Visual charts and statistics"
-          }
-        },
-        "es-419" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gráficas y estadísticas visuales"
-          }
-        }
-      }
-    },
     "Walden Vibes" : {
       "localizations" : {
         "en" : {
@@ -6130,23 +6162,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "¡Bien hecho! Has completado tu sesión de meditación. %@"
-          }
-        }
-      }
-    },
-    "What's Included" : {
-      "comment" : "Section header for export contents",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "What's Included"
-          }
-        },
-        "es-419" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Contenido incluido"
           }
         }
       }
