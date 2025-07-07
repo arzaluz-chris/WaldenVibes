@@ -1,10 +1,11 @@
-// WaldenVibes/Views/Stress/Components/StressList.swift
+// WaldenVibes/Views/Stress/Components/StressList.swift (ACTUALIZADO)
 import SwiftUI
 
 struct StressList: View {
     @EnvironmentObject var dataManager: DataManager
     @Binding var selectedStress: Stress?
     @Binding var showingTips: Bool
+    @Binding var showingStressTest: Bool
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var body: some View {
@@ -18,33 +19,54 @@ struct StressList: View {
                         .padding(.top)
                 }
                 
-                // Quick Tips Button
-                Button(action: { showingTips = true }) {
-                    HStack {
-                        Image(systemName: "lightbulb.fill")
-                            .font(.title3)
-                        
-                        VStack(alignment: .leading) {
-                            Text("Stress Relief Tips", comment: "Title for stress relief tips button")
-                                .font(.headline)
-                            Text("Tap for quick tips", comment: "Subtitle for stress relief tips button")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
+                // Quick Actions
+                HStack(spacing: 12) {
+                    Button(action: { showingTips = true }) {
+                        HStack {
+                            Image(systemName: "lightbulb.fill")
+                                .font(.title3)
+                            
+                            VStack(alignment: .leading) {
+                                Text("Stress Relief Tips", comment: "Title for stress relief tips button")
+                                    .font(.headline)
+                                Text("Tap for quick tips", comment: "Subtitle for stress relief tips button")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                            
+                            Spacer()
                         }
-                        
-                        Spacer()
-                        
-                        Image(systemName: "chevron.right")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(Color("AccentColor").opacity(0.1))
+                        )
                     }
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 16)
-                            .fill(Color("AccentColor").opacity(0.1))
-                    )
+                    .buttonStyle(PlainButtonStyle())
+                    
+                    Button(action: { showingStressTest = true }) {
+                        HStack {
+                            Image(systemName: "doc.text.magnifyingglass")
+                                .font(.title3)
+                            
+                            VStack(alignment: .leading) {
+                                Text("Quick Test", comment: "Title for stress test button")
+                                    .font(.headline)
+                                Text("Assess stress level", comment: "Subtitle for stress test button")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                            
+                            Spacer()
+                        }
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(Color("StressModerate").opacity(0.1))
+                        )
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
-                .buttonStyle(PlainButtonStyle())
                 .padding(.horizontal)
                 .frame(maxWidth: horizontalSizeClass == .regular ? 800 : .infinity)
                 

@@ -1,53 +1,133 @@
-// WaldenVibes/Views/Stress/AddStressView.swift
+// WaldenVibes/Views/Stress/AddStressView.swift (ACTUALIZADO)
 import SwiftUI
 
 struct AddStressView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var dataManager: DataManager
     
+    @State private var stressInputMethod: StressInputMethod = .manual
     @State private var stressLevel: Double = 5
     @State private var selectedTriggers: Set<StressTrigger> = []
     @State private var note = ""
     @State private var previousStressLevel: Double = 5
+    @State private var showingStressTest = false
+    
+    enum StressInputMethod: String, CaseIterable {
+        case manual = "manual"
+        case test = "test"
+        
+        var displayName: LocalizedStringKey {
+            switch self {
+            case .manual: return LocalizedStringKey("Manual Entry")
+            case .test: return LocalizedStringKey("Quick Assessment")
+            }
+        }
+        
+        var description: LocalizedStringKey {
+            switch self {
+            case .manual: return LocalizedStringKey("Set your stress level directly")
+            case .test: return LocalizedStringKey("Take a quick test to determine your stress level")
+            }
+        }
+        
+        var icon: String {
+            switch self {
+            case .manual: return "slider.horizontal.3"
+            case .test: return "doc.text.magnifyingglass"
+            }
+        }
+    }
     
     var body: some View {
         NavigationView {
             Form {
-                // Stress Level
+                // Input Method Selection
                 Section {
-                    VStack(spacing: 20) {
-                        // Level indicator
-                        HStack {
-                            Text("Stress Level", comment: "Label for stress level slider")
-                            Spacer()
-                            Text("\(Int(stressLevel))/10")
-                                .font(.title2)
-                                .fontWeight(.semibold)
-                                .foregroundColor(colorForLevel(stressLevel))
-                        }
-                        
-                        // Slider
-                        Slider(value: $stressLevel, in: 0...10, step: 1)
-                            .accentColor(colorForLevel(stressLevel))
-                            .onChange(of: stressLevel) { _, newValue in
-                                // Progressive haptic feedback based on stress level
-                                triggerProgressiveStressHaptic(for: newValue, previous: previousStressLevel)
-                                previousStressLevel = newValue
+                    ForEach(StressInputMethod.allCases, id: \.self) { method in
+                        Button(action: {
+                            if method == .test {
+                                showingStressTest = true
+                            } else {
+                                stressInputMethod = method
                             }
-                        
-                        // Visual indicator
-                        HStack {
-                            Text(emojiForLevel(stressLevel))
-                                .font(.largeTitle)
-                            
-                            Text(descriptionForLevel(stressLevel))
-                                .font(.headline)
-                                .foregroundColor(colorForLevel(stressLevel))
+                        }) {
+                            HStack(spacing: 16) {
+                                Image(systemName: method.icon)
+                                    .font(.title2)
+                                    .foregroundColor(stressInputMethod == method ? Color("AccentColor") : .secondary)
+                                    .frame(width: 30)
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(method.displayName)
+                                        .font(.headline)
+                                        .foregroundColor(.primary)
+                                    
+                                    Text(method.description)
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                        .multilineTextAlignment(.leading)
+                                }
+                                
+                                Spacer()
+                                
+                                if stressInputMethod == method {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .font(.title2)
+                                        .foregroundColor(Color("AccentColor"))
+                                }
+                                
+                                if method == .test {
+                                    Image(systemName: "chevron.right")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
                         }
-                        .frame(maxWidth: .infinity)
+                        .buttonStyle(PlainButtonStyle())
                     }
                 } header: {
-                    Text("How stressed are you feeling?", comment: "Section header for stress level")
+                    Text("How would you like to assess your stress?", comment: "Section header for stress input method")
+                } footer: {
+                    Text("The quick assessment provides a more accurate measurement based on multiple factors", comment: "Footer explaining stress test benefits")
+                }
+                
+                // Manual Stress Level (only shown if manual method selected)
+                if stressInputMethod == .manual {
+                    Section {
+                        VStack(spacing: 20) {
+                            // Level indicator
+                            HStack {
+                                Text("Stress Level", comment: "Label for stress level slider")
+                                Spacer()
+                                Text("\(Int(stressLevel))/10")
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(colorForLevel(stressLevel))
+                            }
+                            
+                            // Slider
+                            Slider(value: $stressLevel, in: 0...10, step: 1)
+                                .accentColor(colorForLevel(stressLevel))
+                                .onChange(of: stressLevel) { _, newValue in
+                                    // Progressive haptic feedback based on stress level
+                                    triggerProgressiveStressHaptic(for: newValue, previous: previousStressLevel)
+                                    previousStressLevel = newValue
+                                }
+                            
+                            // Visual indicator
+                            HStack {
+                                Text(emojiForLevel(stressLevel))
+                                    .font(.largeTitle)
+                                
+                                Text(descriptionForLevel(stressLevel))
+                                    .font(.headline)
+                                    .foregroundColor(colorForLevel(stressLevel))
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
+                    } header: {
+                        Text("How stressed are you feeling?", comment: "Section header for stress level")
+                    }
                 }
                 
                 // Triggers
@@ -116,11 +196,15 @@ struct AddStressView: View {
                         saveStress()
                     }
                     .fontWeight(.semibold)
+                    .disabled(stressInputMethod == .test) // Disable if test method selected but not completed
                 }
             }
         }
         .onAppear {
             previousStressLevel = stressLevel
+        }
+        .sheet(isPresented: $showingStressTest) {
+            StressTestView()
         }
     }
     
