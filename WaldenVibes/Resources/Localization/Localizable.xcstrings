@@ -423,6 +423,22 @@
         }
       }
     },
+    "All recorded emotions with intensities and notes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All recorded emotions with intensities and notes"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todas las emociones registradas con intensidades y notas"
+          }
+        }
+      }
+    },
     "All your emotional data, moments, and stress records are stored locally on your device. We do not collect or have access to any of your personal information." : {
       "localizations" : {
         "en" : {
@@ -736,6 +752,23 @@
         }
       }
     },
+    "Choose how you want to export your wellness data" : {
+      "comment" : "Export view description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose how you want to export your wellness data"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige cómo quieres exportar tus datos de bienestar"
+          }
+        }
+      }
+    },
     "Clear All Data" : {
       "comment" : "Settings option to delete all data",
       "localizations" : {
@@ -749,6 +782,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Borrar todos los datos"
+          }
+        }
+      }
+    },
+    "Colors, emojis and beautiful formatting" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Colors, emojis and beautiful formatting"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Colores, emojis y formato atractivo"
           }
         }
       }
@@ -1217,6 +1266,7 @@
       }
     },
     "Done" : {
+      "comment" : "Done button",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1511,35 +1561,19 @@
         }
       }
     },
-    "Export all your emotions, moments, and stress records to a text file that you can save or share." : {
-      "comment" : "Export view description",
+    "Export as" : {
+      "comment" : "Export button prefix",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Export all your emotions, moments, and stress records to a text file that you can save or share."
+            "value" : "Export as"
           }
         },
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Exporta todas tus emociones, momentos y registros de estrés a un archivo de texto que puedes guardar o compartir."
-          }
-        }
-      }
-    },
-    "Export as Text" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Export as Text"
-          }
-        },
-        "es-419" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exportar como Texto"
+            "value" : "Exportar como"
           }
         }
       }
@@ -1557,6 +1591,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Exportar Datos"
+          }
+        }
+      }
+    },
+    "Export Format" : {
+      "comment" : "Section header for export format selection",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export Format"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Formato de Exportación"
           }
         }
       }
@@ -1672,6 +1723,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Generado: %@"
+          }
+        }
+      }
+    },
+    "Generating PDF..." : {
+      "comment" : "PDF generation status",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generating PDF..."
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generando PDF…"
           }
         }
       }
@@ -2381,6 +2449,23 @@
         }
       }
     },
+    "No data to export yet" : {
+      "comment" : "No data message",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No data to export yet"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no hay datos para exportar"
+          }
+        }
+      }
+    },
     "No emotions recorded" : {
       "comment" : "Empty state title when no emotions have been tracked",
       "localizations" : {
@@ -2600,6 +2685,23 @@
         }
       }
     },
+    "PDF Report" : {
+      "comment" : "Export format option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PDF Report"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reporte en PDF"
+          }
+        }
+      }
+    },
     "Period" : {
       "localizations" : {
         "en" : {
@@ -2764,6 +2866,23 @@
         }
       }
     },
+    "Ready to export! 🎉" : {
+      "comment" : "Ready to export message",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ready to export! 🎉"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Listo para exportar! 🎉"
+          }
+        }
+      }
+    },
     "Receive a daily reminder to record your emotions" : {
       "comment" : "Settings footer text",
       "localizations" : {
@@ -2857,6 +2976,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hora del recordatorio"
+          }
+        }
+      }
+    },
+    "Rich visual report with colors, emojis and charts" : {
+      "comment" : "Export format description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rich visual report with colors, emojis and charts"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informe visual enriquecido con colores, emojis y gráficos"
           }
         }
       }
@@ -3074,6 +3210,23 @@
         }
       }
     },
+    "Simple text format compatible with any app" : {
+      "comment" : "Export format description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Simple text format compatible with any app"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Formato de texto simple compatible con cualquier aplicación"
+          }
+        }
+      }
+    },
     "Sit comfortably with your back straight and shoulders relaxed" : {
       "comment" : "Meditation posture tip",
       "localizations" : {
@@ -3153,6 +3306,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Momentos Especiales"
+          }
+        }
+      }
+    },
+    "Special moments with categories and durations" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Special moments with categories and durations"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Momentos especiales con categorías y duraciones"
           }
         }
       }
@@ -3323,6 +3492,38 @@
         }
       }
     },
+    "Stress Records" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stress Records"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registros de estrés"
+          }
+        }
+      }
+    },
+    "Stress records with triggers and levels" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stress records with triggers and levels"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registros de estrés con desencadenantes y niveles"
+          }
+        }
+      }
+    },
     "Stress Relief Tips" : {
       "comment" : "Title for stress relief tips button",
       "localizations" : {
@@ -3468,6 +3669,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tecnología"
+          }
+        }
+      }
+    },
+    "Text File" : {
+      "comment" : "Export format option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text File"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivo de Texto"
           }
         }
       }
@@ -3648,6 +3866,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Emociones Totales"
+          }
+        }
+      }
+    },
+    "Total entries: %d" : {
+      "comment" : "Total entries count",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total entries: %d"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total de entradas: %d"
           }
         }
       }
@@ -3833,6 +4068,22 @@
         }
       }
     },
+    "Visual charts and statistics" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visual charts and statistics"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gráficas y estadísticas visuales"
+          }
+        }
+      }
+    },
     "Walden Vibes" : {
       "localizations" : {
         "en" : {
@@ -3964,6 +4215,23 @@
         }
       }
     },
+    "What's Included" : {
+      "comment" : "Section header for export contents",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What's Included"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contenido incluido"
+          }
+        }
+      }
+    },
     "When" : {
       "comment" : "Section header for moment date and time",
       "localizations" : {
@@ -4091,6 +4359,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tus datos se almacenan de forma segura en tu dispositivo utilizando las funciones de seguridad integradas de iOS. No se transmite ningún dato a servidores externos."
+          }
+        }
+      }
+    },
+    "Your Data Summary" : {
+      "comment" : "Data summary card title",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your Data Summary"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resumen de tu Información"
           }
         }
       }
