@@ -181,7 +181,7 @@ struct ExportView: View {
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
-                        .lineLimit(3)
+                        .fixedSize(horizontal: false, vertical: true) // allow full wrapping
                 }
                 
                 // Export content preview for iPad
@@ -301,7 +301,7 @@ struct FormatSelectionCard: View {
                     Text(format.description)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                        .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true) // allow wrapping without truncation
                 }
                 
                 Spacer()
@@ -502,3 +502,4 @@ class PDFShareItem: NSObject, UIActivityItemSource {
         return "com.adobe.pdf"
     }
 }
+
