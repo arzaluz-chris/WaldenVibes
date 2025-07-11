@@ -82,6 +82,12 @@ struct StressView: View {
         .sheet(isPresented: $showingTips) {
             StressTipsView()
         }
+        // Ensure the top bar has an opaque background while scrolling
+        .toolbarBackground(Color(.systemBackground), for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+        // Ensure the top bar has an opaque background while scrolling
+        .toolbarBackground(Color(.systemBackground), for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
     }
     
     // MARK: - Empty State View
@@ -132,3 +138,4 @@ struct StressView: View {
         }
     }
 }
+
