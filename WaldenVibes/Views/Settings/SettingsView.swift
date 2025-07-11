@@ -5,7 +5,7 @@ import UserNotifications
 struct SettingsView: View {
     @EnvironmentObject var dataManager: DataManager
     @AppStorage("selectedTheme") private var selectedTheme = "system"
-    @AppStorage("appLanguage") private var appLanguage = "es"
+    // Removed appLanguage setting to prevent in-app language changes
     @AppStorage("notificationsEnabled") private var notificationsEnabled = false
     @AppStorage("notificationTime") private var notificationTime = Date()
     
@@ -24,13 +24,6 @@ struct SettingsView: View {
                         .tag("light")
                     Label("Dark", systemImage: "moon.fill")
                         .tag("dark")
-                }
-                
-                Picker("Language", selection: $appLanguage) {
-                    Text("Español")
-                        .tag("es")
-                    Text("English")
-                        .tag("en")
                 }
             } header: {
                 Text("Appearance", comment: "Settings section header")
@@ -183,3 +176,4 @@ struct SettingsView: View {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
 }
+

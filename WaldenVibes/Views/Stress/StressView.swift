@@ -1,4 +1,4 @@
-// WaldenVibes/Views/Stress/StressView.swift (CORREGIDO)
+// WaldenVibes/Views/Stress/StressView.swift
 import SwiftUI
 
 struct StressView: View {
@@ -37,13 +37,6 @@ struct StressView: View {
         .navigationTitle("Stress")
         .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: { showingTips = true }) {
-                    Image(systemName: "lightbulb.fill")
-                        .foregroundColor(.yellow)
-                }
-            }
-            
             ToolbarItem(placement: .navigationBarTrailing) {
                 Menu {
                     Button(action: {
@@ -85,9 +78,7 @@ struct StressView: View {
         // Ensure the top bar has an opaque background while scrolling
         .toolbarBackground(Color(.systemBackground), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
-        // Ensure the top bar has an opaque background while scrolling
-        .toolbarBackground(Color(.systemBackground), for: .navigationBar)
-        .toolbarBackground(.visible, for: .navigationBar)
+        // (Duplicate toolbarBackground calls removed)
     }
     
     // MARK: - Empty State View

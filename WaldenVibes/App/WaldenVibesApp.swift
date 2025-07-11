@@ -8,7 +8,7 @@ struct WaldenVibesApp: App {
     @StateObject private var dataManager = DataManager.shared
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @AppStorage("selectedTheme") private var selectedTheme = "system"
-    @AppStorage("appLanguage") private var appLanguage = "es"
+    // Removed in-app language setting to rely on system settings
     @State private var isShowingSplash = true
     @State private var refreshID = UUID() // Add this to force UI refresh
     
@@ -31,20 +31,15 @@ struct WaldenVibesApp: App {
                 } else if hasSeenOnboarding {
                     ContentView()
                         .environmentObject(dataManager)
-                        .environment(\.locale, Locale(identifier: appLanguage))
                         .preferredColorScheme(colorScheme)
-                        .id(refreshID) // Force refresh when language changes
+                        .id(refreshID) // Force refresh when needed
                 } else {
                     OnboardingView(hasSeenOnboarding: $hasSeenOnboarding)
-                        .environment(\.locale, Locale(identifier: appLanguage))
                         .preferredColorScheme(colorScheme)
-                        .id(refreshID) // Force refresh when language changes
+                        .id(refreshID) // Force refresh when needed
                 }
             }
-            .onChange(of: appLanguage) { _, _ in
-                // Force UI refresh when language changes
-                refreshID = UUID()
-            }
+            // Removed `.onChange(of: appLanguage)` to eliminate in-app language switching
         }
     }
     
@@ -105,3 +100,4 @@ struct WaldenVibesApp: App {
         }
     }
 }
+

@@ -47,6 +47,8 @@ struct StressTestView: View {
                 }
             }
             .navigationTitle("Stress Assessment")
+            .toolbarBackground(Color(.systemBackground), for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
         }
     }
     
@@ -188,6 +190,8 @@ struct StressTestView: View {
                                         option: option,
                                         isSelected: testManager.selectedAnswer == option.value,
                                         action: {
+                                            let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+                                            impactFeedback.impactOccurred()
                                             testManager.answerQuestion(questionId: question.id, value: option.value)
                                         }
                                     )
@@ -206,7 +210,11 @@ struct StressTestView: View {
             VStack(spacing: 16) {
                 HStack(spacing: 16) {
                     if testManager.currentQuestionIndex > 0 {
-                        Button(action: testManager.previousQuestion) {
+                        Button(action: {
+                            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                            impactFeedback.impactOccurred()
+                            testManager.previousQuestion()
+                        }) {
                             HStack {
                                 Image(systemName: "chevron.left")
                                 Text("Previous", comment: "Previous question button")
@@ -222,7 +230,11 @@ struct StressTestView: View {
                         }
                     }
                     
-                    Button(action: testManager.nextQuestion) {
+                    Button(action: {
+                        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                        impactFeedback.impactOccurred()
+                        testManager.nextQuestion()
+                    }) {
                         HStack {
                             Text(testManager.currentQuestionIndex == testManager.questions.count - 1 ?
                                  LocalizedStringKey("Finish") : LocalizedStringKey("Next"))
@@ -321,7 +333,7 @@ struct StressTestView: View {
                         
                         ForEach(StressCategory.allCases, id: \.self) { category in
                             if let score = result.categoryScoresEnum[category] {
-                                CategoryScoreView(category: category, score: score, maxScore: 12) // 4 questions * 3 max points
+                                CategoryScoreView(category: category, score: score, maxScore: 12)
                             }
                         }
                     }
@@ -389,7 +401,7 @@ struct StressTestView: View {
             case .physical:
                 triggers.append(.health)
             case .emotional:
-                triggers.append(.other) // Could be expanded with more specific emotional triggers
+                triggers.append(.other)
             case .behavioral:
                 triggers.append(.environment)
             case .cognitive:
@@ -419,6 +431,7 @@ struct StressTestView: View {
 }
 
 // MARK: - Supporting Views
+
 struct InfoCard: View {
     let icon: String
     let title: LocalizedStringKey
@@ -458,7 +471,11 @@ struct OptionButton: View {
     let action: () -> Void
     
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+            impactFeedback.impactOccurred()
+            action()
+        }) {
             HStack {
                 Text(option.text)
                     .font(.body)
@@ -527,3 +544,4 @@ struct CategoryScoreView: View {
         .padding(.horizontal)
     }
 }
+
