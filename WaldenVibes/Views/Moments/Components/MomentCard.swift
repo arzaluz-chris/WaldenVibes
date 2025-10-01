@@ -6,71 +6,152 @@ struct MomentCard: View {
     @State private var isExpanded = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            // Header
-            HStack {
-                // Category Icon with gradient background
-                ZStack {
-                    LinearGradient(
-                        colors: [moment.category.color, moment.category.color.opacity(0.7)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(15)
-                    
-                    Image(systemName: moment.category.icon)
-                        .font(.title2)
-                        .foregroundColor(.white)
-                }
-                
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(moment.category.localizedName)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    
-                    HStack {
-                        Text(moment.date, style: .time)
-                            .font(.subheadline)
-                            .fontWeight(.medium)
-                        
-                        Text("•")
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            VStack(alignment: .leading, spacing: 12) {
+                // Header
+                HStack {
+                    // Category Icon with gradient background
+                    ZStack {
+                        LinearGradient(
+                            colors: [moment.category.color, moment.category.color.opacity(0.7)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                        .frame(width: 50, height: 50)
+                        .cornerRadius(15)
+                        .shadow(color: moment.category.color.opacity(0.4), radius: 8, y: 4)
+
+                        Image(systemName: moment.category.icon)
+                            .font(.title2)
+                            .foregroundColor(.white)
+                    }
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(moment.category.localizedName)
+                            .font(.caption)
                             .foregroundColor(.secondary)
-                        
-                        HStack(spacing: 4) {
-                            Image(systemName: "clock")
-                                .font(.caption2)
-                            Text(moment.formattedDuration)
-                                .font(.caption)
+
+                        HStack {
+                            Text(moment.date, style: .time)
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+
+                            Text("•")
+                                .foregroundColor(.secondary)
+
+                            HStack(spacing: 4) {
+                                Image(systemName: "clock")
+                                    .font(.caption2)
+                                Text(moment.formattedDuration)
+                                    .font(.caption)
+                            }
+                            .foregroundColor(.secondary)
                         }
-                        .foregroundColor(.secondary)
+                    }
+
+                    Spacer()
+                }
+
+                // Description
+                Text(moment.description)
+                    .font(.body)
+                    .foregroundColor(.primary)
+                    .lineLimit(isExpanded ? nil : 3)
+                    .animation(.easeInOut, value: isExpanded)
+
+                if moment.description.count > 100 {
+                    Button(action: { isExpanded.toggle() }) {
+                        Text(isExpanded ? "Show less" : "Show more")
+                            .font(.caption)
+                            .foregroundColor(Color("AccentColor"))
                     }
                 }
-                
-                Spacer()
             }
-            
-            // Description
-            Text(moment.description)
-                .font(.body)
-                .foregroundColor(.primary)
-                .lineLimit(isExpanded ? nil : 3)
-                .animation(.easeInOut, value: isExpanded)
-            
-            if moment.description.count > 100 {
-                Button(action: { isExpanded.toggle() }) {
-                    Text(isExpanded ? "Show less" : "Show more")
-                        .font(.caption)
-                        .foregroundColor(Color("AccentColor"))
+            .padding()
+            .background(.regularMaterial)
+            .cornerRadius(20)
+            .shadow(color: .black.opacity(0.08), radius: 10, y: 5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(
+                        LinearGradient(
+                            colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: 1
+                    )
+            )
+            .padding(.horizontal)
+        } else {
+            // MARK: - iOS 18 Design
+            VStack(alignment: .leading, spacing: 12) {
+                // Header
+                HStack {
+                    // Category Icon with gradient background
+                    ZStack {
+                        LinearGradient(
+                            colors: [moment.category.color, moment.category.color.opacity(0.7)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                        .frame(width: 50, height: 50)
+                        .cornerRadius(15)
+
+                        Image(systemName: moment.category.icon)
+                            .font(.title2)
+                            .foregroundColor(.white)
+                    }
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(moment.category.localizedName)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+
+                        HStack {
+                            Text(moment.date, style: .time)
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+
+                            Text("•")
+                                .foregroundColor(.secondary)
+
+                            HStack(spacing: 4) {
+                                Image(systemName: "clock")
+                                    .font(.caption2)
+                                Text(moment.formattedDuration)
+                                    .font(.caption)
+                            }
+                            .foregroundColor(.secondary)
+                        }
+                    }
+
+                    Spacer()
+                }
+
+                // Description
+                Text(moment.description)
+                    .font(.body)
+                    .foregroundColor(.primary)
+                    .lineLimit(isExpanded ? nil : 3)
+                    .animation(.easeInOut, value: isExpanded)
+
+                if moment.description.count > 100 {
+                    Button(action: { isExpanded.toggle() }) {
+                        Text(isExpanded ? "Show less" : "Show more")
+                            .font(.caption)
+                            .foregroundColor(Color("AccentColor"))
+                    }
                 }
             }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color(UIColor.secondarySystemBackground))
+                    .shadow(color: moment.category.color.opacity(0.1), radius: 5, x: 0, y: 2)
+            )
+            .padding(.horizontal)
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color(UIColor.secondarySystemBackground))
-                .shadow(color: moment.category.color.opacity(0.1), radius: 5, x: 0, y: 2)
-        )
-        .padding(.horizontal)
     }
 }

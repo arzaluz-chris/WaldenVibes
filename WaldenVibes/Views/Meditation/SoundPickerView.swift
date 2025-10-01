@@ -11,82 +11,183 @@ struct SoundPickerView: View {
     @State private var isAnimating = false
     
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(MeditationView.MeditationSound.allCases, id: \.self) { sound in
-                    HStack {
-                        Image(systemName: sound.icon)
-                            .font(.title2)
-                            .foregroundColor(Color("AccentColor"))
-                            .frame(width: 40)
-                        
-                        VStack(alignment: .leading) {
-                            Text(sound.displayName)
-                                .font(.body)
-                        }
-                        
-                        Spacer()
-                        
-                        // Preview button with animation
-                        if sound != .none {
-                            Button(action: {
-                                if currentlyPreviewing == sound {
-                                    stopPreview()
-                                } else {
-                                    previewSound(sound)
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            NavigationView {
+                ZStack {
+                    // Animated glass background
+                    AnimatedGlassBackground(color: Color("AccentColor"))
+
+                    List {
+                        ForEach(MeditationView.MeditationSound.allCases, id: \.self) { sound in
+                            HStack {
+                                Image(systemName: sound.icon)
+                                    .font(.title2)
+                                    .foregroundColor(Color("AccentColor"))
+                                    .frame(width: 40)
+
+                                VStack(alignment: .leading) {
+                                    Text(sound.displayName)
+                                        .font(.body)
                                 }
-                            }) {
-                                ZStack {
-                                    // Background circle for animation
-                                    if currentlyPreviewing == sound {
-                                        Circle()
-                                            .stroke(Color.blue.opacity(0.3), lineWidth: 2)
-                                            .frame(width: 35, height: 35)
-                                            .scaleEffect(isAnimating ? 1.2 : 1.0)
-                                            .opacity(isAnimating ? 0 : 1)
-                                            .animation(
-                                                Animation.easeInOut(duration: 1.5)
-                                                    .repeatForever(autoreverses: false),
-                                                value: isAnimating
-                                            )
+
+                                Spacer()
+
+                                // Preview button with animation
+                                if sound != .none {
+                                    Button(action: {
+                                        if currentlyPreviewing == sound {
+                                            stopPreview()
+                                        } else {
+                                            previewSound(sound)
+                                        }
+                                    }) {
+                                        ZStack {
+                                            // Background circle for animation
+                                            if currentlyPreviewing == sound {
+                                                Circle()
+                                                    .stroke(Color.blue.opacity(0.3), lineWidth: 2)
+                                                    .frame(width: 35, height: 35)
+                                                    .scaleEffect(isAnimating ? 1.2 : 1.0)
+                                                    .opacity(isAnimating ? 0 : 1)
+                                                    .animation(
+                                                        Animation.easeInOut(duration: 1.5)
+                                                            .repeatForever(autoreverses: false),
+                                                        value: isAnimating
+                                                    )
+                                            }
+
+                                            Image(systemName: currentlyPreviewing == sound ? "stop.circle.fill" : "play.circle.fill")
+                                                .font(.title2)
+                                                .foregroundColor(.blue)
+                                        }
                                     }
-                                    
-                                    Image(systemName: currentlyPreviewing == sound ? "stop.circle.fill" : "play.circle.fill")
-                                        .font(.title2)
-                                        .foregroundColor(.blue)
+                                    .buttonStyle(BorderlessButtonStyle())
+                                }
+
+                                if selectedSound == sound {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(Color("AccentColor"))
+                                        .fontWeight(.semibold)
                                 }
                             }
-                            .buttonStyle(BorderlessButtonStyle())
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                selectedSound = sound
+                                stopPreview()
+                                dismiss()
+                            }
+                            .listRowBackground(
+                                Color.clear
+                                    .background(.thinMaterial)
+                                    .cornerRadius(12)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(LinearGradient(
+                                                colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            ), lineWidth: 0.5)
+                                    )
+                            )
                         }
-                        
-                        if selectedSound == sound {
-                            Image(systemName: "checkmark")
+                    }
+                    .scrollContentBackground(.hidden)
+                    .listStyle(InsetGroupedListStyle())
+                    .navigationTitle("Select Sound")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Done") {
+                                stopPreview()
+                                dismiss()
+                            }
+                        }
+                    }
+                }
+            }
+            .onDisappear {
+                stopPreview()
+            }
+        } else {
+            // MARK: - iOS 18 Design
+            NavigationView {
+                List {
+                    ForEach(MeditationView.MeditationSound.allCases, id: \.self) { sound in
+                        HStack {
+                            Image(systemName: sound.icon)
+                                .font(.title2)
                                 .foregroundColor(Color("AccentColor"))
-                                .fontWeight(.semibold)
+                                .frame(width: 40)
+
+                            VStack(alignment: .leading) {
+                                Text(sound.displayName)
+                                    .font(.body)
+                            }
+
+                            Spacer()
+
+                            // Preview button with animation
+                            if sound != .none {
+                                Button(action: {
+                                    if currentlyPreviewing == sound {
+                                        stopPreview()
+                                    } else {
+                                        previewSound(sound)
+                                    }
+                                }) {
+                                    ZStack {
+                                        // Background circle for animation
+                                        if currentlyPreviewing == sound {
+                                            Circle()
+                                                .stroke(Color.blue.opacity(0.3), lineWidth: 2)
+                                                .frame(width: 35, height: 35)
+                                                .scaleEffect(isAnimating ? 1.2 : 1.0)
+                                                .opacity(isAnimating ? 0 : 1)
+                                                .animation(
+                                                    Animation.easeInOut(duration: 1.5)
+                                                        .repeatForever(autoreverses: false),
+                                                    value: isAnimating
+                                                )
+                                        }
+
+                                        Image(systemName: currentlyPreviewing == sound ? "stop.circle.fill" : "play.circle.fill")
+                                            .font(.title2)
+                                            .foregroundColor(.blue)
+                                    }
+                                }
+                                .buttonStyle(BorderlessButtonStyle())
+                            }
+
+                            if selectedSound == sound {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(Color("AccentColor"))
+                                    .fontWeight(.semibold)
+                            }
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            selectedSound = sound
+                            stopPreview()
+                            dismiss()
                         }
                     }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        selectedSound = sound
-                        stopPreview()
-                        dismiss()
+                }
+                .listStyle(InsetGroupedListStyle())
+                .navigationTitle("Select Sound")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Done") {
+                            stopPreview()
+                            dismiss()
+                        }
                     }
                 }
             }
-            .listStyle(InsetGroupedListStyle())
-            .navigationTitle("Select Sound")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
-                        stopPreview()
-                        dismiss()
-                    }
-                }
+            .onDisappear {
+                stopPreview()
             }
-        }
-        .onDisappear {
-            stopPreview()
         }
     }
     

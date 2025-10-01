@@ -7,75 +7,150 @@ struct StatisticsView: View {
     @State private var selectedPeriod: TimePeriod = .week
     @State private var showingExport = false
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    
+
     var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                // Period Selector
-                Picker("Period", selection: $selectedPeriod) {
-                    ForEach(TimePeriod.allCases, id: \.self) { period in
-                        Text(period.localizedName)
-                            .tag(period)
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            ZStack {
+                AnimatedGlassBackground(color: .blue)
+
+                ScrollView {
+                    VStack(spacing: 24) {
+                        // Period Selector
+                        Picker("Period", selection: $selectedPeriod) {
+                            ForEach(TimePeriod.allCases, id: \.self) { period in
+                                Text(period.localizedName)
+                                    .tag(period)
+                            }
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                        .padding(.horizontal)
+                        .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
+
+                        // Summary Cards
+                        if horizontalSizeClass == .regular {
+                            // iPad: 4 columns
+                            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 16) {
+                                summaryCardsContent
+                            }
+                            .padding(.horizontal)
+                            .frame(maxWidth: 1000)
+                        } else {
+                            // iPhone: 2 columns
+                            SummaryCards(period: selectedPeriod)
+                        }
+
+                        // Charts in adaptive grid for iPad
+                        if horizontalSizeClass == .regular {
+                            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 24) {
+                                EmotionFrequencyChart(period: selectedPeriod)
+                                    .frame(minHeight: 300)
+
+                                StressTrendChart(period: selectedPeriod)
+                                    .frame(minHeight: 300)
+
+                                EmotionIntensityChart(period: selectedPeriod)
+                                    .frame(minHeight: 300)
+
+                                InsightsSection(period: selectedPeriod)
+                                    .frame(minHeight: 300)
+                            }
+                            .padding(.horizontal)
+                            .frame(maxWidth: 1200)
+                        } else {
+                            // iPhone: Vertical stack
+                            EmotionFrequencyChart(period: selectedPeriod)
+                            StressTrendChart(period: selectedPeriod)
+                            EmotionIntensityChart(period: selectedPeriod)
+                            InsightsSection(period: selectedPeriod)
+                        }
+                    }
+                    .padding(.vertical)
+                    .frame(maxWidth: .infinity)
+                }
+            }
+            .navigationTitle("Statistics")
+            .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { showingExport = true }) {
+                        Image(systemName: "square.and.arrow.up")
                     }
                 }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding(.horizontal)
-                .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
-                
-                // Summary Cards
-                if horizontalSizeClass == .regular {
-                    // iPad: 4 columns
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 16) {
-                        summaryCardsContent
+            }
+            .sheet(isPresented: $showingExport) {
+                ExportView()
+            }
+        } else {
+            // MARK: - iOS 18 Design
+            ScrollView {
+                VStack(spacing: 24) {
+                    // Period Selector
+                    Picker("Period", selection: $selectedPeriod) {
+                        ForEach(TimePeriod.allCases, id: \.self) { period in
+                            Text(period.localizedName)
+                                .tag(period)
+                        }
                     }
+                    .pickerStyle(SegmentedPickerStyle())
                     .padding(.horizontal)
-                    .frame(maxWidth: 1000)
-                } else {
-                    // iPhone: 2 columns
-                    SummaryCards(period: selectedPeriod)
-                }
-                
-                // Charts in adaptive grid for iPad
-                if horizontalSizeClass == .regular {
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 24) {
+                    .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
+
+                    // Summary Cards
+                    if horizontalSizeClass == .regular {
+                        // iPad: 4 columns
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 16) {
+                            summaryCardsContent
+                        }
+                        .padding(.horizontal)
+                        .frame(maxWidth: 1000)
+                    } else {
+                        // iPhone: 2 columns
+                        SummaryCards(period: selectedPeriod)
+                    }
+
+                    // Charts in adaptive grid for iPad
+                    if horizontalSizeClass == .regular {
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 24) {
+                            EmotionFrequencyChart(period: selectedPeriod)
+                                .frame(minHeight: 300)
+
+                            StressTrendChart(period: selectedPeriod)
+                                .frame(minHeight: 300)
+
+                            EmotionIntensityChart(period: selectedPeriod)
+                                .frame(minHeight: 300)
+
+                            InsightsSection(period: selectedPeriod)
+                                .frame(minHeight: 300)
+                        }
+                        .padding(.horizontal)
+                        .frame(maxWidth: 1200)
+                    } else {
+                        // iPhone: Vertical stack
                         EmotionFrequencyChart(period: selectedPeriod)
-                            .frame(minHeight: 300)
-                        
                         StressTrendChart(period: selectedPeriod)
-                            .frame(minHeight: 300)
-                        
                         EmotionIntensityChart(period: selectedPeriod)
-                            .frame(minHeight: 300)
-                        
                         InsightsSection(period: selectedPeriod)
-                            .frame(minHeight: 300)
                     }
-                    .padding(.horizontal)
-                    .frame(maxWidth: 1200)
-                } else {
-                    // iPhone: Vertical stack
-                    EmotionFrequencyChart(period: selectedPeriod)
-                    StressTrendChart(period: selectedPeriod)
-                    EmotionIntensityChart(period: selectedPeriod)
-                    InsightsSection(period: selectedPeriod)
+                }
+                .padding(.vertical)
+                .frame(maxWidth: .infinity)
+            }
+            .navigationTitle("Statistics")
+            .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarBackground(Color(UIColor.systemBackground), for: .navigationBar)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { showingExport = true }) {
+                        Image(systemName: "square.and.arrow.up")
+                    }
                 }
             }
-            .padding(.vertical)
-            .frame(maxWidth: .infinity)
-        }
-        .navigationTitle("Statistics")
-        .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
-        .toolbarBackground(.visible, for: .navigationBar)
-        .toolbarBackground(Color(UIColor.systemBackground), for: .navigationBar)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { showingExport = true }) {
-                    Image(systemName: "square.and.arrow.up")
-                }
+            .sheet(isPresented: $showingExport) {
+                ExportView()
             }
-        }
-        .sheet(isPresented: $showingExport) {
-            ExportView()
         }
     }
     

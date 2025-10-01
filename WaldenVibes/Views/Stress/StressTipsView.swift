@@ -5,33 +5,80 @@ struct StressTipsView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        NavigationView {
-            List(StressTip.tips) { tip in
-                VStack(alignment: .leading, spacing: 12) {
-                    HStack {
-                        Image(systemName: tip.icon)
-                            .font(.title2)
-                            .foregroundColor(Color("AccentColor"))
-                            .frame(width: 40)
-                        
-                        Text(tip.title)
-                            .font(.headline)
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            NavigationView {
+                ZStack {
+                    // Animated glass background
+                    AnimatedGlassBackground(color: Color("AccentColor"))
+
+                    List(StressTip.tips) { tip in
+                        VStack(alignment: .leading, spacing: 12) {
+                            HStack {
+                                Image(systemName: tip.icon)
+                                    .font(.title2)
+                                    .foregroundColor(Color("AccentColor"))
+                                    .frame(width: 40)
+
+                                Text(tip.title)
+                                    .font(.headline)
+                            }
+
+                            Text(tip.description)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        .padding(.vertical, 8)
+                        .listRowBackground(
+                            Color.clear
+                                .background(.thinMaterial)
+                                .cornerRadius(12)
+                        )
                     }
-                    
-                    Text(tip.description)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
+                    .listStyle(InsetGroupedListStyle())
+                    .scrollContentBackground(.hidden)
                 }
-                .padding(.vertical, 8)
+                .navigationTitle("Stress Relief Tips")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Done") {
+                            dismiss()
+                        }
+                    }
+                }
             }
-            .listStyle(InsetGroupedListStyle())
-            .navigationTitle("Stress Relief Tips")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
-                        dismiss()
+        } else {
+            // MARK: - iOS 18 Design
+            NavigationView {
+                List(StressTip.tips) { tip in
+                    VStack(alignment: .leading, spacing: 12) {
+                        HStack {
+                            Image(systemName: tip.icon)
+                                .font(.title2)
+                                .foregroundColor(Color("AccentColor"))
+                                .frame(width: 40)
+
+                            Text(tip.title)
+                                .font(.headline)
+                        }
+
+                        Text(tip.description)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .padding(.vertical, 8)
+                }
+                .listStyle(InsetGroupedListStyle())
+                .navigationTitle("Stress Relief Tips")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Done") {
+                            dismiss()
+                        }
                     }
                 }
             }

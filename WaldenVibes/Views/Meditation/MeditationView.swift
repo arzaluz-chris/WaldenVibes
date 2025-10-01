@@ -51,73 +51,146 @@ struct MeditationView: View {
     }
     
     var body: some View {
-        ZStack {
-            // Background
-            backgroundView
-            
-            GeometryReader { geometry in
-                VStack(spacing: 30) {
-                    // Add spacer to push content down
-                    Spacer()
-                        .frame(height: geometry.size.height * 0.1) // 10% of screen height
-                    
-                    // Title centered in available space
-                    Text("Time to Meditate", comment: "Meditation screen title")
-                        .font(horizontalSizeClass == .regular ? .system(size: 48, weight: .light) : .largeTitle)
-                        .fontWeight(.light)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                    
-                    Spacer()
-                        .frame(height: 20)
-                    
-                    // Timer Circle - centered vertically
-                    timerCircleView
-                    
-                    Spacer()
-                        .frame(height: 30)
-                    
-                    // Control buttons
-                    controlButtonsView
-                    
-                    // Bottom spacer
-                    Spacer()
-                        .frame(height: geometry.size.height * 0.15) // 15% of screen height
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            ZStack {
+                // Animated glass background
+                AnimatedGlassBackground(color: Color("AccentColor"))
+
+                GeometryReader { geometry in
+                    VStack(spacing: 30) {
+                        // Add spacer to push content down
+                        Spacer()
+                            .frame(height: geometry.size.height * 0.1) // 10% of screen height
+
+                        // Title centered in available space
+                        Text("Time to Meditate", comment: "Meditation screen title")
+                            .font(horizontalSizeClass == .regular ? .system(size: 48, weight: .light) : .largeTitle)
+                            .fontWeight(.light)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
+
+                        Spacer()
+                            .frame(height: 20)
+
+                        // Timer Circle - centered vertically
+                        timerCircleView
+
+                        Spacer()
+                            .frame(height: 30)
+
+                        // Control buttons
+                        controlButtonsView
+
+                        // Bottom spacer
+                        Spacer()
+                            .frame(height: geometry.size.height * 0.15) // 15% of screen height
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-        }
-        .navigationTitle("")
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackgroundHidden()
-        .sheet(isPresented: $showingDurationPicker) {
-            DurationPickerView(selectedDuration: $meditationManager.selectedDuration)
-        }
-        .sheet(isPresented: $showingSoundPicker) {
-            SoundPickerView(selectedSound: Binding(
-                get: { selectedSound },
-                set: { newValue in selectedSoundRawValue = newValue.rawValue }
-            ))
-        }
-        .onAppear {
-            setupBackgroundAudio()
-        }
-        .onChange(of: meditationManager.isActive) { _, isActive in
-            if isActive {
-                withAnimation(.easeInOut(duration: 1)) {
-                    animateCircle = true
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .sheet(isPresented: $showingDurationPicker) {
+                DurationPickerView(selectedDuration: $meditationManager.selectedDuration)
+            }
+            .sheet(isPresented: $showingSoundPicker) {
+                SoundPickerView(selectedSound: Binding(
+                    get: { selectedSound },
+                    set: { newValue in selectedSoundRawValue = newValue.rawValue }
+                ))
+            }
+            .onAppear {
+                setupBackgroundAudio()
+            }
+            .onChange(of: meditationManager.isActive) { _, isActive in
+                if isActive {
+                    withAnimation(.easeInOut(duration: 1)) {
+                        animateCircle = true
+                    }
+                    playMeditationSound()
+                } else {
+                    animateCircle = false
+                    stopMeditationSound()
                 }
-                playMeditationSound()
-            } else {
-                animateCircle = false
-                stopMeditationSound()
             }
-        }
-        .onChange(of: meditationManager.isPaused) { _, isPaused in
-            if isPaused {
-                pauseMeditationSound()
-            } else if meditationManager.isActive {
-                resumeMeditationSound()
+            .onChange(of: meditationManager.isPaused) { _, isPaused in
+                if isPaused {
+                    pauseMeditationSound()
+                } else if meditationManager.isActive {
+                    resumeMeditationSound()
+                }
+            }
+        } else {
+            // MARK: - iOS 18 Design
+            ZStack {
+                // Background
+                backgroundView
+
+                GeometryReader { geometry in
+                    VStack(spacing: 30) {
+                        // Add spacer to push content down
+                        Spacer()
+                            .frame(height: geometry.size.height * 0.1) // 10% of screen height
+
+                        // Title centered in available space
+                        Text("Time to Meditate", comment: "Meditation screen title")
+                            .font(horizontalSizeClass == .regular ? .system(size: 48, weight: .light) : .largeTitle)
+                            .fontWeight(.light)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
+
+                        Spacer()
+                            .frame(height: 20)
+
+                        // Timer Circle - centered vertically
+                        timerCircleView
+
+                        Spacer()
+                            .frame(height: 30)
+
+                        // Control buttons
+                        controlButtonsView
+
+                        // Bottom spacer
+                        Spacer()
+                            .frame(height: geometry.size.height * 0.15) // 15% of screen height
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+            }
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackgroundHidden()
+            .sheet(isPresented: $showingDurationPicker) {
+                DurationPickerView(selectedDuration: $meditationManager.selectedDuration)
+            }
+            .sheet(isPresented: $showingSoundPicker) {
+                SoundPickerView(selectedSound: Binding(
+                    get: { selectedSound },
+                    set: { newValue in selectedSoundRawValue = newValue.rawValue }
+                ))
+            }
+            .onAppear {
+                setupBackgroundAudio()
+            }
+            .onChange(of: meditationManager.isActive) { _, isActive in
+                if isActive {
+                    withAnimation(.easeInOut(duration: 1)) {
+                        animateCircle = true
+                    }
+                    playMeditationSound()
+                } else {
+                    animateCircle = false
+                    stopMeditationSound()
+                }
+            }
+            .onChange(of: meditationManager.isPaused) { _, isPaused in
+                if isPaused {
+                    pauseMeditationSound()
+                } else if meditationManager.isActive {
+                    resumeMeditationSound()
+                }
             }
         }
     }
@@ -222,33 +295,93 @@ struct MeditationView: View {
     }
     
     private var timeDisplayView: some View {
-        VStack(spacing: 8) {
-            Text(meditationManager.formattedTime(from: meditationManager.timeRemaining))
-                .font(.system(size: horizontalSizeClass == .regular ? 64 : 48, weight: .light, design: .rounded))
-                .foregroundColor(.primary)
-            
-            if !meditationManager.isActive {
-                VStack(spacing: 12) {
-                    Button(action: { showingDurationPicker = true }) {
-                        HStack(spacing: 4) {
-                            Text(meditationManager.durationString(for: meditationManager.selectedDuration))
-                                .font(.subheadline)
-                            Image(systemName: "chevron.down")
-                                .font(.caption)
+        if #available(iOS 26.0, *) {
+            VStack(spacing: 8) {
+                Text(meditationManager.formattedTime(from: meditationManager.timeRemaining))
+                    .font(.system(size: horizontalSizeClass == .regular ? 64 : 48, weight: .light, design: .rounded))
+                    .foregroundColor(.primary)
+
+                if !meditationManager.isActive {
+                    VStack(spacing: 12) {
+                        Button(action: { showingDurationPicker = true }) {
+                            HStack(spacing: 4) {
+                                Text(meditationManager.durationString(for: meditationManager.selectedDuration))
+                                    .font(.subheadline)
+                                Image(systemName: "chevron.down")
+                                    .font(.caption)
+                            }
+                            .foregroundColor(.primary)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(.thinMaterial)
+                            .cornerRadius(12)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(LinearGradient(
+                                        colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ), lineWidth: 0.5)
+                            )
+                            .shadow(color: .black.opacity(0.05), radius: 5, y: 2)
                         }
-                        .foregroundColor(.secondary)
+
+                        Button(action: { showingSoundPicker = true }) {
+                            HStack(spacing: 6) {
+                                Image(systemName: selectedSound.icon)
+                                    .font(.caption)
+                                Text(selectedSound.displayName)
+                                    .font(.subheadline)
+                                Image(systemName: "chevron.down")
+                                    .font(.caption)
+                            }
+                            .foregroundColor(.primary)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(.thinMaterial)
+                            .cornerRadius(12)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(LinearGradient(
+                                        colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ), lineWidth: 0.5)
+                            )
+                            .shadow(color: .black.opacity(0.05), radius: 5, y: 2)
+                        }
                     }
-                    
-                    Button(action: { showingSoundPicker = true }) {
-                        HStack(spacing: 6) {
-                            Image(systemName: selectedSound.icon)
-                                .font(.caption)
-                            Text(selectedSound.displayName)
-                                .font(.subheadline)
-                            Image(systemName: "chevron.down")
-                                .font(.caption)
+                }
+            }
+        } else {
+            VStack(spacing: 8) {
+                Text(meditationManager.formattedTime(from: meditationManager.timeRemaining))
+                    .font(.system(size: horizontalSizeClass == .regular ? 64 : 48, weight: .light, design: .rounded))
+                    .foregroundColor(.primary)
+
+                if !meditationManager.isActive {
+                    VStack(spacing: 12) {
+                        Button(action: { showingDurationPicker = true }) {
+                            HStack(spacing: 4) {
+                                Text(meditationManager.durationString(for: meditationManager.selectedDuration))
+                                    .font(.subheadline)
+                                Image(systemName: "chevron.down")
+                                    .font(.caption)
+                            }
+                            .foregroundColor(.secondary)
                         }
-                        .foregroundColor(.secondary)
+
+                        Button(action: { showingSoundPicker = true }) {
+                            HStack(spacing: 6) {
+                                Image(systemName: selectedSound.icon)
+                                    .font(.caption)
+                                Text(selectedSound.displayName)
+                                    .font(.subheadline)
+                                Image(systemName: "chevron.down")
+                                    .font(.caption)
+                            }
+                            .foregroundColor(.secondary)
+                        }
                     }
                 }
             }
@@ -256,64 +389,169 @@ struct MeditationView: View {
     }
     
     private var controlButtonsView: some View {
-        HStack(spacing: 50) {
-            if meditationManager.isActive {
-                // Stop button
-                Button(action: {
-                    // Haptic feedback for stopping meditation
-                    let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
-                    impactFeedback.impactOccurred()
-                    
-                    meditationManager.stop()
-                    stopMeditationSound()
-                }) {
-                    Image(systemName: "stop.fill")
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .frame(width: 80, height: 80)
-                        .background(Color.red.opacity(0.8))
-                        .clipShape(Circle())
-                }
-                
-                // Play/Pause button
-                Button(action: {
-                    if meditationManager.isPaused {
-                        // Haptic feedback for resuming meditation
-                        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+        if #available(iOS 26.0, *) {
+            HStack(spacing: 50) {
+                if meditationManager.isActive {
+                    // Stop button
+                    Button(action: {
+                        // Haptic feedback for stopping meditation
+                        let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
                         impactFeedback.impactOccurred()
-                        
-                        meditationManager.resume()
-                    } else {
-                        // Haptic feedback for pausing meditation
-                        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-                        impactFeedback.impactOccurred()
-                        
-                        meditationManager.pause()
+
+                        meditationManager.stop()
+                        stopMeditationSound()
+                    }) {
+                        Image(systemName: "stop.fill")
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .frame(width: 80, height: 80)
+                            .background(.regularMaterial)
+                            .clipShape(Circle())
+                            .overlay(
+                                Circle()
+                                    .stroke(LinearGradient(
+                                        colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ), lineWidth: 1)
+                            )
+                            .shadow(color: Color.red.opacity(0.3), radius: 15, x: 0, y: 5)
+                            .overlay(
+                                Image(systemName: "stop.fill")
+                                    .font(.title)
+                                    .foregroundColor(.red)
+                            )
                     }
-                }) {
-                    Image(systemName: meditationManager.isPaused ? "play.fill" : "pause.fill")
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .frame(width: 80, height: 80)
-                        .background(Color("AccentColor"))
-                        .clipShape(Circle())
+
+                    // Play/Pause button
+                    Button(action: {
+                        if meditationManager.isPaused {
+                            // Haptic feedback for resuming meditation
+                            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                            impactFeedback.impactOccurred()
+
+                            meditationManager.resume()
+                        } else {
+                            // Haptic feedback for pausing meditation
+                            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                            impactFeedback.impactOccurred()
+
+                            meditationManager.pause()
+                        }
+                    }) {
+                        Image(systemName: meditationManager.isPaused ? "play.fill" : "pause.fill")
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .frame(width: 80, height: 80)
+                            .background(.regularMaterial)
+                            .clipShape(Circle())
+                            .overlay(
+                                Circle()
+                                    .stroke(LinearGradient(
+                                        colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ), lineWidth: 1)
+                            )
+                            .shadow(color: Color("AccentColor").opacity(0.4), radius: 15, x: 0, y: 5)
+                            .overlay(
+                                Image(systemName: meditationManager.isPaused ? "play.fill" : "pause.fill")
+                                    .font(.title)
+                                    .foregroundColor(Color("AccentColor"))
+                            )
+                    }
+                } else {
+                    // Start button
+                    Button(action: {
+                        // Haptic feedback for starting meditation
+                        let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
+                        impactFeedback.impactOccurred()
+
+                        meditationManager.start()
+                    }) {
+                        Image(systemName: "play.fill")
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .frame(width: 80, height: 80)
+                            .background(.regularMaterial)
+                            .clipShape(Circle())
+                            .overlay(
+                                Circle()
+                                    .stroke(LinearGradient(
+                                        colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ), lineWidth: 1)
+                            )
+                            .shadow(color: Color("AccentColor").opacity(0.4), radius: 15, x: 0, y: 5)
+                            .overlay(
+                                Image(systemName: "play.fill")
+                                    .font(.title)
+                                    .foregroundColor(Color("AccentColor"))
+                            )
+                    }
                 }
-            } else {
-                // Start button
-                Button(action: {
-                    // Haptic feedback for starting meditation
-                    let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
-                    impactFeedback.impactOccurred()
-                    
-                    meditationManager.start()
-                }) {
-                    Image(systemName: "play.fill")
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .frame(width: 80, height: 80)
-                        .background(Color("AccentColor"))
-                        .clipShape(Circle())
-                        .shadow(color: Color("AccentColor").opacity(0.3), radius: 10, x: 0, y: 5)
+            }
+        } else {
+            HStack(spacing: 50) {
+                if meditationManager.isActive {
+                    // Stop button
+                    Button(action: {
+                        // Haptic feedback for stopping meditation
+                        let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
+                        impactFeedback.impactOccurred()
+
+                        meditationManager.stop()
+                        stopMeditationSound()
+                    }) {
+                        Image(systemName: "stop.fill")
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .frame(width: 80, height: 80)
+                            .background(Color.red.opacity(0.8))
+                            .clipShape(Circle())
+                    }
+
+                    // Play/Pause button
+                    Button(action: {
+                        if meditationManager.isPaused {
+                            // Haptic feedback for resuming meditation
+                            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                            impactFeedback.impactOccurred()
+
+                            meditationManager.resume()
+                        } else {
+                            // Haptic feedback for pausing meditation
+                            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                            impactFeedback.impactOccurred()
+
+                            meditationManager.pause()
+                        }
+                    }) {
+                        Image(systemName: meditationManager.isPaused ? "play.fill" : "pause.fill")
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .frame(width: 80, height: 80)
+                            .background(Color("AccentColor"))
+                            .clipShape(Circle())
+                    }
+                } else {
+                    // Start button
+                    Button(action: {
+                        // Haptic feedback for starting meditation
+                        let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
+                        impactFeedback.impactOccurred()
+
+                        meditationManager.start()
+                    }) {
+                        Image(systemName: "play.fill")
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .frame(width: 80, height: 80)
+                            .background(Color("AccentColor"))
+                            .clipShape(Circle())
+                            .shadow(color: Color("AccentColor").opacity(0.3), radius: 10, x: 0, y: 5)
+                    }
                 }
             }
         }

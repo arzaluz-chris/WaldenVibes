@@ -20,55 +20,131 @@ struct StressList: View {
                 }
                 
                 // Quick Actions
-                HStack(spacing: 12) {
-                    Button(action: { showingTips = true }) {
-                        HStack {
-                            Image(systemName: "lightbulb.fill")
-                                .font(.title3)
-                            
-                            VStack(alignment: .leading) {
-                                Text("Stress Relief Tips", comment: "Title for stress relief tips button")
-                                    .font(.headline)
-                                Text("Tap for quick tips", comment: "Subtitle for stress relief tips button")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
+                if #available(iOS 26.0, *) {
+                    // MARK: - iOS 26 Glassmorphism Design
+                    HStack(spacing: 12) {
+                        Button(action: { showingTips = true }) {
+                            HStack {
+                                Image(systemName: "lightbulb.fill")
+                                    .font(.title3)
+                                    .foregroundColor(Color("AccentColor"))
+
+                                VStack(alignment: .leading) {
+                                    Text("Stress Relief Tips", comment: "Title for stress relief tips button")
+                                        .font(.headline)
+                                    Text("Tap for quick tips", comment: "Subtitle for stress relief tips button")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+
+                                Spacer()
                             }
-                            
-                            Spacer()
+                            .padding()
+                            .background(.regularMaterial)
+                            .cornerRadius(16)
+                            .shadow(color: Color("AccentColor").opacity(0.2), radius: 8, y: 4)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(
+                                        LinearGradient(
+                                            colors: [Color("AccentColor").opacity(0.4), Color("AccentColor").opacity(0.1)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        ),
+                                        lineWidth: 1
+                                    )
+                            )
                         }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(Color("AccentColor").opacity(0.1))
-                        )
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    
-                    Button(action: { showingStressTest = true }) {
-                        HStack {
-                            Image(systemName: "doc.text.magnifyingglass")
-                                .font(.title3)
-                            
-                            VStack(alignment: .leading) {
-                                Text("Quick Test", comment: "Title for stress test button")
-                                    .font(.headline)
-                                Text("Assess stress level", comment: "Subtitle for stress test button")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
+                        .buttonStyle(PlainButtonStyle())
+
+                        Button(action: { showingStressTest = true }) {
+                            HStack {
+                                Image(systemName: "doc.text.magnifyingglass")
+                                    .font(.title3)
+                                    .foregroundColor(Color("StressModerate"))
+
+                                VStack(alignment: .leading) {
+                                    Text("Quick Test", comment: "Title for stress test button")
+                                        .font(.headline)
+                                    Text("Assess stress level", comment: "Subtitle for stress test button")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+
+                                Spacer()
                             }
-                            
-                            Spacer()
+                            .padding()
+                            .background(.regularMaterial)
+                            .cornerRadius(16)
+                            .shadow(color: Color("StressModerate").opacity(0.2), radius: 8, y: 4)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(
+                                        LinearGradient(
+                                            colors: [Color("StressModerate").opacity(0.4), Color("StressModerate").opacity(0.1)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        ),
+                                        lineWidth: 1
+                                    )
+                            )
                         }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(Color("StressModerate").opacity(0.1))
-                        )
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .padding(.horizontal)
+                    .frame(maxWidth: horizontalSizeClass == .regular ? 800 : .infinity)
+                } else {
+                    // MARK: - iOS 18 Design
+                    HStack(spacing: 12) {
+                        Button(action: { showingTips = true }) {
+                            HStack {
+                                Image(systemName: "lightbulb.fill")
+                                    .font(.title3)
+
+                                VStack(alignment: .leading) {
+                                    Text("Stress Relief Tips", comment: "Title for stress relief tips button")
+                                        .font(.headline)
+                                    Text("Tap for quick tips", comment: "Subtitle for stress relief tips button")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+
+                                Spacer()
+                            }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color("AccentColor").opacity(0.1))
+                            )
+                        }
+                        .buttonStyle(PlainButtonStyle())
+
+                        Button(action: { showingStressTest = true }) {
+                            HStack {
+                                Image(systemName: "doc.text.magnifyingglass")
+                                    .font(.title3)
+
+                                VStack(alignment: .leading) {
+                                    Text("Quick Test", comment: "Title for stress test button")
+                                        .font(.headline)
+                                    Text("Assess stress level", comment: "Subtitle for stress test button")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+
+                                Spacer()
+                            }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color("StressModerate").opacity(0.1))
+                            )
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
+                    .padding(.horizontal)
+                    .frame(maxWidth: horizontalSizeClass == .regular ? 800 : .infinity)
                 }
-                .padding(.horizontal)
-                .frame(maxWidth: horizontalSizeClass == .regular ? 800 : .infinity)
                 
                 // History
                 VStack(alignment: .leading, spacing: 12) {

@@ -9,132 +9,264 @@ struct StressTestView: View {
     @State private var showingIntroduction = true
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                // Background gradient
-                LinearGradient(
-                    colors: [
-                        Color("AccentColor").opacity(0.1),
-                        Color.clear
-                    ],
-                    startPoint: .top,
-                    endPoint: .center
-                )
-                .ignoresSafeArea()
-                
-                if showingIntroduction {
-                    introductionView
-                } else if testManager.isTestComplete {
-                    resultView
-                } else {
-                    testView
-                }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            NavigationView {
+                ZStack {
+                    // Animated glass background
+                    AnimatedGlassBackground(color: Color("AccentColor"))
+
+                    if showingIntroduction {
+                        introductionView
+                    } else if testManager.isTestComplete {
+                        resultView
+                    } else {
+                        testView
                     }
                 }
-                
-                if !showingIntroduction && !testManager.isTestComplete {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Text("\(testManager.currentQuestionIndex + 1)/\(testManager.questions.count)")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
+                    }
+
+                    if !showingIntroduction && !testManager.isTestComplete {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Text("\(testManager.currentQuestionIndex + 1)/\(testManager.questions.count)")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
+                .navigationTitle("Stress Assessment")
             }
-            .navigationTitle("Stress Assessment")
-            .toolbarBackground(Color(.systemBackground), for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
+        } else {
+            // MARK: - iOS 18 Design
+            NavigationView {
+                ZStack {
+                    // Background gradient
+                    LinearGradient(
+                        colors: [
+                            Color("AccentColor").opacity(0.1),
+                            Color.clear
+                        ],
+                        startPoint: .top,
+                        endPoint: .center
+                    )
+                    .ignoresSafeArea()
+
+                    if showingIntroduction {
+                        introductionView
+                    } else if testManager.isTestComplete {
+                        resultView
+                    } else {
+                        testView
+                    }
+                }
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
+                    }
+
+                    if !showingIntroduction && !testManager.isTestComplete {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Text("\(testManager.currentQuestionIndex + 1)/\(testManager.questions.count)")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+                .navigationTitle("Stress Assessment")
+                .toolbarBackground(Color(.systemBackground), for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar)
+            }
         }
     }
     
     // MARK: - Introduction View
     private var introductionView: some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                // Header
-                VStack(spacing: 16) {
-                    Image(systemName: "heart.text.square.fill")
-                        .font(.system(size: 60))
-                        .foregroundColor(Color("AccentColor"))
-                    
-                    Text("Stress Level Assessment", comment: "Stress test introduction title")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .multilineTextAlignment(.center)
-                    
-                    Text("This quick assessment will help us understand your current stress level more accurately.", comment: "Stress test introduction description")
-                        .font(.body)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                }
-                .padding(.top, 40)
-                
-                // Information cards
-                VStack(spacing: 16) {
-                    InfoCard(
-                        icon: "clock.fill",
-                        title: LocalizedStringKey("Quick & Easy"),
-                        description: LocalizedStringKey("Takes only 3-5 minutes to complete")
-                    )
-                    
-                    InfoCard(
-                        icon: "lock.shield.fill",
-                        title: LocalizedStringKey("Private & Secure"),
-                        description: LocalizedStringKey("Your answers stay on your device")
-                    )
-                    
-                    InfoCard(
-                        icon: "chart.line.uptrend.xyaxis",
-                        title: LocalizedStringKey("Personalized Results"),
-                        description: LocalizedStringKey("Get insights and recommendations based on your responses")
-                    )
-                }
-                .padding(.horizontal)
-                
-                // Instructions
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("How it works:", comment: "Instructions header")
-                        .font(.headline)
-                    
-                    Text("• Answer honestly based on how you've been feeling lately", comment: "Instruction 1")
-                    Text("• There are no right or wrong answers", comment: "Instruction 2")
-                    Text("• The assessment covers different aspects of stress", comment: "Instruction 3")
-                    Text("• You'll get a personalized stress level and tips", comment: "Instruction 4")
-                }
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color(UIColor.secondarySystemBackground))
-                )
-                .padding(.horizontal)
-                
-                // Start button
-                Button(action: {
-                    withAnimation {
-                        showingIntroduction = false
-                        testManager.startTest()
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            ScrollView {
+                VStack(spacing: 24) {
+                    // Header
+                    VStack(spacing: 16) {
+                        Image(systemName: "heart.text.square.fill")
+                            .font(.system(size: 60))
+                            .foregroundColor(Color("AccentColor"))
+
+                        Text("Stress Level Assessment", comment: "Stress test introduction title")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .multilineTextAlignment(.center)
+
+                        Text("This quick assessment will help us understand your current stress level more accurately.", comment: "Stress test introduction description")
+                            .font(.body)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
                     }
-                }) {
-                    Text("Start Assessment", comment: "Button to start stress test")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color("AccentColor"))
-                        .cornerRadius(12)
+                    .padding(.top, 40)
+
+                    // Information cards
+                    VStack(spacing: 16) {
+                        InfoCard(
+                            icon: "clock.fill",
+                            title: LocalizedStringKey("Quick & Easy"),
+                            description: LocalizedStringKey("Takes only 3-5 minutes to complete")
+                        )
+
+                        InfoCard(
+                            icon: "lock.shield.fill",
+                            title: LocalizedStringKey("Private & Secure"),
+                            description: LocalizedStringKey("Your answers stay on your device")
+                        )
+
+                        InfoCard(
+                            icon: "chart.line.uptrend.xyaxis",
+                            title: LocalizedStringKey("Personalized Results"),
+                            description: LocalizedStringKey("Get insights and recommendations based on your responses")
+                        )
+                    }
+                    .padding(.horizontal)
+
+                    // Instructions
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("How it works:", comment: "Instructions header")
+                            .font(.headline)
+
+                        Text("• Answer honestly based on how you've been feeling lately", comment: "Instruction 1")
+                        Text("• There are no right or wrong answers", comment: "Instruction 2")
+                        Text("• The assessment covers different aspects of stress", comment: "Instruction 3")
+                        Text("• You'll get a personalized stress level and tips", comment: "Instruction 4")
+                    }
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .padding()
+                    .background(.regularMaterial)
+                    .cornerRadius(16)
+                    .shadow(color: .black.opacity(0.1), radius: 10, y: 5)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(LinearGradient(
+                                colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ), lineWidth: 1)
+                    )
+                    .padding(.horizontal)
+
+                    // Start button
+                    Button(action: {
+                        withAnimation {
+                            showingIntroduction = false
+                            testManager.startTest()
+                        }
+                    }) {
+                        Text("Start Assessment", comment: "Button to start stress test")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color("AccentColor"))
+                            .cornerRadius(12)
+                            .shadow(color: Color("AccentColor").opacity(0.3), radius: 10, y: 5)
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, 20)
+
+                    Spacer(minLength: 40)
                 }
-                .padding(.horizontal)
-                .padding(.top, 20)
-                
-                Spacer(minLength: 40)
+            }
+        } else {
+            // MARK: - iOS 18 Design
+            ScrollView {
+                VStack(spacing: 24) {
+                    // Header
+                    VStack(spacing: 16) {
+                        Image(systemName: "heart.text.square.fill")
+                            .font(.system(size: 60))
+                            .foregroundColor(Color("AccentColor"))
+
+                        Text("Stress Level Assessment", comment: "Stress test introduction title")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .multilineTextAlignment(.center)
+
+                        Text("This quick assessment will help us understand your current stress level more accurately.", comment: "Stress test introduction description")
+                            .font(.body)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
+                    }
+                    .padding(.top, 40)
+
+                    // Information cards
+                    VStack(spacing: 16) {
+                        InfoCard(
+                            icon: "clock.fill",
+                            title: LocalizedStringKey("Quick & Easy"),
+                            description: LocalizedStringKey("Takes only 3-5 minutes to complete")
+                        )
+
+                        InfoCard(
+                            icon: "lock.shield.fill",
+                            title: LocalizedStringKey("Private & Secure"),
+                            description: LocalizedStringKey("Your answers stay on your device")
+                        )
+
+                        InfoCard(
+                            icon: "chart.line.uptrend.xyaxis",
+                            title: LocalizedStringKey("Personalized Results"),
+                            description: LocalizedStringKey("Get insights and recommendations based on your responses")
+                        )
+                    }
+                    .padding(.horizontal)
+
+                    // Instructions
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("How it works:", comment: "Instructions header")
+                            .font(.headline)
+
+                        Text("• Answer honestly based on how you've been feeling lately", comment: "Instruction 1")
+                        Text("• There are no right or wrong answers", comment: "Instruction 2")
+                        Text("• The assessment covers different aspects of stress", comment: "Instruction 3")
+                        Text("• You'll get a personalized stress level and tips", comment: "Instruction 4")
+                    }
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(UIColor.secondarySystemBackground))
+                    )
+                    .padding(.horizontal)
+
+                    // Start button
+                    Button(action: {
+                        withAnimation {
+                            showingIntroduction = false
+                            testManager.startTest()
+                        }
+                    }) {
+                        Text("Start Assessment", comment: "Button to start stress test")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color("AccentColor"))
+                            .cornerRadius(12)
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, 20)
+
+                    Spacer(minLength: 40)
+                }
             }
         }
     }
@@ -436,32 +568,66 @@ struct InfoCard: View {
     let icon: String
     let title: LocalizedStringKey
     let description: LocalizedStringKey
-    
+
     var body: some View {
-        HStack(spacing: 16) {
-            Image(systemName: icon)
-                .font(.title2)
-                .foregroundColor(Color("AccentColor"))
-                .frame(width: 40)
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                
-                Text(description)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
+        if #available(iOS 26.0, *) {
+            HStack(spacing: 16) {
+                Image(systemName: icon)
+                    .font(.title2)
+                    .foregroundColor(Color("AccentColor"))
+                    .frame(width: 40)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+
+                    Text(description)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer()
             }
-            
-            Spacer()
+            .padding()
+            .background(.regularMaterial)
+            .cornerRadius(12)
+            .shadow(color: .black.opacity(0.1), radius: 10, y: 5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(LinearGradient(
+                        colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ), lineWidth: 1)
+            )
+        } else {
+            HStack(spacing: 16) {
+                Image(systemName: icon)
+                    .font(.title2)
+                    .foregroundColor(Color("AccentColor"))
+                    .frame(width: 40)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+
+                    Text(description)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer()
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color(UIColor.secondarySystemBackground))
+            )
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color(UIColor.secondarySystemBackground))
-        )
     }
 }
 
@@ -469,37 +635,82 @@ struct OptionButton: View {
     let option: StressTestOption
     let isSelected: Bool
     let action: () -> Void
-    
+
     var body: some View {
-        Button(action: {
-            let impactFeedback = UIImpactFeedbackGenerator(style: .light)
-            impactFeedback.impactOccurred()
-            action()
-        }) {
-            HStack {
-                Text(option.text)
-                    .font(.body)
-                    .foregroundColor(isSelected ? .white : .primary)
-                    .multilineTextAlignment(.leading)
-                
-                Spacer()
-                
-                if isSelected {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.white)
+        if #available(iOS 26.0, *) {
+            Button(action: {
+                let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+                impactFeedback.impactOccurred()
+                action()
+            }) {
+                HStack {
+                    Text(option.text)
+                        .font(.body)
+                        .foregroundColor(isSelected ? .white : .primary)
+                        .multilineTextAlignment(.leading)
+
+                    Spacer()
+
+                    if isSelected {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.white)
+                    }
                 }
+                .padding()
+                .background(
+                    Group {
+                        if isSelected {
+                            Color("AccentColor")
+                                .cornerRadius(12)
+                                .shadow(color: Color("AccentColor").opacity(0.3), radius: 10, y: 5)
+                        } else {
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(.regularMaterial)
+                                .shadow(color: .black.opacity(0.1), radius: 10, y: 5)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(LinearGradient(
+                                            colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        ), lineWidth: 1)
+                                )
+                        }
+                    }
+                )
             }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(isSelected ? Color("AccentColor") : Color(UIColor.secondarySystemBackground))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(isSelected ? Color("AccentColor") : Color.clear, lineWidth: 2)
-                    )
-            )
+            .buttonStyle(PlainButtonStyle())
+        } else {
+            Button(action: {
+                let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+                impactFeedback.impactOccurred()
+                action()
+            }) {
+                HStack {
+                    Text(option.text)
+                        .font(.body)
+                        .foregroundColor(isSelected ? .white : .primary)
+                        .multilineTextAlignment(.leading)
+
+                    Spacer()
+
+                    if isSelected {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.white)
+                    }
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(isSelected ? Color("AccentColor") : Color(UIColor.secondarySystemBackground))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(isSelected ? Color("AccentColor") : Color.clear, lineWidth: 2)
+                        )
+                )
+            }
+            .buttonStyle(PlainButtonStyle())
         }
-        .buttonStyle(PlainButtonStyle())
     }
 }
 
@@ -507,41 +718,85 @@ struct CategoryScoreView: View {
     let category: StressCategory
     let score: Int
     let maxScore: Int
-    
+
     var body: some View {
-        VStack(spacing: 8) {
-            HStack {
-                Image(systemName: category.icon)
-                    .foregroundColor(category.color)
-                Text(category.localizedName)
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                Spacer()
-                Text("\(score)/\(maxScore)")
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .foregroundColor(category.color)
-            }
-            
-            GeometryReader { geometry in
-                ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(Color.gray.opacity(0.2))
-                        .frame(height: 8)
-                    
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(category.color)
-                        .frame(width: geometry.size.width * (Double(score) / Double(maxScore)), height: 8)
+        if #available(iOS 26.0, *) {
+            VStack(spacing: 8) {
+                HStack {
+                    Image(systemName: category.icon)
+                        .foregroundColor(category.color)
+                    Text(category.localizedName)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                    Spacer()
+                    Text("\(score)/\(maxScore)")
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundColor(category.color)
                 }
+
+                GeometryReader { geometry in
+                    ZStack(alignment: .leading) {
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Color.gray.opacity(0.2))
+                            .frame(height: 8)
+
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(category.color)
+                            .frame(width: geometry.size.width * (Double(score) / Double(maxScore)), height: 8)
+                            .shadow(color: category.color.opacity(0.5), radius: 4, y: 2)
+                    }
+                }
+                .frame(height: 8)
             }
-            .frame(height: 8)
+            .padding()
+            .background(.regularMaterial)
+            .cornerRadius(12)
+            .shadow(color: .black.opacity(0.1), radius: 10, y: 5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(LinearGradient(
+                        colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ), lineWidth: 1)
+            )
+            .padding(.horizontal)
+        } else {
+            VStack(spacing: 8) {
+                HStack {
+                    Image(systemName: category.icon)
+                        .foregroundColor(category.color)
+                    Text(category.localizedName)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                    Spacer()
+                    Text("\(score)/\(maxScore)")
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundColor(category.color)
+                }
+
+                GeometryReader { geometry in
+                    ZStack(alignment: .leading) {
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Color.gray.opacity(0.2))
+                            .frame(height: 8)
+
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(category.color)
+                            .frame(width: geometry.size.width * (Double(score) / Double(maxScore)), height: 8)
+                    }
+                }
+                .frame(height: 8)
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color(UIColor.secondarySystemBackground))
+            )
+            .padding(.horizontal)
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color(UIColor.secondarySystemBackground))
-        )
-        .padding(.horizontal)
     }
 }
 

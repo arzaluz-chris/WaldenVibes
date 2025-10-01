@@ -14,126 +14,282 @@ struct SettingsView: View {
     @State private var showingPrivacy = false
     
     var body: some View {
-        Form {
-            // Appearance Section
-            Section {
-                Picker("Theme", selection: $selectedTheme) {
-                    Label("System", systemImage: "circle.lefthalf.filled")
-                        .tag("system")
-                    Label("Light", systemImage: "sun.max.fill")
-                        .tag("light")
-                    Label("Dark", systemImage: "moon.fill")
-                        .tag("dark")
-                }
-            } header: {
-                Text("Appearance", comment: "Settings section header")
-            }
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            ZStack {
+                AnimatedGlassBackground(color: .green)
+
+                Form {
+                    // Appearance Section
+                    Section {
+                        Picker("Theme", selection: $selectedTheme) {
+                            Label("System", systemImage: "circle.lefthalf.filled")
+                                .tag("system")
+                            Label("Light", systemImage: "sun.max.fill")
+                                .tag("light")
+                            Label("Dark", systemImage: "moon.fill")
+                                .tag("dark")
+                        }
+                    } header: {
+                        Text("Appearance", comment: "Settings section header")
+                    }
+                    .listRowBackground(
+                        Color.clear
+                            .background(.thinMaterial)
+                            .cornerRadius(12)
+                    )
             
-            // Notifications Section
-            Section {
-                Toggle("Enable reminders", isOn: $notificationsEnabled)
-                    .onChange(of: notificationsEnabled) { _, newValue in
-                        if newValue {
-                            requestNotificationPermission()
-                        } else {
-                            cancelAllNotifications()
+                    // Notifications Section
+                    Section {
+                        Toggle("Enable reminders", isOn: $notificationsEnabled)
+                            .onChange(of: notificationsEnabled) { _, newValue in
+                                if newValue {
+                                    requestNotificationPermission()
+                                } else {
+                                    cancelAllNotifications()
+                                }
+                            }
+
+                        if notificationsEnabled {
+                            DatePicker(
+                                "Reminder time",
+                                selection: $notificationTime,
+                                displayedComponents: .hourAndMinute
+                            )
+                            .onChange(of: notificationTime) { _, _ in
+                                scheduleNotification()
+                            }
+                        }
+                    } header: {
+                        Text("Notifications", comment: "Settings section header")
+                    } footer: {
+                        if notificationsEnabled {
+                            Text("Receive a daily reminder to record your emotions", comment: "Settings footer text")
                         }
                     }
-                
-                if notificationsEnabled {
-                    DatePicker(
-                        "Reminder time",
-                        selection: $notificationTime,
-                        displayedComponents: .hourAndMinute
+                    .listRowBackground(
+                        Color.clear
+                            .background(.thinMaterial)
+                            .cornerRadius(12)
                     )
-                    .onChange(of: notificationTime) { _, _ in
-                        scheduleNotification()
-                    }
-                }
-            } header: {
-                Text("Notifications", comment: "Settings section header")
-            } footer: {
-                if notificationsEnabled {
-                    Text("Receive a daily reminder to record your emotions", comment: "Settings footer text")
-                }
-            }
             
-            // Data Management Section
-            Section {
-                Button(action: { showingDeleteAlert = true }) {
-                    HStack {
-                        Image(systemName: "trash")
-                            .foregroundColor(.red)
-                        Text("Clear All Data", comment: "Settings option to delete all data")
-                            .foregroundColor(.red)
+                    // Data Management Section
+                    Section {
+                        Button(action: { showingDeleteAlert = true }) {
+                            HStack {
+                                Image(systemName: "trash")
+                                    .foregroundColor(.red)
+                                Text("Clear All Data", comment: "Settings option to delete all data")
+                                    .foregroundColor(.red)
+                            }
+                        }
+
+                        NavigationLink(destination: ExportView()) {
+                            HStack {
+                                Image(systemName: "square.and.arrow.up")
+                                    .foregroundColor(Color("AccentColor"))
+                                Text("Export Data", comment: "Settings option to export data")
+                            }
+                        }
+                    } header: {
+                        Text("Data Management", comment: "Settings section header")
                     }
-                }
-                
-                NavigationLink(destination: ExportView()) {
-                    HStack {
-                        Image(systemName: "square.and.arrow.up")
-                            .foregroundColor(Color("AccentColor"))
-                        Text("Export Data", comment: "Settings option to export data")
-                    }
-                }
-            } header: {
-                Text("Data Management", comment: "Settings section header")
-            }
+                    .listRowBackground(
+                        Color.clear
+                            .background(.thinMaterial)
+                            .cornerRadius(12)
+                    )
             
-            // About Section
-            Section {
-                Button(action: { showingAbout = true }) {
+                    // About Section
+                    Section {
+                        Button(action: { showingAbout = true }) {
+                            HStack {
+                                Image(systemName: "info.circle")
+                                    .foregroundColor(Color("AccentColor"))
+                                Text("About", comment: "Settings option")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.caption)
+                                    .foregroundStyle(.tertiary)
+                            }
+                        }
+
+                        Button(action: { showingPrivacy = true }) {
+                            HStack {
+                                Image(systemName: "lock.shield")
+                                    .foregroundColor(Color("AccentColor"))
+                                Text("Privacy Policy", comment: "Settings option")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.caption)
+                                    .foregroundStyle(.tertiary)
+                            }
+                        }
+                    } header: {
+                        Text("Information", comment: "Settings section header")
+                    }
+                    .listRowBackground(
+                        Color.clear
+                            .background(.thinMaterial)
+                            .cornerRadius(12)
+                    )
+            
+                    // App Version
+                    Section {
+                        HStack {
+                            Text("Version", comment: "App version label")
+                                .foregroundColor(.secondary)
+                            Spacer()
+                            Text("1.0.0")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .listRowBackground(
+                        Color.clear
+                            .background(.thinMaterial)
+                            .cornerRadius(12)
+                    )
+                }
+                .scrollContentBackground(.hidden)
+            }
+            .navigationTitle("Settings")
+            .alert("Delete All Data?", isPresented: $showingDeleteAlert) {
+                Button("Cancel", role: .cancel) {}
+                Button("Delete", role: .destructive) {
+                    dataManager.clearAllData()
+                }
+            } message: {
+                Text("This will permanently delete all your emotions, moments, and stress records. This action cannot be undone.")
+            }
+            .sheet(isPresented: $showingAbout) {
+                AboutView()
+            }
+            .sheet(isPresented: $showingPrivacy) {
+                PrivacyView()
+            }
+        } else {
+            // MARK: - iOS 18 Design
+            Form {
+                // Appearance Section
+                Section {
+                    Picker("Theme", selection: $selectedTheme) {
+                        Label("System", systemImage: "circle.lefthalf.filled")
+                            .tag("system")
+                        Label("Light", systemImage: "sun.max.fill")
+                            .tag("light")
+                        Label("Dark", systemImage: "moon.fill")
+                            .tag("dark")
+                    }
+                } header: {
+                    Text("Appearance", comment: "Settings section header")
+                }
+
+                // Notifications Section
+                Section {
+                    Toggle("Enable reminders", isOn: $notificationsEnabled)
+                        .onChange(of: notificationsEnabled) { _, newValue in
+                            if newValue {
+                                requestNotificationPermission()
+                            } else {
+                                cancelAllNotifications()
+                            }
+                        }
+
+                    if notificationsEnabled {
+                        DatePicker(
+                            "Reminder time",
+                            selection: $notificationTime,
+                            displayedComponents: .hourAndMinute
+                        )
+                        .onChange(of: notificationTime) { _, _ in
+                            scheduleNotification()
+                        }
+                    }
+                } header: {
+                    Text("Notifications", comment: "Settings section header")
+                } footer: {
+                    if notificationsEnabled {
+                        Text("Receive a daily reminder to record your emotions", comment: "Settings footer text")
+                    }
+                }
+
+                // Data Management Section
+                Section {
+                    Button(action: { showingDeleteAlert = true }) {
+                        HStack {
+                            Image(systemName: "trash")
+                                .foregroundColor(.red)
+                            Text("Clear All Data", comment: "Settings option to delete all data")
+                                .foregroundColor(.red)
+                        }
+                    }
+
+                    NavigationLink(destination: ExportView()) {
+                        HStack {
+                            Image(systemName: "square.and.arrow.up")
+                                .foregroundColor(Color("AccentColor"))
+                            Text("Export Data", comment: "Settings option to export data")
+                        }
+                    }
+                } header: {
+                    Text("Data Management", comment: "Settings section header")
+                }
+
+                // About Section
+                Section {
+                    Button(action: { showingAbout = true }) {
+                        HStack {
+                            Image(systemName: "info.circle")
+                                .foregroundColor(Color("AccentColor"))
+                            Text("About", comment: "Settings option")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
+                        }
+                    }
+
+                    Button(action: { showingPrivacy = true }) {
+                        HStack {
+                            Image(systemName: "lock.shield")
+                                .foregroundColor(Color("AccentColor"))
+                            Text("Privacy Policy", comment: "Settings option")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
+                        }
+                    }
+                } header: {
+                    Text("Information", comment: "Settings section header")
+                }
+
+                // App Version
+                Section {
                     HStack {
-                        Image(systemName: "info.circle")
-                            .foregroundColor(Color("AccentColor"))
-                        Text("About", comment: "Settings option")
+                        Text("Version", comment: "App version label")
+                            .foregroundColor(.secondary)
                         Spacer()
-                        Image(systemName: "chevron.right")
-                            .font(.caption)
-                            .foregroundStyle(.tertiary)
+                        Text("1.0.0")
+                            .foregroundColor(.secondary)
                     }
                 }
-                
-                Button(action: { showingPrivacy = true }) {
-                    HStack {
-                        Image(systemName: "lock.shield")
-                            .foregroundColor(Color("AccentColor"))
-                        Text("Privacy Policy", comment: "Settings option")
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .font(.caption)
-                            .foregroundStyle(.tertiary)
-                    }
+            }
+            .navigationTitle("Settings")
+            .alert("Delete All Data?", isPresented: $showingDeleteAlert) {
+                Button("Cancel", role: .cancel) {}
+                Button("Delete", role: .destructive) {
+                    dataManager.clearAllData()
                 }
-            } header: {
-                Text("Information", comment: "Settings section header")
+            } message: {
+                Text("This will permanently delete all your emotions, moments, and stress records. This action cannot be undone.")
             }
-            
-            // App Version
-            Section {
-                HStack {
-                    Text("Version", comment: "App version label")
-                        .foregroundColor(.secondary)
-                    Spacer()
-                    Text("1.0.0")
-                        .foregroundColor(.secondary)
-                }
+            .sheet(isPresented: $showingAbout) {
+                AboutView()
             }
-        }
-        .navigationTitle("Settings")
-        .alert("Delete All Data?", isPresented: $showingDeleteAlert) {
-            Button("Cancel", role: .cancel) {}
-            Button("Delete", role: .destructive) {
-                dataManager.clearAllData()
+            .sheet(isPresented: $showingPrivacy) {
+                PrivacyView()
             }
-        } message: {
-            Text("This will permanently delete all your emotions, moments, and stress records. This action cannot be undone.")
-        }
-        .sheet(isPresented: $showingAbout) {
-            AboutView()
-        }
-        .sheet(isPresented: $showingPrivacy) {
-            PrivacyView()
         }
     }
     
