@@ -287,31 +287,31 @@ struct ExportView: View {
             .cornerRadius(20)
             .shadow(color: .black.opacity(0.1), radius: 10, y: 5)
             .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(
-                        Group {
-                            if #available(iOS 26.0, *) {
+                Group {
+                    if #available(iOS 26.0, *) {
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(
                                 exportFormat == format ?
-                                    LinearGradient(
-                                        colors: [Color("AccentColor").opacity(0.8), Color("AccentColor").opacity(0.3)],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    ) :
-                                    LinearGradient(
-                                        colors: [.white.opacity(0.3), .white.opacity(0.1)],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                            } else {
                                 LinearGradient(
-                                    colors: [exportFormat == format ? Color("AccentColor") : Color.clear],
+                                    colors: [Color("AccentColor").opacity(0.8), Color("AccentColor").opacity(0.3)],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
-                                )
-                            }
-                        },
-                        lineWidth: exportFormat == format ? 3 : 1
-                    )
+                                ) :
+                                LinearGradient(
+                                    colors: [.white.opacity(0.3), .white.opacity(0.1)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                ),
+                                lineWidth: exportFormat == format ? 3 : 1
+                            )
+                    } else {
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(
+                                exportFormat == format ? Color("AccentColor") : Color.clear,
+                                lineWidth: exportFormat == format ? 3 : 1
+                            )
+                    }
+                }
             )
         }
         .buttonStyle(PlainButtonStyle())
@@ -427,31 +427,31 @@ struct FormatSelectionCard: View {
             .cornerRadius(16)
             .shadow(color: .black.opacity(0.1), radius: 10, y: 5)
             .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(
-                        Group {
-                            if #available(iOS 26.0, *) {
+                Group {
+                    if #available(iOS 26.0, *) {
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(
                                 isSelected ?
-                                    LinearGradient(
-                                        colors: [Color("AccentColor").opacity(0.8), Color("AccentColor").opacity(0.3)],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    ) :
-                                    LinearGradient(
-                                        colors: [.white.opacity(0.3), .white.opacity(0.1)],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                            } else {
                                 LinearGradient(
-                                    colors: [isSelected ? Color("AccentColor") : Color.clear],
+                                    colors: [Color("AccentColor").opacity(0.8), Color("AccentColor").opacity(0.3)],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
-                                )
-                            }
-                        },
-                        lineWidth: isSelected ? 2 : 1
-                    )
+                                ) :
+                                LinearGradient(
+                                    colors: [.white.opacity(0.3), .white.opacity(0.1)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                ),
+                                lineWidth: isSelected ? 2 : 1
+                            )
+                    } else {
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(
+                                isSelected ? Color("AccentColor") : Color.clear,
+                                lineWidth: isSelected ? 2 : 1
+                            )
+                    }
+                }
             )
         }
         .buttonStyle(PlainButtonStyle())
@@ -652,4 +652,3 @@ class PDFShareItem: NSObject, UIActivityItemSource {
         return "com.adobe.pdf"
     }
 }
-

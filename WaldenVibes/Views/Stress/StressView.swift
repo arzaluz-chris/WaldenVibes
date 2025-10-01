@@ -143,6 +143,7 @@ struct StressView: View {
     }
     
     // MARK: - Empty State View
+    @ViewBuilder
     private var emptyStateView: some View {
         if #available(iOS 26.0, *) {
             // MARK: - iOS 26 Glassmorphism Design
@@ -252,4 +253,3 @@ struct StressView: View {
         }
     }
 }
-

@@ -294,6 +294,7 @@ struct MeditationView: View {
         }
     }
     
+    @ViewBuilder
     private var timeDisplayView: some View {
         if #available(iOS 26.0, *) {
             VStack(spacing: 8) {
@@ -388,6 +389,7 @@ struct MeditationView: View {
         }
     }
     
+    @ViewBuilder
     private var controlButtonsView: some View {
         if #available(iOS 26.0, *) {
             HStack(spacing: 50) {

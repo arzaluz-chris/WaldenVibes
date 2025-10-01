@@ -89,6 +89,7 @@ struct StressTestView: View {
     }
     
     // MARK: - Introduction View
+    @ViewBuilder
     private var introductionView: some View {
         if #available(iOS 26.0, *) {
             // MARK: - iOS 26 Glassmorphism Design
@@ -799,4 +800,3 @@ struct CategoryScoreView: View {
         }
     }
 }
-
