@@ -27,31 +27,67 @@ struct InsightsSection: View {
     }
     
     var body: some View {
-        if !insights.isEmpty {
-            VStack(alignment: .leading, spacing: 16) {
-                Text("Insights", comment: "Section header for insights")
-                    .font(.headline)
-                    .padding(.horizontal)
-                
-                VStack(alignment: .leading, spacing: 12) {
-                    ForEach(insights, id: \.self) { insight in
-                        HStack(alignment: .top, spacing: 12) {
-                            Image(systemName: "lightbulb.fill")
-                                .foregroundColor(.yellow)
-                                .font(.subheadline)
-                            
-                            Text(insight)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                                .fixedSize(horizontal: false, vertical: true)
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            if !insights.isEmpty {
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Insights", comment: "Section header for insights")
+                        .font(.headline)
+                        .padding([.top, .horizontal])
+                    
+                    VStack(alignment: .leading, spacing: 12) {
+                        ForEach(insights, id: \.self) { insight in
+                            HStack(alignment: .top, spacing: 12) {
+                                Image(systemName: "lightbulb.fill")
+                                    .foregroundColor(.yellow)
+                                    .font(.subheadline)
+                                
+                                Text(insight)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
                         }
                     }
+                    .padding()
                 }
-                .padding()
+                .background(.regularMaterial)
+                .cornerRadius(20)
+                .shadow(color: .black.opacity(0.1), radius: 10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(.white.opacity(0.2), lineWidth: 1)
+                )
+                .padding(.horizontal)
             }
-            .background(Color(UIColor.secondarySystemBackground))
-            .cornerRadius(16)
-            .padding(.horizontal)
+        } else {
+            // MARK: - iOS 18 Design
+            if !insights.isEmpty {
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Insights", comment: "Section header for insights")
+                        .font(.headline)
+                        .padding(.horizontal)
+                    
+                    VStack(alignment: .leading, spacing: 12) {
+                        ForEach(insights, id: \.self) { insight in
+                            HStack(alignment: .top, spacing: 12) {
+                                Image(systemName: "lightbulb.fill")
+                                    .foregroundColor(.yellow)
+                                    .font(.subheadline)
+                                
+                                Text(insight)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+                        }
+                    }
+                    .padding()
+                }
+                .background(Color(UIColor.secondarySystemBackground))
+                .cornerRadius(16)
+                .padding(.horizontal)
+            }
         }
     }
     
@@ -92,7 +128,9 @@ struct InsightsSection: View {
         let frequencies = dataManager.emotionFrequency(for: period)
         
         if let mostFrequent = frequencies.max(by: { $0.value < $1.value }) {
-            let percentage = Double(mostFrequent.value) / Double(frequencies.values.reduce(0, +)) * 100
+            let total = frequencies.values.reduce(0, +)
+            guard total > 0 else { return nil }
+            let percentage = Double(mostFrequent.value) / Double(total) * 100
             if percentage > 50 {
                 return String(localized: "\(mostFrequent.key.emoji) represents \(Int(percentage))% of your recorded emotions", comment: "Dominant emotion insight")
             }

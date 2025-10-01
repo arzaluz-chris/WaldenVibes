@@ -1,4 +1,4 @@
-// WaldenVibes/Views/Stress/AddStressView.swift (ACTUALIZADO)
+// WaldenVibes/Views/Stress/AddStressView.swift
 import SwiftUI
 
 struct AddStressView: View {
@@ -39,204 +39,212 @@ struct AddStressView: View {
     }
     
     var body: some View {
-        NavigationView {
-            Form {
-                // Input Method Selection
-                Section {
-                    ForEach(StressInputMethod.allCases, id: \.self) { method in
-                        Button(action: {
-                            if method == .test {
-                                showingStressTest = true
-                            } else {
-                                stressInputMethod = method
-                            }
-                        }) {
-                            HStack(spacing: 16) {
-                                Image(systemName: method.icon)
-                                    .font(.title2)
-                                    .foregroundColor(stressInputMethod == method ? Color("AccentColor") : .secondary)
-                                    .frame(width: 30)
-                                
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(method.displayName)
-                                        .font(.headline)
-                                        .foregroundColor(.primary)
-                                    
-                                    Text(method.description)
-                                        .font(.subheadline)
-                                        .foregroundColor(.secondary)
-                                        .multilineTextAlignment(.leading)
-                                }
-                                
-                                Spacer()
-                                
-                                if stressInputMethod == method {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .font(.title2)
-                                        .foregroundColor(Color("AccentColor"))
-                                }
-                                
-                                if method == .test {
-                                    Image(systemName: "chevron.right")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                }
-                            }
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            NavigationView {
+                ZStack {
+                    AnimatedGlassBackground(color: colorForLevel(stressLevel)).ignoresSafeArea()
+                    
+                    Form {
+                        inputMethodSection
+                        
+                        if stressInputMethod == .manual {
+                            manualStressLevelSection
                         }
-                        .buttonStyle(PlainButtonStyle())
+                        
+                        triggersSection
+                        notesSection
                     }
-                } header: {
-                    Text("How would you like to assess your stress?", comment: "Section header for stress input method")
-                } footer: {
-                    Text("The quick assessment provides a more accurate measurement based on multiple factors", comment: "Footer explaining stress test benefits")
+                    .scrollContentBackground(.hidden)
+                    .navigationTitle("New Stress Record")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar { navigationToolbar }
                 }
-                
-                // Manual Stress Level (only shown if manual method selected)
-                if stressInputMethod == .manual {
+                .onAppear { previousStressLevel = stressLevel }
+                .sheet(isPresented: $showingStressTest) { StressTestView() }
+            }
+            
+        } else {
+            // MARK: - iOS 18 Design
+            NavigationView {
+                Form {
                     Section {
-                        VStack(spacing: 20) {
-                            // Level indicator
-                            HStack {
-                                Text("Stress Level", comment: "Label for stress level slider")
-                                Spacer()
-                                Text("\(Int(stressLevel))/10")
-                                    .font(.title2)
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(colorForLevel(stressLevel))
-                            }
-                            
-                            // Slider
-                            Slider(value: $stressLevel, in: 0...10, step: 1)
-                                .accentColor(colorForLevel(stressLevel))
-                                .onChange(of: stressLevel) { _, newValue in
-                                    // Progressive haptic feedback based on stress level
-                                    triggerProgressiveStressHaptic(for: newValue, previous: previousStressLevel)
-                                    previousStressLevel = newValue
-                                }
-                            
-                            // Visual indicator
-                            HStack {
-                                Text(emojiForLevel(stressLevel))
-                                    .font(.largeTitle)
-                                
-                                Text(descriptionForLevel(stressLevel))
-                                    .font(.headline)
-                                    .foregroundColor(colorForLevel(stressLevel))
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
-                    } header: {
-                        Text("How stressed are you feeling?", comment: "Section header for stress level")
-                    }
-                }
-                
-                // Triggers
-                Section {
-                    ForEach(StressTrigger.allCases, id: \.self) { trigger in
-                        HStack {
-                            Image(systemName: trigger.icon)
-                                .foregroundColor(selectedTriggers.contains(trigger) ? Color("AccentColor") : .secondary)
-                                .frame(width: 30)
-                            
-                            Text(trigger.localizedName)
-                            
-                            Spacer()
-                            
-                            if selectedTriggers.contains(trigger) {
-                                Image(systemName: "checkmark")
-                                    .foregroundColor(Color("AccentColor"))
-                                    .fontWeight(.semibold)
-                            }
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            if selectedTriggers.contains(trigger) {
-                                selectedTriggers.remove(trigger)
-                            } else {
-                                selectedTriggers.insert(trigger)
-                            }
-                        }
-                    }
-                } header: {
-                    Text("Stress Triggers", comment: "Section header for stress triggers")
-                } footer: {
-                    Text("Select factors contributing to your stress", comment: "Helper text for stress triggers")
-                }
-                
-                // Notes
-                Section {
-                    TextEditor(text: $note)
-                        .frame(minHeight: 100)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .keyboard) {
-                                Spacer()
-                                Button("Done") {
-                                    hideKeyboard()
+                        ForEach(StressInputMethod.allCases, id: \.self) { method in
+                            Button(action: {
+                                if method == .test { showingStressTest = true }
+                                else { stressInputMethod = method }
+                            }) {
+                                HStack(spacing: 16) {
+                                    Image(systemName: method.icon).font(.title2).foregroundColor(stressInputMethod == method ? Color("AccentColor") : .secondary).frame(width: 30)
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(method.displayName).font(.headline).foregroundColor(.primary)
+                                        Text(method.description).font(.subheadline).foregroundColor(.secondary).multilineTextAlignment(.leading)
+                                    }
+                                    Spacer()
+                                    if stressInputMethod == method { Image(systemName: "checkmark.circle.fill").font(.title2).foregroundColor(Color("AccentColor")) }
+                                    if method == .test { Image(systemName: "chevron.right").font(.caption).foregroundColor(.secondary) }
                                 }
                             }
+                            .buttonStyle(PlainButtonStyle())
                         }
-                } header: {
-                    Text("Notes", comment: "Section header for notes field")
-                } footer: {
-                    Text("Add details about what's causing your stress", comment: "Helper text for stress notes")
+                    } header: { Text("How would you like to assess your stress?", comment: "Section header for stress input method") }
+                    footer: { Text("The quick assessment provides a more accurate measurement based on multiple factors", comment: "Footer explaining stress test benefits") }
+                    
+                    if stressInputMethod == .manual {
+                        Section {
+                            VStack(spacing: 20) {
+                                HStack {
+                                    Text("Stress Level", comment: "Label for stress level slider"); Spacer()
+                                    Text("\(Int(stressLevel))/10").font(.title2).fontWeight(.semibold).foregroundColor(colorForLevel(stressLevel))
+                                }
+                                Slider(value: $stressLevel, in: 0...10, step: 1).accentColor(colorForLevel(stressLevel))
+                                    .onChange(of: stressLevel) { _, newValue in
+                                        triggerProgressiveStressHaptic(for: newValue, previous: previousStressLevel)
+                                        previousStressLevel = newValue
+                                    }
+                                HStack {
+                                    Text(emojiForLevel(stressLevel)).font(.largeTitle)
+                                    Text(descriptionForLevel(stressLevel)).font(.headline).foregroundColor(colorForLevel(stressLevel))
+                                }.frame(maxWidth: .infinity)
+                            }
+                        } header: { Text("How stressed are you feeling?", comment: "Section header for stress level") }
+                    }
+                    
+                    Section {
+                        ForEach(StressTrigger.allCases, id: \.self) { trigger in
+                            HStack {
+                                Image(systemName: trigger.icon).foregroundColor(selectedTriggers.contains(trigger) ? Color("AccentColor") : .secondary).frame(width: 30)
+                                Text(trigger.localizedName); Spacer()
+                                if selectedTriggers.contains(trigger) { Image(systemName: "checkmark").foregroundColor(Color("AccentColor")).fontWeight(.semibold) }
+                            }.contentShape(Rectangle()).onTapGesture {
+                                if selectedTriggers.contains(trigger) { selectedTriggers.remove(trigger) }
+                                else { selectedTriggers.insert(trigger) }
+                            }
+                        }
+                    } header: { Text("Stress Triggers", comment: "Section header for stress triggers") }
+                    footer: { Text("Select factors contributing to your stress", comment: "Helper text for stress triggers") }
+                    
+                    Section {
+                        TextEditor(text: $note).frame(minHeight: 100)
+                            .toolbar { ToolbarItemGroup(placement: .keyboard) { Spacer(); Button("Done") { hideKeyboard() } } }
+                    } header: { Text("Notes", comment: "Section header for notes field") }
+                    footer: { Text("Add details about what's causing your stress", comment: "Helper text for stress notes") }
+                }
+                .navigationTitle("New Stress Record").navigationBarTitleDisplayMode(.inline).navigationBarBackground()
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) { Button("Cancel") { dismiss() } }
+                    ToolbarItem(placement: .navigationBarTrailing) { Button("Save") { saveStress() }.fontWeight(.semibold).disabled(stressInputMethod == .test) }
                 }
             }
-            .navigationTitle("New Stress Record")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackground()
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
-                        saveStress()
-                    }
-                    .fontWeight(.semibold)
-                    .disabled(stressInputMethod == .test) // Disable if test method selected but not completed
-                }
-            }
-        }
-        .onAppear {
-            previousStressLevel = stressLevel
-        }
-        .sheet(isPresented: $showingStressTest) {
-            StressTestView()
+            .onAppear { previousStressLevel = stressLevel }
+            .sheet(isPresented: $showingStressTest) { StressTestView() }
         }
     }
     
-    // MARK: - Haptic Feedback
+    // MARK: - iOS 26 View Components
+    
+    @available(iOS 26.0, *)
+    private var formRowBackground: some View {
+        Color.clear.background(.thinMaterial).cornerRadius(12)
+    }
+
+    @available(iOS 26.0, *)
+    private var inputMethodSection: some View {
+        Section {
+            ForEach(StressInputMethod.allCases, id: \.self) { method in
+                Button(action: {
+                    if method == .test { showingStressTest = true }
+                    else { stressInputMethod = method }
+                }) {
+                    HStack(spacing: 16) {
+                        Image(systemName: method.icon).font(.title2).foregroundColor(stressInputMethod == method ? Color("AccentColor") : .secondary).frame(width: 30)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(method.displayName).font(.headline).foregroundColor(.primary)
+                            Text(method.description).font(.subheadline).foregroundColor(.secondary).multilineTextAlignment(.leading)
+                        }
+                        Spacer()
+                        if stressInputMethod == method { Image(systemName: "checkmark.circle.fill").font(.title2).foregroundColor(Color("AccentColor")) }
+                        if method == .test { Image(systemName: "chevron.right").font(.caption).foregroundColor(.secondary) }
+                    }
+                }.buttonStyle(PlainButtonStyle())
+            }
+        } header: { Text("How would you like to assess your stress?", comment: "Section header for stress input method") }
+        footer: { Text("The quick assessment provides a more accurate measurement based on multiple factors", comment: "Footer explaining stress test benefits") }
+        .listRowBackground(formRowBackground)
+    }
+
+    @available(iOS 26.0, *)
+    private var manualStressLevelSection: some View {
+        Section {
+            VStack(spacing: 20) {
+                HStack {
+                    Text("Stress Level", comment: "Label for stress level slider"); Spacer()
+                    Text("\(Int(stressLevel))/10").font(.title2).fontWeight(.semibold).foregroundColor(colorForLevel(stressLevel))
+                }
+                Slider(value: $stressLevel, in: 0...10, step: 1).accentColor(colorForLevel(stressLevel))
+                    .onChange(of: stressLevel) { _, newValue in
+                        triggerProgressiveStressHaptic(for: newValue, previous: previousStressLevel)
+                        previousStressLevel = newValue
+                    }
+                HStack {
+                    Text(emojiForLevel(stressLevel)).font(.largeTitle)
+                    Text(descriptionForLevel(stressLevel)).font(.headline).foregroundColor(colorForLevel(stressLevel))
+                }.frame(maxWidth: .infinity)
+            }.padding()
+        } header: { Text("How stressed are you feeling?", comment: "Section header for stress level") }
+        .listRowBackground(formRowBackground)
+    }
+
+    @available(iOS 26.0, *)
+    private var triggersSection: some View {
+        Section {
+            ForEach(StressTrigger.allCases, id: \.self) { trigger in
+                HStack {
+                    Image(systemName: trigger.icon).foregroundColor(selectedTriggers.contains(trigger) ? Color("AccentColor") : .secondary).frame(width: 30)
+                    Text(trigger.localizedName); Spacer()
+                    if selectedTriggers.contains(trigger) { Image(systemName: "checkmark").foregroundColor(Color("AccentColor")).fontWeight(.semibold) }
+                }.contentShape(Rectangle()).onTapGesture {
+                    if selectedTriggers.contains(trigger) { selectedTriggers.remove(trigger) } else { selectedTriggers.insert(trigger) }
+                }
+            }
+        } header: { Text("Stress Triggers", comment: "Section header for stress triggers") }
+        footer: { Text("Select factors contributing to your stress", comment: "Helper text for stress triggers") }
+        .listRowBackground(formRowBackground)
+    }
+    
+    @available(iOS 26.0, *)
+    private var notesSection: some View {
+        Section {
+            TextEditor(text: $note).frame(minHeight: 100).background(Color.clear)
+                .toolbar { ToolbarItemGroup(placement: .keyboard) { Spacer(); Button("Done") { hideKeyboard() } } }
+        } header: { Text("Notes", comment: "Section header for notes field") }
+        footer: { Text("Add details about what's causing your stress", comment: "Helper text for stress notes") }
+        .listRowBackground(formRowBackground)
+    }
+    
+    @ToolbarContentBuilder
+    private var navigationToolbar: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) { Button("Cancel") { dismiss() } }
+        ToolbarItem(placement: .navigationBarTrailing) { Button("Save") { saveStress() }.fontWeight(.semibold).disabled(stressInputMethod == .test) }
+    }
+    
+    // MARK: - Helper Functions
     private func triggerProgressiveStressHaptic(for newValue: Double, previous: Double) {
         let difference = abs(newValue - previous)
-        
         if difference >= 1 {
-            // More intense haptic feedback for higher stress levels
             let hapticStyle: UIImpactFeedbackGenerator.FeedbackStyle
-            
             switch newValue {
-            case 0...2:
-                hapticStyle = .light
-            case 3...5:
-                hapticStyle = .medium
-            case 6...7:
-                hapticStyle = .heavy
+            case 0...2: hapticStyle = .light
+            case 3...5: hapticStyle = .medium
+            case 6...7: hapticStyle = .heavy
             case 8...10:
-                // For very high stress, use heavy with multiple impacts
                 let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
                 impactFeedback.impactOccurred()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    impactFeedback.impactOccurred()
-                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { impactFeedback.impactOccurred() }
                 return
-            default:
-                hapticStyle = .medium
+            default: hapticStyle = .medium
             }
-            
-            let impactFeedback = UIImpactFeedbackGenerator(style: hapticStyle)
-            impactFeedback.impactOccurred()
+            UIImpactFeedbackGenerator(style: hapticStyle).impactOccurred()
         }
     }
     
@@ -271,18 +279,9 @@ struct AddStressView: View {
     }
     
     private func saveStress() {
-        let stress = Stress(
-            level: stressLevel,
-            triggers: Array(selectedTriggers),
-            note: note
-        )
-        
+        let stress = Stress(level: stressLevel, triggers: Array(selectedTriggers), note: note)
         dataManager.addStressRecord(stress)
-        
-        // Strong haptic feedback for successful save
-        let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
-        impactFeedback.impactOccurred()
-        
+        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         dismiss()
     }
 }

@@ -9,151 +9,270 @@ struct MoreView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                // Header Card
-                VStack(spacing: 16) {
-                    Image("LaunchLogo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 80, height: 80)
-                    
-                    Text("Walden Vibes")
-                        .font(.title)
-                        .fontWeight(.bold)
-                    
-                    Text("Your emotional well-being companion", comment: "App tagline in More view")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-                .padding(.vertical, 30)
-                .frame(maxWidth: .infinity)
-                .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color("AccentColor").opacity(0.1))
-                )
-                .padding(.horizontal)
-                .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            ZStack {
+                AnimatedGlassBackground(color: Color("AccentColor"))
                 
-                // Quick Stats
-                VStack(spacing: 16) {
-                    Text("Quick Overview", comment: "Section header for statistics overview")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal)
-                    
-                    if horizontalSizeClass == .regular {
-                        // iPad: 4 columns
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 16) {
-                            quickStatCards
-                        }
-                        .padding(.horizontal)
-                        .frame(maxWidth: 800)
-                    } else {
-                        // iPhone: 2 columns
-                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                            quickStatCards
-                        }
-                        .padding(.horizontal)
+                ScrollView {
+                    VStack(spacing: 30) {
+                        headerCard
+                        quickStatsSection
+                        menuItemsSection
+                        motivationalQuoteSection
+                        Spacer(minLength: 30)
                     }
+                    .padding(.vertical)
+                    .frame(maxWidth: .infinity)
                 }
-                
-                // Menu Items
-                VStack(spacing: 12) {
-                    Text("Tools & Features", comment: "Section header for tools menu")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal)
-                        .padding(.top, 8)
-                    
-                    VStack(spacing: 12) {
-                        NavigationLink(destination: StatisticsView()) {
-                            MenuRow(
-                                icon: "chart.line.uptrend.xyaxis",
-                                title: String(localized: "Detailed Statistics", comment: "Menu item"),
-                                subtitle: String(localized: "View trends and insights", comment: "Menu item subtitle"),
-                                color: .blue
-                            )
-                        }
-                        
-                        NavigationLink(destination: ExportView()) {
-                            MenuRow(
-                                icon: "square.and.arrow.up",
-                                title: String(localized: "Export Data", comment: "Menu item"),
-                                subtitle: String(localized: "Save your data externally", comment: "Menu item subtitle"),
-                                color: .green
-                            )
-                        }
-                        
-                        NavigationLink(destination: SettingsView()) {
-                            MenuRow(
-                                icon: "gearshape.fill",
-                                title: String(localized: "Settings", comment: "Menu item"),
-                                subtitle: String(localized: "Customize your experience", comment: "Menu item subtitle"),
-                                color: .gray
-                            )
-                        }
-                        
-                        Button(action: { showingAbout = true }) {
-                            MenuRow(
-                                icon: "info.circle.fill",
-                                title: String(localized: "About", comment: "Menu item"),
-                                subtitle: String(localized: "Learn more about the app", comment: "Menu item subtitle"),
-                                color: .orange
-                            )
-                        }
-                        
-                        Button(action: { showingPrivacy = true }) {
-                            MenuRow(
-                                icon: "lock.shield.fill",
-                                title: String(localized: "Privacy", comment: "Menu item"),
-                                subtitle: String(localized: "Your data is safe", comment: "Menu item subtitle"),
-                                color: .purple
-                            )
-                        }
-                    }
-                    .frame(maxWidth: horizontalSizeClass == .regular ? 800 : .infinity)
-                }
-                
-                // Motivational Quote
-                VStack(spacing: 12) {
-                    Text("Daily Inspiration", comment: "Section header for inspirational quote")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    Text("\"The greatest wealth is health.\"", comment: "Inspirational quote")
-                        .font(.title3)
-                        .italic()
-                        .multilineTextAlignment(.center)
-                    
-                    Text("- Virgil", comment: "Quote author")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(Color(UIColor.secondarySystemBackground))
-                )
-                .padding(.horizontal)
-                .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
-                
-                Spacer(minLength: 30)
             }
-            .padding(.vertical)
-            .frame(maxWidth: .infinity)
+            .navigationTitle("Tools")
+            .sheet(isPresented: $showingAbout) { AboutView() }
+            .sheet(isPresented: $showingPrivacy) { PrivacyView() }
+            
+        } else {
+            // MARK: - iOS 18 Design
+            ScrollView {
+                VStack(spacing: 24) {
+                    // Header Card
+                    VStack(spacing: 16) {
+                        Image("LaunchLogo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 80, height: 80)
+                        
+                        Text("Walden Vibes")
+                            .font(.title)
+                            .fontWeight(.bold)
+                        
+                        Text("Your emotional well-being companion", comment: "App tagline in More view")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.vertical, 30)
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color("AccentColor").opacity(0.1))
+                    )
+                    .padding(.horizontal)
+                    .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
+                    
+                    // Quick Stats
+                    VStack(spacing: 16) {
+                        Text("Quick Overview", comment: "Section header for statistics overview")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal)
+                        
+                        if horizontalSizeClass == .regular {
+                            // iPad: 4 columns
+                            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 16) {
+                                quickStatCards
+                            }
+                            .padding(.horizontal)
+                            .frame(maxWidth: 800)
+                        } else {
+                            // iPhone: 2 columns
+                            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                                quickStatCards
+                            }
+                            .padding(.horizontal)
+                        }
+                    }
+                    
+                    // Menu Items
+                    VStack(spacing: 12) {
+                        Text("Tools & Features", comment: "Section header for tools menu")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal)
+                            .padding(.top, 8)
+                        
+                        VStack(spacing: 12) {
+                            NavigationLink(destination: StatisticsView()) {
+                                MenuRow(
+                                    icon: "chart.line.uptrend.xyaxis",
+                                    title: String(localized: "Detailed Statistics", comment: "Menu item"),
+                                    subtitle: String(localized: "View trends and insights", comment: "Menu item subtitle"),
+                                    color: .blue
+                                )
+                            }
+                            
+                            NavigationLink(destination: ExportView()) {
+                                MenuRow(
+                                    icon: "square.and.arrow.up",
+                                    title: String(localized: "Export Data", comment: "Menu item"),
+                                    subtitle: String(localized: "Save your data externally", comment: "Menu item subtitle"),
+                                    color: .green
+                                )
+                            }
+                            
+                            NavigationLink(destination: SettingsView()) {
+                                MenuRow(
+                                    icon: "gearshape.fill",
+                                    title: String(localized: "Settings", comment: "Menu item"),
+                                    subtitle: String(localized: "Customize your experience", comment: "Menu item subtitle"),
+                                    color: .gray
+                                )
+                            }
+                            
+                            Button(action: { showingAbout = true }) {
+                                MenuRow(
+                                    icon: "info.circle.fill",
+                                    title: String(localized: "About", comment: "Menu item"),
+                                    subtitle: String(localized: "Learn more about the app", comment: "Menu item subtitle"),
+                                    color: .orange
+                                )
+                            }
+                            
+                            Button(action: { showingPrivacy = true }) {
+                                MenuRow(
+                                    icon: "lock.shield.fill",
+                                    title: String(localized: "Privacy", comment: "Menu item"),
+                                    subtitle: String(localized: "Your data is safe", comment: "Menu item subtitle"),
+                                    color: .purple
+                                )
+                            }
+                        }
+                        .frame(maxWidth: horizontalSizeClass == .regular ? 800 : .infinity)
+                    }
+                    
+                    // Motivational Quote
+                    VStack(spacing: 12) {
+                        Text("Daily Inspiration", comment: "Section header for inspirational quote")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Text("\"The greatest wealth is health.\"", comment: "Inspirational quote")
+                            .font(.title3)
+                            .italic()
+                            .multilineTextAlignment(.center)
+                        
+                        Text("- Virgil", comment: "Quote author")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Color(UIColor.secondarySystemBackground))
+                    )
+                    .padding(.horizontal)
+                    .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
+                    
+                    Spacer(minLength: 30)
+                }
+                .padding(.vertical)
+                .frame(maxWidth: .infinity)
+            }
+            .navigationTitle("Tools")
+            .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarBackground(Color(UIColor.systemBackground), for: .navigationBar)
+            .sheet(isPresented: $showingAbout) {
+                AboutView()
+            }
+            .sheet(isPresented: $showingPrivacy) {
+                PrivacyView()
+            }
         }
-        .navigationTitle("Tools")
-        .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
-        .toolbarBackground(.visible, for: .navigationBar)
-        .toolbarBackground(Color(UIColor.systemBackground), for: .navigationBar)
-        .sheet(isPresented: $showingAbout) {
-            AboutView()
+    }
+    
+    @ViewBuilder
+    private var headerCard: some View {
+        VStack(spacing: 16) {
+            Image("LaunchLogo")
+                .resizable().scaledToFit().frame(width: 80, height: 80)
+            Text("Walden Vibes").font(.title).fontWeight(.bold)
+            Text("Your emotional well-being companion", comment: "App tagline in More view")
+                .font(.subheadline).foregroundColor(.secondary)
         }
-        .sheet(isPresented: $showingPrivacy) {
-            PrivacyView()
+        .padding(.vertical, 30).frame(maxWidth: .infinity)
+        .background(
+            ZStack {
+                if #available(iOS 26.0, *) {
+                    Color.clear.background(.regularMaterial)
+                } else {
+                    Color("AccentColor").opacity(0.1)
+                }
+            }
+        )
+        .cornerRadius(20)
+        .overlay(
+            ZStack {
+                if #available(iOS 26.0, *) {
+                    RoundedRectangle(cornerRadius: 20).stroke(.white.opacity(0.2), lineWidth: 1)
+                }
+            }
+        )
+        .padding(.horizontal)
+        .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
+    }
+
+    @ViewBuilder
+    private var quickStatsSection: some View {
+        VStack(spacing: 16) {
+            Text("Quick Overview", comment: "Section header for statistics overview")
+                .font(.headline).frame(maxWidth: .infinity, alignment: .leading).padding(.horizontal)
+            
+            if horizontalSizeClass == .regular {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 16) {
+                    quickStatCards
+                }.padding(.horizontal).frame(maxWidth: 800)
+            } else {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                    quickStatCards
+                }.padding(.horizontal)
+            }
         }
+    }
+    
+    @ViewBuilder
+    private var menuItemsSection: some View {
+        VStack(spacing: 12) {
+            Text("Tools & Features", comment: "Section header for tools menu")
+                .font(.headline).frame(maxWidth: .infinity, alignment: .leading).padding(.horizontal).padding(.top, 8)
+            
+            VStack(spacing: 12) {
+                NavigationLink(destination: StatisticsView()) { MenuRow(icon: "chart.line.uptrend.xyaxis", title: "Detailed Statistics", subtitle: "View trends and insights", color: .blue) }
+                NavigationLink(destination: ExportView()) { MenuRow(icon: "square.and.arrow.up", title: "Export Data", subtitle: "Save your data externally", color: .green) }
+                NavigationLink(destination: SettingsView()) { MenuRow(icon: "gearshape.fill", title: "Settings", subtitle: "Customize your experience", color: .gray) }
+                Button(action: { showingAbout = true }) { MenuRow(icon: "info.circle.fill", title: "About", subtitle: "Learn more about the app", color: .orange) }
+                Button(action: { showingPrivacy = true }) { MenuRow(icon: "lock.shield.fill", title: "Privacy", subtitle: "Your data is safe", color: .purple) }
+            }
+            .frame(maxWidth: horizontalSizeClass == .regular ? 800 : .infinity)
+        }
+    }
+    
+    @ViewBuilder
+    private var motivationalQuoteSection: some View {
+        VStack(spacing: 12) {
+            Text("Daily Inspiration", comment: "Section header for inspirational quote").font(.headline).frame(maxWidth: .infinity, alignment: .leading)
+            Text("\"The greatest wealth is health.\"", comment: "Inspirational quote").font(.title3).italic().multilineTextAlignment(.center)
+            Text("- Virgil", comment: "Quote author").font(.caption).foregroundColor(.secondary)
+        }
+        .padding().frame(maxWidth: .infinity)
+        .background(
+            ZStack {
+                if #available(iOS 26.0, *) {
+                    Color.clear.background(.regularMaterial)
+                } else {
+                    Color(UIColor.secondarySystemBackground)
+                }
+            }
+        )
+        .cornerRadius(16)
+        .overlay(
+            ZStack {
+                if #available(iOS 26.0, *) {
+                    RoundedRectangle(cornerRadius: 16).stroke(.white.opacity(0.2), lineWidth: 1)
+                }
+            }
+        )
+        .padding(.horizontal)
+        .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
     }
     
     @ViewBuilder
@@ -172,24 +291,24 @@ struct MoreView: View {
             color: Color("EmotionExcited")
         )
                
-               QuickStatCard(
-                   icon: "waveform.path.ecg",
-                   value: String(format: "%.1f", dataManager.averageStressLevel(for: .month)),
-                   label: String(localized: "Avg Stress", comment: "Quick stat label"),
-                   color: Color("StressModerate")
-               )
+        QuickStatCard(
+           icon: "waveform.path.ecg",
+           value: String(format: "%.1f", dataManager.averageStressLevel(for: .month)),
+           label: String(localized: "Avg Stress", comment: "Quick stat label"),
+           color: Color("StressModerate")
+        )
                
-               QuickStatCard(
-                   icon: "calendar",
-                   value: "\(daysTracked)",
-                   label: String(localized: "Days Tracked", comment: "Quick stat label"),
-                   color: Color("AccentColor")
-               )
-           }
+        QuickStatCard(
+           icon: "calendar",
+           value: "\(daysTracked)",
+           label: String(localized: "Days Tracked", comment: "Quick stat label"),
+           color: Color("AccentColor")
+        )
+    }
            
-           private var daysTracked: Int {
-               let calendar = Calendar.current
-               let dates = Set(dataManager.emotions.map { calendar.startOfDay(for: $0.date) })
-               return dates.count
-           }
-        }
+    private var daysTracked: Int {
+        let calendar = Calendar.current
+        let dates = Set(dataManager.emotions.map { calendar.startOfDay(for: $0.date) })
+        return dates.count
+    }
+}

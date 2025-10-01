@@ -38,153 +38,105 @@ struct ExportView: View {
     }
     
     // MARK: - Computed Properties for iPad Layout
-    private var isIPad: Bool {
-        horizontalSizeClass == .regular
-    }
-    
-    private var contentMaxWidth: CGFloat {
-        isIPad ? 700 : .infinity
-    }
-    
-    private var headerIconSize: CGFloat {
-        isIPad ? 80 : 60
-    }
-    
-    private var sectionSpacing: CGFloat {
-        isIPad ? 32 : 24
-    }
-    
-    private var horizontalPadding: CGFloat {
-        isIPad ? 40 : 20
-    }
+    private var isIPad: Bool { horizontalSizeClass == .regular }
+    private var contentMaxWidth: CGFloat { isIPad ? 700 : .infinity }
+    private var headerIconSize: CGFloat { isIPad ? 80 : 60 }
+    private var sectionSpacing: CGFloat { isIPad ? 32 : 24 }
+    private var horizontalPadding: CGFloat { isIPad ? 40 : 20 }
     
     var body: some View {
         NavigationView {
-            GeometryReader { geometry in
+            ZStack {
+                if #available(iOS 26.0, *) {
+                    AnimatedGlassBackground(color: Color("AccentColor")).ignoresSafeArea()
+                }
+                
                 ScrollView {
                     VStack(spacing: sectionSpacing) {
-                        // Header
-                        VStack(spacing: 20) {
-                            Image(systemName: "square.and.arrow.up.circle.fill")
-                                .font(.system(size: headerIconSize))
-                                .foregroundColor(Color("AccentColor"))
-                            
-                            Text(NSLocalizedString("Export Your Data", comment: "Export view title"))
-                                .font(isIPad ? .largeTitle : .title2)
-                                .fontWeight(.semibold)
-                            
-                            Text(NSLocalizedString("Choose how you want to export your wellness data", comment: "Export view description"))
-                                .font(isIPad ? .title3 : .body)
-                                .foregroundColor(.secondary)
-                                .multilineTextAlignment(.center)
-                                .padding(.horizontal, horizontalPadding)
-                        }
-                        .padding(.top, isIPad ? 40 : 20)
+                        headerSection
                         
-                        // Format Selection Section - Enhanced for iPad
-                        if isIPad {
-                            iPadFormatSelectionSection
-                        } else {
-                            iPhoneFormatSelectionSection
-                        }
+                        if isIPad { iPadFormatSelectionSection }
+                        else { iPhoneFormatSelectionSection }
                         
-                        // Data Summary - Enhanced for iPad
                         DataSummaryCard(dataManager: dataManager, isIPad: isIPad)
                             .padding(.horizontal, horizontalPadding)
                         
-                        // Export Button
                         exportButton
                             .padding(.horizontal, horizontalPadding)
                         
                         Spacer(minLength: isIPad ? 50 : 30)
                     }
                     .frame(maxWidth: contentMaxWidth)
-                    .frame(maxWidth: .infinity) // Center content on iPad
+                    .frame(maxWidth: .infinity)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(NSLocalizedString("Done", comment: "Done button")) {
-                        dismiss()
-                    }
-                    .font(isIPad ? .title3 : .body)
+            .toolbar { navigationToolbar }
+            .sheet(isPresented: $showingShareSheet) {
+                if let pdfData = generatedPDFData {
+                    ShareSheet(items: [PDFShareItem(data: pdfData, filename: "WaldenVibes-Report.pdf")])
                 }
             }
-        }
-        .sheet(isPresented: $showingShareSheet) {
-            if let pdfData = generatedPDFData {
-                ShareSheet(items: [PDFShareItem(data: pdfData, filename: "WaldenVibes-Report.pdf")])
+            .sheet(isPresented: $showingTextShareSheet) {
+                ShareSheet(items: [dataManager.exportAllData()])
             }
         }
-        .sheet(isPresented: $showingTextShareSheet) {
-            ShareSheet(items: [dataManager.exportAllData()])
-        }
-        .navigationViewStyle(StackNavigationViewStyle()) // Ensure proper iPad behavior
     }
     
-    // MARK: - iPad Format Selection Section
+    // MARK: - View Sections
+    
+    private var headerSection: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "square.and.arrow.up.circle.fill")
+                .font(.system(size: headerIconSize))
+                .foregroundColor(Color("AccentColor"))
+            
+            Text("Export Your Data", comment: "Export view title")
+                .font(isIPad ? .largeTitle : .title2)
+                .fontWeight(.semibold)
+            
+            Text("Choose how you want to export your wellness data", comment: "Export view description")
+                .font(isIPad ? .title3 : .body)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, horizontalPadding)
+        }
+        .padding(.top, isIPad ? 40 : 20)
+    }
+    
     private var iPadFormatSelectionSection: some View {
         VStack(spacing: 24) {
-            Text(NSLocalizedString("Choose Export Format", comment: "Format selection title"))
-                .font(.title2)
-                .fontWeight(.semibold)
-                .padding(.horizontal, horizontalPadding)
-            
+            Text("Choose Export Format", comment: "Format selection title")
+                .font(.title2).fontWeight(.semibold).padding(.horizontal, horizontalPadding)
             HStack(spacing: 30) {
                 ForEach(ExportFormat.allCases, id: \.self) { format in
                     iPadFormatSelectionCard(format: format)
                 }
-            }
-            .padding(.horizontal, horizontalPadding)
+            }.padding(.horizontal, horizontalPadding)
         }
     }
     
-    // MARK: - iPhone Format Selection Section
     private var iPhoneFormatSelectionSection: some View {
-        VStack(spacing: 20) {
-            Text(NSLocalizedString("Choose Export Format", comment: "Format selection title"))
-                .font(.headline)
-                .padding(.horizontal, horizontalPadding)
+        VStack(spacing: 12) {
+            Text("Choose Export Format", comment: "Format selection title")
+                .font(.headline).padding(.horizontal, horizontalPadding)
             
-            VStack(spacing: 12) {
-                ForEach(ExportFormat.allCases, id: \.self) { format in
-                    FormatSelectionCard(
-                        format: format,
-                        isSelected: exportFormat == format
-                    ) {
-                        exportFormat = format
-                    }
+            ForEach(ExportFormat.allCases, id: \.self) { format in
+                FormatSelectionCard(format: format, isSelected: exportFormat == format) {
+                    exportFormat = format
                 }
             }
-            .padding(.horizontal, horizontalPadding)
-        }
+        }.padding(.horizontal, horizontalPadding)
     }
     
-    // MARK: - iPad Format Selection Card
     private func iPadFormatSelectionCard(format: ExportFormat) -> some View {
-        Button(action: {
-            exportFormat = format
-        }) {
+        Button(action: { exportFormat = format }) {
             VStack(spacing: 20) {
-                Image(systemName: format.icon)
-                    .font(.system(size: 50))
-                    .foregroundColor(exportFormat == format ? Color("AccentColor") : .secondary)
-                
+                Image(systemName: format.icon).font(.system(size: 50)).foregroundColor(exportFormat == format ? Color("AccentColor") : .secondary)
                 VStack(spacing: 8) {
-                    Text(format.displayName)
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.primary)
-                    
-                    Text(format.description)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true) // allow full wrapping
+                    Text(format.displayName).font(.title3).fontWeight(.semibold).foregroundColor(.primary)
+                    Text(format.description).font(.subheadline).foregroundColor(.secondary).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
                 }
-                
-                // Export content preview for iPad
                 VStack(spacing: 8) {
                     if format == .pdf {
                         ExportContentRow(icon: "heart.fill", title: NSLocalizedString("Emotions with charts", comment: ""), color: Color("EmotionHappy"))
@@ -196,90 +148,73 @@ struct ExportView: View {
                         ExportContentRow(icon: "textformat", title: NSLocalizedString("Plain text format", comment: ""), color: .green)
                         ExportContentRow(icon: "square.and.arrow.up", title: NSLocalizedString("Compatible with all apps", comment: ""), color: .purple)
                     }
-                }
-                .padding(.top, 10)
+                }.padding(.top, 10)
             }
-            .frame(maxWidth: .infinity)
-            .frame(height: 320)
-            .padding(24)
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color(UIColor.secondarySystemBackground))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(
-                                exportFormat == format ? Color("AccentColor") : Color.clear,
-                                lineWidth: 3
-                            )
-                    )
-            )
-        }
-        .buttonStyle(PlainButtonStyle())
+            .frame(maxWidth: .infinity).frame(height: 320).padding(24)
+            .background(backgroundMaterial)
+            .cornerRadius(20)
+            .overlay(RoundedRectangle(cornerRadius: 20).stroke(exportFormat == format ? Color("AccentColor") : .clear, lineWidth: 3))
+        }.buttonStyle(PlainButtonStyle())
     }
     
-    // MARK: - Export Button
     private var exportButton: some View {
         Button(action: {
-            if exportFormat == .pdf {
-                generateAndSharePDF()
-            } else {
-                showingTextShareSheet = true
-            }
+            if exportFormat == .pdf { generateAndSharePDF() } else { showingTextShareSheet = true }
         }) {
             HStack(spacing: 12) {
-                if isGeneratingPDF {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                        .scaleEffect(isIPad ? 1.2 : 0.8)
-                } else {
-                    Image(systemName: exportFormat.icon)
-                        .font(isIPad ? .title2 : .headline)
-                }
+                if isGeneratingPDF { ProgressView().progressViewStyle(CircularProgressViewStyle(tint: .white)).scaleEffect(isIPad ? 1.2 : 0.8) }
+                else { Image(systemName: exportFormat.icon).font(isIPad ? .title2 : .headline) }
                 
-                if isGeneratingPDF {
-                    Text(NSLocalizedString("Generating PDF...", comment: "PDF generation status"))
-                        .fontWeight(.semibold)
-                        .font(isIPad ? .title3 : .headline)
-                } else {
-                    HStack(spacing: 4) {
-                        Text(NSLocalizedString("Export as", comment: "Export button prefix"))
-                        Text(exportFormat.displayName)
-                    }
-                    .fontWeight(.semibold)
-                    .font(isIPad ? .title3 : .headline)
-                }
+                if isGeneratingPDF { Text("Generating PDF...", comment: "PDF generation status").fontWeight(.semibold).font(isIPad ? .title3 : .headline) }
+                else { HStack(spacing: 4) { Text("Export as", comment: "Export button prefix"); Text(exportFormat.displayName) }.fontWeight(.semibold).font(isIPad ? .title3 : .headline) }
             }
-            .foregroundColor(.white)
-            .frame(maxWidth: isIPad ? 400 : .infinity)
-            .padding(isIPad ? 20 : 16)
-            .background(Color("AccentColor"))
+            .foregroundColor(.white).frame(maxWidth: isIPad ? 400 : .infinity).padding(isIPad ? 20 : 16)
+            .background(exportButtonBackground)
             .cornerRadius(isIPad ? 16 : 12)
             .disabled(isGeneratingPDF)
         }
     }
     
+    // MARK: - Helper Methods & Views
+    
+    @ViewBuilder
+    private var backgroundMaterial: some View {
+        if #available(iOS 26.0, *) {
+            Color.clear.background(.regularMaterial)
+        } else {
+            Color(UIColor.secondarySystemBackground)
+        }
+    }
+    
+    @ViewBuilder
+    private var exportButtonBackground: some View {
+        if #available(iOS 26.0, *) {
+            Color.clear.background(.regularMaterial).overlay(Color("AccentColor").opacity(0.8)).clipShape(RoundedRectangle(cornerRadius: isIPad ? 16 : 12))
+        } else {
+            Color("AccentColor")
+        }
+    }
+    
+    @ToolbarContentBuilder
+    private var navigationToolbar: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) { Button("Done") { dismiss() }.font(isIPad ? .title3 : .body) }
+    }
+    
     private func generateAndSharePDF() {
         isGeneratingPDF = true
-        
-        // Generate PDF on background queue
         DispatchQueue.global(qos: .userInitiated).async {
             let pdfData = PDFExportManager.shared.createPDF(from: dataManager)
-            
             DispatchQueue.main.async {
                 isGeneratingPDF = false
-                if let data = pdfData {
-                    generatedPDFData = data
-                    showingShareSheet = true
-                } else {
-                    // Handle error - could show an alert
-                    print("Failed to generate PDF")
-                }
+                if let data = pdfData { generatedPDFData = data; showingShareSheet = true }
+                else { print("Failed to generate PDF") }
             }
         }
     }
 }
 
-// MARK: - Format Selection Card (iPhone)
+// MARK: - Sub-components (Moved outside ExportView)
+
 struct FormatSelectionCard: View {
     let format: ExportView.ExportFormat
     let isSelected: Bool
@@ -288,48 +223,29 @@ struct FormatSelectionCard: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 16) {
-                Image(systemName: format.icon)
-                    .font(.title2)
-                    .foregroundColor(isSelected ? Color("AccentColor") : .secondary)
-                    .frame(width: 30)
-                
+                Image(systemName: format.icon).font(.title2).foregroundColor(isSelected ? Color("AccentColor") : .secondary).frame(width: 30)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(format.displayName)
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                    
-                    Text(format.description)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .fixedSize(horizontal: false, vertical: true) // allow wrapping without truncation
+                    Text(format.displayName).font(.headline).foregroundColor(.primary)
+                    Text(format.description).font(.subheadline).foregroundColor(.secondary).fixedSize(horizontal: false, vertical: true)
                 }
-                
                 Spacer()
-                
-                if isSelected {
-                    Image(systemName: "checkmark.circle.fill")
-                        .font(.title3)
-                        .foregroundColor(Color("AccentColor"))
-                }
+                if isSelected { Image(systemName: "checkmark.circle.fill").font(.title3).foregroundColor(Color("AccentColor")) }
             }
             .padding(20)
-            .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(Color(UIColor.secondarySystemBackground))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(
-                                isSelected ? Color("AccentColor") : Color.clear,
-                                lineWidth: 2
-                            )
-                    )
-            )
-        }
-        .buttonStyle(PlainButtonStyle())
+            .background(backgroundMaterial)
+            .cornerRadius(16)
+            .overlay(RoundedRectangle(cornerRadius: 16).stroke(isSelected ? Color("AccentColor") : .clear, lineWidth: 2))
+        }.buttonStyle(PlainButtonStyle())
+    }
+    
+    @ViewBuilder
+    private var backgroundMaterial: some View {
+        if #available(iOS 26.0, *) {
+            Color.clear.background(.regularMaterial)
+        } else { Color(UIColor.secondarySystemBackground) }
     }
 }
 
-// MARK: - Export Content Row
 struct ExportContentRow: View {
     let icon: String
     let title: String
@@ -337,117 +253,55 @@ struct ExportContentRow: View {
     
     var body: some View {
         HStack(spacing: 12) {
-            Image(systemName: icon)
-                .font(.subheadline)
-                .foregroundColor(color)
-                .frame(width: 20)
-            
-            Text(title)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .lineLimit(1)
-            
+            Image(systemName: icon).font(.subheadline).foregroundColor(color).frame(width: 20)
+            Text(title).font(.subheadline).foregroundColor(.secondary).lineLimit(1)
             Spacer()
         }
     }
 }
 
-// MARK: - Data Summary Card (Enhanced for iPad)
 struct DataSummaryCard: View {
-    let dataManager: DataManager
+    @ObservedObject var dataManager: DataManager
     let isIPad: Bool
     
     var body: some View {
         VStack(alignment: .leading, spacing: isIPad ? 24 : 16) {
-            Text(NSLocalizedString("Your Data Summary", comment: "Data summary card title"))
-                .font(isIPad ? .title2 : .headline)
-                .fontWeight(.semibold)
+            Text("Your Data Summary", comment: "Data summary card title").font(isIPad ? .title2 : .headline).fontWeight(.semibold)
             
-            if isIPad {
-                // iPad layout - 3 columns with larger spacing
-                HStack(spacing: 40) {
-                    DataSummaryItem(
-                        icon: "heart.fill",
-                        count: dataManager.emotions.count,
-                        label: NSLocalizedString("Emotions", comment: ""),
-                        color: Color("EmotionHappy"),
-                        isIPad: isIPad
-                    )
-                    
-                    DataSummaryItem(
-                        icon: "star.fill",
-                        count: dataManager.moments.count,
-                        label: NSLocalizedString("Moments", comment: ""),
-                        color: Color("EmotionExcited"),
-                        isIPad: isIPad
-                    )
-                    
-                    DataSummaryItem(
-                        icon: "waveform.path.ecg",
-                        count: dataManager.stressRecords.count,
-                        label: NSLocalizedString("Stress Records", comment: ""),
-                        color: Color("StressModerate"),
-                        isIPad: isIPad
-                    )
-                }
-            } else {
-                // iPhone layout - compact horizontal
-                HStack(spacing: 20) {
-                    DataSummaryItem(
-                        icon: "heart.fill",
-                        count: dataManager.emotions.count,
-                        label: NSLocalizedString("Emotions", comment: ""),
-                        color: Color("EmotionHappy"),
-                        isIPad: isIPad
-                    )
-                    
-                    DataSummaryItem(
-                        icon: "star.fill",
-                        count: dataManager.moments.count,
-                        label: NSLocalizedString("Moments", comment: ""),
-                        color: Color("EmotionExcited"),
-                        isIPad: isIPad
-                    )
-                    
-                    DataSummaryItem(
-                        icon: "waveform.path.ecg",
-                        count: dataManager.stressRecords.count,
-                        label: NSLocalizedString("Stress Records", comment: ""),
-                        color: Color("StressModerate"),
-                        isIPad: isIPad
-                    )
-                }
-            }
+            let gridLayout = isIPad ? AnyView(HStack(spacing: 40) { summaryItems }) : AnyView(HStack(spacing: 20) { summaryItems })
+            gridLayout
             
             let totalEntries = dataManager.emotions.count + dataManager.moments.count + dataManager.stressRecords.count
-            
             HStack {
-                Text(String(format: NSLocalizedString("Total entries: %d", comment: "Total entries count"), totalEntries))
-                    .font(isIPad ? .title3 : .subheadline)
-                    .foregroundColor(.secondary)
-                
+                Text(String(format: NSLocalizedString("Total entries: %d", comment: "Total entries count"), totalEntries)).font(isIPad ? .title3 : .subheadline).foregroundColor(.secondary)
                 Spacer()
-                
                 if totalEntries > 0 {
-                    Text(NSLocalizedString("Ready to export! 🎉", comment: "Ready to export message"))
-                        .font(isIPad ? .title3 : .subheadline)
-                        .foregroundColor(Color("AccentColor"))
+                    Text("Ready to export! 🎉", comment: "Ready to export message").font(isIPad ? .title3 : .subheadline).foregroundColor(Color("AccentColor"))
                 } else {
-                    Text(NSLocalizedString("No data to export yet", comment: "No data message"))
-                        .font(isIPad ? .title3 : .subheadline)
-                        .foregroundColor(.secondary)
+                    Text("No data to export yet", comment: "No data message").font(isIPad ? .title3 : .subheadline).foregroundColor(.secondary)
                 }
             }
         }
         .padding(isIPad ? 32 : 20)
-        .background(
-            RoundedRectangle(cornerRadius: isIPad ? 20 : 16)
-                .fill(Color(UIColor.secondarySystemBackground))
-        )
+        .background(backgroundMaterial)
+        .cornerRadius(isIPad ? 20 : 16)
+    }
+
+    @ViewBuilder
+    private var summaryItems: some View {
+        DataSummaryItem(icon: "heart.fill", count: dataManager.emotions.count, label: NSLocalizedString("Emotions", comment: ""), color: Color("EmotionHappy"), isIPad: isIPad)
+        DataSummaryItem(icon: "star.fill", count: dataManager.moments.count, label: NSLocalizedString("Moments", comment: ""), color: Color("EmotionExcited"), isIPad: isIPad)
+        DataSummaryItem(icon: "waveform.path.ecg", count: dataManager.stressRecords.count, label: NSLocalizedString("Stress Records", comment: ""), color: Color("StressModerate"), isIPad: isIPad)
+    }
+
+    @ViewBuilder
+    private var backgroundMaterial: some View {
+        if #available(iOS 26.0, *) {
+            Color.clear.background(.regularMaterial)
+        } else { Color(UIColor.secondarySystemBackground) }
     }
 }
 
-// MARK: - Data Summary Item (Enhanced for iPad)
 struct DataSummaryItem: View {
     let icon: String
     let count: Int
@@ -457,49 +311,21 @@ struct DataSummaryItem: View {
     
     var body: some View {
         VStack(spacing: isIPad ? 12 : 8) {
-            Image(systemName: icon)
-                .font(isIPad ? .largeTitle : .title2)
-                .foregroundColor(color)
-            
-            Text("\(count)")
-                .font(isIPad ? .title : .title3)
-                .fontWeight(.bold)
-            
-            Text(label)
-                .font(isIPad ? .body : .caption)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
+            Image(systemName: icon).font(isIPad ? .largeTitle : .title2).foregroundColor(color)
+            Text("\(count)").font(isIPad ? .title : .title3).fontWeight(.bold)
+            Text(label).font(isIPad ? .body : .caption).foregroundColor(.secondary).multilineTextAlignment(.center)
         }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, isIPad ? 8 : 0)
+        .frame(maxWidth: .infinity).padding(.vertical, isIPad ? 8 : 0)
     }
 }
 
-// MARK: - PDF Share Item
 class PDFShareItem: NSObject, UIActivityItemSource {
     let data: Data
     let filename: String
     
-    init(data: Data, filename: String) {
-        self.data = data
-        self.filename = filename
-        super.init()
-    }
-    
-    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return data
-    }
-    
-    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-        return data
-    }
-    
-    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
-        return "Walden Vibes - Wellness Report"
-    }
-    
-    func activityViewController(_ activityViewController: UIActivityViewController, dataTypeIdentifierForActivityType activityType: UIActivity.ActivityType?) -> String {
-        return "com.adobe.pdf"
-    }
+    init(data: Data, filename: String) { self.data = data; self.filename = filename; super.init() }
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any { return data }
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? { return data }
+    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String { return "Walden Vibes - Wellness Report" }
+    func activityViewController(_ activityViewController: UIActivityViewController, dataTypeIdentifierForActivityType activityType: UIActivity.ActivityType?) -> String { return "com.adobe.pdf" }
 }
-

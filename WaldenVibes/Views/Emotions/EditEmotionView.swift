@@ -25,145 +25,243 @@ struct EditEmotionView: View {
     }
     
     var body: some View {
-        NavigationView {
-            Form {
-                // Emotion Selection
-                Section {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 20) {
-                            ForEach(EmotionType.allCases, id: \.self) { type in
-                                EmotionButton(
-                                    type: type,
-                                    isSelected: selectedType == type,
-                                    action: {
-                                        withAnimation(.spring()) {
-                                            selectedType = type
-                                        }
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            NavigationView {
+                ZStack {
+                    AnimatedGlassBackground(color: selectedType.color).ignoresSafeArea()
+
+                    Form {
+                        // Emotion Selection
+                        Section {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 16) {
+                                    ForEach(EmotionType.allCases, id: \.self) { type in
+                                        EmotionButton(
+                                            type: type,
+                                            isSelected: selectedType == type,
+                                            action: { withAnimation(.spring()) { selectedType = type } }
+                                        )
                                     }
-                                )
+                                }
+                                .padding(.horizontal)
+                                .padding(.vertical, 10)
                             }
-                        }
-                        .padding(.vertical, 10)
-                    }
-                } header: {
-                    Text("Select emotion", comment: "Section header for emotion selection")
-                }
-                
-                // Intensity Slider
-                Section {
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack {
-                            Text("Intensity", comment: "Label for emotion intensity")
-                            Spacer()
-                            Text("\(Int(intensity))")
-                                .fontWeight(.semibold)
-                                .foregroundColor(selectedType.color)
+                            .listRowBackground(Color.clear)
+                        } header: {
+                            Text("Select emotion", comment: "Section header for emotion selection")
                         }
                         
-                        Slider(value: $intensity, in: 1...10, step: 1)
-                            .accentColor(selectedType.color)
-                            .onChange(of: intensity) { _, newValue in
-                                // Progressive haptic feedback based on intensity
-                                triggerProgressiveHaptic(for: newValue, previous: previousIntensity)
-                                previousIntensity = newValue
-                            }
+                        // Intensity Slider
+                        Section {
+                            intensitySliderContent
+                        } header: {
+                            Text("Emotion intensity", comment: "Section header for intensity slider")
+                        }
+                        .listRowBackground(formRowBackground)
                         
-                        IntensityView(intensity: intensity, color: selectedType.color)
-                            .frame(maxWidth: .infinity)
+                        // Notes
+                        Section {
+                            notesEditorContent
+                        } header: {
+                            Text("Notes", comment: "Section header for notes field")
+                        } footer: {
+                            Text("Optional notes about how you're feeling", comment: "Footer text explaining the notes field")
+                        }
+                        .listRowBackground(formRowBackground)
+                        
+                        // Location
+                        Section {
+                            locationSelectorContent
+                        } header: {
+                            Text("Location", comment: "Section header for location field")
+                        }
+                        .listRowBackground(formRowBackground)
                     }
-                } header: {
-                    Text("Emotion intensity", comment: "Section header for intensity slider")
+                    .scrollContentBackground(.hidden)
+                    .navigationTitle("Edit Emotion")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar { navigationToolbar }
                 }
-                
-                // Notes
-                Section {
-                    TextEditor(text: $note)
-                        .frame(minHeight: 100)
-                } header: {
-                    Text("Notes", comment: "Section header for notes field")
-                } footer: {
-                    Text("Optional notes about how you're feeling", comment: "Footer text explaining the notes field")
-                }
-                
-                // Location
-                Section {
-                    Toggle("Include location", isOn: $includeLocation)
+                .onTapGesture { hideKeyboard() }
+                .onAppear { previousIntensity = intensity }
+
+            }
+        } else {
+            // MARK: - iOS 18 Design
+            NavigationView {
+                Form {
+                    // Emotion Selection
+                    Section {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
+                                ForEach(EmotionType.allCases, id: \.self) { type in
+                                    EmotionButton(
+                                        type: type,
+                                        isSelected: selectedType == type,
+                                        action: {
+                                            withAnimation(.spring()) {
+                                                selectedType = type
+                                            }
+                                        }
+                                    )
+                                }
+                            }
+                            .padding(.vertical, 10)
+                        }
+                    } header: {
+                        Text("Select emotion", comment: "Section header for emotion selection")
+                    }
                     
-                    if includeLocation {
-                        TextField("Location", text: $location, prompt: Text("Where are you?"))
+                    // Intensity Slider
+                    Section {
+                        VStack(alignment: .leading, spacing: 12) {
+                            HStack {
+                                Text("Intensity", comment: "Label for emotion intensity")
+                                Spacer()
+                                Text("\(Int(intensity))")
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(selectedType.color)
+                            }
+                            
+                            Slider(value: $intensity, in: 1...10, step: 1)
+                                .accentColor(selectedType.color)
+                                .onChange(of: intensity) { _, newValue in
+                                    triggerProgressiveHaptic(for: newValue, previous: previousIntensity)
+                                    previousIntensity = newValue
+                                }
+                            
+                            IntensityView(intensity: intensity, color: selectedType.color)
+                                .frame(maxWidth: .infinity)
+                        }
+                    } header: {
+                        Text("Emotion intensity", comment: "Section header for intensity slider")
                     }
-                } header: {
-                    Text("Location", comment: "Section header for location field")
-                }
-            }
-            .navigationTitle("Edit Emotion")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
+                    
+                    // Notes
+                    Section {
+                        TextEditor(text: $note)
+                            .frame(minHeight: 100)
+                    } header: {
+                        Text("Notes", comment: "Section header for notes field")
+                    } footer: {
+                        Text("Optional notes about how you're feeling", comment: "Footer text explaining the notes field")
+                    }
+                    
+                    // Location
+                    Section {
+                        Toggle("Include location", isOn: $includeLocation)
+                        
+                        if includeLocation {
+                            TextField("Location", text: $location, prompt: Text("Where are you?"))
+                        }
+                    } header: {
+                        Text("Location", comment: "Section header for location field")
                     }
                 }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
-                        updateEmotion()
-                    }
-                    .fontWeight(.semibold)
+                .navigationTitle("Edit Emotion")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) { Button("Cancel") { dismiss() } }
+                    ToolbarItem(placement: .navigationBarTrailing) { Button("Save") { updateEmotion() }.fontWeight(.semibold) }
                 }
-            }
-            .onTapGesture {
-                hideKeyboard()
+                .onTapGesture { hideKeyboard() }
             }
         }
     }
+
+    // MARK: - iOS 26 View Components
     
-    // MARK: - Haptic Feedback
+    @available(iOS 26.0, *)
+    private var formRowBackground: some View {
+        Color.clear
+            .background(.thinMaterial)
+            .cornerRadius(12)
+    }
+
+    @available(iOS 26.0, *)
+    private var intensitySliderContent: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text("Intensity", comment: "Label for emotion intensity")
+                Spacer()
+                Text("\(Int(intensity))").fontWeight(.semibold).foregroundColor(selectedType.color)
+            }
+            Slider(value: $intensity, in: 1...10, step: 1)
+                .accentColor(selectedType.color)
+                .onChange(of: intensity) { _, newValue in
+                    triggerProgressiveHaptic(for: newValue, previous: previousIntensity)
+                    previousIntensity = newValue
+                }
+            IntensityView(intensity: intensity, color: selectedType.color).frame(maxWidth: .infinity)
+        }
+        .padding()
+    }
+
+    @available(iOS 26.0, *)
+    private var notesEditorContent: some View {
+        TextEditor(text: $note)
+            .frame(minHeight: 100)
+            .background(Color.clear)
+            .padding(4)
+    }
+
+    @available(iOS 26.0, *)
+    private var locationSelectorContent: some View {
+        VStack {
+            Toggle("Include location", isOn: $includeLocation)
+                .tint(Color("AccentColor"))
+            
+            if includeLocation {
+                TextField("Location", text: $location, prompt: Text("Where are you?"))
+                    .textFieldStyle(.plain)
+                    .padding(8)
+                    .background(.ultraThinMaterial)
+                    .cornerRadius(8)
+                    .padding(.top, 4)
+            }
+        }
+        .padding()
+    }
+    
+    @ToolbarContentBuilder
+    private var navigationToolbar: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) { Button("Cancel") { dismiss() } }
+        ToolbarItem(placement: .navigationBarTrailing) { Button("Save") { updateEmotion() }.fontWeight(.semibold) }
+    }
+    
+    // MARK: - Helper Functions
     private func triggerProgressiveHaptic(for newValue: Double, previous: Double) {
         let difference = abs(newValue - previous)
-        
         if difference >= 1 {
-            // Determine intensity based on emotion intensity level
             let hapticStyle: UIImpactFeedbackGenerator.FeedbackStyle
-            
             switch newValue {
-            case 1...3:
-                hapticStyle = .light
-            case 4...6:
-                hapticStyle = .medium
-            case 7...10:
-                hapticStyle = .heavy
-            default:
-                hapticStyle = .medium
+            case 1...3: hapticStyle = .light
+            case 4...6: hapticStyle = .medium
+            case 7...10: hapticStyle = .heavy
+            default: hapticStyle = .medium
             }
-            
-            let impactFeedback = UIImpactFeedbackGenerator(style: hapticStyle)
-            impactFeedback.impactOccurred()
+            UIImpactFeedbackGenerator(style: hapticStyle).impactOccurred()
         }
     }
     
     private func updateEmotion() {
-        // Create updated emotion
         let updatedEmotion = Emotion(
             id: emotion.id,
             type: selectedType,
             intensity: intensity,
             note: note,
-            date: emotion.date, // Keep original date
+            date: emotion.date,
             location: includeLocation && !location.isEmpty ? location : nil
         )
         
-        // Update in data manager
         if let index = dataManager.emotions.firstIndex(where: { $0.id == emotion.id }) {
             dataManager.emotions[index] = updatedEmotion
             dataManager.saveEmotions()
         }
         
-        // Strong haptic feedback for successful save
-        let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
-        impactFeedback.impactOccurred()
+        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         
-        // Play custom sound
         if let soundURL = Bundle.main.url(forResource: "EmotionRecorded", withExtension: "mp3") {
             var soundID: SystemSoundID = 0
             AudioServicesCreateSystemSoundID(soundURL as CFURL, &soundID)

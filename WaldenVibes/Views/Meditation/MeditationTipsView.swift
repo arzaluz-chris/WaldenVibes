@@ -13,34 +13,60 @@ struct MeditationTipsView: View {
     @State private var timer: Timer?
     
     var body: some View {
-        VStack(spacing: 12) {
-            Text("Tips", comment: "Header for meditation tips section")
-                .font(.headline)
-                .foregroundColor(.secondary)
-            
-            Text(tips[currentTipIndex])
-                .font(.subheadline)
-                .multilineTextAlignment(.center)
-                .foregroundColor(.secondary)
-                .padding(.horizontal, 30)
-                .fixedSize(horizontal: false, vertical: true) // Allow text to expand vertically
-                .frame(minHeight: 50) // Ensure minimum height for longer tips
-                .animation(.easeInOut, value: currentTipIndex)
-        }
-        .frame(maxWidth: .infinity)
-        .onAppear {
-            startTimer()
-        }
-        .onDisappear {
-            timer?.invalidate()
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            VStack(spacing: 12) {
+                Text("Tips", comment: "Header for meditation tips section")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+                
+                Text(tips[currentTipIndex])
+                    .font(.subheadline)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal, 30)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(minHeight: 50)
+                    .id(currentTipIndex) // Use ID to force view update for transition
+                    .transition(.opacity.animation(.easeInOut))
+            }
+            .padding()
+            .background(.regularMaterial)
+            .cornerRadius(20)
+            .shadow(color: .black.opacity(0.1), radius: 10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.white.opacity(0.2), lineWidth: 1)
+            )
+            .onAppear(perform: startTimer)
+            .onDisappear { timer?.invalidate() }
+
+        } else {
+            // MARK: - iOS 18 Design
+            VStack(spacing: 12) {
+                Text("Tips", comment: "Header for meditation tips section")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+                
+                Text(tips[currentTipIndex])
+                    .font(.subheadline)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal, 30)
+                    .fixedSize(horizontal: false, vertical: true) // Allow text to expand vertically
+                    .frame(minHeight: 50) // Ensure minimum height for longer tips
+                    .animation(.easeInOut, value: currentTipIndex)
+            }
+            .frame(maxWidth: .infinity)
+            .onAppear(perform: startTimer)
+            .onDisappear { timer?.invalidate() }
         }
     }
     
     private func startTimer() {
+        timer?.invalidate() // Ensure no duplicate timers
         timer = Timer.scheduledTimer(withTimeInterval: 7, repeats: true) { _ in
-            withAnimation {
-                currentTipIndex = (currentTipIndex + 1) % tips.count
-            }
+            currentTipIndex = (currentTipIndex + 1) % tips.count
         }
     }
 }

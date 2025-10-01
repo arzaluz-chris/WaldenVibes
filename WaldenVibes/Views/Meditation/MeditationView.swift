@@ -51,89 +51,110 @@ struct MeditationView: View {
     }
     
     var body: some View {
-        ZStack {
-            // Background
-            backgroundView
-            
-            GeometryReader { geometry in
-                VStack(spacing: 30) {
-                    // Add spacer to push content down
-                    Spacer()
-                        .frame(height: geometry.size.height * 0.1) // 10% of screen height
-                    
-                    // Title centered in available space
-                    Text("Time to Meditate", comment: "Meditation screen title")
-                        .font(horizontalSizeClass == .regular ? .system(size: 48, weight: .light) : .largeTitle)
-                        .fontWeight(.light)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                    
-                    Spacer()
-                        .frame(height: 20)
-                    
-                    // Timer Circle - centered vertically
-                    timerCircleView
-                    
-                    Spacer()
-                        .frame(height: 30)
-                    
-                    // Control buttons
-                    controlButtonsView
-                    
-                    // Bottom spacer
-                    Spacer()
-                        .frame(height: geometry.size.height * 0.15) // 15% of screen height
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            ZStack {
+                // Animated glass background
+                AnimatedGlassBackground(color: Color("AccentColor"))
+                
+                GeometryReader { geometry in
+                    VStack(spacing: 30) {
+                        Spacer().frame(height: geometry.size.height * 0.1)
+                        
+                        Text("Time to Meditate", comment: "Meditation screen title")
+                            .font(horizontalSizeClass == .regular ? .system(size: 48, weight: .light) : .largeTitle)
+                            .fontWeight(.light)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
+                        
+                        Spacer().frame(height: 20)
+                        
+                        timerCircleView
+                        
+                        Spacer().frame(height: 30)
+                        
+                        controlButtonsView
+                        
+                        Spacer().frame(height: geometry.size.height * 0.15)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-        }
-        .navigationTitle("")
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackgroundHidden()
-        .sheet(isPresented: $showingDurationPicker) {
-            DurationPickerView(selectedDuration: $meditationManager.selectedDuration)
-        }
-        .sheet(isPresented: $showingSoundPicker) {
-            SoundPickerView(selectedSound: Binding(
-                get: { selectedSound },
-                set: { newValue in selectedSoundRawValue = newValue.rawValue }
-            ))
-        }
-        .onAppear {
-            setupBackgroundAudio()
-        }
-        .onChange(of: meditationManager.isActive) { _, isActive in
-            if isActive {
-                withAnimation(.easeInOut(duration: 1)) {
-                    animateCircle = true
+            .navigationTitle("")
+            .navigationBarHidden(true)
+            .sheet(isPresented: $showingDurationPicker) { DurationPickerView(selectedDuration: $meditationManager.selectedDuration) }
+            .sheet(isPresented: $showingSoundPicker) {
+                SoundPickerView(selectedSound: Binding(
+                    get: { selectedSound },
+                    set: { newValue in selectedSoundRawValue = newValue.rawValue }
+                ))
+            }
+            .onAppear(perform: setupAudioAndAnimation)
+            .onChange(of: meditationManager.isActive, perform: handleActiveChange)
+            .onChange(of: meditationManager.isPaused, perform: handlePauseChange)
+
+        } else {
+            // MARK: - iOS 18 Design
+            ZStack {
+                backgroundView
+                
+                GeometryReader { geometry in
+                    VStack(spacing: 30) {
+                        Spacer().frame(height: geometry.size.height * 0.1)
+                        Text("Time to Meditate", comment: "Meditation screen title")
+                            .font(horizontalSizeClass == .regular ? .system(size: 48, weight: .light) : .largeTitle)
+                            .fontWeight(.light).multilineTextAlignment(.center).padding(.horizontal)
+                        Spacer().frame(height: 20)
+                        timerCircleView
+                        Spacer().frame(height: 30)
+                        controlButtonsView
+                        Spacer().frame(height: geometry.size.height * 0.15)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                playMeditationSound()
-            } else {
-                animateCircle = false
-                stopMeditationSound()
             }
-        }
-        .onChange(of: meditationManager.isPaused) { _, isPaused in
-            if isPaused {
-                pauseMeditationSound()
-            } else if meditationManager.isActive {
-                resumeMeditationSound()
+            .navigationTitle("").navigationBarTitleDisplayMode(.inline).navigationBarBackgroundHidden()
+            .sheet(isPresented: $showingDurationPicker) { DurationPickerView(selectedDuration: $meditationManager.selectedDuration) }
+            .sheet(isPresented: $showingSoundPicker) {
+                SoundPickerView(selectedSound: Binding(
+                    get: { selectedSound },
+                    set: { newValue in selectedSoundRawValue = newValue.rawValue }
+                ))
+            }
+            .onAppear { setupBackgroundAudio() }
+            .onChange(of: meditationManager.isActive) { _, isActive in
+                if isActive { withAnimation(.easeInOut(duration: 1)) { animateCircle = true }; playMeditationSound() }
+                else { animateCircle = false; stopMeditationSound() }
+            }
+            .onChange(of: meditationManager.isPaused) { _, isPaused in
+                if isPaused { pauseMeditationSound() } else if meditationManager.isActive { resumeMeditationSound() }
             }
         }
     }
-    
-    // MARK: - Audio Setup
-    private func setupBackgroundAudio() {
-        do {
-            // Configure audio session for background playback and to override silent mode
-            try AVAudioSession.sharedInstance().setCategory(
-                .playback,
-                mode: .default,
-                options: [.allowBluetooth, .allowBluetoothA2DP, .allowAirPlay, .mixWithOthers]
-            )
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            print("Failed to configure audio session: \(error)")
+
+    // MARK: - iOS 26 Setup
+    private func setupAudioAndAnimation() {
+        setupBackgroundAudio()
+        if meditationManager.isActive {
+            animateCircle = true
+        }
+    }
+
+    private func handleActiveChange(newValue: Bool) {
+        if newValue {
+            withAnimation(.easeInOut(duration: 1)) { animateCircle = true }
+            playMeditationSound()
+        } else {
+            animateCircle = false
+            stopMeditationSound()
+        }
+    }
+
+    private func handlePauseChange(newValue: Bool) {
+        if newValue {
+            pauseMeditationSound()
+        } else if meditationManager.isActive {
+            resumeMeditationSound()
         }
     }
     
@@ -141,49 +162,32 @@ struct MeditationView: View {
     private var backgroundView: some View {
         ZStack {
             Image("MeditationBackground")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
+                .resizable().aspectRatio(contentMode: .fill).ignoresSafeArea().opacity(0.3)
+            LinearGradient(colors: [Color("AccentColor").opacity(0.1), Color("AccentColor").opacity(0.3)], startPoint: .topLeading, endPoint: .bottomTrailing)
                 .ignoresSafeArea()
-                .opacity(0.3)
-            
-            LinearGradient(
-                colors: [
-                    Color("AccentColor").opacity(0.1),
-                    Color("AccentColor").opacity(0.3)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
         }
     }
     
     private var timerCircleView: some View {
         ZStack {
-            // Background circle
-            Circle()
-                .stroke(
-                    Color("AccentColor").opacity(0.2),
-                    lineWidth: 20
-                )
-                .frame(width: circleSize, height: circleSize)
+            if #available(iOS 26.0, *) {
+                // Glassmorphism background for the circle
+                Circle()
+                    .fill(.regularMaterial)
+                    .frame(width: circleSize, height: circleSize)
+                    .overlay(Circle().stroke(.white.opacity(0.2), lineWidth: 1))
+                    .shadow(radius: 20)
+            } else {
+                Circle().stroke(Color("AccentColor").opacity(0.2), lineWidth: 20)
+                    .frame(width: circleSize, height: circleSize)
+            }
             
             // Progress circle
             Circle()
                 .trim(from: 0, to: meditationManager.progress)
                 .stroke(
-                    LinearGradient(
-                        colors: [
-                            Color("AccentColor"),
-                            Color("AccentColor").opacity(0.7)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ),
-                    style: StrokeStyle(
-                        lineWidth: 20,
-                        lineCap: .round
-                    )
+                    LinearGradient(colors: [Color("AccentColor"), Color("AccentColor").opacity(0.7)], startPoint: .topLeading, endPoint: .bottomTrailing),
+                    style: StrokeStyle(lineWidth: 20, lineCap: .round)
                 )
                 .frame(width: circleSize, height: circleSize)
                 .rotationEffect(.degrees(-90))
@@ -194,7 +198,6 @@ struct MeditationView: View {
                 animatedCircles
             }
             
-            // Time display
             timeDisplayView
         }
     }
@@ -202,22 +205,11 @@ struct MeditationView: View {
     private var animatedCircles: some View {
         ForEach(0..<3) { index in
             Circle()
-                .stroke(
-                    Color("AccentColor").opacity(0.3),
-                    lineWidth: 2
-                )
-                .frame(
-                    width: circleSize + CGFloat(index * 40),
-                    height: circleSize + CGFloat(index * 40)
-                )
+                .stroke(Color("AccentColor").opacity(0.3), lineWidth: 2)
+                .frame(width: circleSize + CGFloat(index * 40), height: circleSize + CGFloat(index * 40))
                 .scaleEffect(animateCircle ? 1.1 : 1.0)
                 .opacity(animateCircle ? 0 : 0.5)
-                .animation(
-                    Animation.easeInOut(duration: 4)
-                        .repeatForever(autoreverses: false)
-                        .delay(Double(index) * 0.5),
-                    value: animateCircle
-                )
+                .animation(Animation.easeInOut(duration: 4).repeatForever(autoreverses: false).delay(Double(index) * 0.5), value: animateCircle)
         }
     }
     
@@ -231,24 +223,17 @@ struct MeditationView: View {
                 VStack(spacing: 12) {
                     Button(action: { showingDurationPicker = true }) {
                         HStack(spacing: 4) {
-                            Text(meditationManager.durationString(for: meditationManager.selectedDuration))
-                                .font(.subheadline)
-                            Image(systemName: "chevron.down")
-                                .font(.caption)
-                        }
-                        .foregroundColor(.secondary)
+                            Text(meditationManager.durationString(for: meditationManager.selectedDuration)).font(.subheadline)
+                            Image(systemName: "chevron.down").font(.caption)
+                        }.foregroundColor(.secondary)
                     }
                     
                     Button(action: { showingSoundPicker = true }) {
                         HStack(spacing: 6) {
-                            Image(systemName: selectedSound.icon)
-                                .font(.caption)
-                            Text(selectedSound.displayName)
-                                .font(.subheadline)
-                            Image(systemName: "chevron.down")
-                                .font(.caption)
-                        }
-                        .foregroundColor(.secondary)
+                            Image(systemName: selectedSound.icon).font(.caption)
+                            Text(selectedSound.displayName).font(.subheadline)
+                            Image(systemName: "chevron.down").font(.caption)
+                        }.foregroundColor(.secondary)
                     }
                 }
             }
@@ -259,102 +244,76 @@ struct MeditationView: View {
         HStack(spacing: 50) {
             if meditationManager.isActive {
                 // Stop button
-                Button(action: {
-                    // Haptic feedback for stopping meditation
+                controlButton(systemName: "stop.fill", color: .red.opacity(0.8)) {
                     let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
                     impactFeedback.impactOccurred()
-                    
                     meditationManager.stop()
                     stopMeditationSound()
-                }) {
-                    Image(systemName: "stop.fill")
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .frame(width: 80, height: 80)
-                        .background(Color.red.opacity(0.8))
-                        .clipShape(Circle())
                 }
                 
                 // Play/Pause button
-                Button(action: {
-                    if meditationManager.isPaused {
-                        // Haptic feedback for resuming meditation
-                        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-                        impactFeedback.impactOccurred()
-                        
-                        meditationManager.resume()
-                    } else {
-                        // Haptic feedback for pausing meditation
-                        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-                        impactFeedback.impactOccurred()
-                        
-                        meditationManager.pause()
-                    }
-                }) {
-                    Image(systemName: meditationManager.isPaused ? "play.fill" : "pause.fill")
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .frame(width: 80, height: 80)
-                        .background(Color("AccentColor"))
-                        .clipShape(Circle())
+                controlButton(systemName: meditationManager.isPaused ? "play.fill" : "pause.fill", color: Color("AccentColor")) {
+                    let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                    impactFeedback.impactOccurred()
+                    if meditationManager.isPaused { meditationManager.resume() } else { meditationManager.pause() }
                 }
             } else {
                 // Start button
-                Button(action: {
-                    // Haptic feedback for starting meditation
+                controlButton(systemName: "play.fill", color: Color("AccentColor")) {
                     let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
                     impactFeedback.impactOccurred()
-                    
                     meditationManager.start()
-                }) {
-                    Image(systemName: "play.fill")
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .frame(width: 80, height: 80)
-                        .background(Color("AccentColor"))
-                        .clipShape(Circle())
-                        .shadow(color: Color("AccentColor").opacity(0.3), radius: 10, x: 0, y: 5)
                 }
             }
         }
     }
-    
-    // MARK: - Sound Management
-    private func playMeditationSound() {
-        guard selectedSound != .none else { return }
-        
-        if let soundURL = Bundle.main.url(forResource: selectedSound.rawValue, withExtension: "m4a") {
-            do {
-                // Stop any existing player
-                audioPlayer?.stop()
-                
-                // Create new audio player
-                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-                audioPlayer?.numberOfLoops = -1 // Loop indefinitely
-                audioPlayer?.prepareToPlay()
-                audioPlayer?.play()
-                
-                // Configure to play even when app is in background
-                try AVAudioSession.sharedInstance().setActive(true)
-                
-            } catch {
-                print("Failed to play meditation sound: \(error)")
-            }
+
+    @ViewBuilder
+    private func controlButton(systemName: String, color: Color, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: systemName)
+                .font(.title)
+                .foregroundColor(.white)
+                .frame(width: 80, height: 80)
+                .background(
+                    ZStack {
+                        if #available(iOS 26.0, *) {
+                            color
+                                .background(.regularMaterial)
+                                .clipShape(Circle())
+                                .shadow(color: color.opacity(0.4), radius: 10, y: 5)
+                                .overlay(Circle().stroke(.white.opacity(0.3), lineWidth: 1))
+                        } else {
+                            color.clipShape(Circle())
+                        }
+                    }
+                )
         }
     }
     
-    private func pauseMeditationSound() {
-        audioPlayer?.pause()
+    // MARK: - Audio and Sound Management
+    private func setupBackgroundAudio() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.allowBluetooth, .allowBluetoothA2DP, .allowAirPlay, .mixWithOthers])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch { print("Failed to configure audio session: \(error)") }
     }
     
-    private func resumeMeditationSound() {
-        audioPlayer?.play()
+    private func playMeditationSound() {
+        guard selectedSound != .none, let soundURL = Bundle.main.url(forResource: selectedSound.rawValue, withExtension: "m4a") else { return }
+        do {
+            audioPlayer?.stop()
+            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            audioPlayer?.numberOfLoops = -1
+            audioPlayer?.prepareToPlay()
+            audioPlayer?.play()
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch { print("Failed to play meditation sound: \(error)") }
     }
     
-    private func stopMeditationSound() {
-        audioPlayer?.stop()
-        audioPlayer = nil
-    }
+    private func pauseMeditationSound() { audioPlayer?.pause() }
+    private func resumeMeditationSound() { audioPlayer?.play() }
+    private func stopMeditationSound() { audioPlayer?.stop(); audioPlayer = nil }
 }
 
 // Navigation bar background hidden extension
@@ -366,12 +325,11 @@ extension View {
 
 struct NavigationBarBackgroundHiddenModifier: ViewModifier {
     func body(content: Content) -> some View {
-        content
-            .onAppear {
-                let appearance = UINavigationBarAppearance()
-                appearance.configureWithTransparentBackground()
-                UINavigationBar.appearance().standardAppearance = appearance
-                UINavigationBar.appearance().scrollEdgeAppearance = appearance
-            }
+        content.onAppear {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithTransparentBackground()
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
     }
 }
