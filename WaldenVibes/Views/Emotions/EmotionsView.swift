@@ -129,7 +129,7 @@ struct EmotionsView: View {
                 }
             }
             .navigationTitle("Emotions")
-            .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -281,7 +281,7 @@ struct EmotionsView: View {
                 }
             }
             .navigationTitle("Emotions")
-            .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {

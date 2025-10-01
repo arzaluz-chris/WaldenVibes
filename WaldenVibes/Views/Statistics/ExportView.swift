@@ -63,7 +63,7 @@ struct ExportView: View {
             // MARK: - iOS 26 Glassmorphism Design
             NavigationView {
                 ZStack {
-                    AnimatedGlassBackground(color: Color("AccentColor"))
+                    SimpleGlassBackground(color: Color("AccentColor"))
 
                     GeometryReader { geometry in
                         ScrollView {

@@ -23,7 +23,7 @@ struct MomentsView: View {
                 }
             }
             .navigationTitle("Moments")
-            .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { showingAddMoment = true }) {
@@ -64,7 +64,7 @@ struct MomentsView: View {
                                }
                            }
                            .navigationTitle("Moments")
-                           .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
+                           .navigationBarTitleDisplayMode(.inline)
                            .toolbar {
                                ToolbarItem(placement: .navigationBarTrailing) {
                                    Button(action: { showingAddMoment = true }) {

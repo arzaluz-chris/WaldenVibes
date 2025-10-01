@@ -17,7 +17,7 @@ struct SettingsView: View {
         if #available(iOS 26.0, *) {
             // MARK: - iOS 26 Glassmorphism Design
             ZStack {
-                AnimatedGlassBackground(color: .green)
+                SimpleGlassBackground(color: Color("AccentColor"))
 
                 Form {
                     // Appearance Section

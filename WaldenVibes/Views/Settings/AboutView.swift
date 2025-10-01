@@ -9,7 +9,7 @@ struct AboutView: View {
             // MARK: - iOS 26 Glassmorphism Design
             NavigationView {
                 ZStack {
-                    AnimatedGlassBackground(color: .purple)
+                    SimpleGlassBackground(color: Color("AccentColor"))
 
                     ScrollView {
                         VStack(spacing: 30) {

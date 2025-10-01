@@ -7,6 +7,13 @@ struct MeditationView: View {
     @State private var showingDurationPicker = false
     @State private var showingSoundPicker = false
     @State private var animateCircle = false
+    @State private var animateOrbs = false
+    @State private var orbOffset1 = CGSize.zero
+    @State private var orbOffset2 = CGSize.zero
+    @State private var orbOffset3 = CGSize.zero
+    @State private var orbScale1: CGFloat = 1.0
+    @State private var orbScale2: CGFloat = 1.0
+    @State private var orbScale3: CGFloat = 1.0
     @AppStorage("selectedMeditationSound") private var selectedSoundRawValue = "none"
     @State private var audioPlayer: AVAudioPlayer?
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -56,37 +63,89 @@ struct MeditationView: View {
             ZStack {
                 // Animated glass background
                 AnimatedGlassBackground(color: Color("AccentColor"))
+                    .ignoresSafeArea(.all)
+                
+                // Orbes animados de fondo para iOS 26
+                if animateOrbs {
+                    orbsBackground
+                        .ignoresSafeArea(.all)
+                }
 
-                GeometryReader { geometry in
-                    VStack(spacing: 30) {
-                        // Add spacer to push content down
-                        Spacer()
-                            .frame(height: geometry.size.height * 0.1) // 10% of screen height
+                VStack(spacing: 40) {
+                    Spacer()
 
-                        // Title centered in available space
-                        Text("Time to Meditate", comment: "Meditation screen title")
-                            .font(horizontalSizeClass == .regular ? .system(size: 48, weight: .light) : .largeTitle)
-                            .fontWeight(.light)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
+                    // Timer Circle - centered
+                    timerCircleView
+                        .padding(.horizontal, 40)
 
-                        Spacer()
-                            .frame(height: 20)
+                    Spacer()
 
-                        // Timer Circle - centered vertically
-                        timerCircleView
-
-                        Spacer()
-                            .frame(height: 30)
-
+                    // Bottom controls - always visible
+                    VStack(spacing: 24) {
                         // Control buttons
                         controlButtonsView
+                            .opacity(meditationManager.isActive ? 0.7 : 1.0)
 
-                        // Bottom spacer
-                        Spacer()
-                            .frame(height: geometry.size.height * 0.15) // 15% of screen height
+                        // Settings row - translúcida cuando está activo
+                        HStack(spacing: 16) {
+                            // Duration button
+                            Button(action: { showingDurationPicker = true }) {
+                                HStack(spacing: 8) {
+                                    Image(systemName: "timer")
+                                        .font(.body)
+                                    Text(meditationManager.durationString(for: meditationManager.selectedDuration))
+                                        .font(.subheadline)
+                                        .fontWeight(.medium)
+                                }
+                                .foregroundColor(.primary)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .background(.regularMaterial)
+                                .cornerRadius(16)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .stroke(LinearGradient(
+                                            colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        ), lineWidth: 0.5)
+                                )
+                                .shadow(color: .black.opacity(0.05), radius: 5, y: 2)
+                            }
+                            .disabled(meditationManager.isActive)
+
+                            // Sound button
+                            Button(action: { showingSoundPicker = true }) {
+                                HStack(spacing: 8) {
+                                    Image(systemName: selectedSound.icon)
+                                        .font(.body)
+                                    Text(selectedSound.displayName)
+                                        .font(.subheadline)
+                                        .fontWeight(.medium)
+                                        .lineLimit(1)
+                                }
+                                .foregroundColor(.primary)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .background(.regularMaterial)
+                                .cornerRadius(16)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .stroke(LinearGradient(
+                                            colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        ), lineWidth: 0.5)
+                                )
+                                .shadow(color: .black.opacity(0.05), radius: 5, y: 2)
+                            }
+                            .disabled(meditationManager.isActive)
+                        }
+                        .padding(.horizontal, 24)
+                        .opacity(meditationManager.isActive ? 0.4 : 1.0)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(.vertical, 32)
+                    .padding(.bottom, 20)
                 }
             }
             .navigationTitle("")
@@ -108,16 +167,20 @@ struct MeditationView: View {
                     withAnimation(.easeInOut(duration: 1)) {
                         animateCircle = true
                     }
+                    startOrbAnimations()
                     playMeditationSound()
                 } else {
                     animateCircle = false
+                    stopOrbAnimations()
                     stopMeditationSound()
                 }
             }
             .onChange(of: meditationManager.isPaused) { _, isPaused in
                 if isPaused {
+                    pauseOrbAnimations()
                     pauseMeditationSound()
                 } else if meditationManager.isActive {
+                    resumeOrbAnimations()
                     resumeMeditationSound()
                 }
             }
@@ -133,12 +196,32 @@ struct MeditationView: View {
                         Spacer()
                             .frame(height: geometry.size.height * 0.1) // 10% of screen height
 
-                        // Title centered in available space
-                        Text("Time to Meditate", comment: "Meditation screen title")
-                            .font(horizontalSizeClass == .regular ? .system(size: 48, weight: .light) : .largeTitle)
-                            .fontWeight(.light)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
+                        // Title centered in available space con glassmorphism
+                        VStack {
+                            Text("Time to Meditate", comment: "Meditation screen title")
+                                .font(horizontalSizeClass == .regular ? .system(size: 48, weight: .light) : .largeTitle)
+                                .fontWeight(.light)
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.primary)
+                        }
+                        .padding(.horizontal, 32)
+                        .padding(.vertical, 20)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.thinMaterial)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(
+                                            LinearGradient(
+                                                colors: [.white.opacity(0.3), .white.opacity(0.1)],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            ),
+                                            lineWidth: 1
+                                        )
+                                )
+                                .shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 8)
+                        )
 
                         Spacer()
                             .frame(height: 20)
@@ -179,16 +262,20 @@ struct MeditationView: View {
                     withAnimation(.easeInOut(duration: 1)) {
                         animateCircle = true
                     }
+                    startOrbAnimations()
                     playMeditationSound()
                 } else {
                     animateCircle = false
+                    stopOrbAnimations()
                     stopMeditationSound()
                 }
             }
             .onChange(of: meditationManager.isPaused) { _, isPaused in
                 if isPaused {
+                    pauseOrbAnimations()
                     pauseMeditationSound()
                 } else if meditationManager.isActive {
+                    resumeOrbAnimations()
                     resumeMeditationSound()
                 }
             }
@@ -213,34 +300,49 @@ struct MeditationView: View {
     // MARK: - Subviews
     private var backgroundView: some View {
         ZStack {
+            // Fondo base con imagen
             Image("MeditationBackground")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea()
-                .opacity(0.3)
+                .frame(minWidth: UIScreen.main.bounds.width, 
+                       minHeight: UIScreen.main.bounds.height)
+                .ignoresSafeArea(.all)
+                .opacity(0.6)
             
-            LinearGradient(
-                colors: [
-                    Color("AccentColor").opacity(0.1),
-                    Color("AccentColor").opacity(0.3)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
+            // Capa de glassmorphism uniforme
+            Rectangle()
+                .fill(.ultraThinMaterial)
+                .ignoresSafeArea(.all)
+                .overlay(
+                    LinearGradient(
+                        colors: [
+                            Color("AccentColor").opacity(0.15),
+                            Color("AccentColor").opacity(0.25),
+                            Color("AccentColor").opacity(0.1)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+            
+            // Orbes animados de fondo
+            if animateOrbs {
+                orbsBackground
+                    .ignoresSafeArea(.all)
+            }
         }
     }
     
     private var timerCircleView: some View {
         ZStack {
-            // Background circle
+            // Background circle with glassmorphic effect
             Circle()
                 .stroke(
-                    Color("AccentColor").opacity(0.2),
-                    lineWidth: 20
+                    Color("AccentColor").opacity(0.15),
+                    lineWidth: 16
                 )
                 .frame(width: circleSize, height: circleSize)
-            
+
             // Progress circle
             Circle()
                 .trim(from: 0, to: meditationManager.progress)
@@ -248,27 +350,42 @@ struct MeditationView: View {
                     LinearGradient(
                         colors: [
                             Color("AccentColor"),
-                            Color("AccentColor").opacity(0.7)
+                            Color("AccentColor").opacity(0.6)
                         ],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     ),
                     style: StrokeStyle(
-                        lineWidth: 20,
+                        lineWidth: 16,
                         lineCap: .round
                     )
                 )
                 .frame(width: circleSize, height: circleSize)
                 .rotationEffect(.degrees(-90))
                 .animation(.linear(duration: 0.1), value: meditationManager.progress)
-            
-            // Animated circles
+                .shadow(color: Color("AccentColor").opacity(0.3), radius: 8, x: 0, y: 4)
+
+            // Animated breathing circles
             if meditationManager.isActive && !meditationManager.isPaused && animateCircle {
                 animatedCircles
             }
-            
+
             // Time display
-            timeDisplayView
+            VStack(spacing: 4) {
+                Text(meditationManager.formattedTime(from: meditationManager.timeRemaining))
+                    .font(.system(size: horizontalSizeClass == .regular ? 72 : 56, weight: .thin, design: .rounded))
+                    .foregroundColor(.primary)
+                    .monospacedDigit()
+
+                if meditationManager.isActive {
+                    Text(meditationManager.isPaused ? "Paused" : "Breathe")
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundColor(.secondary)
+                        .textCase(.uppercase)
+                        .tracking(2)
+                }
+            }
         }
     }
     
@@ -276,228 +393,184 @@ struct MeditationView: View {
         ForEach(0..<3) { index in
             Circle()
                 .stroke(
-                    Color("AccentColor").opacity(0.3),
-                    lineWidth: 2
+                    Color("AccentColor").opacity(0.2),
+                    lineWidth: 1.5
                 )
                 .frame(
-                    width: circleSize + CGFloat(index * 40),
-                    height: circleSize + CGFloat(index * 40)
+                    width: circleSize + CGFloat(index * 50),
+                    height: circleSize + CGFloat(index * 50)
                 )
-                .scaleEffect(animateCircle ? 1.1 : 1.0)
-                .opacity(animateCircle ? 0 : 0.5)
+                .scaleEffect(animateCircle ? 1.15 : 1.0)
+                .opacity(animateCircle ? 0 : 0.4)
                 .animation(
-                    Animation.easeInOut(duration: 4)
+                    Animation.easeInOut(duration: 5)
                         .repeatForever(autoreverses: false)
-                        .delay(Double(index) * 0.5),
+                        .delay(Double(index) * 0.7),
                     value: animateCircle
                 )
         }
     }
     
-    @ViewBuilder
-    private var timeDisplayView: some View {
-        if #available(iOS 26.0, *) {
-            VStack(spacing: 8) {
-                Text(meditationManager.formattedTime(from: meditationManager.timeRemaining))
-                    .font(.system(size: horizontalSizeClass == .regular ? 64 : 48, weight: .light, design: .rounded))
-                    .foregroundColor(.primary)
-
-                if !meditationManager.isActive {
-                    VStack(spacing: 12) {
-                        Button(action: { showingDurationPicker = true }) {
-                            HStack(spacing: 4) {
-                                Text(meditationManager.durationString(for: meditationManager.selectedDuration))
-                                    .font(.subheadline)
-                                Image(systemName: "chevron.down")
-                                    .font(.caption)
-                            }
-                            .foregroundColor(.primary)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
-                            .background(.thinMaterial)
-                            .cornerRadius(12)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(LinearGradient(
-                                        colors: [.white.opacity(0.5), .white.opacity(0.1)],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    ), lineWidth: 0.5)
-                            )
-                            .shadow(color: .black.opacity(0.05), radius: 5, y: 2)
-                        }
-
-                        Button(action: { showingSoundPicker = true }) {
-                            HStack(spacing: 6) {
-                                Image(systemName: selectedSound.icon)
-                                    .font(.caption)
-                                Text(selectedSound.displayName)
-                                    .font(.subheadline)
-                                Image(systemName: "chevron.down")
-                                    .font(.caption)
-                            }
-                            .foregroundColor(.primary)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
-                            .background(.thinMaterial)
-                            .cornerRadius(12)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(LinearGradient(
-                                        colors: [.white.opacity(0.5), .white.opacity(0.1)],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    ), lineWidth: 0.5)
-                            )
-                            .shadow(color: .black.opacity(0.05), radius: 5, y: 2)
-                        }
-                    }
-                }
-            }
-        } else {
-            VStack(spacing: 8) {
-                Text(meditationManager.formattedTime(from: meditationManager.timeRemaining))
-                    .font(.system(size: horizontalSizeClass == .regular ? 64 : 48, weight: .light, design: .rounded))
-                    .foregroundColor(.primary)
-
-                if !meditationManager.isActive {
-                    VStack(spacing: 12) {
-                        Button(action: { showingDurationPicker = true }) {
-                            HStack(spacing: 4) {
-                                Text(meditationManager.durationString(for: meditationManager.selectedDuration))
-                                    .font(.subheadline)
-                                Image(systemName: "chevron.down")
-                                    .font(.caption)
-                            }
-                            .foregroundColor(.secondary)
-                        }
-
-                        Button(action: { showingSoundPicker = true }) {
-                            HStack(spacing: 6) {
-                                Image(systemName: selectedSound.icon)
-                                    .font(.caption)
-                                Text(selectedSound.displayName)
-                                    .font(.subheadline)
-                                Image(systemName: "chevron.down")
-                                    .font(.caption)
-                            }
-                            .foregroundColor(.secondary)
-                        }
-                    }
-                }
-            }
+    // MARK: - Orbes animados de fondo
+    private var orbsBackground: some View {
+        ZStack {
+            // Orbe 1 - Grande y lento
+            Circle()
+                .fill(
+                    RadialGradient(
+                        colors: [
+                            Color("AccentColor").opacity(0.15),
+                            Color("AccentColor").opacity(0.05),
+                            .clear
+                        ],
+                        center: .center,
+                        startRadius: 10,
+                        endRadius: 120
+                    )
+                )
+                .frame(width: 240, height: 240)
+                .scaleEffect(orbScale1)
+                .offset(orbOffset1)
+                .blur(radius: 2)
+            
+            // Orbe 2 - Mediano
+            Circle()
+                .fill(
+                    RadialGradient(
+                        colors: [
+                            Color("AccentColor").opacity(0.2),
+                            Color("AccentColor").opacity(0.08),
+                            .clear
+                        ],
+                        center: .center,
+                        startRadius: 5,
+                        endRadius: 80
+                    )
+                )
+                .frame(width: 160, height: 160)
+                .scaleEffect(orbScale2)
+                .offset(orbOffset2)
+                .blur(radius: 1.5)
+            
+            // Orbe 3 - Pequeño y rápido
+            Circle()
+                .fill(
+                    RadialGradient(
+                        colors: [
+                            Color("AccentColor").opacity(0.25),
+                            Color("AccentColor").opacity(0.1),
+                            .clear
+                        ],
+                        center: .center,
+                        startRadius: 3,
+                        endRadius: 50
+                    )
+                )
+                .frame(width: 100, height: 100)
+                .scaleEffect(orbScale3)
+                .offset(orbOffset3)
+                .blur(radius: 1)
         }
     }
     
     @ViewBuilder
     private var controlButtonsView: some View {
         if #available(iOS 26.0, *) {
-            HStack(spacing: 50) {
+            HStack(spacing: 24) {
                 if meditationManager.isActive {
                     // Stop button
                     Button(action: {
-                        // Haptic feedback for stopping meditation
                         let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
                         impactFeedback.impactOccurred()
-
                         meditationManager.stop()
                         stopMeditationSound()
                     }) {
-                        Image(systemName: "stop.fill")
-                            .font(.title)
-                            .foregroundColor(.white)
-                            .frame(width: 80, height: 80)
-                            .background(.regularMaterial)
-                            .clipShape(Circle())
-                            .overlay(
-                                Circle()
-                                    .stroke(LinearGradient(
-                                        colors: [.white.opacity(0.5), .white.opacity(0.1)],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    ), lineWidth: 1)
-                            )
-                            .shadow(color: Color.red.opacity(0.3), radius: 15, x: 0, y: 5)
-                            .overlay(
-                                Image(systemName: "stop.fill")
-                                    .font(.title)
-                                    .foregroundColor(.red)
-                            )
+                        ZStack {
+                            Circle()
+                                .fill(.regularMaterial)
+                                .frame(width: 64, height: 64)
+                                .overlay(
+                                    Circle()
+                                        .stroke(LinearGradient(
+                                            colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        ), lineWidth: 1)
+                                )
+                                .shadow(color: Color.red.opacity(0.2), radius: 12, x: 0, y: 4)
+
+                            Image(systemName: "stop.fill")
+                                .font(.system(size: 22))
+                                .foregroundColor(.red)
+                        }
                     }
 
-                    // Play/Pause button
+                    // Play/Pause button (larger, primary)
                     Button(action: {
+                        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                        impactFeedback.impactOccurred()
                         if meditationManager.isPaused {
-                            // Haptic feedback for resuming meditation
-                            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-                            impactFeedback.impactOccurred()
-
                             meditationManager.resume()
                         } else {
-                            // Haptic feedback for pausing meditation
-                            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-                            impactFeedback.impactOccurred()
-
                             meditationManager.pause()
                         }
                     }) {
-                        Image(systemName: meditationManager.isPaused ? "play.fill" : "pause.fill")
-                            .font(.title)
-                            .foregroundColor(.white)
-                            .frame(width: 80, height: 80)
-                            .background(.regularMaterial)
-                            .clipShape(Circle())
-                            .overlay(
-                                Circle()
-                                    .stroke(LinearGradient(
-                                        colors: [.white.opacity(0.5), .white.opacity(0.1)],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    ), lineWidth: 1)
-                            )
-                            .shadow(color: Color("AccentColor").opacity(0.4), radius: 15, x: 0, y: 5)
-                            .overlay(
-                                Image(systemName: meditationManager.isPaused ? "play.fill" : "pause.fill")
-                                    .font(.title)
-                                    .foregroundColor(Color("AccentColor"))
-                            )
+                        ZStack {
+                            Circle()
+                                .fill(.regularMaterial)
+                                .frame(width: 80, height: 80)
+                                .overlay(
+                                    Circle()
+                                        .stroke(LinearGradient(
+                                            colors: [.white.opacity(0.6), .white.opacity(0.2)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        ), lineWidth: 1.5)
+                                )
+                                .shadow(color: Color("AccentColor").opacity(0.3), radius: 16, x: 0, y: 6)
+
+                            Image(systemName: meditationManager.isPaused ? "play.fill" : "pause.fill")
+                                .font(.system(size: 28))
+                                .foregroundColor(Color("AccentColor"))
+                        }
                     }
+
+                    // Invisible spacer for balance
+                    Circle()
+                        .fill(.clear)
+                        .frame(width: 64, height: 64)
                 } else {
-                    // Start button
+                    // Start button (centered, large)
                     Button(action: {
-                        // Haptic feedback for starting meditation
                         let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
                         impactFeedback.impactOccurred()
-
                         meditationManager.start()
                     }) {
-                        Image(systemName: "play.fill")
-                            .font(.title)
-                            .foregroundColor(.white)
-                            .frame(width: 80, height: 80)
-                            .background(.regularMaterial)
-                            .clipShape(Circle())
-                            .overlay(
-                                Circle()
-                                    .stroke(LinearGradient(
-                                        colors: [.white.opacity(0.5), .white.opacity(0.1)],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    ), lineWidth: 1)
-                            )
-                            .shadow(color: Color("AccentColor").opacity(0.4), radius: 15, x: 0, y: 5)
-                            .overlay(
-                                Image(systemName: "play.fill")
-                                    .font(.title)
-                                    .foregroundColor(Color("AccentColor"))
-                            )
+                        ZStack {
+                            Circle()
+                                .fill(.regularMaterial)
+                                .frame(width: 80, height: 80)
+                                .overlay(
+                                    Circle()
+                                        .stroke(LinearGradient(
+                                            colors: [.white.opacity(0.6), .white.opacity(0.2)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        ), lineWidth: 1.5)
+                                )
+                                .shadow(color: Color("AccentColor").opacity(0.3), radius: 16, x: 0, y: 6)
+
+                            Image(systemName: "play.fill")
+                                .font(.system(size: 28))
+                                .foregroundColor(Color("AccentColor"))
+                        }
                     }
                 }
             }
         } else {
             HStack(spacing: 50) {
                 if meditationManager.isActive {
-                    // Stop button
+                    // Stop button con glassmorphism
                     Button(action: {
                         // Haptic feedback for stopping meditation
                         let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
@@ -506,15 +579,30 @@ struct MeditationView: View {
                         meditationManager.stop()
                         stopMeditationSound()
                     }) {
-                        Image(systemName: "stop.fill")
-                            .font(.title)
-                            .foregroundColor(.white)
-                            .frame(width: 80, height: 80)
-                            .background(Color.red.opacity(0.8))
-                            .clipShape(Circle())
+                        ZStack {
+                            Circle()
+                                .fill(.regularMaterial)
+                                .frame(width: 80, height: 80)
+                                .overlay(
+                                    Circle()
+                                        .stroke(
+                                            LinearGradient(
+                                                colors: [.white.opacity(0.4), .white.opacity(0.1)],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            ),
+                                            lineWidth: 1
+                                        )
+                                )
+                                .shadow(color: Color.red.opacity(0.3), radius: 15, x: 0, y: 8)
+                            
+                            Image(systemName: "stop.fill")
+                                .font(.title)
+                                .foregroundColor(.red)
+                        }
                     }
 
-                    // Play/Pause button
+                    // Play/Pause button con glassmorphism
                     Button(action: {
                         if meditationManager.isPaused {
                             // Haptic feedback for resuming meditation
@@ -530,15 +618,30 @@ struct MeditationView: View {
                             meditationManager.pause()
                         }
                     }) {
-                        Image(systemName: meditationManager.isPaused ? "play.fill" : "pause.fill")
-                            .font(.title)
-                            .foregroundColor(.white)
-                            .frame(width: 80, height: 80)
-                            .background(Color("AccentColor"))
-                            .clipShape(Circle())
+                        ZStack {
+                            Circle()
+                                .fill(.regularMaterial)
+                                .frame(width: 80, height: 80)
+                                .overlay(
+                                    Circle()
+                                        .stroke(
+                                            LinearGradient(
+                                                colors: [.white.opacity(0.5), .white.opacity(0.2)],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            ),
+                                            lineWidth: 1.5
+                                        )
+                                )
+                                .shadow(color: Color("AccentColor").opacity(0.4), radius: 15, x: 0, y: 8)
+                            
+                            Image(systemName: meditationManager.isPaused ? "play.fill" : "pause.fill")
+                                .font(.title)
+                                .foregroundColor(Color("AccentColor"))
+                        }
                     }
                 } else {
-                    // Start button
+                    // Start button con glassmorphism
                     Button(action: {
                         // Haptic feedback for starting meditation
                         let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
@@ -546,13 +649,27 @@ struct MeditationView: View {
 
                         meditationManager.start()
                     }) {
-                        Image(systemName: "play.fill")
-                            .font(.title)
-                            .foregroundColor(.white)
-                            .frame(width: 80, height: 80)
-                            .background(Color("AccentColor"))
-                            .clipShape(Circle())
-                            .shadow(color: Color("AccentColor").opacity(0.3), radius: 10, x: 0, y: 5)
+                        ZStack {
+                            Circle()
+                                .fill(.regularMaterial)
+                                .frame(width: 80, height: 80)
+                                .overlay(
+                                    Circle()
+                                        .stroke(
+                                            LinearGradient(
+                                                colors: [.white.opacity(0.5), .white.opacity(0.2)],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            ),
+                                            lineWidth: 1.5
+                                        )
+                                )
+                                .shadow(color: Color("AccentColor").opacity(0.4), radius: 15, x: 0, y: 8)
+                            
+                            Image(systemName: "play.fill")
+                                .font(.title)
+                                .foregroundColor(Color("AccentColor"))
+                        }
                     }
                 }
             }
@@ -594,6 +711,72 @@ struct MeditationView: View {
     private func stopMeditationSound() {
         audioPlayer?.stop()
         audioPlayer = nil
+    }
+    
+    // MARK: - Orb Animation Management
+    private func startOrbAnimations() {
+        withAnimation(.easeInOut(duration: 0.8)) {
+            animateOrbs = true
+        }
+        
+        // Animación del orbe 1 - Movimiento lento y suave
+        withAnimation(
+            Animation.easeInOut(duration: 8)
+                .repeatForever(autoreverses: true)
+        ) {
+            orbOffset1 = CGSize(width: 60, height: -80)
+            orbScale1 = 1.2
+        }
+        
+        // Animación del orbe 2 - Movimiento mediano
+        withAnimation(
+            Animation.easeInOut(duration: 6)
+                .repeatForever(autoreverses: true)
+                .delay(1)
+        ) {
+            orbOffset2 = CGSize(width: -70, height: 90)
+            orbScale2 = 1.1
+        }
+        
+        // Animación del orbe 3 - Movimiento rápido
+        withAnimation(
+            Animation.easeInOut(duration: 4)
+                .repeatForever(autoreverses: true)
+                .delay(0.5)
+        ) {
+            orbOffset3 = CGSize(width: 50, height: 60)
+            orbScale3 = 1.3
+        }
+    }
+    
+    private func pauseOrbAnimations() {
+        // Las animaciones se mantienen pero se detienen visualmente
+        withAnimation(.easeOut(duration: 0.5)) {
+            orbScale1 = 0.8
+            orbScale2 = 0.8
+            orbScale3 = 0.8
+        }
+    }
+    
+    private func resumeOrbAnimations() {
+        // Reanudar las animaciones con transición suave
+        withAnimation(.easeIn(duration: 0.5)) {
+            orbScale1 = 1.2
+            orbScale2 = 1.1
+            orbScale3 = 1.3
+        }
+    }
+    
+    private func stopOrbAnimations() {
+        withAnimation(.easeOut(duration: 0.8)) {
+            animateOrbs = false
+            orbOffset1 = .zero
+            orbOffset2 = .zero
+            orbOffset3 = .zero
+            orbScale1 = 1.0
+            orbScale2 = 1.0
+            orbScale3 = 1.0
+        }
     }
 }
 

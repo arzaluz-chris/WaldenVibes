@@ -867,6 +867,9 @@
         }
       }
     },
+    "Breathe" : {
+
+    },
     "Calm" : {
       "localizations" : {
         "en" : {
@@ -3905,6 +3908,9 @@
           }
         }
       }
+    },
+    "Paused" : {
+
     },
     "PDF Report" : {
       "comment" : "Export format option",

@@ -54,20 +54,35 @@ struct WaldenVibesApp: App {
     private func configureAppearance() {
         if #available(iOS 26.0, *) {
             // MARK: - iOS 26 Glassmorphism Design
-            // Configure Navigation Bar with glassmorphic effect
+            // Configure Navigation Bar with glassmorphic effect and compact style
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithTransparentBackground()
-            navBarAppearance.backgroundEffect = UIBlurEffect(style: .systemMaterial)
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.label]
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.label]
+            navBarAppearance.backgroundEffect = UIBlurEffect(style: .systemThinMaterial)
+            navBarAppearance.largeTitleTextAttributes = [
+                .foregroundColor: UIColor.label,
+                .font: UIFont.systemFont(ofSize: 28, weight: .bold) // Smaller large title
+            ]
+            navBarAppearance.titleTextAttributes = [
+                .foregroundColor: UIColor.label,
+                .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
+            ]
+
+            // Shadow for depth
+            navBarAppearance.shadowColor = UIColor.black.withAlphaComponent(0.05)
 
             UINavigationBar.appearance().standardAppearance = navBarAppearance
+            UINavigationBar.appearance().compactAppearance = navBarAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+            UINavigationBar.appearance().compactScrollEdgeAppearance = navBarAppearance
+
+            // Make navigation bar more compact
+            UINavigationBar.appearance().prefersLargeTitles = false
 
             // Configure Tab Bar with glassmorphic effect
             let tabBarAppearance = UITabBarAppearance()
             tabBarAppearance.configureWithTransparentBackground()
-            tabBarAppearance.backgroundEffect = UIBlurEffect(style: .systemMaterial)
+            tabBarAppearance.backgroundEffect = UIBlurEffect(style: .systemThinMaterial)
+            tabBarAppearance.shadowColor = UIColor.black.withAlphaComponent(0.05)
 
             UITabBar.appearance().standardAppearance = tabBarAppearance
             UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance

@@ -28,7 +28,7 @@ struct StressView: View {
                 }
             }
             .navigationTitle("Stress")
-            .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
@@ -95,7 +95,7 @@ struct StressView: View {
                 }
             }
             .navigationTitle("Stress")
-            .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {

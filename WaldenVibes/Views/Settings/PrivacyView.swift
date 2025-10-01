@@ -9,7 +9,7 @@ struct PrivacyView: View {
             // MARK: - iOS 26 Glassmorphism Design
             NavigationView {
                 ZStack {
-                    AnimatedGlassBackground(color: .blue)
+                    SimpleGlassBackground(color: Color("AccentColor"))
 
                     ScrollView {
                         VStack(alignment: .leading, spacing: 24) {

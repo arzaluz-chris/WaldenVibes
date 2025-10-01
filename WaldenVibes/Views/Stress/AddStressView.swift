@@ -43,8 +43,9 @@ struct AddStressView: View {
             // MARK: - iOS 26 Glassmorphism Design
             NavigationView {
                 ZStack {
-                    // Animated glass background
-                    AnimatedGlassBackground(color: Color("StressModerate"))
+                    // Dynamic animated glass background based on stress level
+                    AnimatedGlassBackground(color: colorForLevel(stressLevel))
+                        .animation(.easeInOut(duration: 0.5), value: stressLevel)
 
                     Form {
                         // Input Method Selection

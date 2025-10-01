@@ -12,7 +12,7 @@ struct StatisticsView: View {
         if #available(iOS 26.0, *) {
             // MARK: - iOS 26 Glassmorphism Design
             ZStack {
-                AnimatedGlassBackground(color: .blue)
+                AnimatedGlassBackground(color: Color("AccentColor"))
 
                 ScrollView {
                     VStack(spacing: 24) {
@@ -70,7 +70,7 @@ struct StatisticsView: View {
                 }
             }
             .navigationTitle("Statistics")
-            .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { showingExport = true }) {
@@ -138,7 +138,7 @@ struct StatisticsView: View {
                 .frame(maxWidth: .infinity)
             }
             .navigationTitle("Statistics")
-            .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarBackground(Color(UIColor.systemBackground), for: .navigationBar)
             .toolbar {

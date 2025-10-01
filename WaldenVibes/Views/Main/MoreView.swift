@@ -165,7 +165,7 @@ struct MoreView: View {
                 }
             }
             .navigationTitle("Tools")
-            .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
+            .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showingAbout) {
                 AboutView()
             }
@@ -310,7 +310,7 @@ struct MoreView: View {
                 .frame(maxWidth: .infinity)
             }
             .navigationTitle("Tools")
-            .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarBackground(Color(UIColor.systemBackground), for: .navigationBar)
             .sheet(isPresented: $showingAbout) {
