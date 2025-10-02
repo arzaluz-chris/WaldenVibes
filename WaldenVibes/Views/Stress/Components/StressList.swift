@@ -28,18 +28,23 @@ struct StressList: View {
                                 Image(systemName: "lightbulb.fill")
                                     .font(.title3)
                                     .foregroundColor(Color("AccentColor"))
+                                    .frame(width: 24)
 
-                                VStack(alignment: .leading) {
+                                VStack(alignment: .leading, spacing: 4) {
                                     Text("Stress Relief Tips", comment: "Title for stress relief tips button")
                                         .font(.headline)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.8)
                                     Text("Tap for quick tips", comment: "Subtitle for stress relief tips button")
                                         .font(.caption)
                                         .foregroundColor(.secondary)
+                                        .lineLimit(1)
                                 }
 
-                                Spacer()
+                                Spacer(minLength: 0)
                             }
                             .padding()
+                            .frame(maxWidth: .infinity, minHeight: 70)
                             .background(.regularMaterial)
                             .cornerRadius(16)
                             .shadow(color: Color("AccentColor").opacity(0.2), radius: 8, y: 4)
@@ -62,18 +67,23 @@ struct StressList: View {
                                 Image(systemName: "doc.text.magnifyingglass")
                                     .font(.title3)
                                     .foregroundColor(Color("StressModerate"))
+                                    .frame(width: 24)
 
-                                VStack(alignment: .leading) {
+                                VStack(alignment: .leading, spacing: 4) {
                                     Text("Quick Test", comment: "Title for stress test button")
                                         .font(.headline)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.8)
                                     Text("Assess stress level", comment: "Subtitle for stress test button")
                                         .font(.caption)
                                         .foregroundColor(.secondary)
+                                        .lineLimit(1)
                                 }
 
-                                Spacer()
+                                Spacer(minLength: 0)
                             }
                             .padding()
+                            .frame(maxWidth: .infinity, minHeight: 70)
                             .background(.regularMaterial)
                             .cornerRadius(16)
                             .shadow(color: Color("StressModerate").opacity(0.2), radius: 8, y: 4)

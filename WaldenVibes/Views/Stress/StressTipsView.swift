@@ -34,10 +34,20 @@ struct StressTipsView: View {
                             Color.clear
                                 .background(.thinMaterial)
                                 .cornerRadius(12)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(LinearGradient(
+                                            colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        ), lineWidth: 0.5)
+                                )
                         )
+                        .listRowSeparator(.hidden)
                     }
                     .listStyle(InsetGroupedListStyle())
                     .scrollContentBackground(.hidden)
+                    .listRowSpacing(12)
                 }
                 .navigationTitle("Stress Relief Tips")
                 .navigationBarTitleDisplayMode(.inline)

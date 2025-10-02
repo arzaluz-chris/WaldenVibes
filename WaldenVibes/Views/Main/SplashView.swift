@@ -13,20 +13,20 @@ struct SplashView: View {
                 // Animated glass background
                 AnimatedGlassBackground(color: Color("AccentColor"))
 
-                VStack(spacing: 20) {
+                VStack(spacing: 24) {
                     // App Icon from Assets with glassmorphic container
                     ZStack {
                         Circle()
                             .fill(.regularMaterial)
                             .frame(width: 150, height: 150)
-                            .shadow(color: Color("AccentColor").opacity(0.3), radius: 20, x: 0, y: 10)
+                            .shadow(color: .black.opacity(0.3), radius: 25, x: 0, y: 12)
                             .overlay(
                                 Circle()
                                     .stroke(LinearGradient(
-                                        colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                        colors: [.white.opacity(0.6), .white.opacity(0.2)],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
-                                    ), lineWidth: 1)
+                                    ), lineWidth: 2)
                             )
 
                         Image("LaunchLogo")
@@ -41,29 +41,51 @@ struct SplashView: View {
                             )
                     }
 
-                    // App Name with glass effect
-                    Text("Walden Vibes")
-                        .font(.system(size: 40, weight: .bold, design: .rounded))
-                        .foregroundStyle(
-                            LinearGradient(
-                                colors: [.white, .white.opacity(0.8)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
+                    // App Name with enhanced contrast
+                    VStack(spacing: 12) {
+                        Text("Walden Vibes")
+                            .font(.system(size: 44, weight: .bold, design: .rounded))
+                            .foregroundStyle(
+                                LinearGradient(
+                                    colors: [.white, Color.white.opacity(0.95)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
                             )
-                        )
-                        .opacity(showContent ? 1 : 0)
-                        .offset(y: showContent ? 0 : 20)
-                        .animation(.easeOut(duration: 0.8).delay(0.3), value: showContent)
-                        .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 2)
+                            .shadow(color: .black.opacity(0.5), radius: 8, x: 0, y: 4)
+                            .shadow(color: .black.opacity(0.3), radius: 15, x: 0, y: 8)
+                            .opacity(showContent ? 1 : 0)
+                            .offset(y: showContent ? 0 : 20)
+                            .animation(.easeOut(duration: 0.8).delay(0.3), value: showContent)
 
-                    // Tagline with glass effect
-                    Text("Your emotional well-being matters", comment: "App tagline in splash screen")
-                        .font(.headline)
-                        .foregroundColor(.white.opacity(0.9))
-                        .opacity(showContent ? 1 : 0)
-                        .offset(y: showContent ? 0 : 20)
-                        .animation(.easeOut(duration: 0.8).delay(0.5), value: showContent)
-                        .shadow(color: .black.opacity(0.1), radius: 3, x: 0, y: 1)
+                        // Tagline with enhanced contrast
+                        Text("Your emotional well-being matters", comment: "App tagline in splash screen")
+                            .font(.title3)
+                            .fontWeight(.medium)
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 40)
+                            .padding(.vertical, 12)
+                            .background(
+                                Capsule()
+                                    .fill(.ultraThinMaterial)
+                                    .overlay(
+                                        Capsule()
+                                            .stroke(
+                                                LinearGradient(
+                                                    colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                                    startPoint: .topLeading,
+                                                    endPoint: .bottomTrailing
+                                                ),
+                                                lineWidth: 1
+                                            )
+                                    )
+                            )
+                            .shadow(color: .black.opacity(0.4), radius: 10, x: 0, y: 5)
+                            .opacity(showContent ? 1 : 0)
+                            .offset(y: showContent ? 0 : 20)
+                            .animation(.easeOut(duration: 0.8).delay(0.5), value: showContent)
+                    }
                 }
             }
             .onAppear {

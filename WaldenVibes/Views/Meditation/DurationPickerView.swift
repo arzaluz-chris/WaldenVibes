@@ -45,10 +45,12 @@ struct DurationPickerView: View {
                                             ), lineWidth: 0.5)
                                     )
                             )
+                            .listRowSeparator(.hidden)
                         }
                     }
                     .scrollContentBackground(.hidden)
                     .listStyle(InsetGroupedListStyle())
+                    .listRowSpacing(12)
                     .navigationTitle("Select Duration")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {

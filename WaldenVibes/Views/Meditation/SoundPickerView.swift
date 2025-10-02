@@ -23,12 +23,13 @@ struct SoundPickerView: View {
                             HStack {
                                 Image(systemName: sound.icon)
                                     .font(.title2)
-                                    .foregroundColor(Color("AccentColor"))
+                                    .foregroundColor(selectedSound == sound ? .white : Color("AccentColor"))
                                     .frame(width: 40)
 
                                 VStack(alignment: .leading) {
                                     Text(sound.displayName)
                                         .font(.body)
+                                        .foregroundColor(selectedSound == sound ? .white : .primary)
                                 }
 
                                 Spacer()
@@ -47,7 +48,7 @@ struct SoundPickerView: View {
                                             if currentlyPreviewing == sound {
                                                 Circle()
                                                     .stroke(Color.blue.opacity(0.3), lineWidth: 2)
-                                                    .frame(width: 35, height: 35)
+                                                    .frame(width: 32, height: 32)
                                                     .scaleEffect(isAnimating ? 1.2 : 1.0)
                                                     .opacity(isAnimating ? 0 : 1)
                                                     .animation(
@@ -59,16 +60,11 @@ struct SoundPickerView: View {
 
                                             Image(systemName: currentlyPreviewing == sound ? "stop.circle.fill" : "play.circle.fill")
                                                 .font(.title2)
-                                                .foregroundColor(.blue)
+                                                .foregroundColor(selectedSound == sound ? .white.opacity(0.8) : .blue)
+                                                .frame(width: 32, height: 32)
                                         }
                                     }
                                     .buttonStyle(BorderlessButtonStyle())
-                                }
-
-                                if selectedSound == sound {
-                                    Image(systemName: "checkmark")
-                                        .foregroundColor(Color("AccentColor"))
-                                        .fontWeight(.semibold)
                                 }
                             }
                             .contentShape(Rectangle())
@@ -78,22 +74,32 @@ struct SoundPickerView: View {
                                 dismiss()
                             }
                             .listRowBackground(
-                                Color.clear
-                                    .background(.thinMaterial)
-                                    .cornerRadius(12)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .stroke(LinearGradient(
-                                                colors: [.white.opacity(0.5), .white.opacity(0.1)],
-                                                startPoint: .topLeading,
-                                                endPoint: .bottomTrailing
-                                            ), lineWidth: 0.5)
-                                    )
+                                Group {
+                                    if selectedSound == sound {
+                                        Color("AccentColor")
+                                            .cornerRadius(12)
+                                            .shadow(color: Color("AccentColor").opacity(0.3), radius: 8, y: 4)
+                                    } else {
+                                        Color.clear
+                                            .background(.thinMaterial)
+                                            .cornerRadius(12)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 12)
+                                                    .stroke(LinearGradient(
+                                                        colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                                        startPoint: .topLeading,
+                                                        endPoint: .bottomTrailing
+                                                    ), lineWidth: 0.5)
+                                            )
+                                    }
+                                }
                             )
+                            .listRowSeparator(.hidden)
                         }
                     }
                     .scrollContentBackground(.hidden)
                     .listStyle(InsetGroupedListStyle())
+                    .listRowSpacing(12)
                     .navigationTitle("Select Sound")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
