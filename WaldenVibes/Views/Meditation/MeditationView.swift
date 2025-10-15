@@ -304,7 +304,7 @@ struct MeditationView: View {
             Image("MeditationBackground")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(minWidth: UIScreen.main.bounds.width, 
+                .frame(minWidth: UIScreen.main.bounds.width,
                        minHeight: UIScreen.main.bounds.height)
                 .ignoresSafeArea(.all)
                 .opacity(0.6)
@@ -378,7 +378,7 @@ struct MeditationView: View {
                     .monospacedDigit()
 
                 if meditationManager.isActive {
-                    Text(meditationManager.isPaused ? "Paused" : "Breathe")
+                    Text(meditationManager.isPaused ? String(localized: "Paused", comment: "Meditation paused status") : String(localized: "Breathe", comment: "Meditation breathing instruction"))
                         .font(.subheadline)
                         .fontWeight(.medium)
                         .foregroundColor(.secondary)
@@ -798,3 +798,4 @@ struct NavigationBarBackgroundHiddenModifier: ViewModifier {
             }
     }
 }
+

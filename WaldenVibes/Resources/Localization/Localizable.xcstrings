@@ -868,7 +868,7 @@
       }
     },
     "Breathe" : {
-
+      "comment" : "Meditation breathing instruction"
     },
     "Calm" : {
       "localizations" : {
@@ -3910,7 +3910,7 @@
       }
     },
     "Paused" : {
-
+      "comment" : "Meditation paused status"
     },
     "PDF Report" : {
       "comment" : "Export format option",
