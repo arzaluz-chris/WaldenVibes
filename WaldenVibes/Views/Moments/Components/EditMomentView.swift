@@ -22,93 +22,212 @@ struct EditMomentView: View {
     }
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                // Invisible background to detect taps
-                Color.clear
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        hideKeyboard()
-                    }
-                
-                Form {
-                    // Description
-                    Section {
-                        TextEditor(text: $description)
-                            .frame(minHeight: 100)
-                            .toolbar {
-                                ToolbarItemGroup(placement: .keyboard) {
-                                    Spacer()
-                                    Button("Done") {
-                                        hideKeyboard()
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            NavigationView {
+                ZStack {
+                    // Animated glass background
+                    AnimatedGlassBackground(color: selectedCategory.color)
+
+                    // Invisible background to detect taps
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            hideKeyboard()
+                        }
+
+                    Form {
+                        // Description
+                        Section {
+                            TextEditor(text: $description)
+                                .frame(minHeight: 100)
+                                .toolbar {
+                                    ToolbarItemGroup(placement: .keyboard) {
+                                        Spacer()
+                                        Button("Done") {
+                                            hideKeyboard()
+                                        }
                                     }
                                 }
-                            }
-                    } header: {
-                        Text("Description", comment: "Section header for moment description")
-                    } footer: {
-                        Text("Describe what made this moment special", comment: "Helper text for moment description field")
-                    }
-                    
-                    // Category
-                    Section {
-                        Picker("Category", selection: $selectedCategory) {
-                            ForEach(MomentCategory.allCases, id: \.self) { category in
-                                Label {
-                                    Text(category.localizedName)
-                                } icon: {
-                                    Image(systemName: category.icon)
-                                        .foregroundColor(category.color)
-                                }
-                                .tag(category)
-                            }
+                        } header: {
+                            Text("Description", comment: "Section header for moment description")
+                        } footer: {
+                            Text("Describe what made this moment special", comment: "Helper text for moment description field")
                         }
-                    } header: {
-                        Text("Category", comment: "Section header for moment category")
-                    }
-                    
-                    // Duration
-                    Section {
-                        Picker("Duration", selection: $duration) {
-                            ForEach(durationOptions, id: \.self) { minutes in
-                                Text(formatDuration(minutes))
-                                    .tag(minutes)
-                            }
-                        }
-                        .pickerStyle(WheelPickerStyle())
-                        .frame(height: 120)
-                    } header: {
-                        Text("Duration", comment: "Section header for moment duration")
-                    }
-                    
-                    // Date & Time
-                    Section {
-                        DatePicker(
-                            "Date & Time",
-                            selection: $date,
-                            displayedComponents: [.date, .hourAndMinute]
+                        .listRowBackground(
+                            Color.clear
+                                .background(.thinMaterial)
+                                .cornerRadius(12)
                         )
-                    } header: {
-                        Text("When", comment: "Section header for moment date and time")
+
+                        // Category
+                        Section {
+                            Picker("Category", selection: $selectedCategory) {
+                                ForEach(MomentCategory.allCases, id: \.self) { category in
+                                    Label {
+                                        Text(category.localizedName)
+                                    } icon: {
+                                        Image(systemName: category.icon)
+                                            .foregroundColor(category.color)
+                                    }
+                                    .tag(category)
+                                }
+                            }
+                        } header: {
+                            Text("Category", comment: "Section header for moment category")
+                        }
+                        .listRowBackground(
+                            Color.clear
+                                .background(.thinMaterial)
+                                .cornerRadius(12)
+                        )
+
+                        // Duration
+                        Section {
+                            Picker("Duration", selection: $duration) {
+                                ForEach(durationOptions, id: \.self) { minutes in
+                                    Text(formatDuration(minutes))
+                                        .tag(minutes)
+                                }
+                            }
+                            .pickerStyle(WheelPickerStyle())
+                            .frame(height: 120)
+                        } header: {
+                            Text("Duration", comment: "Section header for moment duration")
+                        }
+                        .listRowBackground(
+                            Color.clear
+                                .background(.thinMaterial)
+                                .cornerRadius(12)
+                        )
+
+                        // Date & Time
+                        Section {
+                            DatePicker(
+                                "Date & Time",
+                                selection: $date,
+                                displayedComponents: [.date, .hourAndMinute]
+                            )
+                        } header: {
+                            Text("When", comment: "Section header for moment date and time")
+                        }
+                        .listRowBackground(
+                            Color.clear
+                                .background(.thinMaterial)
+                                .cornerRadius(12)
+                        )
+                    }
+                    .scrollContentBackground(.hidden)
+                }
+                .navigationTitle("Edit Moment")
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarBackground()
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
+                    }
+
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Save") {
+                            updateMoment()
+                        }
+                        .fontWeight(.semibold)
+                        .disabled(description.isEmpty)
                     }
                 }
             }
-            .navigationTitle("Edit Moment")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackground()
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
+        } else {
+            // MARK: - iOS 18 Design
+            NavigationView {
+                ZStack {
+                    // Invisible background to detect taps
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            hideKeyboard()
+                        }
+
+                    Form {
+                        // Description
+                        Section {
+                            TextEditor(text: $description)
+                                .frame(minHeight: 100)
+                                .toolbar {
+                                    ToolbarItemGroup(placement: .keyboard) {
+                                        Spacer()
+                                        Button("Done") {
+                                            hideKeyboard()
+                                        }
+                                    }
+                                }
+                        } header: {
+                            Text("Description", comment: "Section header for moment description")
+                        } footer: {
+                            Text("Describe what made this moment special", comment: "Helper text for moment description field")
+                        }
+
+                        // Category
+                        Section {
+                            Picker("Category", selection: $selectedCategory) {
+                                ForEach(MomentCategory.allCases, id: \.self) { category in
+                                    Label {
+                                        Text(category.localizedName)
+                                    } icon: {
+                                        Image(systemName: category.icon)
+                                            .foregroundColor(category.color)
+                                    }
+                                    .tag(category)
+                                }
+                            }
+                        } header: {
+                            Text("Category", comment: "Section header for moment category")
+                        }
+
+                        // Duration
+                        Section {
+                            Picker("Duration", selection: $duration) {
+                                ForEach(durationOptions, id: \.self) { minutes in
+                                    Text(formatDuration(minutes))
+                                        .tag(minutes)
+                                }
+                            }
+                            .pickerStyle(WheelPickerStyle())
+                            .frame(height: 120)
+                        } header: {
+                            Text("Duration", comment: "Section header for moment duration")
+                        }
+
+                        // Date & Time
+                        Section {
+                            DatePicker(
+                                "Date & Time",
+                                selection: $date,
+                                displayedComponents: [.date, .hourAndMinute]
+                            )
+                        } header: {
+                            Text("When", comment: "Section header for moment date and time")
+                        }
                     }
                 }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
-                        updateMoment()
+                .navigationTitle("Edit Moment")
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarBackground()
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
                     }
-                    .fontWeight(.semibold)
-                    .disabled(description.isEmpty)
+
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Save") {
+                            updateMoment()
+                        }
+                        .fontWeight(.semibold)
+                        .disabled(description.isEmpty)
+                    }
                 }
             }
         }

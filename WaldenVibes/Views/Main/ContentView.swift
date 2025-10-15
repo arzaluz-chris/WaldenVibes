@@ -92,7 +92,7 @@ struct ContentView: View {
 // MARK: - iPad Home View
 struct iPadHomeView: View {
     @Binding var selectedTab: Int
-    
+
     let tabs = [
         (0, LocalizedStringKey("Emotions"), "heart.fill", Color("EmotionHappy")),
         (1, LocalizedStringKey("Meditation"), "sparkles", Color("AccentColor")),
@@ -100,61 +100,141 @@ struct iPadHomeView: View {
         (3, LocalizedStringKey("Stress"), "waveform.path.ecg", Color("StressModerate")),
         (4, LocalizedStringKey("Tools"), "wrench.and.screwdriver.fill", Color.gray)
     ]
-    
+
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
-    
+
     var body: some View {
-        VStack(spacing: 40) {
-            // Header
-            VStack(spacing: 16) {
-                Image("LaunchLogo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 120, height: 120)
-                
-                Text(LocalizedStringKey("Walden Vibes"))
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                
-                Text(LocalizedStringKey("Select where you want to go"))
-                    .font(.title3)
-                    .foregroundColor(.secondary)
-            }
-            .padding(.top, 60)
-            
-            // Navigation Grid
-            LazyVGrid(columns: columns, spacing: 30) {
-                ForEach(tabs, id: \.0) { tab in
-                    NavigationLink(value: tab.0) {
-                        VStack(spacing: 16) {
-                            Image(systemName: tab.2)
-                                .font(.system(size: 50))
-                                .foregroundColor(tab.3)
-                            
-                            Text(tab.1)
-                                .font(.title3)
-                                .fontWeight(.medium)
-                                .foregroundColor(.primary)
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            ZStack {
+                // Animated glass background
+                AnimatedGlassBackground(color: Color("AccentColor"))
+
+                VStack(spacing: 40) {
+                    // Header with glass effect
+                    VStack(spacing: 16) {
+                        ZStack {
+                            Circle()
+                                .fill(.thinMaterial)
+                                .frame(width: 140, height: 140)
+                                .shadow(color: Color("AccentColor").opacity(0.3), radius: 15, x: 0, y: 8)
+                                .overlay(
+                                    Circle()
+                                        .stroke(LinearGradient(
+                                            colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        ), lineWidth: 1)
+                                )
+
+                            Image("LaunchLogo")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 120, height: 120)
                         }
-                        .frame(width: 200, height: 150)
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color(UIColor.secondarySystemBackground))
-                                .shadow(radius: 5)
-                        )
+
+                        Text(LocalizedStringKey("Walden Vibes"))
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+
+                        Text(LocalizedStringKey("Select where you want to go"))
+                            .font(.title3)
+                            .foregroundColor(.secondary)
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .padding(.top, 60)
+
+                    // Navigation Grid with glass cards
+                    LazyVGrid(columns: columns, spacing: 30) {
+                        ForEach(tabs, id: \.0) { tab in
+                            NavigationLink(value: tab.0) {
+                                VStack(spacing: 16) {
+                                    Image(systemName: tab.2)
+                                        .font(.system(size: 50))
+                                        .foregroundColor(tab.3)
+                                        .shadow(color: tab.3.opacity(0.3), radius: 8, x: 0, y: 4)
+
+                                    Text(tab.1)
+                                        .font(.title3)
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.primary)
+                                }
+                                .frame(width: 200, height: 150)
+                                .background(.regularMaterial)
+                                .cornerRadius(20)
+                                .shadow(color: tab.3.opacity(0.2), radius: 15, x: 0, y: 8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(LinearGradient(
+                                            colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        ), lineWidth: 1)
+                                )
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
+                    .padding(.horizontal, 40)
+
+                    Spacer()
                 }
             }
-            .padding(.horizontal, 40)
-            
-            Spacer()
+            .navigationTitle("")
+            .navigationBarHidden(true)
+        } else {
+            // MARK: - iOS 18 Design
+            VStack(spacing: 40) {
+                // Header
+                VStack(spacing: 16) {
+                    Image("LaunchLogo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 120, height: 120)
+
+                    Text(LocalizedStringKey("Walden Vibes"))
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+
+                    Text(LocalizedStringKey("Select where you want to go"))
+                        .font(.title3)
+                        .foregroundColor(.secondary)
+                }
+                .padding(.top, 60)
+
+                // Navigation Grid
+                LazyVGrid(columns: columns, spacing: 30) {
+                    ForEach(tabs, id: \.0) { tab in
+                        NavigationLink(value: tab.0) {
+                            VStack(spacing: 16) {
+                                Image(systemName: tab.2)
+                                    .font(.system(size: 50))
+                                    .foregroundColor(tab.3)
+
+                                Text(tab.1)
+                                    .font(.title3)
+                                    .fontWeight(.medium)
+                                    .foregroundColor(.primary)
+                            }
+                            .frame(width: 200, height: 150)
+                            .background(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color(UIColor.secondarySystemBackground))
+                                    .shadow(radius: 5)
+                            )
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
+                }
+                .padding(.horizontal, 40)
+
+                Spacer()
+            }
+            .navigationTitle("")
+            .navigationBarHidden(true)
         }
-        .navigationTitle("")
-        .navigationBarHidden(true)
     }
 }

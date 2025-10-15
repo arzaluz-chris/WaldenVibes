@@ -46,135 +46,293 @@ struct AddEmotionView: View {
     }
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                // Invisible background to detect taps
-                Color.clear
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        hideKeyboard()
-                    }
-                
-                Form {
-                    // Emotion Selection
-                    Section {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 20) {
-                                ForEach(EmotionType.allCases, id: \.self) { type in
-                                    EmotionButton(
-                                        type: type,
-                                        isSelected: selectedType == type,
-                                        action: {
-                                            withAnimation(.spring()) {
-                                                selectedType = type
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            NavigationView {
+                ZStack {
+                    // Animated glass background
+                    AnimatedGlassBackground(color: selectedType.color)
+
+                    // Invisible background to detect taps
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            hideKeyboard()
+                        }
+
+                    Form {
+                        // Emotion Selection
+                        Section {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 20) {
+                                    ForEach(EmotionType.allCases, id: \.self) { type in
+                                        EmotionButton(
+                                            type: type,
+                                            isSelected: selectedType == type,
+                                            action: {
+                                                withAnimation(.spring()) {
+                                                    selectedType = type
+                                                }
                                             }
-                                        }
-                                    )
-                                }
-                            }
-                            .padding(.vertical, 10)
-                        }
-                    } header: {
-                        Text("Select emotion", comment: "Section header for emotion selection")
-                    }
-                    
-                    // Intensity Slider
-                    Section {
-                        VStack(alignment: .leading, spacing: 12) {
-                            HStack {
-                                Text("Intensity", comment: "Label for emotion intensity")
-                                Spacer()
-                                Text("\(Int(intensity))")
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(selectedType.color)
-                            }
-                            
-                            Slider(value: $intensity, in: 1...10, step: 1)
-                                .accentColor(selectedType.color)
-                                .onChange(of: intensity) { _, newValue in
-                                    // Progressive haptic feedback based on intensity
-                                    triggerProgressiveHaptic(for: newValue, previous: previousIntensity)
-                                    previousIntensity = newValue
-                                }
-                            
-                            IntensityView(intensity: intensity, color: selectedType.color)
-                                .frame(maxWidth: .infinity)
-                        }
-                    } header: {
-                        Text("Emotion intensity", comment: "Section header for intensity slider")
-                    }
-                    
-                    // Notes
-                    Section {
-                        TextEditor(text: $note)
-                            .frame(minHeight: 100)
-                            .toolbar {
-                                ToolbarItemGroup(placement: .keyboard) {
-                                    Spacer()
-                                    Button("Done") {
-                                        hideKeyboard()
+                                        )
                                     }
                                 }
+                                .padding(.vertical, 10)
                             }
-                    } header: {
-                        Text("Notes", comment: "Section header for notes field")
-                    } footer: {
-                        Text("Optional notes about how you're feeling", comment: "Footer text explaining the notes field")
-                    }
-                    
-                    // Location
-                    Section {
-                        ForEach(LocationOption.allCases, id: \.self) { location in
-                            HStack {
-                                Image(systemName: location.icon)
-                                    .foregroundColor(selectedLocation == location ? Color("AccentColor") : .secondary)
-                                    .frame(width: 30)
-                                
-                                Text(location.localizedName)
-                                
-                                Spacer()
-                                
-                                if selectedLocation == location {
-                                    Image(systemName: "checkmark")
-                                        .foregroundColor(Color("AccentColor"))
+                        } header: {
+                            Text("Select emotion", comment: "Section header for emotion selection")
+                        }
+                        .listRowBackground(
+                            Color.clear
+                                .background(.thinMaterial)
+                                .cornerRadius(12)
+                        )
+
+                        // Intensity Slider
+                        Section {
+                            VStack(alignment: .leading, spacing: 12) {
+                                HStack {
+                                    Text("Intensity", comment: "Label for emotion intensity")
+                                    Spacer()
+                                    Text("\(Int(intensity))")
                                         .fontWeight(.semibold)
+                                        .foregroundColor(selectedType.color)
+                                }
+
+                                Slider(value: $intensity, in: 1...10, step: 1)
+                                    .accentColor(selectedType.color)
+                                    .onChange(of: intensity) { _, newValue in
+                                        // Progressive haptic feedback based on intensity
+                                        triggerProgressiveHaptic(for: newValue, previous: previousIntensity)
+                                        previousIntensity = newValue
+                                    }
+
+                                IntensityView(intensity: intensity, color: selectedType.color)
+                                    .frame(maxWidth: .infinity)
+                            }
+                        } header: {
+                            Text("Emotion intensity", comment: "Section header for intensity slider")
+                        }
+                        .listRowBackground(
+                            Color.clear
+                                .background(.thinMaterial)
+                                .cornerRadius(12)
+                        )
+
+                        // Notes
+                        Section {
+                            TextEditor(text: $note)
+                                .frame(minHeight: 100)
+                                .toolbar {
+                                    ToolbarItemGroup(placement: .keyboard) {
+                                        Spacer()
+                                        Button("Done") {
+                                            hideKeyboard()
+                                        }
+                                    }
+                                }
+                        } header: {
+                            Text("Notes", comment: "Section header for notes field")
+                        } footer: {
+                            Text("Optional notes about how you're feeling", comment: "Footer text explaining the notes field")
+                        }
+                        .listRowBackground(
+                            Color.clear
+                                .background(.thinMaterial)
+                                .cornerRadius(12)
+                        )
+
+                        // Location
+                        Section {
+                            ForEach(LocationOption.allCases, id: \.self) { location in
+                                HStack {
+                                    Image(systemName: location.icon)
+                                        .foregroundColor(selectedLocation == location ? Color("AccentColor") : .secondary)
+                                        .frame(width: 30)
+
+                                    Text(location.localizedName)
+
+                                    Spacer()
+
+                                    if selectedLocation == location {
+                                        Image(systemName: "checkmark")
+                                            .foregroundColor(Color("AccentColor"))
+                                            .fontWeight(.semibold)
+                                    }
+                                }
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    selectedLocation = location
                                 }
                             }
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                selectedLocation = location
+
+                            if selectedLocation == .other {
+                                TextField("Specify location", text: $customLocation, prompt: Text("Where are you?"))
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
                             }
+                        } header: {
+                            Text("Location", comment: "Section header for location selection")
                         }
-                        
-                        if selectedLocation == .other {
-                            TextField("Specify location", text: $customLocation, prompt: Text("Where are you?"))
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .listRowBackground(
+                            Color.clear
+                                .background(.thinMaterial)
+                                .cornerRadius(12)
+                        )
+                    }
+                    .scrollContentBackground(.hidden)
+                }
+                .navigationTitle("New Emotion")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            dismiss()
                         }
-                    } header: {
-                        Text("Location", comment: "Section header for location selection")
+                    }
+
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Save") {
+                            saveEmotion()
+                        }
+                        .fontWeight(.semibold)
                     }
                 }
             }
-            .navigationTitle("New Emotion")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackground()
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
+            .onAppear {
+                previousIntensity = intensity
+            }
+        } else {
+            // MARK: - iOS 18 Design
+            NavigationView {
+                ZStack {
+                    // Invisible background to detect taps
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            hideKeyboard()
+                        }
+
+                    Form {
+                        // Emotion Selection
+                        Section {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 20) {
+                                    ForEach(EmotionType.allCases, id: \.self) { type in
+                                        EmotionButton(
+                                            type: type,
+                                            isSelected: selectedType == type,
+                                            action: {
+                                                withAnimation(.spring()) {
+                                                    selectedType = type
+                                                }
+                                            }
+                                        )
+                                    }
+                                }
+                                .padding(.vertical, 10)
+                            }
+                        } header: {
+                            Text("Select emotion", comment: "Section header for emotion selection")
+                        }
+
+                        // Intensity Slider
+                        Section {
+                            VStack(alignment: .leading, spacing: 12) {
+                                HStack {
+                                    Text("Intensity", comment: "Label for emotion intensity")
+                                    Spacer()
+                                    Text("\(Int(intensity))")
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(selectedType.color)
+                                }
+
+                                Slider(value: $intensity, in: 1...10, step: 1)
+                                    .accentColor(selectedType.color)
+                                    .onChange(of: intensity) { _, newValue in
+                                        // Progressive haptic feedback based on intensity
+                                        triggerProgressiveHaptic(for: newValue, previous: previousIntensity)
+                                        previousIntensity = newValue
+                                    }
+
+                                IntensityView(intensity: intensity, color: selectedType.color)
+                                    .frame(maxWidth: .infinity)
+                            }
+                        } header: {
+                            Text("Emotion intensity", comment: "Section header for intensity slider")
+                        }
+
+                        // Notes
+                        Section {
+                            TextEditor(text: $note)
+                                .frame(minHeight: 100)
+                                .toolbar {
+                                    ToolbarItemGroup(placement: .keyboard) {
+                                        Spacer()
+                                        Button("Done") {
+                                            hideKeyboard()
+                                        }
+                                    }
+                                }
+                        } header: {
+                            Text("Notes", comment: "Section header for notes field")
+                        } footer: {
+                            Text("Optional notes about how you're feeling", comment: "Footer text explaining the notes field")
+                        }
+
+                        // Location
+                        Section {
+                            ForEach(LocationOption.allCases, id: \.self) { location in
+                                HStack {
+                                    Image(systemName: location.icon)
+                                        .foregroundColor(selectedLocation == location ? Color("AccentColor") : .secondary)
+                                        .frame(width: 30)
+
+                                    Text(location.localizedName)
+
+                                    Spacer()
+
+                                    if selectedLocation == location {
+                                        Image(systemName: "checkmark")
+                                            .foregroundColor(Color("AccentColor"))
+                                            .fontWeight(.semibold)
+                                    }
+                                }
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    selectedLocation = location
+                                }
+                            }
+
+                            if selectedLocation == .other {
+                                TextField("Specify location", text: $customLocation, prompt: Text("Where are you?"))
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                            }
+                        } header: {
+                            Text("Location", comment: "Section header for location selection")
+                        }
                     }
                 }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
-                        saveEmotion()
+                .navigationTitle("New Emotion")
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarBackground()
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
                     }
-                    .fontWeight(.semibold)
+
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Save") {
+                            saveEmotion()
+                        }
+                        .fontWeight(.semibold)
+                    }
                 }
             }
-        }
-        .onAppear {
-            previousIntensity = intensity
+            .onAppear {
+                previousIntensity = intensity
+            }
         }
     }
     

@@ -23,6 +23,8 @@ struct SummaryCards: View {
     }
     
     var body: some View {
+        // This view's appearance is determined by the StatCard component, which has already been updated.
+        // No conditional logic for iOS 26 is needed here.
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
             // Total Emotions
             StatCard(

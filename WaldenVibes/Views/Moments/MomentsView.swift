@@ -7,82 +7,148 @@ struct MomentsView: View {
     @State private var selectedCategory: MomentCategory? = nil
     @State private var selectedMoment: Moment?
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    
+
     var body: some View {
-        ZStack {
-            // Background pattern
-            GeometryReader { geometry in
-                               ForEach(0..<20, id: \.self) { index in
-                                   Image(systemName: "star.fill")
-                                       .font(.caption)
-                                       .foregroundColor(Color("AccentColor").opacity(0.03))
-                                       .position(
-                                           x: CGFloat.random(in: 0...geometry.size.width),
-                                           y: CGFloat.random(in: 0...geometry.size.height)
-                                       )
-                               }
-                           }
-                           .ignoresSafeArea()
-                           
-                           if dataManager.moments.isEmpty {
-                               EmptyMomentsView(showingAddMoment: $showingAddMoment)
-                                   .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
-                           } else {
-                               MomentsList(selectedCategory: $selectedCategory, selectedMoment: $selectedMoment)
-                           }
-                       }
-                       .navigationTitle("Moments")
-                       .navigationBarTitleDisplayMode(horizontalSizeClass == .regular ? .large : .automatic)
-                       .toolbar {
-                           ToolbarItem(placement: .navigationBarTrailing) {
-                               Button(action: { showingAddMoment = true }) {
-                                   Image(systemName: "plus.circle.fill")
-                                       .font(.title2)
-                                       .foregroundColor(Color("AccentColor"))
-                               }
-                           }
-                       }
-                       .sheet(isPresented: $showingAddMoment) {
-                           AddMomentView()
-                       }
-                       .sheet(item: $selectedMoment) { moment in
-                           MomentDetailView(moment: moment)
-                       }
-                   }
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            ZStack {
+                // Animated glass background
+                AnimatedGlassBackground(color: Color("AccentColor"))
+
+                if dataManager.moments.isEmpty {
+                    EmptyMomentsView(showingAddMoment: $showingAddMoment)
+                        .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
+                } else {
+                    MomentsList(selectedCategory: $selectedCategory, selectedMoment: $selectedMoment)
                 }
+            }
+            .navigationTitle("Moments")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { showingAddMoment = true }) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title2)
+                            .foregroundColor(Color("AccentColor"))
+                    }
+                }
+            }
+            .sheet(isPresented: $showingAddMoment) {
+                AddMomentView()
+            }
+            .sheet(item: $selectedMoment) { moment in
+                MomentDetailView(moment: moment)
+            }
+        } else {
+            // MARK: - iOS 18 Design
+            ZStack {
+                // Background pattern
+                GeometryReader { geometry in
+                                   ForEach(0..<20, id: \.self) { index in
+                                       Image(systemName: "star.fill")
+                                           .font(.caption)
+                                           .foregroundColor(Color("AccentColor").opacity(0.03))
+                                           .position(
+                                               x: CGFloat.random(in: 0...geometry.size.width),
+                                               y: CGFloat.random(in: 0...geometry.size.height)
+                                           )
+                                   }
+                               }
+                               .ignoresSafeArea()
+
+                               if dataManager.moments.isEmpty {
+                                   EmptyMomentsView(showingAddMoment: $showingAddMoment)
+                                       .frame(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
+                               } else {
+                                   MomentsList(selectedCategory: $selectedCategory, selectedMoment: $selectedMoment)
+                               }
+                           }
+                           .navigationTitle("Moments")
+                           .navigationBarTitleDisplayMode(.inline)
+                           .toolbar {
+                               ToolbarItem(placement: .navigationBarTrailing) {
+                                   Button(action: { showingAddMoment = true }) {
+                                       Image(systemName: "plus.circle.fill")
+                                           .font(.title2)
+                                           .foregroundColor(Color("AccentColor"))
+                                   }
+                               }
+                           }
+                           .sheet(isPresented: $showingAddMoment) {
+                               AddMomentView()
+                           }
+                           .sheet(item: $selectedMoment) { moment in
+                               MomentDetailView(moment: moment)
+                           }
+                       }
+                    }
 
                 // MARK: - Empty State
                 struct EmptyMomentsView: View {
                    @Binding var showingAddMoment: Bool
-                   
+
                    var body: some View {
-                       VStack(spacing: 20) {
-                           Image("EmptyMoments")
-                               .resizable()
-                               .scaledToFit()
-                               .frame(width: 150, height: 150)
-                               .opacity(0.5)
-                           
-                           Text("No moments yet", comment: "Empty state title when no moments have been recorded")
-                               .font(.title2)
-                               .fontWeight(.semibold)
-                           
-                           Text("Start capturing your special moments to preserve your memories", comment: "Empty state subtitle encouraging user to start recording moments")
-                               .font(.body)
-                               .foregroundColor(.secondary)
-                               .multilineTextAlignment(.center)
-                               .padding(.horizontal, 40)
-                           
-                           Button(action: { showingAddMoment = true }) {
-                               Label("Add Moment", systemImage: "plus.circle.fill")
-                                   .font(.headline)
-                                   .foregroundColor(.white)
-                                   .padding(.horizontal, 20)
-                                   .padding(.vertical, 12)
-                                   .background(Color("AccentColor"))
-                                   .cornerRadius(25)
+                       if #available(iOS 26.0, *) {
+                           // MARK: - iOS 26 Glassmorphism Design
+                           VStack(spacing: 20) {
+                               Image("EmptyMoments")
+                                   .resizable()
+                                   .scaledToFit()
+                                   .frame(width: 150, height: 150)
+                                   .opacity(0.5)
+
+                               Text("No moments yet", comment: "Empty state title when no moments have been recorded")
+                                   .font(.title2)
+                                   .fontWeight(.semibold)
+
+                               Text("Start capturing your special moments to preserve your memories", comment: "Empty state subtitle encouraging user to start recording moments")
+                                   .font(.body)
+                                   .foregroundColor(.secondary)
+                                   .multilineTextAlignment(.center)
+                                   .padding(.horizontal, 40)
+
+                               Button(action: { showingAddMoment = true }) {
+                                   Label("Add Moment", systemImage: "plus.circle.fill")
+                                       .font(.headline)
+                                       .foregroundColor(.white)
+                                       .padding(.horizontal, 20)
+                                       .padding(.vertical, 12)
+                                       .background(Color("AccentColor"))
+                                       .cornerRadius(25)
+                                       .shadow(color: Color("AccentColor").opacity(0.4), radius: 10, y: 5)
+                               }
+                               .padding(.top, 10)
                            }
-                           .padding(.top, 10)
+                       } else {
+                           // MARK: - iOS 18 Design
+                           VStack(spacing: 20) {
+                               Image("EmptyMoments")
+                                   .resizable()
+                                   .scaledToFit()
+                                   .frame(width: 150, height: 150)
+                                   .opacity(0.5)
+
+                               Text("No moments yet", comment: "Empty state title when no moments have been recorded")
+                                   .font(.title2)
+                                   .fontWeight(.semibold)
+
+                               Text("Start capturing your special moments to preserve your memories", comment: "Empty state subtitle encouraging user to start recording moments")
+                                   .font(.body)
+                                   .foregroundColor(.secondary)
+                                   .multilineTextAlignment(.center)
+                                   .padding(.horizontal, 40)
+
+                               Button(action: { showingAddMoment = true }) {
+                                   Label("Add Moment", systemImage: "plus.circle.fill")
+                                       .font(.headline)
+                                       .foregroundColor(.white)
+                                       .padding(.horizontal, 20)
+                                       .padding(.vertical, 12)
+                                       .background(Color("AccentColor"))
+                                       .cornerRadius(25)
+                               }
+                               .padding(.top, 10)
+                           }
                        }
                    }
                 }
@@ -125,30 +191,61 @@ struct MomentsView: View {
                    
                    /// Horizontal chip selector
                    private var categoryFilter: some View {
-                       ScrollView(.horizontal, showsIndicators: false) {
-                           HStack(spacing: 12) {
-                               CategoryChip(
-                                   title: String(localized: "All", comment: "Filter option to show all categories"),
-                                   icon: "square.grid.2x2",
-                                   color: Color("AccentColor"),
-                                   isSelected: selectedCategory == nil,
-                                   action: { selectedCategory = nil }
-                               )
+                       Group {
+                           if #available(iOS 26.0, *) {
+                               // MARK: - iOS 26 Glassmorphism Design
+                               ScrollView(.horizontal, showsIndicators: false) {
+                                   HStack(spacing: 12) {
+                                       CategoryChip(
+                                           title: String(localized: "All", comment: "Filter option to show all categories"),
+                                           icon: "square.grid.2x2",
+                                           color: Color("AccentColor"),
+                                           isSelected: selectedCategory == nil,
+                                           action: { selectedCategory = nil }
+                                       )
 
-                               ForEach(MomentCategory.allCases, id: \.self) { category in
-                                   CategoryChip(
-                                       title: categoryTitle(for: category),
-                                       icon: category.icon,
-                                       color: category.color,
-                                       isSelected: selectedCategory == category,
-                                       action: { selectedCategory = category }
-                                   )
+                                       ForEach(MomentCategory.allCases, id: \.self) { category in
+                                           CategoryChip(
+                                               title: categoryTitle(for: category),
+                                               icon: category.icon,
+                                               color: category.color,
+                                               isSelected: selectedCategory == category,
+                                               action: { selectedCategory = category }
+                                           )
+                                       }
+                                   }
+                                   .padding(.horizontal)
+                                   .padding(.vertical, 12)
                                }
+                               .background(.ultraThinMaterial)
+                           } else {
+                               // MARK: - iOS 18 Design
+                               ScrollView(.horizontal, showsIndicators: false) {
+                                   HStack(spacing: 12) {
+                                       CategoryChip(
+                                           title: String(localized: "All", comment: "Filter option to show all categories"),
+                                           icon: "square.grid.2x2",
+                                           color: Color("AccentColor"),
+                                           isSelected: selectedCategory == nil,
+                                           action: { selectedCategory = nil }
+                                       )
+
+                                       ForEach(MomentCategory.allCases, id: \.self) { category in
+                                           CategoryChip(
+                                               title: categoryTitle(for: category),
+                                               icon: category.icon,
+                                               color: category.color,
+                                               isSelected: selectedCategory == category,
+                                               action: { selectedCategory = category }
+                                           )
+                                       }
+                                   }
+                                   .padding(.horizontal)
+                                   .padding(.vertical, 12)
+                               }
+                               .background(Color(UIColor.systemBackground))
                            }
-                           .padding(.horizontal)
-                           .padding(.vertical, 12)
                        }
-                       .background(Color(UIColor.systemBackground))
                    }
                    
                    // Helper function to get proper localized string
@@ -274,3 +371,4 @@ struct MomentsView: View {
                        }
                    }
                 }
+}

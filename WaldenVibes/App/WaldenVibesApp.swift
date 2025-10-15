@@ -52,23 +52,60 @@ struct WaldenVibesApp: App {
     }
     
     private func configureAppearance() {
-        // Configure navigation bar appearance
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.systemBackground
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.label]
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.label]
-        
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        
-        // Configure tab bar appearance
-        let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.configureWithOpaqueBackground()
-        tabBarAppearance.backgroundColor = UIColor.systemBackground
-        
-        UITabBar.appearance().standardAppearance = tabBarAppearance
-        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        if #available(iOS 26.0, *) {
+            // MARK: - iOS 26 Glassmorphism Design
+            // Configure Navigation Bar with glassmorphic effect and compact style
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithTransparentBackground()
+            navBarAppearance.backgroundEffect = UIBlurEffect(style: .systemThinMaterial)
+            navBarAppearance.largeTitleTextAttributes = [
+                .foregroundColor: UIColor.label,
+                .font: UIFont.systemFont(ofSize: 28, weight: .bold) // Smaller large title
+            ]
+            navBarAppearance.titleTextAttributes = [
+                .foregroundColor: UIColor.label,
+                .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
+            ]
+
+            // Shadow for depth
+            navBarAppearance.shadowColor = UIColor.black.withAlphaComponent(0.05)
+
+            UINavigationBar.appearance().standardAppearance = navBarAppearance
+            UINavigationBar.appearance().compactAppearance = navBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+            UINavigationBar.appearance().compactScrollEdgeAppearance = navBarAppearance
+
+            // Make navigation bar more compact
+            UINavigationBar.appearance().prefersLargeTitles = false
+
+            // Configure Tab Bar with glassmorphic effect
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithTransparentBackground()
+            tabBarAppearance.backgroundEffect = UIBlurEffect(style: .systemThinMaterial)
+            tabBarAppearance.shadowColor = UIColor.black.withAlphaComponent(0.05)
+
+            UITabBar.appearance().standardAppearance = tabBarAppearance
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        } else {
+            // MARK: - iOS 18 Design
+            // Configure navigation bar appearance
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor.systemBackground
+            appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.label]
+            appearance.titleTextAttributes = [.foregroundColor: UIColor.label]
+
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+
+            // Configure tab bar appearance
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithOpaqueBackground()
+            tabBarAppearance.backgroundColor = UIColor.systemBackground
+
+            UITabBar.appearance().standardAppearance = tabBarAppearance
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        }
     }
     
     private func configureAudioSession() {

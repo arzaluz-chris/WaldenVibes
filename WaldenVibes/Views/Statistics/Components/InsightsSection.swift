@@ -28,30 +28,68 @@ struct InsightsSection: View {
     
     var body: some View {
         if !insights.isEmpty {
-            VStack(alignment: .leading, spacing: 16) {
-                Text("Insights", comment: "Section header for insights")
-                    .font(.headline)
-                    .padding(.horizontal)
-                
-                VStack(alignment: .leading, spacing: 12) {
-                    ForEach(insights, id: \.self) { insight in
-                        HStack(alignment: .top, spacing: 12) {
-                            Image(systemName: "lightbulb.fill")
-                                .foregroundColor(.yellow)
-                                .font(.subheadline)
-                            
-                            Text(insight)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                                .fixedSize(horizontal: false, vertical: true)
+            if #available(iOS 26.0, *) {
+                // MARK: - iOS 26 Glassmorphism Design
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Insights", comment: "Section header for insights")
+                        .font(.headline)
+                        .padding(.horizontal)
+
+                    VStack(alignment: .leading, spacing: 12) {
+                        ForEach(insights, id: \.self) { insight in
+                            HStack(alignment: .top, spacing: 12) {
+                                Image(systemName: "lightbulb.fill")
+                                    .foregroundColor(.yellow)
+                                    .font(.subheadline)
+
+                                Text(insight)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
                         }
                     }
+                    .padding()
                 }
-                .padding()
+                .background(.regularMaterial)
+                .cornerRadius(16)
+                .shadow(color: .black.opacity(0.1), radius: 10, y: 5)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(LinearGradient(
+                            colors: [.white.opacity(0.5), .white.opacity(0.1)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ), lineWidth: 1)
+                )
+                .padding(.horizontal)
+            } else {
+                // MARK: - iOS 18 Design
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Insights", comment: "Section header for insights")
+                        .font(.headline)
+                        .padding(.horizontal)
+
+                    VStack(alignment: .leading, spacing: 12) {
+                        ForEach(insights, id: \.self) { insight in
+                            HStack(alignment: .top, spacing: 12) {
+                                Image(systemName: "lightbulb.fill")
+                                    .foregroundColor(.yellow)
+                                    .font(.subheadline)
+
+                                Text(insight)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+                        }
+                    }
+                    .padding()
+                }
+                .background(Color(UIColor.secondarySystemBackground))
+                .cornerRadius(16)
+                .padding(.horizontal)
             }
-            .background(Color(UIColor.secondarySystemBackground))
-            .cornerRadius(16)
-            .padding(.horizontal)
         }
     }
     
